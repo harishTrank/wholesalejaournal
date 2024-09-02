@@ -1,13 +1,31 @@
-import React from "react";
+import React, { useEffect } from "react";
 
-const CoverOption = ({coverCurrentOption, setCoverCurrentOption}: any) => {
+const CoverOption = ({
+  coverCurrentOption,
+  setCoverCurrentOption,
+  canvasText,
+  setCanvasText,
+}: any) => {
+  const optionSelectHandler = (e: any) => {
+    setCoverCurrentOption(e.target.value);
+    setCanvasText(["", "", ""]);
+  };
+
+  useEffect(() => {
+    if (coverCurrentOption === "Phrase") {
+      setCanvasText(["", "", ""]);
+    } else {
+      setCanvasText("");
+    }
+  }, [coverCurrentOption, setCanvasText]);
+
   return (
     <>
       <select
         name="personaliseProd"
         id="personaliseProd"
         value={coverCurrentOption}
-        onChange={(e: any) => setCoverCurrentOption(e.target.value)}
+        onChange={optionSelectHandler}
       >
         <option value="Phrase">Phrase</option>
         <option value="Name or initial">Name or initial</option>
@@ -16,25 +34,42 @@ const CoverOption = ({coverCurrentOption, setCoverCurrentOption}: any) => {
       {coverCurrentOption === "Phrase" ? (
         <div>
           <input
-            name="textLine[]"
             type="text"
-            id="textInput"
             maxLength={25}
             placeholder="Line 1"
+            value={canvasText[0]}
+            onChange={(e: any) =>
+              setCanvasText((oldVal: any) => [
+                e.target.value,
+                ...oldVal.slice(1, 3),
+              ])
+            }
           />
           <input
-            name="textLine[]"
             type="text"
-            id="textInput2"
             maxLength={25}
             placeholder="Line 2"
+            value={canvasText[1]}
+            onChange={(e: any) =>
+              setCanvasText((oldVal: any) => [
+                oldVal[0],
+                e.target.value,
+                oldVal[2],
+              ])
+            }
           />
           <input
-            name="textLine[]"
             type="text"
-            id="textInput3"
             maxLength={25}
             placeholder="Line 3"
+            value={canvasText[2]}
+            onChange={(e: any) =>
+              setCanvasText((oldVal: any) => [
+                oldVal[0],
+                oldVal[1],
+                e.target.value,
+              ])
+            }
           />
         </div>
       ) : coverCurrentOption === "Name or initial" ? (
@@ -45,6 +80,8 @@ const CoverOption = ({coverCurrentOption, setCoverCurrentOption}: any) => {
             id="writingArea"
             rows={5}
             placeholder="Please enter the message"
+            value={canvasText}
+            onChange={(e: any) => setCanvasText(e.target.value)}
           ></textarea>
         </span>
       ) : (
