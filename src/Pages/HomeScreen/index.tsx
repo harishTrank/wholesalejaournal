@@ -4,6 +4,7 @@ import CoverOption from "./HomeComp/CoverOption";
 import BackgroundShape from "./HomeComp/BackgroundShape";
 import CustomCanvas from "./HomeComp/CustomCanvas";
 import ColorSelector from "./HomeComp/ColorSelector";
+import { Link } from "react-router-dom";
 
 const HomeScreen = ({ curimage }: any) => {
   const [image, setImage]: any = useState(null);
@@ -84,6 +85,7 @@ const HomeScreen = ({ curimage }: any) => {
             />
           </div>
         </div>
+        <Link to="/more-customization">more-customization</Link>
       </div>
     </div>
   );
