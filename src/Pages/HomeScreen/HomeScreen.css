@@ -1,0 +1,102 @@
+.mainContainer {
+  display: flex;
+  flex-direction: row;
+  padding: 1rem;
+}
+:root {
+  --primary-color: #000000;
+  --header-text-color: #fff;
+}
+
+/* Typograhpy */
+:root {
+  --font-heading: "Epilogue", serif;
+  --font-main: -apple-system, BlinkMacSystemFont, "Raleway", "Segoe UI", Roboto,
+    Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+}
+
+body,
+button,
+input,
+select,
+optgroup,
+textarea,
+p {
+  font-family: "Raleway", serif;
+}
+
+.site-identity p.site-title,
+h1.site-title a,
+h1.site-title,
+p.site-title a,
+.site-branding h1.site-title a {
+  font-family: "Lato", serif;
+}
+
+p.site-description {
+  font-family: "Raleway", serif !important;
+}
+
+.accordion-content {
+  display: flex;
+  flex-direction: column;
+}
+
+.swatch label {
+  cursor: pointer;
+  display: inline-block;
+  background: #fff;
+  border: 1px solid #000;
+  border-radius: 50%;
+  height: 50px;
+  width: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 5px;
+}
+.swatch-container {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+/* hover case */
+.tooltip {
+  position: relative;
+  display: inline-block;
+  cursor: pointer;
+}
+
+.tooltip .tooltiptext {
+  visibility: hidden;
+  background-color: black;
+  color: #fff;
+  text-align: center;
+  border-radius: 5px;
+  padding: 8px;
+  position: absolute;
+  z-index: 1;
+  bottom: 125%; /* Position above the label */
+  left: 50%;
+  margin-left: -60px;
+  opacity: 0;
+  transition: opacity 0.3s;
+  width: 120px;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.tooltip .tooltiptext::after {
+  content: "";
+  position: absolute;
+  top: 100%; /* Position the arrow at the bottom of the tooltip box */
+  left: 50%;
+  margin-left: -5px;
+  border-width: 8px;
+  border-style: solid;
+  border-color: black transparent transparent transparent; /* Upward-pointing arrow */
+}
+
+.tooltip:hover .tooltiptext {
+  visibility: visible;
+  opacity: 1;
+}
