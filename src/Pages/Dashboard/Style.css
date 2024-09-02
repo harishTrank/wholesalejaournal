@@ -1,0 +1,393 @@
+header {
+    background: #fff;
+}
+
+.top-area {
+    padding: 15px 0;
+}
+
+.top-area a {
+    font-size: 22px;
+    font-weight: 700;
+}
+
+.top-area p {
+    color: #1e1e1e;
+}
+
+.top-area .nmbr {
+    font-size: 16px;
+    font-weight: 500;
+    color: #8e8e8e;
+}
+
+nav {
+    background: #FCF8F3;
+    padding: 10px 0;
+}
+
+nav ul li {
+    margin: 0 30px;
+}
+
+.toggle {
+    display: none;
+}
+
+.toggle i {
+    font-size: 18px;
+}
+
+/* banner area */
+.banner-area {
+    width: 100%;
+    background: url(../../assests/banner-back.png);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    padding: 100px 0;
+}
+
+.banner-area .banner-text {
+    background: #FFF3E3;
+    padding: 15px;
+    border-radius: 10px;
+}
+
+.banner-area .banner-text h1 {
+    color: #B88E2F;
+}
+
+.banner-area .banner-text p {
+    margin-bottom: 15px;
+}
+
+.banner-area .banner-text a {
+    display: inline-block;
+    background: #B88E2F;
+    color: #fff;
+    padding: 10px 25px;
+}
+
+/* product area */
+.product-detail img {
+    width: 100%;
+    display: block;
+}
+
+.product-text {
+    background: #F4F5F7;
+    padding: 10px;
+}
+
+.product-text h3 {
+    font-size: 18px;
+    margin-bottom: 10px;
+}
+
+.product-text p {
+    color: #898989;
+    font-size: 14px;
+    margin-bottom: 10px;
+}
+
+.product-text a {
+    display: inline-block;
+    background: #B88E2F;
+    padding: 8px 15px;
+    font-size: 14px;
+    color: #fff;
+}
+
+.slider img {
+    width: 100%;
+    height: 350px;
+    object-fit: cover;
+}
+
+.slick-slide>div {
+    margin: 0 10px;
+}
+
+.slider ul.slick-dots {
+    display: flex;
+    justify-content: center;
+}
+
+.slider ul.slick-dots li button {
+    background: #d8d8d8;
+    border: none;
+    outline: none;
+    font-size: 0;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    margin-right: 10px;
+}
+
+.slider ul.slick-dots li.slick-active button {
+    background: #B88E2F;
+    border: 1px solid #B88E2F;
+    border-radius: 50%;
+    padding: 2px;
+}
+
+.slider button.slick-prev {
+    background: #fff;
+    outline: none;
+    border: none;
+    font-size: 0;
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    position: absolute;
+    z-index: 9;
+    top: 50%;
+    left: 0;
+    cursor: pointer;
+}
+
+.slider button.slick-next {
+    background: #fff;
+    outline: none;
+    border: none;
+    font-size: 0;
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    position: absolute;
+    z-index: 9;
+    top: 50%;
+    right: 0;
+    cursor: pointer;
+}
+
+.slick-next::after {
+    content: "\f054";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-family: 'Font Awesome 6 Free';
+    font-weight: 900;
+    font-size: 14px;
+}
+
+.slick-prev::after {
+    content: "\f053";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-family: 'Font Awesome 6 Free';
+    font-weight: 900;
+    font-size: 14px;
+}
+
+/* products slider */
+.prod-slides {
+    background: #FCF8F3;
+}
+
+.prod-slides h2 {
+    font-size: 28px;
+    margin-bottom: 15px;
+}
+
+.prod-slides p {
+    margin-bottom: 15px;
+}
+
+.prod-slides a {
+    display: inline-block;
+    background: #B88E2F;
+    padding: 10px 20px;
+    font-size: 16px;
+    color: #fff;
+}
+
+/* new journal area */
+.new-journal img {
+    width: 100%;
+    height: 100%;
+    display: block;
+}
+
+.new-text {
+    background: #F1EBE8;
+    padding: 40px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.new-text p {
+    margin-bottom: 15px;
+}
+
+.new-text a {
+    display: inline-block;
+    background: #B88E2F;
+    padding: 10px 20px;
+    font-size: 16px;
+    color: #fff;
+    border-radius: 6px;
+    width: 40%;
+    text-align: center;
+}
+
+/* footer */
+footer h3 {
+    font-size: 18px;
+    margin-bottom: 20px;
+}
+
+footer ul li {
+    margin-bottom: 10px;
+}
+
+footer ul li a {
+    font-size: 16px;
+    color: #9f9f9f;
+}
+
+footer form {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+footer form input[type="text"],
+footer form input[type="button"] {
+    width: 73%;
+    outline: none;
+    border: none;
+    padding: 5px;
+    border-bottom: 2px solid #9F9F9F;
+}
+
+footer form input[type="button"] {
+    width: 26%;
+    background: transparent;
+}
+
+footer .flex {
+    border-bottom: 1px solid #D9D9D9;
+}
+
+footer .copyright p {
+    padding-top: 15px;
+    font-size: 14px;
+}
+
+@media(max-width: 767px) {
+    .top-area a {
+        font-size: 16px;
+    }
+
+    .tagline {
+        display: none;
+    }
+
+    .top-area .nmbr {
+        font-size: 14px;
+    }
+
+    .toggle {
+        display: block;
+    }
+
+    nav {
+        position: absolute;
+        background: #FCF8F3;
+        width: 100%;
+        height: 100%;
+        z-index: 999;
+        top: 55px;
+        left: 0;
+        display: none;
+        padding: 0;
+    }
+
+    nav ul {
+        display: inline-block !important;
+    }
+
+    nav ul li {
+        margin: 15px 0px;
+        padding: 10px 0;
+    }
+
+    .no-show {
+        display: none;
+    }
+
+    .banner-area {
+        padding: 40px 0;
+    }
+
+    .product-detail .col-25 {
+        margin-bottom: 10px;
+    }
+
+    .prod-slides .col-40 {
+        margin-bottom: 15px;
+    }
+
+    .prod-slides h2 {
+        font-size: 22px;
+        margin-bottom: 10px;
+    }
+
+    .prod-slides p {
+        margin-bottom: 10px;
+    }
+
+    .prod-slides a {
+        font-size: 14px;
+    }
+
+    .new-text {
+        padding: 20px;
+    }
+
+    .new-text a {
+        padding: 8px 0px;
+        font-size: 14px;
+        width: 30%;
+    }
+}
+
+@media(max-width:480px) {
+    .banner-area .banner-text a {
+        padding: 8px 20px;
+        font-size: 14px;
+    }
+
+    .product-text h3 {
+        font-size: 16px;
+        margin-bottom: 5px;
+    }
+
+    .prod-slides h2 {
+        font-size: 20px;
+    }
+
+    .prod-slides a {
+        padding: 8px 10px;
+        font-size: 14px;
+    }
+
+    footer h3 {
+        font-size: 16px;
+        margin-bottom: 10px;
+    }
+
+    footer ul li a {
+        font-size: 14px;
+    }
+
+    footer .col-25 {
+        margin-bottom: 10px;
+    }
+}
