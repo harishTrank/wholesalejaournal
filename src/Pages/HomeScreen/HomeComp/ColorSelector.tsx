@@ -1,5 +1,5 @@
 import React from "react";
-import { colors } from "../../Utils";
+import { colors } from "../../../Utils";
 
 const BackGroundColor = ({ backgroundColor, setBackGroundColor }: any) => {
   return (
@@ -16,7 +16,10 @@ const BackGroundColor = ({ backgroundColor, setBackGroundColor }: any) => {
               width: 40,
               height: 40,
               display: "inline-block",
-              border: backgroundColor !== item.color ? "2px solid #DEDEDE" : "2px solid black"
+              border:
+                backgroundColor !== item.color
+                  ? "2px solid #DEDEDE"
+                  : "2px solid black",
             }}
           />
           <span className="tooltiptext">{item.colorName}</span>
