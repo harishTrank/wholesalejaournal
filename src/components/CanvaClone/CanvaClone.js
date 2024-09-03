@@ -24,45 +24,45 @@ function CanvaClone({ assetLibrary = "airtable" }) {
       }),
     };
 
-    const customImagePath = `${window.location.protocol}//${window.location.host}/resources/programming.png`;
+    // const customImagePath = `${window.location.protocol}//${window.location.host}/resources/programming.png`;
 
     let cesdk;
     let config = {
       initialSceneURL: `https://cdn.img.ly/packages/imgly/cesdk-js/latest/assets/templates/cesdk_business_card_1.scene`,
       assetSources: {
         ...externalAssetSources,
-        custom: {
-          findAssets: () => {
-            return {
-              assets: [
-                {
-                  id: "custom-image-1",
-                  type: "ly.img.image",
-                  locale: "en",
-                  label: "Programming",
-                  thumbUri: customImagePath,
-                  size: {
-                    width: 512,
-                    height: 512,
-                  },
-                  meta: {
-                    uri: customImagePath,
-                  },
-                  context: {
-                    sourceId: "custom",
-                  },
-                  credits: {
-                    name: "Freepik",
-                    url: "https://www.flaticon.com/free-icon/programming_1208884?related_id=1208782&origin=search",
-                  },
-                },
-              ],
-              currentPage: 1,
-              total: 1,
-              nextPage: undefined,
-            };
-          },
-        },
+        // custom: {
+        //   findAssets: () => {
+        //     return {
+        //       assets: [
+        //         {
+        //           id: "custom-image-1",
+        //           type: "ly.img.image",
+        //           locale: "en",
+        //           label: "Programming",
+        //           thumbUri: customImagePath,
+        //           size: {
+        //             width: 512,
+        //             height: 512,
+        //           },
+        //           meta: {
+        //             uri: customImagePath,
+        //           },
+        //           context: {
+        //             sourceId: "custom",
+        //           },
+        //           credits: {
+        //             name: "Freepik",
+        //             url: "https://www.flaticon.com/free-icon/programming_1208884?related_id=1208782&origin=search",
+        //           },
+        //         },
+        //       ],
+        //       currentPage: 1,
+        //       total: 1,
+        //       nextPage: undefined,
+        //     };
+        //   },
+        // },
       },
       i18n: {
         en: {
