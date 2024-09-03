@@ -1,5 +1,3 @@
-import { PhotoEditorSDKUI } from "photoeditorsdk";
-
 export const colors = [
   {
     color: "#333333",
@@ -50,41 +48,3 @@ export const colors = [
     colorName: "Misty",
   },
 ];
-
-export const initEditor = async () => {
-  const editor: any = await PhotoEditorSDKUI.init({
-    container: "#editor",
-    license: "tKdK-1QwIsYAZVux36KAWmgWoifVjj01S2i0XPfe2ALf4BJgL3IKS4J5SNKApi0W",
-    image:
-      "https://cdn.img.ly/packages/imgly/photoeditorsdk/latest/assets/example.jpg",
-    assetBaseUrl:
-      "https://cdn.img.ly/packages/imgly/photoeditorsdk/latest/assets",
-    export: {
-      image: {
-        enableDownload: false,
-      },
-    },
-  });
-
-  editor.on("export", () => {
-    let format = "image/jpg";
-
-    switch (editor.getImageMimeType()) {
-      case "image/png":
-      case "image/svg+xml":
-      case "image/gif":
-      case "image/bmp":
-      case "image/tiff":
-        format = "image/png";
-        break;
-      default:
-        break;
-    }
-
-    editor.export({
-      enableDownload: true,
-      preventExportEvent: true,
-      format,
-    });
-  });
-};
