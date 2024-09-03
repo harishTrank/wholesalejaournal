@@ -3,13 +3,16 @@ import "./HomeScreen.css";
 import CoverOption from "./HomeComp/CoverOption";
 import BackgroundShape from "./HomeComp/BackgroundShape";
 import CustomCanvas from "./HomeComp/CustomCanvas";
-import BackGroundColor from "./HomeComp/BackGroundColor";
+import ColorSelector from "./HomeComp/ColorSelector";
+import { Link } from "react-router-dom";
 
 const HomeScreen = ({ curimage }: any) => {
   const [image, setImage]: any = useState(null);
   const [coverCurrentOption, setCoverCurrentOption] = useState("Phrase");
   const [currentBkgShape, setCurrentBkgShape]: any = useState("rect");
   const [backgroundColor, setBackGroundColor]: any = useState("#F5E6D9");
+  const [textColor, setTextColor]: any = useState("#333333");
+  const [canvasText, setCanvasText]: any = useState(["", "", ""]);
 
   useEffect(() => {
     const loadImage: any = new window.Image();
@@ -25,11 +28,15 @@ const HomeScreen = ({ curimage }: any) => {
         image={image}
         currentBkgShape={currentBkgShape}
         backgroundColor={backgroundColor}
+        canvasText={canvasText}
+        textColor={textColor}
       />
-      <div style={{marginLeft: "2%"}} className="accordion-content">
+      <div style={{ marginLeft: "2%" }} className="accordion-content">
         <CoverOption
           coverCurrentOption={coverCurrentOption}
           setCoverCurrentOption={setCoverCurrentOption}
+          canvasText={canvasText}
+          setCanvasText={setCanvasText}
         />
         <div className="controls">
           <div className="more-cust">
@@ -65,37 +72,20 @@ const HomeScreen = ({ curimage }: any) => {
           </div>
           <div className="more-cust-1">
             <h4>Select background color</h4>
-            <BackGroundColor
+            <ColorSelector
               backgroundColor={backgroundColor}
               setBackGroundColor={setBackGroundColor}
             />
           </div>
           <div className="more-cust-2">
             <h4>Select text color</h4>
-            <div className="swatch-container">
-              <input type="hidden" id="textColor" value="#000000" />
-              <div className="swatch customily-swatch">
-                <input
-                  // onClick={() => updateTextColor("#000000")}
-                  id="tcblack"
-                  type="radio"
-                  name="textcolorSelect"
-                  value="black"
-                />
-                <label
-                  htmlFor="tcblack"
-                  style={{
-                    backgroundColor: "#000000",
-                    width: 40,
-                    height: 40,
-                    display: "inline-block",
-                  }}
-                ></label>
-              </div>
-              {/* Add similar text color selection items */}
-            </div>
+            <ColorSelector
+              backgroundColor={textColor}
+              setBackGroundColor={setTextColor}
+            />
           </div>
         </div>
+        <Link to="/more-customization">more-customization</Link>
       </div>
     </div>
   );

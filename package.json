@@ -3,6 +3,11 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@cesdk/cesdk-js": "1.7.0-alpha.3",
+    "@cesdk/engine": "1.7.0-alpha.3",
+    "airtable": "^0.11.4",
+    "chroma-js": "^2.4.2",
+    "unsplash-js": "^7.0.15",
     "@testing-library/jest-dom": "^5.14.1",
     "@testing-library/react": "^13.0.0",
     "@testing-library/user-event": "^13.2.1",
@@ -43,8 +48,5 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  },
-  "devDependencies": {
-    "@types/react-slick": "^0.23.13"
   }
 }
