@@ -1,26 +1,14 @@
 import "./CanvaClone.css";
 import CreativeEditorSDK from "@cesdk/cesdk-js";
-import React, { useEffect, useRef } from "react";
-import { findAirtableAssets } from "./airtableAssetLibrary";
+import React, { useEffect, useRef, useState } from "react";
 import { findUnsplashAssets } from "./unsplashAssetLibrary";
 
-function CanvaClone({
-  // initializing Airtable as default external asset library
-  assetLibrary = "airtable",
-}) {
+function CanvaClone({ assetLibrary = "airtable" }) {
   const cesdkContainer = useRef(null);
+  const [cesdkInstance, setCesdkInstance] = useState(null);
 
   useEffect(() => {
     const externalAssetSources = {
-      ...(assetLibrary === "airtable" && {
-        airtable: {
-          findAssets: findAirtableAssets,
-          credits: {
-            name: "Airtable",
-            url: "https://airtable.com/shr4x8s9jqaxiJxm5/tblSLR9GBwiVwFS8z?backgroundColor=orange",
-          },
-        },
-      }),
       ...(assetLibrary === "unsplash" && {
         unsplash: {
           findAssets: findUnsplashAssets,
@@ -36,21 +24,13 @@ function CanvaClone({
       }),
     };
 
-    // path to the local image to load into CE.SDK
-    const customImagePath = `${
-      window.location.protocol + "//" + window.location.host
-    }/resources/programming.png`;
+    const customImagePath = `${window.location.protocol}//${window.location.host}/resources/programming.png`;
 
     let cesdk;
     let config = {
-      // loading the business card template
       initialSceneURL: `https://cdn.img.ly/packages/imgly/cesdk-js/latest/assets/templates/cesdk_business_card_1.scene`,
-
-      // loading the external asset sources
       assetSources: {
-        // loading the AirTable or Unsplash asset library
         ...externalAssetSources,
-        // loading a custom image into CE.SDK
         custom: {
           findAssets: () => {
             return {
@@ -84,8 +64,6 @@ function CanvaClone({
           },
         },
       },
-
-      // translating the labels associates with the external asset sources
       i18n: {
         en: {
           "libraries.airtable.label": "Airtable",
@@ -93,8 +71,6 @@ function CanvaClone({
           "libraries.custom.label": "Custom",
         },
       },
-
-      // initializing CE.SDK with some templates
       presets: {
         templates: {
           postcard_1: {
@@ -145,6 +121,9 @@ function CanvaClone({
       CreativeEditorSDK.init(cesdkContainer.current, config).then(
         (instance) => {
           cesdk = instance;
+          setCesdkInstance(instance); // Save the instance to state for later use
+          console.log("CE.SDK Instance:", cesdk);
+          console.dir(cesdk.engine); // Log the engine property in a more readable way
         }
       );
     }
@@ -156,9 +135,35 @@ function CanvaClone({
     };
   }, [cesdkContainer, assetLibrary]);
 
+  const handleDownloadImage = async () => {
+    if (cesdkInstance) {
+      const blocks = await cesdkInstance.engine.block.findAll();
+      const base64Images = [];
+      for (const block of blocks) {
+        const type = cesdkInstance.engine.block.getType(block);
+        if (type.includes("page")) {
+          const blockBlob = await cesdkInstance.engine.block.export(
+            block,
+            "image/png"
+          );
+          const reader = new FileReader();
+          reader.readAsDataURL(blockBlob);
+          reader.onloadend = () => {
+            const base64String = reader.result;
+            base64Images.push(base64String);
+          };
+        }
+      }
+      console.log(base64Images);
+    }
+  };
+
   return (
     <div className="caseContainer">
       <div className="wrapper">
+        <button onClick={handleDownloadImage} className="download-button">
+          Download Edited Image
+        </button>
         <div ref={cesdkContainer} className="cesdk"></div>
       </div>
     </div>

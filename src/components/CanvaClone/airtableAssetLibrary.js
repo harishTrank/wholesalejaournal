@@ -1,4 +1,4 @@
-import Airtable from 'airtable';
+import Airtable from "airtable";
 
 // This custom asset library demonstrates how to use an arbitrary API as asset source.
 // Airtable is a SaaS product that provides extensible spreadsheets.
@@ -8,34 +8,33 @@ import Airtable from 'airtable';
 
 // Insert a readonly api key:
 // See: https://support.airtable.com/hc/en-us/articles/360056249614-Creating-a-read-only-API-key
-let AIRTABLE_API_KEY = '';
-
+let AIRTABLE_API_KEY = "";
 
 let base;
-if (AIRTABLE_API_KEY !== '') {
+if (AIRTABLE_API_KEY !== "") {
   base = new Airtable({
-    apiKey: AIRTABLE_API_KEY
-  }).base('appHAZoD6Qj3teOmr');
+    apiKey: AIRTABLE_API_KEY,
+  }).base("appHAZoD6Qj3teOmr");
 }
 
 export const queryAirtable = ({ query, page, perPage }) => {
   let records = [];
   return new Promise(function (resolve, reject) {
-    base('Asset sources')
+    base("Asset sources")
       .select({
         maxRecords: perPage || 100,
-        view: 'Grid view',
+        view: "Grid view",
         // Poor mans search via airtable formula
         filterByFormula: query
           ? "AND({Name} != '', SEARCH(LOWER('" + query + "'), LOWER({Name})))"
-          : "{Name} != ''"
+          : "{Name} != ''",
       })
       .eachPage(
         function page(pageRecords, fetchNextPage) {
           pageRecords.forEach(function (record) {
             const asset = {
-              name: record.get('Name'),
-              image: record.get('Image')[0]
+              name: record.get("Name"),
+              image: record.get("Image")[0],
             };
             records = [...records, asset];
           });
@@ -53,18 +52,16 @@ export const queryAirtable = ({ query, page, perPage }) => {
 };
 
 export const findAirtableAssets = async (type, queryData) => {
-  if (AIRTABLE_API_KEY === '' && !window.airtableWarning) {
+  if (AIRTABLE_API_KEY === "" && !window.airtableWarning) {
     window.airtableWarning = true;
-    alert(
-      `Please provide your airtable API key.`
-    );
+    alert(`Please provide your airtable API key.`);
     return;
   }
 
   const response = await queryAirtable({
     query: queryData.query,
     page: queryData.page,
-    perPage: queryData.perPage
+    perPage: queryData.perPage,
   });
   const { results } = response;
 
@@ -74,30 +71,30 @@ export const findAirtableAssets = async (type, queryData) => {
     // With a high number we force the button to display 'more'
     total: 99999,
     currentPage: 1,
-    nextPage: undefined
+    nextPage: undefined,
   };
 };
 
 function translateToAssetResult({ image }) {
   return {
     id: image.id,
-    type: 'ly.img.image',
-    locale: 'en',
+    type: "ly.img.image",
+    locale: "en",
     label: image.name ?? undefined,
 
     thumbUri: image.thumbnails.large.url,
 
     size: {
       width: image.width,
-      height: image.height
+      height: image.height,
     },
 
     meta: {
-      uri: image.url
+      uri: image.url,
     },
 
     context: {
-      sourceId: 'airtable'
-    }
+      sourceId: "airtable",
+    },
   };
 }
