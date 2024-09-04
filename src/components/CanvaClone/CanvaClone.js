@@ -160,10 +160,10 @@ function CanvaClone({ assetLibrary = "airtable" }) {
 
   return (
     <div className="caseContainer">
+      <button onClick={handleDownloadImage} className="download-button">
+        Download Edited Image
+      </button>
       <div className="wrapper">
-        <button onClick={handleDownloadImage} className="download-button">
-          Download Edited Image
-        </button>
         <div ref={cesdkContainer} className="cesdk"></div>
       </div>
     </div>
