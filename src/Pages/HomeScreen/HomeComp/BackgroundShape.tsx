@@ -28,6 +28,7 @@ const BackgroundShape = ({ currentBkgShape, setCurrentBkgShape }: any) => {
           display: "flex",
           flexDirection: "row",
           width: window.innerWidth * 0.4,
+         
         }}
       >
         {details.map((item: any, index: any) => (
