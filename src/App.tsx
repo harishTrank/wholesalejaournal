@@ -1,7 +1,8 @@
 import React from "react";
-import HomeScreen from "./Pages/HomeScreen";
+import HomeScreen from "./Pages/HomeScreen/HomeLayout";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import MoreCustomScreen from "./Pages/MoreCustomScreen";
+import Dashboard from "./Pages/Dashboard/Index";
 
 function App() {
   return (
@@ -13,6 +14,7 @@ function App() {
           element={<HomeScreen curimage={require("./assests/dummyimg.jpg")} />}
         />
         <Route path="more-customization" element={<MoreCustomScreen />} />
+        <Route path="dashboard" element={<Dashboard />} />
         {/* </Route> */}
       </Routes>
     </BrowserRouter>

@@ -1,7 +1,9 @@
 .mainContainer {
   display: flex;
   flex-direction: row;
-  padding: 1rem;
+  margin-top: 1rem;
+  
+   
 }
 :root {
   --primary-color: #000000;
@@ -38,8 +40,9 @@ p.site-description {
 }
 
 .accordion-content {
-  display: flex;
-  flex-direction: column;
+ width: 40%;
+  margin-left: 5rem;
+  margin-top: 20px;
 }
 
 .swatch label {
@@ -54,6 +57,12 @@ p.site-description {
   align-items: center;
   justify-content: center;
   margin: 0 5px;
+}
+.swatch img{
+  border-radius: 50%;
+}
+.swatch input{
+  display: none;
 }
 .swatch-container {
   display: flex;
@@ -99,4 +108,83 @@ p.site-description {
 .tooltip:hover .tooltiptext {
   visibility: visible;
   opacity: 1;
+}
+
+.home-layout{
+  justify-content: center;
+}
+.more-cust h4{
+
+}
+
+.customcanvas{
+  width: 40%;
+}
+
+
+.accordion-content select{
+  width: 100%;
+  outline: none;
+  border: none;
+  border-bottom: 1px solid #000;
+  padding: 10px 10px 4px 0;
+  margin-bottom: 15px;
+  font-size: 14px;
+}
+
+.personalisethisproductheading h2{
+  font-size: 14px;
+
+}
+.more-cust h4{
+  font-size: 14px;
+  margin-bottom: 8px;
+
+}
+.more-cust {
+  margin-bottom: 15px;
+  margin-top: 15px;
+}
+.more-cust-1{
+  margin-bottom: 15px;
+  margin-top: 15px;
+}
+.more-cust-1 h4{
+  font-size: 14px;
+  margin-bottom: 8px;
+}
+.more-btn button{
+  padding: 10px;
+  background: #B88E2F;
+  font-size: 1rem;
+  font-weight: 300;
+  cursor: pointer;
+  outline: 0;
+  border: none;
+  border-radius: 4px;
+  border-width: 1px;
+  
+}
+.more-btn button a{
+  color: #fff;
+}
+.more-btn{
+  margin-bottom: 15px;
+}
+.accordion-header{
+  cursor: pointer;
+    padding: 8px;
+    background-color: #f1f1f1;
+    border: none;
+    outline: none;
+    width: 100%;
+    text-align: left;
+    font-size: 16px;
+    transition: background-color 0.2s ease;
+    margin-bottom: 10px;
+}
+.accordion-header h3{
+  font-size: 1em;
+  display: block;
+  font-weight: 600;
 }

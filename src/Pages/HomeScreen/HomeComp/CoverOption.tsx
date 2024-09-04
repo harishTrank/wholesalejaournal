@@ -5,6 +5,8 @@ const CoverOption = ({
   setCoverCurrentOption,
   canvasText,
   setCanvasText,
+  lowerVisible,
+  setLowerVisible
 }: any) => {
   const optionSelectHandler = (e: any) => {
     setCoverCurrentOption(e.target.value);
@@ -21,6 +23,8 @@ const CoverOption = ({
 
   return (
     <>
+    
+    
       <select
         name="personaliseProd"
         id="personaliseProd"
@@ -32,7 +36,9 @@ const CoverOption = ({
         <option value="Upload a logo">Upload a logo</option>
       </select>
       {coverCurrentOption === "Phrase" ? (
-        <div>
+       
+        <div className="Lines flex">
+          {setLowerVisible(true)}
           <input
             type="text"
             maxLength={25}
@@ -74,6 +80,7 @@ const CoverOption = ({
         </div>
       ) : coverCurrentOption === "Name or initial" ? (
         <span className="nameInitial">
+          {setLowerVisible(true)}
           <textarea
             name="writingArea"
             maxLength={15}
@@ -84,12 +91,17 @@ const CoverOption = ({
             onChange={(e: any) => setCanvasText(e.target.value)}
           ></textarea>
         </span>
-      ) : (
+      ) :coverCurrentOption === "Upload a logo" ?(
         <>
+        {setLowerVisible(false)}
           <div className="file" id="uploadImage">
-            <label htmlFor="input-file">Select a file</label>
-            <input type="file" id="logoUpload" />
-          </div>
+    
+      <label htmlFor="logoUpload" style={{ cursor: "pointer" }}>
+        Select a file
+      </label>
+     
+      <input type="file" id="logoUpload" style={{ display: "none" }} />
+    </div>
           <img
             hidden
             id="logoPreview"
@@ -98,6 +110,8 @@ const CoverOption = ({
             style={{ maxWidth: 200, marginTop: 10 }}
           />
         </>
+      ):(
+        <div>hello</div>
       )}
     </>
   );

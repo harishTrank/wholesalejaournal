@@ -7,6 +7,7 @@ import {
   Transformer,
 } from "react-konva";
 import ShapeSelector from "./ShapeSelector";
+import './HomeComp.css'
 
 const CustomCanvas = ({
   image,
@@ -77,7 +78,7 @@ const CustomCanvas = ({
   }, [currentBkgShape]);
 
   return (
-    <div>
+    <div >
       <Stage
         width={window.innerWidth * 0.3}
         height={window.innerHeight}
