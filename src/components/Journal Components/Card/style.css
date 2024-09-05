@@ -1,0 +1,32 @@
+.card-container{
+    width: 30.75%;
+    border-radius: 0px;
+    background: #F4F5F7;
+}
+.card-image img{
+    margin: 0;
+    width: 100%;
+    
+    display: block;
+    box-shadow: none;
+
+}
+
+.card-content{
+    padding: 10px;
+    
+}
+.card-name p,.card-price p{
+    padding-bottom: 8px ;
+    font-size: 16px;
+    font-weight: bold;
+}
+.card-btn button{
+    border-radius: 3px;
+    color: #fff;
+    padding: 12px 15px;
+    margin: 3px;
+    font-size: 15px;
+    background: #B88E2F;
+    border: none;
+}

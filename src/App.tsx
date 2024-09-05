@@ -3,19 +3,21 @@ import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import HomeScreen from "./Pages/HomeScreen/HomeLayout";
 import MoreCustomScreen from "./Pages/MoreCustomScreen";
 import Dashboard from "./Pages/Dashboard/Index";
-
+import Login from "./Pages/Login";
+import Journal from "./Pages/Journal Books";
 function App() {
   return (
     <BrowserRouter>
       <Routes>
-        {/* Redirect from root to /dashboard */}
-        <Route path="/" element={<Navigate to="/dashboard" replace />} />
-        <Route path="dashboard" element={<Dashboard />} />
         <Route
-          path="image-editor"
+          path="/customise"
           element={<HomeScreen curimage={require("./assests/dummyimg.jpg")} />}
         />
-        <Route path="more-customization" element={<MoreCustomScreen />} />
+        <Route path="morecustomization" element={<MoreCustomScreen />} />
+        <Route path="/" element={<Dashboard />} />
+
+        <Route path="/journal" element={<Journal />} />
+        <Route path="/login" element={<Login />} />
       </Routes>
     </BrowserRouter>
   );

@@ -1,0 +1,52 @@
+.sidebar{
+    box-shadow: rgba(0, 0, 0, 0.24) 0 3px 8px;
+    width: 330px;
+    height: 100%;
+}
+.sidebar h2{
+    font-size: 16px;
+}
+.sidebar input[type=checkbox]{
+  
+    background-color: #fff;
+    border: 1px solid rgba(25, 23, 17, .48);
+    border-radius: 4px;
+    box-sizing: border-box;
+    font-size: 1em;
+    height: 1.5em;
+    margin: 0 1em 0 0;
+    min-height: 1.5em;
+    min-width: 1.5em;
+    overflow: hidden;
+    position: static;
+    vertical-align: middle;
+    width: 1.5em;
+}
+.sidebar label{
+    font-size: 14px;
+    display: block;
+    margin-bottom: 15px;
+    
+}
+.sidebar-content{
+    padding: 15px;
+}
+.search-products input,button{
+    padding: 6px 16px;
+}
+.search-products input{
+    border: 1px solid #d3ced2;
+    border-radius: 3px 0 0 3px;
+}
+.search-products button{
+    cursor: pointer;
+    color: #fff;
+    background-color: #B8BE2F;
+    margin: 0;
+    padding: 10px 25px;
+    border-radius: 0 3px 3px 0;
+    border: none;
+}
+.Uncategorised p{
+    font-weight: bold;
+}
