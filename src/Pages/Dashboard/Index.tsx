@@ -14,6 +14,7 @@ import new2 from '../../assests/new2.png'
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+import { Link } from 'react-router-dom'
 
 
 const Dashboard = () => {
@@ -36,13 +37,13 @@ const Dashboard = () => {
                 <div className="container">
                     <div className="top-area flex space-bw al-center">
                         <div>
-                            <a href="index.html">Wholesale Journal</a>
+                            <a href="#">Wholesale Journal</a>
                         </div>
                         <div className="tagline">
                             <p>Bulk Journals- journals and notebooks- custom diaries</p>
                         </div>
                         <div>
-                            <a href="" className="nmbr">PH: (800) 310 - 2723</a>
+                            <a href="#" className="nmbr">PH: (800) 310 - 2723</a>
                         </div>
                         <div className="toggle">
                             <i className="fa-solid fa-bars"></i>
@@ -53,16 +54,16 @@ const Dashboard = () => {
                     <div className="container">
                         <ul className="flex justify-center">
                             <li>
-                                <a href="">Home</a>
+                                <Link to="/">Home</Link>
                             </li>
                             <li>
-                                <a href="">Writing Journals</a>
+                            <Link to='journal'>Journal Books</Link>
                             </li>
                             <li>
-                                <a href="">Journal Books</a>
+                                <a href="#">Writing Journal</a>
                             </li>
                             <li>
-                                <a href="">Contact Us</a>
+                                <a href="#">Shop</a>
                             </li>
                         </ul>
                     </div>
@@ -87,7 +88,7 @@ const Dashboard = () => {
                                 notebooks, office to do lists- the possibilities are endless when your personalizing your
                                 journal
                                 covers.</p>
-                            <a href="">Buy Now</a>
+                            <a href="#">Buy Now</a>
                         </div>
                     </div>
                 </div>
@@ -129,7 +130,7 @@ const Dashboard = () => {
                             <div className="product-text">
                                 <h3>Wholesale Recycled Paper Notebooks</h3>
                                 <p>Product # WHJS1209-9</p>
-                                <a href="product-detail.html">Buy Now</a>
+                                <a href="#">Buy Now</a>
                             </div>
                         </div>
                         <div className="col-25">
@@ -137,7 +138,7 @@ const Dashboard = () => {
                             <div className="product-text">
                                 <h3>Eco Saddle Stitched Notebooks</h3>
                                 <p>Product # WHJS1209-9</p>
-                                <a href="">Buy Now</a>
+                                <a href="#">Buy Now</a>
                             </div>
                         </div>
                         <div className="col-25">
@@ -145,7 +146,7 @@ const Dashboard = () => {
                             <div className="product-text">
                                 <h3>Wholesale Recycled Paper Notebooks</h3>
                                 <p>Product # WHJS1209-9</p>
-                                <a href="">Buy Now</a>
+                                <a href="#">Buy Now</a>
                             </div>
                         </div>
                         <div className="col-25">
@@ -153,7 +154,7 @@ const Dashboard = () => {
                             <div className="product-text">
                                 <h3>Bulk Recycled Spiral Journals</h3>
                                 <p>Product # WHJS1209-9</p>
-                                <a href="">Buy Now</a>
+                                <a href="#">Buy Now</a>
                             </div>
                         </div>
                     </div>
@@ -166,7 +167,7 @@ const Dashboard = () => {
                         <div className="col-40">
                             <h2>Discover 50+ stylish journals</h2>
                             <p>"Discover our curated collection of inspiring journal prototypes!"</p>
-                            <a href="">Explore More</a>
+                            <a href="#">Explore More</a>
                         </div>
                         <div className="col-60">
                             <div className="slider">
@@ -200,7 +201,7 @@ const Dashboard = () => {
                         <p>Dive into our latest collection of exquisitely designed journals. Crafted with care and attention to
                             detail, each piece promises to inspire your creativity and enhance your writing experience. Don't
                             miss out on our new arrivals—your perfect journal awaits!</p>
-                        <a href="">View More</a>
+                        <a href="#">View More</a>
                     </div>
                     <div className="col-33">
                         <img src={new2} alt="" />
@@ -215,22 +216,22 @@ const Dashboard = () => {
                             <h3>USA Custom Pad</h3>
                             <ul>
                                 <li>
-                                    <a href="">
+                                    <a href="#">
                                         Sidney Industrial Park <br />16 Winkler Road – Sidney, New York 13838
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="">
+                                    <a href="#">
                                         Ph: (800) 310-2723
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="">
+                                    <a href="#">
                                         E-Mail: sales@usapad.com
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="">
+                                    <a href="#">
                                         Fax: (607) 563-9553
                                     </a>
                                 </li>
@@ -240,16 +241,16 @@ const Dashboard = () => {
                             <h3>Links</h3>
                             <ul>
                                 <li>
-                                    <a href="">Home</a>
+                                    <a href="#">Home</a>
                                 </li>
                                 <li>
-                                    <a href="">Shop</a>
+                                    <a href="#">Shop</a>
                                 </li>
                                 <li>
-                                    <a href="">About</a>
+                                    <a href="#">About</a>
                                 </li>
                                 <li>
-                                    <a href="">Contact</a>
+                                    <a href="#">Contact</a>
                                 </li>
                             </ul>
                         </div>
@@ -257,13 +258,13 @@ const Dashboard = () => {
                             <h3>Help</h3>
                             <ul>
                                 <li>
-                                    <a href="">Payment Options</a>
+                                    <a href="#">Payment Options</a>
                                 </li>
                                 <li>
-                                    <a href="">Returns</a>
+                                    <a href="#">Returns</a>
                                 </li>
                                 <li>
-                                    <a href="">Privacy Policy</a>
+                                    <a href="#">Privacy Policy</a>
                                 </li>
                             </ul>
                         </div>

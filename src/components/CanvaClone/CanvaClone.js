@@ -24,7 +24,7 @@ function CanvaClone({ assetLibrary = "airtable" }) {
       }),
     };
 
-    // const customImagePath = `${window.location.protocol}//${window.location.host}/resources/programming.png`;
+  // const customImagePath = `${window.location.protocol}//${window.location.host}/resources/programming.png`;
 
     let cesdk;
     let config = {

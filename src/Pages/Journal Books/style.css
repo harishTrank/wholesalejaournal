@@ -1,0 +1,10 @@
+.journal-section {
+    width: calc(100% - 350px);
+}
+.default-sorting select{
+    background: #fff;
+    color: #000;
+    padding: 10px;
+    outline: none;
+    border: 1px solid #e3e3e3;
+}

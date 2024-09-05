@@ -5,6 +5,7 @@ import BackgroundShape from "../HomeComp/BackgroundShape";
 import CustomCanvas from "../HomeComp/CustomCanvas";
 import ColorSelector from "../HomeComp/ColorSelector";
 import { Link } from "react-router-dom";
+import Header from '../../../components/Header'
 
 const HomeScreen = ({ curimage }: any) => {
   const [image, setImage]: any = useState(null);
@@ -36,42 +37,7 @@ const HomeScreen = ({ curimage }: any) => {
 
   return (
     <div className="container">
-       <header>
-                <div className="container">
-                    <div className="top-area flex space-bw al-center">
-                        <div>
-                            <a href="index.html">Wholesale Journal</a>
-                        </div>
-                        <div className="tagline">
-                            <p>Bulk Journals- journals and notebooks- custom diaries</p>
-                        </div>
-                        <div>
-                            <a href="" className="nmbr">PH: (800) 310 - 2723</a>
-                        </div>
-                        <div className="toggle">
-                            <i className="fa-solid fa-bars"></i>
-                        </div>
-                    </div>
-                </div>
-                <nav>
-                    <div className="container">
-                        <ul className="flex justify-center">
-                            <li>
-                                <a href="">Home</a>
-                            </li>
-                            <li>
-                                <a href="">Writing Journals</a>
-                            </li>
-                            <li>
-                                <a href="">Journal Books</a>
-                            </li>
-                            <li>
-                                <a href="">Contact Us</a>
-                            </li>
-                        </ul>
-                    </div>
-                </nav>
-       </header>
+       <Header/>
     <div className="mainContainer">
       <div className="customcanvas">
       <CustomCanvas
