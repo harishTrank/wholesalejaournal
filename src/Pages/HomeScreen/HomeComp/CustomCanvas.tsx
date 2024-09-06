@@ -7,7 +7,7 @@ import {
   Transformer,
 } from "react-konva";
 import ShapeSelector from "./ShapeSelector";
-import './HomeComp.css'
+import "./HomeComp.css";
 
 const CustomCanvas = ({
   image,
@@ -15,24 +15,25 @@ const CustomCanvas = ({
   backgroundColor,
   canvasText,
   textColor,
+  uploadLogo,
 }: any) => {
   const [imgProps, setImgProps] = useState({ width: 0, height: 0 });
+  const [logoImage, setLogoImage] = useState<HTMLImageElement | null>(null);
+  const [logoProps, setLogoProps] = useState({
+    width: 0,
+    height: 0,
+    x: 0,
+    y: 0,
+  });
   const [selectedId, setSelectedId] = useState<string | null>(null);
 
   // Refs for transformer nodes
   const textRef = useRef<any>(null);
   const trRef = useRef<any>(null);
+  const logoRef = useRef<any>(null);
 
-  // Shape props
-  const shapeProps = {
-    width: currentBkgShape === "circle" ? 200 : 220,
-    height: currentBkgShape === "circle" ? 200 : 120,
-    fill: backgroundColor,
-    shadowBlur: 1,
-    stroke: "white",
-    id: "shape",
-    draggable: true, // Enable dragging
-  };
+  const canvasWidth = window.innerWidth * 0.3;
+  const canvasHeight = window.innerHeight;
 
   const handleSelect = (e: any) => {
     setSelectedId(e.target.id());
@@ -48,14 +49,13 @@ const CustomCanvas = ({
     // Handle transformation changes, if needed
   };
 
+  // Set image background
   useEffect(() => {
     if (image) {
       const img = new window.Image();
       img.src = image.src;
       img.onload = () => {
         const aspectRatio = img.width / img.height;
-        const canvasWidth = window.innerWidth * 0.3;
-        const canvasHeight = window.innerHeight;
 
         let width, height;
 
@@ -72,16 +72,51 @@ const CustomCanvas = ({
     }
   }, [image]);
 
-  // Deselect shape when currentBkgShape changes
+  // Handle uploadLogo update to display and center the logo on canvas
   useEffect(() => {
-    setSelectedId(null);
-  }, [currentBkgShape]);
+    if (uploadLogo) {
+      const logo = new window.Image();
+      logo.src = URL.createObjectURL(uploadLogo);
+      logo.onload = () => {
+        const logoAspectRatio = logo.width / logo.height;
+
+        // Maximum width and height the logo can occupy (e.g., 50% of canvas)
+        const maxLogoWidth = canvasWidth * 0.5;
+        const maxLogoHeight = canvasHeight * 0.5;
+
+        let logoWidth, logoHeight;
+
+        // Scale logo while keeping the aspect ratio
+        if (maxLogoWidth / logoAspectRatio <= maxLogoHeight) {
+          logoWidth = maxLogoWidth;
+          logoHeight = maxLogoWidth / logoAspectRatio;
+        } else {
+          logoHeight = maxLogoHeight;
+          logoWidth = maxLogoHeight * logoAspectRatio;
+        }
+
+        // Center the logo on the canvas
+        const logoX = (canvasWidth - logoWidth) / 2;
+        const logoY = (canvasHeight - logoHeight) / 2;
+
+        setLogoImage(logo);
+        setLogoProps({
+          width: logoWidth,
+          height: logoHeight,
+          x: logoX,
+          y: logoY,
+        });
+      };
+
+      return () => URL.revokeObjectURL(logo.src); // Cleanup URL
+    }
+  }, [uploadLogo]);
 
   return (
-    <div >
+    <div>
       <Stage
-        width={window.innerWidth * 0.3}
-        height={window.innerHeight}
+        width={canvasWidth}
+        height={canvasHeight}
         onMouseDown={handleDeselect}
         onTouchStart={handleDeselect}
       >
@@ -100,7 +135,15 @@ const CustomCanvas = ({
           <ShapeSelector
             backgroundColor={backgroundColor}
             currentBkgShape={currentBkgShape}
-            shapeProps={shapeProps}
+            shapeProps={{
+              width: currentBkgShape === "circle" ? 200 : 220,
+              height: currentBkgShape === "circle" ? 200 : 120,
+              fill: backgroundColor,
+              shadowBlur: 1,
+              stroke: "white",
+              id: "shape",
+              draggable: true,
+            }}
             isSelected={selectedId === "shape"}
             onSelect={handleSelect}
             onTransform={handleTransform}
@@ -128,6 +171,26 @@ const CustomCanvas = ({
               nodes={[textRef.current]}
               keepRatio={true}
             />
+          )}
+        </Layer>
+        <Layer>
+          {logoImage && (
+            <KonvaImage
+              image={logoImage}
+              x={logoProps.x}
+              y={logoProps.y}
+              width={logoProps.width}
+              height={logoProps.height}
+              draggable
+              ref={logoRef}
+              onClick={handleSelect}
+              onTap={handleSelect}
+              onTransformEnd={handleTransform}
+              id="logo"
+            />
+          )}
+          {selectedId === "logo" && logoRef.current && (
+            <Transformer ref={trRef} nodes={[logoRef.current]} />
           )}
         </Layer>
       </Stage>

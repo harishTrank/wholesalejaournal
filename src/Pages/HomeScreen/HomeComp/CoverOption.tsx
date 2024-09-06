@@ -5,26 +5,47 @@ const CoverOption = ({
   setCoverCurrentOption,
   canvasText,
   setCanvasText,
-  lowerVisible,
-  setLowerVisible
+  setLowerVisible,
+  uploadLogo,
+  setUploadLogo,
+  setCurrentBkgShape,
 }: any) => {
   const optionSelectHandler = (e: any) => {
     setCoverCurrentOption(e.target.value);
     setCanvasText(["", "", ""]);
   };
 
+  const handleLogoUpload = (e: any) => {
+    // setUploadLogo(e.target.value);
+    const file = e.target.files[0];
+    if (file) {
+      setUploadLogo(file);
+    }
+  };
+
   useEffect(() => {
     if (coverCurrentOption === "Phrase") {
       setCanvasText(["", "", ""]);
-    } else {
+      setLowerVisible(true);
+      setCurrentBkgShape("rect");
+      setUploadLogo("");
+    } else if (coverCurrentOption === "Name or initial") {
       setCanvasText("");
+      setLowerVisible(true);
+      setCurrentBkgShape("rect");
+      setUploadLogo("");
+    } else if (coverCurrentOption === "Upload a logo") {
+      setLowerVisible(false);
+      setCurrentBkgShape("");
     }
-  }, [coverCurrentOption, setCanvasText]);
+  }, [coverCurrentOption, setCanvasText, setLowerVisible, setCurrentBkgShape]);
+
+  useEffect(() => {
+    console.log("uploadLogo", uploadLogo);
+  }, [uploadLogo]);
 
   return (
     <>
-    
-    
       <select
         name="personaliseProd"
         id="personaliseProd"
@@ -36,9 +57,7 @@ const CoverOption = ({
         <option value="Upload a logo">Upload a logo</option>
       </select>
       {coverCurrentOption === "Phrase" ? (
-       
         <div className="Lines flex">
-          {setLowerVisible(true)}
           <input
             type="text"
             maxLength={25}
@@ -80,7 +99,6 @@ const CoverOption = ({
         </div>
       ) : coverCurrentOption === "Name or initial" ? (
         <span className="nameInitial">
-          {setLowerVisible(true)}
           <textarea
             name="writingArea"
             maxLength={15}
@@ -91,17 +109,20 @@ const CoverOption = ({
             onChange={(e: any) => setCanvasText(e.target.value)}
           ></textarea>
         </span>
-      ) :coverCurrentOption === "Upload a logo" ?(
+      ) : coverCurrentOption === "Upload a logo" ? (
         <>
-        {setLowerVisible(false)}
           <div className="file" id="uploadImage">
-    
-      <label htmlFor="logoUpload" style={{ cursor: "pointer" }}>
-        Select a file
-      </label>
-     
-      <input type="file" id="logoUpload" style={{ display: "none" }} />
-    </div>
+            <label htmlFor="logoUpload" style={{ cursor: "pointer" }}>
+              Select a file
+            </label>
+
+            <input
+              type="file"
+              onChange={handleLogoUpload}
+              id="logoUpload"
+              style={{ display: "none" }}
+            />
+          </div>
           <img
             hidden
             id="logoPreview"
@@ -110,7 +131,7 @@ const CoverOption = ({
             style={{ maxWidth: 200, marginTop: 10 }}
           />
         </>
-      ):(
+      ) : (
         <div>hello</div>
       )}
     </>

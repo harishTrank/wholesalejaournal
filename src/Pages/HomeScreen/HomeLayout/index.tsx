@@ -10,13 +10,14 @@ import Header from "../../../components/Header";
 const HomeScreen = ({ curimage }: any) => {
   const [image, setImage]: any = useState(null);
   const [coverCurrentOption, setCoverCurrentOption] = useState("Phrase");
-  const [currentBkgShape, setCurrentBkgShape]: any = useState("rect");
+  const [currentBkgShape, setCurrentBkgShape]: any = useState("");
   const [backgroundColor, setBackGroundColor]: any = useState("#F5E6D9");
   const [textColor, setTextColor]: any = useState("#333333");
   const [canvasText, setCanvasText]: any = useState(["", "", ""]);
   const [selectedOption, setSelectedOption] = useState<string>("");
   const [isCanvasVisible, setIsCanvasVisible] = useState<boolean>(false);
   const [lowerVisible, setLowerVisible]: any = useState(true);
+  const [uploadLogo, setUploadLogo]: any = useState("");
 
   useEffect(() => {
     const loadImage: any = new window.Image();
@@ -28,6 +29,13 @@ const HomeScreen = ({ curimage }: any) => {
 
   const handleOptionChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     setSelectedOption(event.target.value);
+    if (event.target.value === "Yes") {
+      setCurrentBkgShape("rect");
+      // setIsCanvasVisible(true);
+    } else {
+      setCurrentBkgShape("");
+      setCanvasText(["", "", ""]);
+    }
   };
   const toggleCanvasVisibility = () => {
     setIsCanvasVisible(!isCanvasVisible);
@@ -44,6 +52,7 @@ const HomeScreen = ({ curimage }: any) => {
             backgroundColor={backgroundColor}
             canvasText={canvasText}
             textColor={textColor}
+            uploadLogo={uploadLogo}
           />
         </div>
 
@@ -79,6 +88,9 @@ const HomeScreen = ({ curimage }: any) => {
                       setCanvasText={setCanvasText}
                       lowerVisible={lowerVisible}
                       setLowerVisible={setLowerVisible}
+                      uploadLogo={uploadLogo}
+                      setUploadLogo={setUploadLogo}
+                      setCurrentBkgShape={setCurrentBkgShape}
                     />
                   </div>
                   {lowerVisible && (

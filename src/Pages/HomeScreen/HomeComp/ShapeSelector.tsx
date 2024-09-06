@@ -54,18 +54,20 @@ const ShapeSelector = ({
           onTransformEnd={onTransform}
         />
       ) : (
-        <Rect
-          {...shapeProps}
-          width={160}
-          height={160}
-          x={215}
-          y={75}
-          ref={shapeRef}
-          rotation={45}
-          onClick={onSelect}
-          onTap={onSelect}
-          onTransformEnd={onTransform}
-        />
+        currentBkgShape === "trap" && (
+          <Rect
+            {...shapeProps}
+            width={160}
+            height={160}
+            x={215}
+            y={75}
+            ref={shapeRef}
+            rotation={45}
+            onClick={onSelect}
+            onTap={onSelect}
+            onTransformEnd={onTransform}
+          />
+        )
       )}
       {isSelected && <Transformer ref={trRef} />}
     </>
