@@ -74,7 +74,7 @@ const CustomCanvas = ({
 
   // Handle uploadLogo update to display and center the logo on canvas
   useEffect(() => {
-    if (uploadLogo) {
+    if (uploadLogo && uploadLogo !== "") {
       const logo = new window.Image();
       logo.src = URL.createObjectURL(uploadLogo);
       logo.onload = () => {
@@ -109,6 +109,10 @@ const CustomCanvas = ({
       };
 
       return () => URL.revokeObjectURL(logo.src); // Cleanup URL
+    }
+
+    if (uploadLogo === "") {
+      setLogoImage(null);
     }
   }, [uploadLogo]);
 
