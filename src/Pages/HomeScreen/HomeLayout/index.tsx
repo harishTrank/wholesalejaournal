@@ -6,6 +6,7 @@ import CustomCanvas from "../HomeComp/CustomCanvas";
 import ColorSelector from "../HomeComp/ColorSelector";
 import { Link } from "react-router-dom";
 import Header from "../../../components/Header";
+import FontsComponents from "../HomeComp/FontsComponents";
 
 const HomeScreen = ({ curimage }: any) => {
   const [image, setImage]: any = useState(null);
@@ -18,6 +19,7 @@ const HomeScreen = ({ curimage }: any) => {
   const [isCanvasVisible, setIsCanvasVisible] = useState<boolean>(false);
   const [lowerVisible, setLowerVisible]: any = useState(true);
   const [uploadLogo, setUploadLogo]: any = useState("");
+  const [currentFont, setCurrentFont]: any = useState("Roboto");
 
   useEffect(() => {
     const loadImage: any = new window.Image();
@@ -53,6 +55,7 @@ const HomeScreen = ({ curimage }: any) => {
             canvasText={canvasText}
             textColor={textColor}
             uploadLogo={uploadLogo}
+            currentFont={currentFont}
           />
         </div>
 
@@ -107,111 +110,10 @@ const HomeScreen = ({ curimage }: any) => {
                         </div>
                         <div className="more-cust">
                           <h4>Select font style</h4>
-                          <div className="swatch-container">
-                            {/* Repeatable Font Style Items */}
-                            <div className="swatch customily-swatch">
-                              <input
-                                id="font1"
-                                type="radio"
-                                name="fontStyle"
-                                className="needsclick needsfocus"
-                              />
-                              <label
-                                htmlFor="font1"
-                                className="needsclick needsfocus"
-                              >
-                                <img
-                                  src="https://cdn.customily.com/shopify/assetFiles/swatches/may-designs-main.myshopify.com/af1a5c75-f3c9-474f-bc9d-590d16cae0d0/2/15fb2438-ceed-4cef-85e0-5d05506f687e.png"
-                                  loading="lazy"
-                                  width="40"
-                                  height="40"
-                                  alt="font1"
-                                />
-                              </label>
-                            </div>
-                            <div className="swatch customily-swatch">
-                              <input
-                                id="font2"
-                                type="radio"
-                                name="fontStyle"
-                                className="needsclick needsfocus"
-                              />
-                              <label
-                                htmlFor="font2"
-                                className="needsclick needsfocus"
-                              >
-                                <img
-                                  src="https://cdn.customily.com/shopify/assetFiles/swatches/may-designs-main.myshopify.com/af1a5c75-f3c9-474f-bc9d-590d16cae0d0/2/28092ff8-3da0-4fd4-b47b-d15c65cb2daf.png"
-                                  loading="lazy"
-                                  width="40"
-                                  height="40"
-                                  alt="font1"
-                                />
-                              </label>
-                            </div>
-                            <div className="swatch customily-swatch">
-                              <input
-                                id="font3"
-                                type="radio"
-                                name="fontStyle"
-                                className="needsclick needsfocus"
-                              />
-                              <label
-                                htmlFor="font3"
-                                className="needsclick needsfocus"
-                              >
-                                <img
-                                  src="https://cdn.customily.com/shopify/assetFiles/swatches/may-designs-main.myshopify.com/af1a5c75-f3c9-474f-bc9d-590d16cae0d0/2/5481ad74-5b5a-4b1e-9aa1-5d9dab975abc.png"
-                                  loading="lazy"
-                                  width="40"
-                                  height="40"
-                                  alt="font1"
-                                />
-                              </label>
-                            </div>
-                            <div className="swatch customily-swatch">
-                              <input
-                                id="font4"
-                                type="radio"
-                                name="fontStyle"
-                                className="needsclick needsfocus"
-                              />
-                              <label
-                                htmlFor="font4"
-                                className="needsclick needsfocus"
-                              >
-                                <img
-                                  src="https://cdn.customily.com/shopify/assetFiles/swatches/may-designs-main.myshopify.com/af1a5c75-f3c9-474f-bc9d-590d16cae0d0/2/3accc091-642e-4e90-b8d1-310b2333f3af.png"
-                                  loading="lazy"
-                                  width="40"
-                                  height="40"
-                                  alt="font1"
-                                />
-                              </label>
-                            </div>
-                            <div className="swatch customily-swatch">
-                              <input
-                                id="font5"
-                                type="radio"
-                                name="fontStyle"
-                                className="needsclick needsfocus"
-                              />
-                              <label
-                                htmlFor="font5"
-                                className="needsclick needsfocus"
-                              >
-                                <img
-                                  src="https://cdn.customily.com/shopify/assetFiles/swatches/may-designs-main.myshopify.com/af1a5c75-f3c9-474f-bc9d-590d16cae0d0/2/51bba9cb-2e8b-45f9-ab39-b2f87e3e0a3c.png"
-                                  loading="lazy"
-                                  width="40"
-                                  height="40"
-                                  alt="font1"
-                                />
-                              </label>
-                            </div>
-
-                            {/* Add similar font style items */}
-                          </div>
+                          <FontsComponents
+                            currentFont={currentFont}
+                            setCurrentFont={setCurrentFont}
+                          />
                         </div>
                         <div className="more-cust-1">
                           <h4>Select background color</h4>

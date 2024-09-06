@@ -16,6 +16,7 @@ const CustomCanvas = ({
   canvasText,
   textColor,
   uploadLogo,
+  currentFont,
 }: any) => {
   const [imgProps, setImgProps] = useState({ width: 0, height: 0 });
   const [logoImage, setLogoImage] = useState<HTMLImageElement | null>(null);
@@ -26,6 +27,11 @@ const CustomCanvas = ({
     y: 0,
   });
   const [selectedId, setSelectedId] = useState<string | null>(null);
+  const [textProps, setTextProps] = useState({
+    text: Array.isArray(canvasText) ? canvasText.join("\n") : canvasText,
+    fontFamily: currentFont,
+    fontStyle: currentFont.includes("italic") ? "italic" : "normal",
+  });
 
   // Refs for transformer nodes
   const textRef = useRef<any>(null);
@@ -116,6 +122,23 @@ const CustomCanvas = ({
     }
   }, [uploadLogo]);
 
+  // Re-render the text when font family or canvas text changes
+  useEffect(() => {
+    setTextProps({
+      text: Array.isArray(canvasText) ? canvasText.join("\n") : canvasText,
+      fontFamily: currentFont,
+      fontStyle: currentFont.includes("italic") ? "italic" : "normal",
+    });
+
+    if (textRef.current) {
+      textRef.current.fontFamily(currentFont); // Explicitly update the font family
+      textRef.current.fontStyle(
+        currentFont.includes("italic") ? "italic" : "normal"
+      );
+      textRef.current.getLayer().batchDraw(); // Force re-render
+    }
+  }, [canvasText, currentFont]);
+
   return (
     <div>
       <Stage
@@ -153,9 +176,7 @@ const CustomCanvas = ({
             onTransform={handleTransform}
           />
           <Text
-            text={
-              Array.isArray(canvasText) ? canvasText.join("\n") : canvasText
-            }
+            text={textProps.text}
             fontSize={20}
             fill={textColor}
             x={(window.innerWidth * 0.35) / 2 - 130}
@@ -168,6 +189,8 @@ const CustomCanvas = ({
             onTransformEnd={handleTransform}
             id="text"
             ref={textRef}
+            fontFamily={textProps.fontFamily}
+            fontStyle={textProps.fontStyle}
           />
           {selectedId === "text" && (
             <Transformer
