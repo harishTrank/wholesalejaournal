@@ -56,6 +56,13 @@ const CoverOption = ({
         <option value="Name or initial">Name or initial</option>
         <option value="Upload a logo">Upload a logo</option>
       </select>
+      <label htmlFor="">Personalise Inner Pages</label>
+      <select name="" id="">
+        <option value="">Select an option</option>
+        <option value="">Cover</option>
+        <option value="">Lined</option>
+        <option value="">Non Lined</option>
+      </select>
       {coverCurrentOption === "Phrase" ? (
         <div className="Lines flex">
           <input

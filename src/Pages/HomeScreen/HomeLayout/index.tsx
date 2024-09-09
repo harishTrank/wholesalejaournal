@@ -6,20 +6,18 @@ import CustomCanvas from "../HomeComp/CustomCanvas";
 import ColorSelector from "../HomeComp/ColorSelector";
 import { Link } from "react-router-dom";
 import Header from "../../../components/Header";
-import FontsComponents from "../HomeComp/FontsComponents";
+import Diary from "../../../images/Diary-removebg-preview.png";
 
 const HomeScreen = ({ curimage }: any) => {
   const [image, setImage]: any = useState(null);
   const [coverCurrentOption, setCoverCurrentOption] = useState("Phrase");
-  const [currentBkgShape, setCurrentBkgShape]: any = useState("");
+  const [currentBkgShape, setCurrentBkgShape]: any = useState("rect");
   const [backgroundColor, setBackGroundColor]: any = useState("#F5E6D9");
   const [textColor, setTextColor]: any = useState("#333333");
   const [canvasText, setCanvasText]: any = useState(["", "", ""]);
   const [selectedOption, setSelectedOption] = useState<string>("");
-  const [isCanvasVisible, setIsCanvasVisible] = useState<boolean>(true);
+  const [isCanvasVisible, setIsCanvasVisible] = useState<boolean>(false);
   const [lowerVisible, setLowerVisible]: any = useState(true);
-  const [uploadLogo, setUploadLogo]: any = useState("");
-  const [currentFont, setCurrentFont]: any = useState("Roboto");
 
   useEffect(() => {
     const loadImage: any = new window.Image();
@@ -31,13 +29,6 @@ const HomeScreen = ({ curimage }: any) => {
 
   const handleOptionChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     setSelectedOption(event.target.value);
-    if (event.target.value === "Yes") {
-      setCurrentBkgShape("rect");
-      setIsCanvasVisible(true);
-    } else {
-      setCurrentBkgShape("");
-      setCanvasText(["", "", ""]);
-    }
   };
   const toggleCanvasVisibility = () => {
     setIsCanvasVisible(!isCanvasVisible);
@@ -54,8 +45,6 @@ const HomeScreen = ({ curimage }: any) => {
             backgroundColor={backgroundColor}
             canvasText={canvasText}
             textColor={textColor}
-            uploadLogo={uploadLogo}
-            currentFont={currentFont}
           />
         </div>
 
@@ -73,76 +62,192 @@ const HomeScreen = ({ curimage }: any) => {
             </select>
           </div>
           {selectedOption === "Yes" && (
-            <div className="personalisecover">
-              <div
-                className="accordion-header"
-                onClick={toggleCanvasVisibility}
-                style={{ cursor: "pointer" }}
-              >
-                <h3>Personalise cover</h3>
-              </div>
-              {isCanvasVisible && (
-                <div>
-                  <div className="cover-option">
-                    <CoverOption
-                      coverCurrentOption={coverCurrentOption}
-                      setCoverCurrentOption={setCoverCurrentOption}
-                      canvasText={canvasText}
-                      setCanvasText={setCanvasText}
-                      lowerVisible={lowerVisible}
-                      setLowerVisible={setLowerVisible}
-                      uploadLogo={uploadLogo}
-                      setUploadLogo={setUploadLogo}
-                      setCurrentBkgShape={setCurrentBkgShape}
-                    />
-                  </div>
-                  {lowerVisible && (
-                    <div>
-                      <div className="controls">
-                        <div className="more-cust">
-                          <h4>Select background shape</h4>
-                          <div className="shapes">
-                            <BackgroundShape
-                              currentBkgShape={currentBkgShape}
-                              setCurrentBkgShape={setCurrentBkgShape}
+            <>
+              <div className="personalisecover">
+                <div
+                  className="accordion-header"
+                  onClick={toggleCanvasVisibility}
+                  style={{ cursor: "pointer" }}
+                >
+                  <h3>Personalise cover</h3>
+                </div>
+                {isCanvasVisible && (
+                  <div>
+                    <div className="cover-option">
+                      <CoverOption
+                        coverCurrentOption={coverCurrentOption}
+                        setCoverCurrentOption={setCoverCurrentOption}
+                        canvasText={canvasText}
+                        setCanvasText={setCanvasText}
+                        lowerVisible={lowerVisible}
+                        setLowerVisible={setLowerVisible}
+                      />
+                    </div>
+                    {lowerVisible && (
+                      <div>
+                        <div className="controls">
+                          <div className="more-cust">
+                            <h4>Select background shape</h4>
+                            <div className="shapes">
+                              <BackgroundShape
+                                currentBkgShape={currentBkgShape}
+                                setCurrentBkgShape={setCurrentBkgShape}
+                              />
+                            </div>
+                          </div>
+                          <div className="more-cust">
+                            <h4>Select font style</h4>
+                            <div className="swatch-container">
+                              {/* Repeatable Font Style Items */}
+                              <div className="swatch customily-swatch">
+                                <input
+                                  id="font1"
+                                  type="radio"
+                                  name="fontStyle"
+                                  className="needsclick needsfocus"
+                                />
+                                <label
+                                  htmlFor="font1"
+                                  className="needsclick needsfocus"
+                                >
+                                  <img
+                                    src="https://cdn.customily.com/shopify/assetFiles/swatches/may-designs-main.myshopify.com/af1a5c75-f3c9-474f-bc9d-590d16cae0d0/2/15fb2438-ceed-4cef-85e0-5d05506f687e.png"
+                                    loading="lazy"
+                                    width="40"
+                                    height="40"
+                                    alt="font1"
+                                  />
+                                </label>
+                              </div>
+                              <div className="swatch customily-swatch">
+                                <input
+                                  id="font2"
+                                  type="radio"
+                                  name="fontStyle"
+                                  className="needsclick needsfocus"
+                                />
+                                <label
+                                  htmlFor="font2"
+                                  className="needsclick needsfocus"
+                                >
+                                  <img
+                                    src="https://cdn.customily.com/shopify/assetFiles/swatches/may-designs-main.myshopify.com/af1a5c75-f3c9-474f-bc9d-590d16cae0d0/2/28092ff8-3da0-4fd4-b47b-d15c65cb2daf.png"
+                                    loading="lazy"
+                                    width="40"
+                                    height="40"
+                                    alt="font1"
+                                  />
+                                </label>
+                              </div>
+                              <div className="swatch customily-swatch">
+                                <input
+                                  id="font3"
+                                  type="radio"
+                                  name="fontStyle"
+                                  className="needsclick needsfocus"
+                                />
+                                <label
+                                  htmlFor="font3"
+                                  className="needsclick needsfocus"
+                                >
+                                  <img
+                                    src="https://cdn.customily.com/shopify/assetFiles/swatches/may-designs-main.myshopify.com/af1a5c75-f3c9-474f-bc9d-590d16cae0d0/2/5481ad74-5b5a-4b1e-9aa1-5d9dab975abc.png"
+                                    loading="lazy"
+                                    width="40"
+                                    height="40"
+                                    alt="font1"
+                                  />
+                                </label>
+                              </div>
+                              <div className="swatch customily-swatch">
+                                <input
+                                  id="font4"
+                                  type="radio"
+                                  name="fontStyle"
+                                  className="needsclick needsfocus"
+                                />
+                                <label
+                                  htmlFor="font4"
+                                  className="needsclick needsfocus"
+                                >
+                                  <img
+                                    src="https://cdn.customily.com/shopify/assetFiles/swatches/may-designs-main.myshopify.com/af1a5c75-f3c9-474f-bc9d-590d16cae0d0/2/3accc091-642e-4e90-b8d1-310b2333f3af.png"
+                                    loading="lazy"
+                                    width="40"
+                                    height="40"
+                                    alt="font1"
+                                  />
+                                </label>
+                              </div>
+                              <div className="swatch customily-swatch">
+                                <input
+                                  id="font5"
+                                  type="radio"
+                                  name="fontStyle"
+                                  className="needsclick needsfocus"
+                                />
+                                <label
+                                  htmlFor="font5"
+                                  className="needsclick needsfocus"
+                                >
+                                  <img
+                                    src="https://cdn.customily.com/shopify/assetFiles/swatches/may-designs-main.myshopify.com/af1a5c75-f3c9-474f-bc9d-590d16cae0d0/2/51bba9cb-2e8b-45f9-ab39-b2f87e3e0a3c.png"
+                                    loading="lazy"
+                                    width="40"
+                                    height="40"
+                                    alt="font1"
+                                  />
+                                </label>
+                              </div>
+
+                              {/* Add similar font style items */}
+                            </div>
+                          </div>
+                          <div className="more-cust-1">
+                            <h4>Select background color</h4>
+                            <ColorSelector
+                              backgroundColor={backgroundColor}
+                              setBackGroundColor={setBackGroundColor}
+                            />
+                          </div>
+                          <div className="more-cust-2">
+                            <h4>Select text color</h4>
+                            <ColorSelector
+                              backgroundColor={textColor}
+                              setBackGroundColor={setTextColor}
                             />
                           </div>
                         </div>
-                        <div className="more-cust">
-                          <h4>Select font style</h4>
-                          <FontsComponents
-                            currentFont={currentFont}
-                            setCurrentFont={setCurrentFont}
-                          />
-                        </div>
-                        <div className="more-cust-1">
-                          <h4>Select background color</h4>
-                          <ColorSelector
-                            backgroundColor={backgroundColor}
-                            setBackGroundColor={setBackGroundColor}
-                          />
-                        </div>
-                        <div className="more-cust-2">
-                          <h4>Select text color</h4>
-                          <ColorSelector
-                            backgroundColor={textColor}
-                            setBackGroundColor={setTextColor}
-                          />
+                        <div className="more-btn">
+                          <button>
+                            <Link to="/more-customization">
+                              More-customization
+                            </Link>
+                          </button>
                         </div>
                       </div>
-                      <div className="more-btn">
-                        <button>
-                          <Link to="/morecustomization">
-                            More-customization
-                          </Link>
-                        </button>
-                      </div>
-                    </div>
-                  )}
-                </div>
-              )}
-            </div>
+                    )}
+                  </div>
+                )}
+              </div>
+            </>
           )}
+          <div className="diaryimage flex">
+            <div className="coverimage">
+              <img src={Diary} alt="" />
+            </div>
+            <div className="coverimage1">
+              <img src={Diary} alt="" />
+            </div>
+          </div>
+          <div className="customisecart flex">
+            <div className="qty-box">
+              <input type="text" />
+            </div>
+            <div className="addbtn">
+              <button>Add to cart</button>
+            </div>
+          </div>
         </div>
       </div>
     </div>
