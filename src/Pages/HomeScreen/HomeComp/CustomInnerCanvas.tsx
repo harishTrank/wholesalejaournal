@@ -1,16 +1,15 @@
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { Layer, Stage, Image as KonvaImage } from "react-konva";
 import "./HomeComp.css";
 import LinedImageSrc from "../../../assests/lined.jpg";
 import NonLinedImageSrc from "../../../assests/non-lined.jpg";
 
-const CustomInnerCanvas = ({ innerPageOption }: any) => {
+const CustomInnerCanvas = ({ innerPageOption, innerRef }: any) => {
   const [selectedId, setSelectedId] = useState<string | null>(null);
   const [imgProps, setImgProps] = useState({ width: 0, height: 0 });
   const [currentBackImg, setCurrentBackImg] = useState<HTMLImageElement | null>(
     null
   );
-  const innerRef: any = useRef(null);
 
   const canvasWidth = window.innerWidth * 0.3;
   const canvasHeight = window.innerHeight;

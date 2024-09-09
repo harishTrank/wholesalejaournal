@@ -20,6 +20,7 @@ const CustomCanvas = ({
   currentFont,
   coverRef,
   innerPageOption,
+  innerRef,
 }: any) => {
   const [imgProps, setImgProps] = useState({ width: 0, height: 0 });
   const [logoImage, setLogoImage] = useState<HTMLImageElement | null>(null);
@@ -55,7 +56,11 @@ const CustomCanvas = ({
   };
 
   const handleTransform = (e: any) => {
-    // Handle transformation changes, if needed
+    // if (coverRef?.current) {
+    //   const stage = coverRef.current.getStage();
+    //   const dataUrl = stage.toDataURL();
+    //   setCanvasCoverDataUrl(dataUrl);
+    // }
   };
 
   // Set image background
@@ -228,7 +233,10 @@ const CustomCanvas = ({
           </Layer>
         </Stage>
       ) : (
-        <CustomInnerCanvas innerPageOption={innerPageOption} />
+        <CustomInnerCanvas
+          innerPageOption={innerPageOption}
+          innerRef={innerRef}
+        />
       )}
     </div>
   );

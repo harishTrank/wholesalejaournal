@@ -9,12 +9,9 @@ const CoverOption = ({
   uploadLogo,
   setUploadLogo,
   setCurrentBkgShape,
-  innerPageOption,
-  setInnerPageOption,
 }: any) => {
   const optionSelectHandler = (e: any) => {
     setCoverCurrentOption(e.target.value);
-    setCanvasText(["", "", ""]);
   };
 
   const handleLogoUpload = (e: any) => {
@@ -48,14 +45,8 @@ const CoverOption = ({
     setUploadLogo,
   ]);
 
-  useEffect(() => {
-    console.log("uploadLogo", uploadLogo);
-  }, [uploadLogo]);
-
   return (
     <>
-     
-      
       <select
         name="personaliseProd"
         id="personaliseProd"

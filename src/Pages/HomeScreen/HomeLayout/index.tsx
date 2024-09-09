@@ -6,7 +6,6 @@ import CustomCanvas from "../HomeComp/CustomCoverCanvas";
 import ColorSelector from "../HomeComp/ColorSelector";
 import { Link } from "react-router-dom";
 import Header from "../../../components/Header";
-import Diary from "../../../images/Diary-removebg-preview.png";
 
 const HomeScreen = ({ curimage }: any) => {
   const [image, setImage]: any = useState(null);
@@ -21,6 +20,7 @@ const HomeScreen = ({ curimage }: any) => {
   const [uploadLogo, setUploadLogo]: any = useState(null);
   const [innerPageOption, setInnerPageOption]: any = useState("Cover");
   const coverRef = useRef<any>(null);
+  const innerRef: any = useRef(null);
   const [isContentVisible, setIsContentVisible]: any = useState(false);
 
   useEffect(() => {
@@ -55,6 +55,7 @@ const HomeScreen = ({ curimage }: any) => {
             uploadLogo={uploadLogo}
             coverRef={coverRef}
             innerPageOption={innerPageOption}
+            innerRef={innerRef}
           />
         </div>
 
@@ -268,10 +269,10 @@ const HomeScreen = ({ curimage }: any) => {
           )}
           <div className="diaryimage flex">
             <div className="coverimage">
-              <img src={Diary} alt="Canvas Preview" />
+              {/* <img src={canvasCoverDataUrl} alt="" /> */}
             </div>
             <div className="coverimage1">
-              <img src={Diary} alt="" />
+              {/* <img src={canvasInnerDataUrl} alt="" /> */}
             </div>
           </div>
           <div className="customisecart flex">
