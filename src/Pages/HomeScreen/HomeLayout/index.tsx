@@ -47,6 +47,7 @@ const HomeScreen = ({ curimage }: any) => {
             backgroundColor={backgroundColor}
             canvasText={canvasText}
             textColor={textColor}
+            uploadLogo={uploadLogo}
           />
         </div>
 
@@ -81,7 +82,6 @@ const HomeScreen = ({ curimage }: any) => {
                         setCoverCurrentOption={setCoverCurrentOption}
                         canvasText={canvasText}
                         setCanvasText={setCanvasText}
-                        lowerVisible={lowerVisible}
                         setLowerVisible={setLowerVisible}
                         setCurrentBkgShape={setCurrentBkgShape}
                         setUploadLogo={setUploadLogo}
