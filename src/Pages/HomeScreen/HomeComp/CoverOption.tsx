@@ -48,15 +48,8 @@ const CoverOption = ({
 
   return (
     <>
-      <label htmlFor="">Personalise Inner Pages</label>
-      <select
-        onChange={(e: any) => setInnerPageOption(e.target.value)}
-        value={innerPageOption}
-      >
-        <option value="Cover">Cover</option>
-        <option value="Lined">Lined</option>
-        <option value="Non Lined">Non Lined</option>
-      </select>
+     
+      
       <select
         name="personaliseProd"
         id="personaliseProd"
