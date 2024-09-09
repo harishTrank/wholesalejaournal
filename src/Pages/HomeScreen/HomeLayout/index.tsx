@@ -24,6 +24,7 @@ const HomeScreen = ({ curimage }: any) => {
   const [backGroundImage, setBackgroundImage]: any = useState(curimage);
   const [innerPageOption, setInnerPageOption]: any = useState("Cover");
   const coverRef = useRef<any>(null);
+  const [isContentVisible, setIsContentVisible]: any = useState(false);
 
   useEffect(() => {
     if (innerPageOption === "Cover") {
@@ -49,6 +50,9 @@ const HomeScreen = ({ curimage }: any) => {
   };
   const toggleCanvasVisibility = () => {
     setIsCanvasVisible(!isCanvasVisible);
+  };
+  const toggleContentVisibility = () => {
+    setIsContentVisible(!isContentVisible); // Toggle the content visibility
   };
 
   return (
@@ -250,6 +254,26 @@ const HomeScreen = ({ curimage }: any) => {
                         </div>
                       </div>
                     )}
+                  </div>
+                )}
+              </div>
+              <div className="personaliseinnerimages">
+                <div
+                  className="accordion-header"
+                  onClick={toggleContentVisibility}
+                >
+                  <h3>Personalise inner pages</h3>
+                </div>
+                {isContentVisible && (
+                  <div className="inner-content">
+                    <select
+                      onChange={(e: any) => setInnerPageOption(e.target.value)}
+                      value={innerPageOption}
+                    >
+                      <option value="Cover">Cover</option>
+                      <option value="Lined">Lined</option>
+                      <option value="Non Lined">Non Lined</option>
+                    </select>
                   </div>
                 )}
               </div>
