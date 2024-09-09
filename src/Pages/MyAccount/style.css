@@ -1,0 +1,45 @@
+.my-profile p,span{
+    color: grey;
+}
+.email-section{
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    width: 50%;
+    margin-top: 15px;
+}
+.email-content{
+    padding: 15px;
+    border: 1px solid #000;
+    border-radius: 10px;
+
+}
+.email{
+    margin-bottom: 15px;
+}
+.email input{
+    width: 100%;
+    border-radius: 5px;
+    background: #f4f5f6;
+    padding: 6px;
+    border: none;
+    outline: none;
+}
+.update-btn button{
+ width: 100%;
+ background:#000;
+ border: none;
+ border-radius: 5px;   
+ color: #fff;
+}
+.email label{
+    display: block;
+    margin-bottom: 5px;
+}
+.email-section{
+    width: 50%;
+}
+.profile-img{
+    width: 50%;
+}
+.profile-img img{
+    width: 100%;
+}

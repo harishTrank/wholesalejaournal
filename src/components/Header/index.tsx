@@ -1,5 +1,9 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
+import { FaRegUserCircle } from "react-icons/fa";
+import { IoCart } from "react-icons/io5";
+
+
 const index = () => {
   return (
     <div>
@@ -7,13 +11,14 @@ const index = () => {
                 <div className="container">
                     <div className="top-area flex space-bw al-center">
                         <div>
-                            <a href="#">Wholesale Journal</a>
+                            <Link to='/'>Wholesale Journal</Link>
                         </div>
                         <div className="tagline">
                             <p>Bulk Journals- journals and notebooks- custom diaries</p>
                         </div>
-                        <div>
-                            <a href="#" className="nmbr">PH: (800) 310 - 2723</a>
+                        <div className='cart-header'>
+                            <Link to='/account'><FaRegUserCircle /></Link>
+                            <Link to='/'><IoCart/></Link>
                         </div>
                         <div className="toggle">
                             <i className="fa-solid fa-bars"></i>
@@ -30,10 +35,10 @@ const index = () => {
                             <Link to='/journal'>Journal Books</Link>
                             </li>
                             <li>
-                                <a href="#">Writing Journal</a>
+                                <a href="/writing">Writing Journal</a>
                             </li>
                             <li>
-                                <a href="#">Shop</a>
+                                <a href="/shop">Shop</a>
                             </li>
                         </ul>
                     </div>
