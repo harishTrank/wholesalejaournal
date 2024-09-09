@@ -137,6 +137,7 @@ const CustomCanvas = ({
       );
       textRef.current.getLayer().batchDraw(); // Force re-render
     }
+    console.log("currentFont", currentFont);
   }, [canvasText, currentFont]);
 
   return (
