@@ -30,7 +30,7 @@ const CustomCanvas = ({
   const [textProps, setTextProps] = useState({
     text: Array.isArray(canvasText) ? canvasText.join("\n") : canvasText,
     fontFamily: currentFont,
-    fontStyle: currentFont.includes("italic") ? "italic" : "normal",
+    fontStyle: currentFont?.includes("italic") ? "italic" : "normal",
   });
 
   // Refs for transformer nodes
@@ -127,13 +127,13 @@ const CustomCanvas = ({
     setTextProps({
       text: Array.isArray(canvasText) ? canvasText.join("\n") : canvasText,
       fontFamily: currentFont,
-      fontStyle: currentFont.includes("italic") ? "italic" : "normal",
+      fontStyle: currentFont?.includes("italic") ? "italic" : "normal",
     });
 
     if (textRef.current) {
       textRef.current.fontFamily(currentFont); // Explicitly update the font family
       textRef.current.fontStyle(
-        currentFont.includes("italic") ? "italic" : "normal"
+        currentFont?.includes("italic") ? "italic" : "normal"
       );
       textRef.current.getLayer().batchDraw(); // Force re-render
     }

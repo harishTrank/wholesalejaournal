@@ -11,13 +11,14 @@ import Diary from "../../../images/Diary-removebg-preview.png";
 const HomeScreen = ({ curimage }: any) => {
   const [image, setImage]: any = useState(null);
   const [coverCurrentOption, setCoverCurrentOption] = useState("Phrase");
-  const [currentBkgShape, setCurrentBkgShape]: any = useState("rect");
+  const [currentBkgShape, setCurrentBkgShape]: any = useState("");
   const [backgroundColor, setBackGroundColor]: any = useState("#F5E6D9");
   const [textColor, setTextColor]: any = useState("#333333");
   const [canvasText, setCanvasText]: any = useState(["", "", ""]);
   const [selectedOption, setSelectedOption] = useState<string>("");
-  const [isCanvasVisible, setIsCanvasVisible] = useState<boolean>(false);
+  const [isCanvasVisible, setIsCanvasVisible] = useState<boolean>(true);
   const [lowerVisible, setLowerVisible]: any = useState(true);
+  const [uploadLogo, setUploadLogo]: any = useState(null);
 
   useEffect(() => {
     const loadImage: any = new window.Image();
@@ -29,6 +30,7 @@ const HomeScreen = ({ curimage }: any) => {
 
   const handleOptionChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     setSelectedOption(event.target.value);
+    setIsCanvasVisible(true);
   };
   const toggleCanvasVisibility = () => {
     setIsCanvasVisible(!isCanvasVisible);
@@ -81,6 +83,9 @@ const HomeScreen = ({ curimage }: any) => {
                         setCanvasText={setCanvasText}
                         lowerVisible={lowerVisible}
                         setLowerVisible={setLowerVisible}
+                        setCurrentBkgShape={setCurrentBkgShape}
+                        setUploadLogo={setUploadLogo}
+                        uploadLogo={uploadLogo}
                       />
                     </div>
                     {lowerVisible && (
