@@ -16,7 +16,7 @@ const HomeScreen = ({ curimage }: any) => {
   const [textColor, setTextColor]: any = useState("#333333");
   const [canvasText, setCanvasText]: any = useState(["", "", ""]);
   const [selectedOption, setSelectedOption] = useState<string>("");
-  const [isCanvasVisible, setIsCanvasVisible] = useState<boolean>(false);
+  const [isCanvasVisible, setIsCanvasVisible] = useState<boolean>(true);
   const [lowerVisible, setLowerVisible]: any = useState(true);
   const [uploadLogo, setUploadLogo]: any = useState("");
   const [currentFont, setCurrentFont]: any = useState("Roboto");
@@ -33,7 +33,7 @@ const HomeScreen = ({ curimage }: any) => {
     setSelectedOption(event.target.value);
     if (event.target.value === "Yes") {
       setCurrentBkgShape("rect");
-      // setIsCanvasVisible(true);
+      setIsCanvasVisible(true);
     } else {
       setCurrentBkgShape("");
       setCanvasText(["", "", ""]);
