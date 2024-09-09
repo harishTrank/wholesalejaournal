@@ -23,7 +23,7 @@ const Index = () => {
           <div className="cart-section">
             <p>Home/Cart</p>
             <h2>Cart</h2>
-            <div className="details-section">
+            <div className="details-section flex space-bw">
               <div className="product">
                 <div className="product-content">
                   <div className="product-upper flex space-bw">
@@ -56,13 +56,42 @@ const Index = () => {
                        
                       </div>
                       <p>
-                        <u>Remove Item</u>
+                        <span>Remove Item</span>
                       </p>
                      
                     </div>
                     <div className="product-price">
                         <p>$10.00</p>
                     </div>
+                  </div>
+                </div>
+              </div>
+              <div className="cart-total">
+                <div className="cart-heading">
+                <h3>Cart Totals</h3>
+                </div>
+               
+                <div className="addcoupon">
+                  <div className="addcoupon-heading">
+                  <p>Add a coupon</p>
+                  </div>
+                  
+                  <div className="entercode flex space-bw">
+                    <input type="text" placeholder="Enter Code" />
+                    <button>Apply</button>
+                  </div>
+                  <div className="subtotal flex space-bw">
+                    <p>Subtotal</p>
+                    <p>$10.00</p>
+                  </div>
+                  <div className="free-shipping flex space-bw">
+                    <p>Shipping</p>
+                    <p>FREE</p>
+                  </div>
+                  
+                  <div className="total flex space-bw">
+                    <p>Total</p>
+                    <p>$10.00</p>
                   </div>
                 </div>
               </div>
