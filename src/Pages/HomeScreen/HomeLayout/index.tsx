@@ -2,13 +2,11 @@ import React, { useState, useEffect, useRef } from "react";
 import "./HomeScreen.css";
 import CoverOption from "../HomeComp/CoverOption";
 import BackgroundShape from "../HomeComp/BackgroundShape";
-import CustomCanvas from "../HomeComp/CustomCanvas";
+import CustomCanvas from "../HomeComp/CustomCoverCanvas";
 import ColorSelector from "../HomeComp/ColorSelector";
 import { Link } from "react-router-dom";
 import Header from "../../../components/Header";
 import Diary from "../../../images/Diary-removebg-preview.png";
-import Lined from "../../../assests/lined.jpg";
-import NonLined from "../../../assests/non-lined.jpg";
 
 const HomeScreen = ({ curimage }: any) => {
   const [image, setImage]: any = useState(null);
@@ -18,35 +16,23 @@ const HomeScreen = ({ curimage }: any) => {
   const [textColor, setTextColor]: any = useState("#333333");
   const [canvasText, setCanvasText]: any = useState(["", "", ""]);
   const [selectedOption, setSelectedOption] = useState<string>("");
-  const [isCanvasVisible, setIsCanvasVisible] = useState<boolean>(true);
+  const [isCanvasVisible, setIsCanvasVisible] = useState<boolean>(false);
   const [lowerVisible, setLowerVisible]: any = useState(true);
   const [uploadLogo, setUploadLogo]: any = useState(null);
-  const [backGroundImage, setBackgroundImage]: any = useState(curimage);
   const [innerPageOption, setInnerPageOption]: any = useState("Cover");
   const coverRef = useRef<any>(null);
   const [isContentVisible, setIsContentVisible]: any = useState(false);
 
   useEffect(() => {
-    if (innerPageOption === "Cover") {
-      setBackgroundImage(curimage);
-    } else if (innerPageOption === "Lined") {
-      setBackgroundImage(Lined);
-    } else if (innerPageOption === "Non Lined") {
-      setBackgroundImage(NonLined);
-    }
-  }, [innerPageOption, curimage]);
-
-  useEffect(() => {
     const loadImage: any = new window.Image();
-    loadImage.src = backGroundImage;
+    loadImage.src = curimage;
     loadImage.onload = () => {
       setImage(loadImage);
     };
-  }, [backGroundImage]);
+  }, [curimage]);
 
   const handleOptionChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     setSelectedOption(event.target.value);
-    setIsCanvasVisible(true);
   };
   const toggleCanvasVisibility = () => {
     setIsCanvasVisible(!isCanvasVisible);
@@ -68,6 +54,7 @@ const HomeScreen = ({ curimage }: any) => {
             textColor={textColor}
             uploadLogo={uploadLogo}
             coverRef={coverRef}
+            innerPageOption={innerPageOption}
           />
         </div>
 

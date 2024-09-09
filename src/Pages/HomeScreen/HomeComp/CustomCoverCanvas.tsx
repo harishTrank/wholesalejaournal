@@ -8,6 +8,7 @@ import {
 } from "react-konva";
 import ShapeSelector from "./ShapeSelector";
 import "./HomeComp.css";
+import CustomInnerCanvas from "./CustomInnerCanvas";
 
 const CustomCanvas = ({
   image,
@@ -18,6 +19,7 @@ const CustomCanvas = ({
   uploadLogo,
   currentFont,
   coverRef,
+  innerPageOption,
 }: any) => {
   const [imgProps, setImgProps] = useState({ width: 0, height: 0 });
   const [logoImage, setLogoImage] = useState<HTMLImageElement | null>(null);
@@ -143,87 +145,91 @@ const CustomCanvas = ({
 
   return (
     <div>
-      <Stage
-        width={canvasWidth}
-        height={canvasHeight}
-        onMouseDown={handleDeselect}
-        onTouchStart={handleDeselect}
-        ref={coverRef}
-      >
-        <Layer>
-          {image && (
-            <KonvaImage
-              image={image}
-              x={10}
-              y={10}
-              width={imgProps.width}
-              height={imgProps.height}
+      {innerPageOption === "Cover" ? (
+        <Stage
+          width={canvasWidth}
+          height={canvasHeight}
+          onMouseDown={handleDeselect}
+          onTouchStart={handleDeselect}
+          ref={coverRef}
+        >
+          <Layer>
+            {image && (
+              <KonvaImage
+                image={image}
+                x={10}
+                y={10}
+                width={imgProps.width}
+                height={imgProps.height}
+              />
+            )}
+          </Layer>
+          <Layer>
+            <ShapeSelector
+              backgroundColor={backgroundColor}
+              currentBkgShape={currentBkgShape}
+              shapeProps={{
+                width: currentBkgShape === "circle" ? 200 : 220,
+                height: currentBkgShape === "circle" ? 200 : 120,
+                fill: backgroundColor,
+                shadowBlur: 1,
+                stroke: "white",
+                id: "shape",
+                draggable: true,
+              }}
+              isSelected={selectedId === "shape"}
+              onSelect={handleSelect}
+              onTransform={handleTransform}
             />
-          )}
-        </Layer>
-        <Layer>
-          <ShapeSelector
-            backgroundColor={backgroundColor}
-            currentBkgShape={currentBkgShape}
-            shapeProps={{
-              width: currentBkgShape === "circle" ? 200 : 220,
-              height: currentBkgShape === "circle" ? 200 : 120,
-              fill: backgroundColor,
-              shadowBlur: 1,
-              stroke: "white",
-              id: "shape",
-              draggable: true,
-            }}
-            isSelected={selectedId === "shape"}
-            onSelect={handleSelect}
-            onTransform={handleTransform}
-          />
-          <Text
-            text={textProps.text}
-            fontSize={20}
-            fill={textColor}
-            x={(window.innerWidth * 0.35) / 2 - 130}
-            y={100}
-            width={220}
-            align="center"
-            draggable
-            onClick={handleSelect}
-            onTap={handleSelect}
-            onTransformEnd={handleTransform}
-            id="text"
-            ref={textRef}
-            fontFamily={textProps.fontFamily}
-            fontStyle={textProps.fontStyle}
-          />
-          {selectedId === "text" && (
-            <Transformer
-              ref={trRef}
-              nodes={[textRef.current]}
-              keepRatio={true}
-            />
-          )}
-        </Layer>
-        <Layer>
-          {logoImage && (
-            <KonvaImage
-              image={logoImage}
-              x={logoProps.x}
-              y={logoProps.y}
-              width={logoProps.width}
-              height={logoProps.height}
+            <Text
+              text={textProps.text}
+              fontSize={20}
+              fill={textColor}
+              x={(window.innerWidth * 0.35) / 2 - 130}
+              y={100}
+              width={220}
+              align="center"
               draggable
-              ref={logoRef}
               onClick={handleSelect}
               onTap={handleSelect}
               onTransformEnd={handleTransform}
-              id="logo"
+              id="text"
+              ref={textRef}
+              fontFamily={textProps.fontFamily}
+              fontStyle={textProps.fontStyle}
             />
-          )}
-          {selectedId === "logo" && logoRef.current && (
-            <Transformer ref={trRef} nodes={[logoRef.current]} />
-          )}
-        </Layer>
-      </Stage>
+            {selectedId === "text" && (
+              <Transformer
+                ref={trRef}
+                nodes={[textRef.current]}
+                keepRatio={true}
+              />
+            )}
+          </Layer>
+          <Layer>
+            {logoImage && (
+              <KonvaImage
+                image={logoImage}
+                x={logoProps.x}
+                y={logoProps.y}
+                width={logoProps.width}
+                height={logoProps.height}
+                draggable
+                ref={logoRef}
+                onClick={handleSelect}
+                onTap={handleSelect}
+                onTransformEnd={handleTransform}
+                id="logo"
+              />
+            )}
+            {selectedId === "logo" && logoRef.current && (
+              <Transformer ref={trRef} nodes={[logoRef.current]} />
+            )}
+          </Layer>
+        </Stage>
+      ) : (
+        <CustomInnerCanvas innerPageOption={innerPageOption} />
+      )}
     </div>
   );
 };
