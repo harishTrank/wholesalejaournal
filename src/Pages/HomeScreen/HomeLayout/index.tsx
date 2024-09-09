@@ -33,7 +33,7 @@ const HomeScreen = ({ curimage }: any) => {
     } else if (innerPageOption === "Non Lined") {
       setBackgroundImage(NonLined);
     }
-  }, [innerPageOption]);
+  }, [innerPageOption, curimage]);
 
   useEffect(() => {
     const loadImage: any = new window.Image();

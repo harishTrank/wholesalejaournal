@@ -77,7 +77,7 @@ const CustomCanvas = ({
         setImgProps({ width, height });
       };
     }
-  }, [image]);
+  }, [image, canvasHeight, canvasWidth]);
 
   // Handle uploadLogo update to display and center the logo on canvas
   useEffect(() => {
@@ -121,7 +121,7 @@ const CustomCanvas = ({
     if (uploadLogo === "") {
       setLogoImage(null);
     }
-  }, [uploadLogo]);
+  }, [uploadLogo, canvasHeight, canvasWidth]);
 
   // Re-render the text when font family or canvas text changes
   useEffect(() => {

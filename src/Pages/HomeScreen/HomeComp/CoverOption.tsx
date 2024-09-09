@@ -40,7 +40,13 @@ const CoverOption = ({
       setLowerVisible(false);
       setCurrentBkgShape("");
     }
-  }, [coverCurrentOption, setCanvasText, setLowerVisible, setCurrentBkgShape]);
+  }, [
+    coverCurrentOption,
+    setCanvasText,
+    setLowerVisible,
+    setCurrentBkgShape,
+    setUploadLogo,
+  ]);
 
   useEffect(() => {
     console.log("uploadLogo", uploadLogo);
