@@ -6,6 +6,7 @@ import CustomCanvas from "../HomeComp/CustomCanvas";
 import ColorSelector from "../HomeComp/ColorSelector";
 import { Link } from "react-router-dom";
 import Header from '../../../components/Header'
+import Diary from '../../../images/Diary-removebg-preview.png'
 
 const HomeScreen = ({ curimage }: any) => {
   const [image, setImage]: any = useState(null);
@@ -60,7 +61,7 @@ const HomeScreen = ({ curimage }: any) => {
       </select>
     </div>
     {selectedOption ==='Yes' && (
-      
+      <>
       <div className="personalisecover">
         <div className="accordion-header" onClick={toggleCanvasVisibility} style={{ cursor: "pointer" }}>
         <h3>Personalise cover</h3>
@@ -216,7 +217,27 @@ const HomeScreen = ({ curimage }: any) => {
       
       
     </div>
+    
+    </>
+    
     )}
+    <div className="diaryimage flex">
+      <div className="coverimage">
+        <img src={Diary} alt="" />
+      </div>
+      <div className="coverimage1">
+        <img src={Diary} alt="" />
+      </div>
+    
+    </div>
+    <div className="customisecart flex">
+        <div className="qty-box">
+          <input type="text" />
+        </div>
+        <div className="addbtn">
+          <button>Add to cart</button>
+        </div>
+      </div>
     
 
       
