@@ -9,6 +9,8 @@ const CoverOption = ({
   uploadLogo,
   setUploadLogo,
   setCurrentBkgShape,
+  innerPageOption,
+  setInnerPageOption,
 }: any) => {
   const optionSelectHandler = (e: any) => {
     setCoverCurrentOption(e.target.value);
@@ -46,6 +48,15 @@ const CoverOption = ({
 
   return (
     <>
+      <label htmlFor="">Personalise Inner Pages</label>
+      <select
+        onChange={(e: any) => setInnerPageOption(e.target.value)}
+        value={innerPageOption}
+      >
+        <option value="Cover">Cover</option>
+        <option value="Lined">Lined</option>
+        <option value="Non Lined">Non Lined</option>
+      </select>
       <select
         name="personaliseProd"
         id="personaliseProd"
@@ -55,13 +66,6 @@ const CoverOption = ({
         <option value="Phrase">Phrase</option>
         <option value="Name or initial">Name or initial</option>
         <option value="Upload a logo">Upload a logo</option>
-      </select>
-      <label htmlFor="">Personalise Inner Pages</label>
-      <select name="" id="">
-        <option value="">Select an option</option>
-        <option value="">Cover</option>
-        <option value="">Lined</option>
-        <option value="">Non Lined</option>
       </select>
       {coverCurrentOption === "Phrase" ? (
         <div className="Lines flex">

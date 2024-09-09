@@ -7,6 +7,8 @@ import ColorSelector from "../HomeComp/ColorSelector";
 import { Link } from "react-router-dom";
 import Header from "../../../components/Header";
 import Diary from "../../../images/Diary-removebg-preview.png";
+import Lined from "../../../assests/lined.jpg";
+import NonLined from "../../../assests/non-lined.jpg";
 
 const HomeScreen = ({ curimage }: any) => {
   const [image, setImage]: any = useState(null);
@@ -19,14 +21,26 @@ const HomeScreen = ({ curimage }: any) => {
   const [isCanvasVisible, setIsCanvasVisible] = useState<boolean>(true);
   const [lowerVisible, setLowerVisible]: any = useState(true);
   const [uploadLogo, setUploadLogo]: any = useState(null);
+  const [backGroundImage, setBackgroundImage]: any = useState(curimage);
+  const [innerPageOption, setInnerPageOption]: any = useState("Cover");
+
+  useEffect(() => {
+    if (innerPageOption === "Cover") {
+      setBackgroundImage(curimage);
+    } else if (innerPageOption === "Lined") {
+      setBackgroundImage(Lined);
+    } else if (innerPageOption === "Non Lined") {
+      setBackgroundImage(NonLined);
+    }
+  }, [innerPageOption]);
 
   useEffect(() => {
     const loadImage: any = new window.Image();
-    loadImage.src = curimage;
+    loadImage.src = backGroundImage;
     loadImage.onload = () => {
       setImage(loadImage);
     };
-  }, [curimage]);
+  }, [backGroundImage]);
 
   const handleOptionChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     setSelectedOption(event.target.value);
@@ -72,7 +86,7 @@ const HomeScreen = ({ curimage }: any) => {
                   onClick={toggleCanvasVisibility}
                   style={{ cursor: "pointer" }}
                 >
-                  <h3>Personalise cover</h3>
+                  <h3>Personalise</h3>
                 </div>
                 {isCanvasVisible && (
                   <div>
@@ -86,6 +100,8 @@ const HomeScreen = ({ curimage }: any) => {
                         setCurrentBkgShape={setCurrentBkgShape}
                         setUploadLogo={setUploadLogo}
                         uploadLogo={uploadLogo}
+                        innerPageOption={innerPageOption}
+                        setInnerPageOption={setInnerPageOption}
                       />
                     </div>
                     {lowerVisible && (
