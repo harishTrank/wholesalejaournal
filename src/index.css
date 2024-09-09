@@ -152,7 +152,11 @@ header {
   font-weight: 500;
   color: #8e8e8e;
 }
-
+.cart-header{
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
 nav {
   background: #FCF8F3;
   padding: 10px 0;

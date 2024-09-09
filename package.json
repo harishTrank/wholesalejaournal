@@ -18,10 +18,10 @@
     "photoeditorsdk": "^5.19.0",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
+    "react-icons": "^5.3.0",
     "react-konva": "^18.2.10",
     "react-scripts": "5.0.1",
     "react-slick": "^0.30.2",
-    
     "slick-carousel": "^1.8.1",
     "typescript": "^4.4.2",
     "unsplash-js": "^7.0.15",
@@ -52,7 +52,7 @@
     ]
   },
   "devDependencies": {
-    "react-router-dom": "^6.26.1",
-    "@types/react-slick": "^0.23.13"
+    "@types/react-slick": "^0.23.13",
+    "react-router-dom": "^6.26.1"
   }
 }
