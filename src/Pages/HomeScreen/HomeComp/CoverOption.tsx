@@ -6,7 +6,6 @@ const CoverOption = ({
   canvasText,
   setCanvasText,
   setLowerVisible,
-  uploadLogo,
   setUploadLogo,
   setCurrentBkgShape,
 }: any) => {

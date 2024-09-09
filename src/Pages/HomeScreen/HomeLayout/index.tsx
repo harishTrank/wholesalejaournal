@@ -20,8 +20,13 @@ const HomeScreen = ({ curimage }: any) => {
   const [uploadLogo, setUploadLogo]: any = useState(null);
   const [innerPageOption, setInnerPageOption]: any = useState("Cover");
   const coverRef = useRef<any>(null);
-  const innerRef: any = useRef(null);
+  const innerRef = useRef<any>(null);
   const [isContentVisible, setIsContentVisible]: any = useState(false);
+  const [previewImage, setPreviewImage]: any = useState({
+    cover: null,
+    inner: null,
+  });
+  const [selectedId, setSelectedId] = useState<string | null>(null);
 
   useEffect(() => {
     const loadImage: any = new window.Image();
@@ -41,6 +46,30 @@ const HomeScreen = ({ curimage }: any) => {
     setIsContentVisible(!isContentVisible); // Toggle the content visibility
   };
 
+  const preViewButtonHandler = () => {
+    if (innerRef?.current) {
+      const stage = innerRef.current.getStage();
+      const dataUrl = stage.toDataURL();
+      setPreviewImage((oldVal: any) => {
+        return { ...oldVal, inner: dataUrl };
+      });
+    }
+    if (coverRef?.current) {
+      setSelectedId(null);
+      setTimeout(() => {
+        const stage = coverRef.current.getStage();
+        const dataUrl = stage.toDataURL();
+        setPreviewImage((oldVal: any) => {
+          return { ...oldVal, cover: dataUrl };
+        });
+      }, 500);
+    }
+  };
+
+  useEffect(() => {
+    console.log("previewImage", previewImage);
+  }, [previewImage]);
+
   return (
     <div className="container">
       <Header />
@@ -56,6 +85,8 @@ const HomeScreen = ({ curimage }: any) => {
             coverRef={coverRef}
             innerPageOption={innerPageOption}
             innerRef={innerRef}
+            selectedId={selectedId}
+            setSelectedId={setSelectedId}
           />
         </div>
 
@@ -278,6 +309,9 @@ const HomeScreen = ({ curimage }: any) => {
           <div className="customisecart flex">
             <div className="qty-box">
               <input type="text" />
+            </div>
+            <div className="addbtn">
+              <button onClick={preViewButtonHandler}>Preview</button>
             </div>
             <div className="addbtn">
               <button>Add to cart</button>

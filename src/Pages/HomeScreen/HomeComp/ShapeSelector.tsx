@@ -7,6 +7,7 @@ const ShapeSelector = ({
   shapeProps,
   onSelect,
   onTransform,
+  backgroundColor,
 }: any) => {
   const shapeRef = useRef<any>(null);
   const trRef = useRef<any>(null);
@@ -29,6 +30,7 @@ const ShapeSelector = ({
           onClick={onSelect}
           onTap={onSelect}
           onTransformEnd={onTransform}
+          fill={backgroundColor}
         />
       ) : currentBkgShape === "circle" ? (
         <Circle
@@ -40,6 +42,7 @@ const ShapeSelector = ({
           onClick={onSelect}
           onTap={onSelect}
           onTransformEnd={onTransform}
+          fill={backgroundColor}
         />
       ) : currentBkgShape === "squr" ? (
         <Rect
@@ -52,6 +55,7 @@ const ShapeSelector = ({
           onClick={onSelect}
           onTap={onSelect}
           onTransformEnd={onTransform}
+          fill={backgroundColor}
         />
       ) : (
         currentBkgShape === "trap" && (
@@ -66,6 +70,7 @@ const ShapeSelector = ({
             onClick={onSelect}
             onTap={onSelect}
             onTransformEnd={onTransform}
+            fill={backgroundColor}
           />
         )
       )}

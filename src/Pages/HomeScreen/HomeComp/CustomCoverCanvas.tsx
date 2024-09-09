@@ -21,20 +21,40 @@ const CustomCanvas = ({
   coverRef,
   innerPageOption,
   innerRef,
+  selectedId,
+  setSelectedId,
 }: any) => {
   const [imgProps, setImgProps] = useState({ width: 0, height: 0 });
   const [logoImage, setLogoImage] = useState<HTMLImageElement | null>(null);
+
+  // State for shape, text, and logo positions
+  const [shapeProps, setShapeProps] = useState({
+    width: currentBkgShape === "circle" ? 200 : 220,
+    height: currentBkgShape === "circle" ? 200 : 120,
+    fill: backgroundColor,
+    shadowBlur: 1,
+    stroke: "white",
+    id: "shape",
+    x: (window.innerWidth * 0.35) / 2 - 130, // Initial position
+    y: 100,
+    draggable: true,
+  });
+
   const [logoProps, setLogoProps] = useState({
     width: 0,
     height: 0,
     x: 0,
     y: 0,
+    draggable: true,
   });
-  const [selectedId, setSelectedId] = useState<string | null>(null);
+
   const [textProps, setTextProps] = useState({
     text: Array.isArray(canvasText) ? canvasText.join("\n") : canvasText,
     fontFamily: currentFont,
     fontStyle: currentFont?.includes("italic") ? "italic" : "normal",
+    x: (window.innerWidth * 0.35) / 2 - 130, // Initial position
+    y: 100,
+    draggable: true,
   });
 
   // Refs for transformer nodes
@@ -56,11 +76,7 @@ const CustomCanvas = ({
   };
 
   const handleTransform = (e: any) => {
-    // if (coverRef?.current) {
-    //   const stage = coverRef.current.getStage();
-    //   const dataUrl = stage.toDataURL();
-    //   setCanvasCoverDataUrl(dataUrl);
-    // }
+    // Optional: Handle transformations such as rotation, scale, etc.
   };
 
   // Set image background
@@ -84,7 +100,7 @@ const CustomCanvas = ({
         setImgProps({ width, height });
       };
     }
-  }, [image, canvasHeight, canvasWidth]);
+  }, [image, canvasHeight, canvasWidth, setImgProps]);
 
   // Handle uploadLogo update to display and center the logo on canvas
   useEffect(() => {
@@ -119,6 +135,7 @@ const CustomCanvas = ({
           height: logoHeight,
           x: logoX,
           y: logoY,
+          draggable: true,
         });
       };
 
@@ -132,10 +149,13 @@ const CustomCanvas = ({
 
   // Re-render the text when font family or canvas text changes
   useEffect(() => {
-    setTextProps({
-      text: Array.isArray(canvasText) ? canvasText.join("\n") : canvasText,
-      fontFamily: currentFont,
-      fontStyle: currentFont?.includes("italic") ? "italic" : "normal",
+    setTextProps((oldValue: any) => {
+      return {
+        ...oldValue,
+        text: Array.isArray(canvasText) ? canvasText.join("\n") : canvasText,
+        fontFamily: currentFont,
+        fontStyle: currentFont?.includes("italic") ? "italic" : "normal",
+      };
     });
 
     if (textRef.current) {
@@ -145,12 +165,11 @@ const CustomCanvas = ({
       );
       textRef.current.getLayer().batchDraw(); // Force re-render
     }
-    console.log("currentFont", currentFont);
   }, [canvasText, currentFont]);
 
   return (
     <div>
-      {innerPageOption === "Cover" ? (
+      <div style={{ display: innerPageOption === "Cover" ? "block" : "none" }}>
         <Stage
           width={canvasWidth}
           height={canvasHeight}
@@ -173,30 +192,36 @@ const CustomCanvas = ({
             <ShapeSelector
               backgroundColor={backgroundColor}
               currentBkgShape={currentBkgShape}
-              shapeProps={{
-                width: currentBkgShape === "circle" ? 200 : 220,
-                height: currentBkgShape === "circle" ? 200 : 120,
-                fill: backgroundColor,
-                shadowBlur: 1,
-                stroke: "white",
-                id: "shape",
-                draggable: true,
-              }}
+              shapeProps={shapeProps}
               isSelected={selectedId === "shape"}
               onSelect={handleSelect}
               onTransform={handleTransform}
+              onDragEnd={(e: any) =>
+                setShapeProps({
+                  ...shapeProps,
+                  x: e.target.x(),
+                  y: e.target.y(),
+                })
+              } // Save position when drag ends
             />
             <Text
               text={textProps.text}
               fontSize={20}
               fill={textColor}
-              x={(window.innerWidth * 0.35) / 2 - 130}
-              y={100}
+              x={textProps.x}
+              y={textProps.y}
               width={220}
               align="center"
               draggable
               onClick={handleSelect}
               onTap={handleSelect}
+              onDragEnd={(e) =>
+                setTextProps({
+                  ...textProps,
+                  x: e.target.x(),
+                  y: e.target.y(),
+                })
+              } // Save position when drag ends
               onTransformEnd={handleTransform}
               id="text"
               ref={textRef}
@@ -223,6 +248,13 @@ const CustomCanvas = ({
                 ref={logoRef}
                 onClick={handleSelect}
                 onTap={handleSelect}
+                onDragEnd={(e) =>
+                  setLogoProps({
+                    ...logoProps,
+                    x: e.target.x(),
+                    y: e.target.y(),
+                  })
+                } // Save position when drag ends
                 onTransformEnd={handleTransform}
                 id="logo"
               />
@@ -232,12 +264,13 @@ const CustomCanvas = ({
             )}
           </Layer>
         </Stage>
-      ) : (
+      </div>
+      <div style={{ display: innerPageOption === "Cover" ? "none" : "block" }}>
         <CustomInnerCanvas
           innerPageOption={innerPageOption}
           innerRef={innerRef}
         />
-      )}
+      </div>
     </div>
   );
 };
