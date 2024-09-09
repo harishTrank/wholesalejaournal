@@ -17,6 +17,7 @@ const CustomCanvas = ({
   textColor,
   uploadLogo,
   currentFont,
+  coverRef,
 }: any) => {
   const [imgProps, setImgProps] = useState({ width: 0, height: 0 });
   const [logoImage, setLogoImage] = useState<HTMLImageElement | null>(null);
@@ -147,6 +148,7 @@ const CustomCanvas = ({
         height={canvasHeight}
         onMouseDown={handleDeselect}
         onTouchStart={handleDeselect}
+        ref={coverRef}
       >
         <Layer>
           {image && (

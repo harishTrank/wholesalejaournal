@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import "./HomeScreen.css";
 import CoverOption from "../HomeComp/CoverOption";
 import BackgroundShape from "../HomeComp/BackgroundShape";
@@ -23,6 +23,7 @@ const HomeScreen = ({ curimage }: any) => {
   const [uploadLogo, setUploadLogo]: any = useState(null);
   const [backGroundImage, setBackgroundImage]: any = useState(curimage);
   const [innerPageOption, setInnerPageOption]: any = useState("Cover");
+  const coverRef = useRef<any>(null);
 
   useEffect(() => {
     if (innerPageOption === "Cover") {
@@ -62,6 +63,7 @@ const HomeScreen = ({ curimage }: any) => {
             canvasText={canvasText}
             textColor={textColor}
             uploadLogo={uploadLogo}
+            coverRef={coverRef}
           />
         </div>
 
@@ -255,7 +257,7 @@ const HomeScreen = ({ curimage }: any) => {
           )}
           <div className="diaryimage flex">
             <div className="coverimage">
-              <img src={Diary} alt="" />
+              <img src={Diary} alt="Canvas Preview" />
             </div>
             <div className="coverimage1">
               <img src={Diary} alt="" />
