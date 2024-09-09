@@ -39,4 +39,85 @@
   }
   .product-upper{
     border-bottom: 1px solid #ccc;
+    margin-bottom: 15px;
   }
+  .product-upper p{
+    font-weight: bold;
+    font-size: 20px;
+    margin-bottom: 10px;
+  }
+  .product-image{
+    width: 10%;
+  }
+  .product-image img{
+    width: 100%;
+  }
+.product-description p u{
+  font-size: 20px;
+  font-weight: bold;
+}
+.product-description p{
+  margin-bottom: 15px;
+}
+.product-description p span{
+  color: #000;
+  text-decoration: underline;
+  font-size: 18px;
+}
+.quantity-box{
+  margin-bottom: 10px;
+}
+.product-down{
+  padding: 10px;
+}
+.details-section{
+  margin-top: 25px;
+}
+.product{
+  width: 70%;
+}
+.cart-total{
+  width: 25%;
+}
+.cart-heading{
+  border-bottom: 1px solid hsla(0, 0%,
+  7%,.11);
+  
+}
+.cart-heading h3{
+  margin-bottom: 10px;
+}
+.addcoupon{
+  padding: 10px;
+}
+.addcoupon-heading{
+  margin-bottom: 10px;
+}
+.entercode input{
+  width: 70%;
+  margin-bottom: 15px;
+
+}
+.entercode button{
+  width: 29%;
+  margin-bottom: 15px;
+  
+}
+.entercode{
+  border-bottom: 1px solid hsla(0, 0%,
+  7%,.11);
+}
+.subtotal{
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.free-shipping{
+  margin-bottom: 10px;
+  border-bottom: 1px solid hsla(0, 0%,
+  7%,.11);
+
+}
+.free-shipping p{
+  margin-bottom: 10px;
+}
