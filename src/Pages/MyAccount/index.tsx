@@ -3,10 +3,10 @@ import Header from "../../components/Header";
 import { CgProfile } from "react-icons/cg";
 import Accountimage from "../../images/10973590.jpg";
 import Footer from "../../components/Footer";
-import LoginImage from "../../images/Login.jpg";
 import "./style.css";
-import { Link } from "react-router-dom";
-const index = () => {
+import LoginScreen from "../Login";
+
+const MyAccount = () => {
   return (
     <div>
       <Header />
@@ -79,39 +79,7 @@ const index = () => {
               </div>
             </div>
           ) : (
-            <div className="login-card">
-              <div className="login-card-left">
-                <img src={LoginImage} alt="Login Illustration" />
-              </div>
-              <div className="login-card-right">
-                <h1>Login</h1>
-                <form>
-                  <div className="input-group">
-                    <label>Email</label>
-                    <input
-                      type="email"
-                      placeholder="Enter your email"
-                      required
-                    />
-                  </div>
-                  <div className="input-group">
-                    <label>Password</label>
-                    <input
-                      type="password"
-                      placeholder="Enter your password"
-                      required
-                    />
-                  </div>
-                  <button type="submit">Login</button>
-                  <p>
-                    Don't have an account?{" "}
-                    <Link to="/signup">
-                      <u>Signup</u>{" "}
-                    </Link>
-                  </p>
-                </form>
-              </div>
-            </div>
+            <LoginScreen />
           )}
         </section>
       </div>
@@ -120,4 +88,4 @@ const index = () => {
   );
 };
 
-export default index;
+export default MyAccount;
