@@ -23,6 +23,7 @@ const HomeScreen = ({ curimage }: any) => {
   const innerRef = useRef<any>(null);
   const [innerTextColor,setInnerTextColor]:any=useState('')
   const [isContentVisible, setIsContentVisible]: any = useState(false);
+  const [isModalOpen, setIsModalOpen]:any = useState(false);
   const [previewImage, setPreviewImage]: any = useState({
     cover: null,
     inner: null,
@@ -75,6 +76,10 @@ const HomeScreen = ({ curimage }: any) => {
         });
       }, 500);
     }
+    setIsModalOpen(true)
+  };
+  const closeModalHandler = () => {
+    setIsModalOpen(false);
   };
 
   return (
@@ -467,6 +472,27 @@ const HomeScreen = ({ curimage }: any) => {
             <div className="addbtn">
               <button>Add to cart</button>
             </div>
+            {isModalOpen && (
+        <div className="modal">
+          <div className="modal-content">
+            <span className="close-button" onClick={closeModalHandler}>
+              &times;
+            </span>
+            <div className="images-container">
+              <div className="cover-modal">
+              <img src={previewImage?.cover} alt="Image 1" className="modal-image" />
+              <p>Cover Image</p>
+              </div>
+              <div className="inner-modal">
+              <img src={previewImage?.inner} alt="Image 2" className="modal-image" />
+              <p>Inner Image</p>
+              </div>
+              
+              
+            </div>
+          </div>
+        </div>
+      )}
           </div>
         </div>
       </div>
