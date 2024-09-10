@@ -23,6 +23,9 @@ const CustomCanvas = ({
   innerRef,
   selectedId,
   setSelectedId,
+  innerPageText,
+  innerTextColor,
+  currentInnerFont,
 }: any) => {
   const [imgProps, setImgProps] = useState({ width: 0, height: 0 });
   const [logoImage, setLogoImage] = useState<HTMLImageElement | null>(null);
@@ -269,6 +272,9 @@ const CustomCanvas = ({
         <CustomInnerCanvas
           innerPageOption={innerPageOption}
           innerRef={innerRef}
+          innerPageText={innerPageText}
+          innerTextColor={innerTextColor}
+          currentInnerFont={currentInnerFont}
         />
       </div>
     </div>
