@@ -23,7 +23,7 @@ const LoginScreen = () => {
     onSubmit: (values) => {
       loginApiCall({
         body: {
-          email: values.email,
+          user_name: values.email,
           password: values.password,
           user_type: "Client",
         },
