@@ -23,7 +23,7 @@ const MyAccount = () => {
               that defines who you are
             </p>
           </div>
-          {sessionStorage.getItem("accessToken") ? (
+          {localStorage.getItem("accessToken") ? (
             <div className="flex al-center contact-part">
               <div className="email-section">
                 <div className="email-content">

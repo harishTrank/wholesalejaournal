@@ -2,9 +2,7 @@ import Axios from "axios";
 import queryString from "querystring";
 
 export const hostname = () => {
-  // let hostUrl = "http://192.168.0.16:8000/api";
-  let hostUrl = "https://thetradewing.com/api";
-  // let hostUrl = "http://13.234.111.203:8000/api";
+  let hostUrl = "http://192.168.0.18:8000/api";
   // let hostUrl = "http://localhost:8000/api";
 
   return hostUrl;
@@ -23,7 +21,7 @@ export const makeUrl = (
     .join("/")}${query ? `?${queryString.stringify(query)}` : ""}`;
 
 export const getDefaultHeaders = async (multipart: boolean) => {
-  const accessToken = sessionStorage.getItem("accessToken");
+  const accessToken = localStorage.getItem("accessToken");
   const contentType =
     multipart === true ? "multipart/form-data" : "application/json";
 

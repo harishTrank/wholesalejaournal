@@ -1,9 +1,40 @@
 import React from "react";
+import { useFormik } from "formik";
+import * as Yup from "yup";
 import "./style.css";
 import LoginImage from "../../images/Login.jpg";
 import { Link } from "react-router-dom";
+import { loginApiCall } from "../../store/Services/Auth";
 
 const LoginScreen = () => {
+  const formik = useFormik({
+    initialValues: {
+      email: "",
+      password: "",
+    },
+    validationSchema: Yup.object({
+      email: Yup.string()
+        .email("Invalid email address")
+        .required("Email is required"),
+      password: Yup.string()
+        .min(8, "Password must be at least 8 characters")
+        .required("Password is required"),
+    }),
+    onSubmit: (values) => {
+      loginApiCall({
+        body: {
+          email: values.email,
+          password: values.password,
+          user_type: "Client",
+        },
+      })
+        .then((res: any) => {
+          console.log("res", res);
+        })
+        .catch((err: any) => console.log("err", err));
+    },
+  });
+
   return (
     <div className="login-card">
       <div className="login-card-left">
@@ -11,20 +42,42 @@ const LoginScreen = () => {
       </div>
       <div className="login-card-right">
         <h1>Login</h1>
-        <form>
+        <form onSubmit={formik.handleSubmit}>
           <div className="input-group">
             <label>Email</label>
-            <input type="email" placeholder="Enter your email" required />
+            <input
+              id="email"
+              name="email"
+              type="email"
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
+              value={formik.values.email}
+              placeholder="Enter your email"
+            />
+            {formik.touched.email && formik.errors.email ? (
+              <div className="error-message">{formik.errors.email}</div>
+            ) : null}
           </div>
           <div className="input-group">
             <label>Password</label>
-            <input type="password" placeholder="Enter your password" required />
+            <input
+              id="password"
+              name="password"
+              type="password"
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
+              value={formik.values.password}
+              placeholder="Enter your password"
+            />
+            {formik.touched.password && formik.errors.password ? (
+              <div className="error-message">{formik.errors.password}</div>
+            ) : null}
           </div>
           <button type="submit">Login</button>
           <p>
             Don't have an account?{" "}
             <Link to="/signup">
-              <u>Signup</u>{" "}
+              <u>Signup</u>
             </Link>
           </p>
         </form>
