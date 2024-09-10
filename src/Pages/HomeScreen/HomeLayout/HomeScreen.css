@@ -106,7 +106,6 @@ p.site-description {
   justify-content: center;
 }
 
-
 .customcanvas{
   width: 40%;
 }
@@ -211,4 +210,7 @@ p.site-description {
  margin-left: 10px;
   font-size: 15px;
   background: #B88E2F;
+}
+.addbtn{
+  margin-left: 10px;
 }
