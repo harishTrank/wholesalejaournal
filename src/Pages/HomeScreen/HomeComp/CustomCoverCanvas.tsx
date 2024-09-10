@@ -26,6 +26,7 @@ const CustomCanvas = ({
   innerPageText,
   innerTextColor,
   currentInnerFont,
+  uploadInnerLogo,
 }: any) => {
   const [imgProps, setImgProps] = useState({ width: 0, height: 0 });
   const [logoImage, setLogoImage] = useState<HTMLImageElement | null>(null);
@@ -275,6 +276,9 @@ const CustomCanvas = ({
           innerPageText={innerPageText}
           innerTextColor={innerTextColor}
           currentInnerFont={currentInnerFont}
+          uploadInnerLogo={uploadInnerLogo}
+          selectedId={selectedId}
+          setSelectedId={setSelectedId}
         />
       </div>
     </div>

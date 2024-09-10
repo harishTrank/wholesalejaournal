@@ -16,8 +16,12 @@ const CustomInnerCanvas = ({
   innerPageText,
   innerTextColor,
   currentInnerFont,
+  uploadInnerLogo,
+  selectedId,
+  setSelectedId,
 }: any) => {
-  const [selectedId, setSelectedId] = useState<string | null>(null);
+  const [logoImage, setLogoImage] = useState<HTMLImageElement | null>(null);
+
   const [imgProps, setImgProps] = useState({ width: 0, height: 0 });
   const [currentBackImg, setCurrentBackImg] = useState<HTMLImageElement | null>(
     null
@@ -28,6 +32,13 @@ const CustomInnerCanvas = ({
     fontStyle: currentInnerFont?.includes("italic") ? "italic" : "normal",
     x: (window.innerWidth * 0.35) / 2 - 130, // Initial position
     y: 100,
+    draggable: true,
+  });
+  const [logoProps, setLogoProps] = useState({
+    width: 0,
+    height: 0,
+    x: 0,
+    y: 0,
     draggable: true,
   });
   const textRef = useRef<any>(null);
@@ -98,6 +109,50 @@ const CustomInnerCanvas = ({
     }
   }, [innerPageText, currentInnerFont]);
 
+  useEffect(() => {
+    if (uploadInnerLogo && uploadInnerLogo !== "") {
+      const logo = new window.Image();
+      logo.src = URL.createObjectURL(uploadInnerLogo);
+      logo.onload = () => {
+        const logoAspectRatio = logo.width / logo.height;
+
+        // Maximum width and height the logo can occupy (e.g., 50% of canvas)
+        const maxLogoWidth = canvasWidth * 0.5;
+        const maxLogoHeight = canvasHeight * 0.5;
+
+        let logoWidth, logoHeight;
+
+        // Scale logo while keeping the aspect ratio
+        if (maxLogoWidth / logoAspectRatio <= maxLogoHeight) {
+          logoWidth = maxLogoWidth;
+          logoHeight = maxLogoWidth / logoAspectRatio;
+        } else {
+          logoHeight = maxLogoHeight;
+          logoWidth = maxLogoHeight * logoAspectRatio;
+        }
+
+        // Center the logo on the canvas
+        const logoX = (canvasWidth - logoWidth) / 2;
+        const logoY = (canvasHeight - logoHeight) / 2;
+
+        setLogoImage(logo);
+        setLogoProps({
+          width: logoWidth,
+          height: logoHeight,
+          x: logoX,
+          y: logoY,
+          draggable: true,
+        });
+      };
+
+      return () => URL.revokeObjectURL(logo.src); // Cleanup URL
+    }
+
+    if (uploadInnerLogo === "") {
+      setLogoImage(null);
+    }
+  }, [uploadInnerLogo, canvasHeight, canvasWidth]);
+
   return (
     <div>
       <Stage
@@ -149,6 +204,33 @@ const CustomInnerCanvas = ({
               nodes={[textRef.current]}
               keepRatio={true}
             />
+          )}
+        </Layer>
+        <Layer>
+          {logoImage && (
+            <KonvaImage
+              image={logoImage}
+              x={logoProps.x}
+              y={logoProps.y}
+              width={logoProps.width}
+              height={logoProps.height}
+              draggable
+              ref={logoRef}
+              onClick={handleSelect}
+              onTap={handleSelect}
+              onDragEnd={(e) =>
+                setLogoProps({
+                  ...logoProps,
+                  x: e.target.x(),
+                  y: e.target.y(),
+                })
+              } // Save position when drag ends
+              onTransformEnd={handleTransform}
+              id="logo"
+            />
+          )}
+          {selectedId === "logo" && logoRef.current && (
+            <Transformer ref={trRef} nodes={[logoRef.current]} />
           )}
         </Layer>
       </Stage>

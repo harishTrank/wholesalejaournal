@@ -19,6 +19,7 @@ const HomeScreen = ({ curimage }: any) => {
   const [isCanvasVisible, setIsCanvasVisible] = useState<boolean>(false);
   const [lowerVisible, setLowerVisible]: any = useState(true);
   const [uploadLogo, setUploadLogo]: any = useState(null);
+  const [uploadInnerLogo, setUploadInnerLogo]: any = useState(null);
   const [innerPageOption, setInnerPageOption]: any = useState("Cover");
   const coverRef = useRef<any>(null);
   const innerRef = useRef<any>(null);
@@ -62,22 +63,37 @@ const HomeScreen = ({ curimage }: any) => {
   };
 
   const preViewButtonHandler = () => {
-    if (innerRef?.current) {
-      const stage = innerRef.current.getStage();
-      const dataUrl = stage.toDataURL();
-      setPreviewImage((oldVal: any) => {
-        return { ...oldVal, inner: dataUrl };
-      });
-    }
-    if (coverRef?.current) {
-      setSelectedId(null);
-      setTimeout(() => {
+    setTimeout(() => {
+      if (innerRef?.current) {
+        const stage = innerRef.current.getStage();
+        const dataUrl = stage.toDataURL();
+        setPreviewImage((oldVal: any) => {
+          return { ...oldVal, inner: dataUrl };
+        });
+      }
+      if (coverRef?.current) {
+        setSelectedId(null);
         const stage = coverRef.current.getStage();
         const dataUrl = stage.toDataURL();
         setPreviewImage((oldVal: any) => {
           return { ...oldVal, cover: dataUrl };
         });
-      }, 500);
+      }
+    }, 500);
+  };
+
+  useEffect(() => {
+    if (innercustomised === "Logo") {
+      setInnerPageText("");
+    } else {
+      setUploadInnerLogo(null);
+    }
+  }, [innercustomised]);
+
+  const handleInnerLogoUpload = (e: any) => {
+    const file = e.target.files[0];
+    if (file) {
+      setUploadInnerLogo(file);
     }
   };
 
@@ -102,6 +118,7 @@ const HomeScreen = ({ curimage }: any) => {
             innerTextColor={innerTextColor}
             currentInnerFont={currentInnerFont}
             currentFont={currentFont}
+            uploadInnerLogo={uploadInnerLogo}
           />
         </div>
 
@@ -143,49 +160,45 @@ const HomeScreen = ({ curimage }: any) => {
                       setInnerPageOption={setInnerPageOption}
                     />
                   </div>
-                  {lowerVisible && (
-                    <div>
-                      <div className="controls">
-                        <div className="more-cust">
-                          <h4>Select background shape</h4>
-                          <div className="shapes">
-                            <BackgroundShape
-                              currentBkgShape={currentBkgShape}
-                              setCurrentBkgShape={setCurrentBkgShape}
-                            />
-                          </div>
-                        </div>
-                        <div className="more-cust">
-                          <h4>Select font style</h4>
-                          <FontsComponents
-                            currentFont={currentFont}
-                            setCurrentFont={setCurrentFont}
-                          />
-                        </div>
-                        <div className="more-cust-1">
-                          <h4>Select background color</h4>
-                          <ColorSelector
-                            backgroundColor={backgroundColor}
-                            setBackGroundColor={setBackGroundColor}
-                          />
-                        </div>
-                        <div className="more-cust-2">
-                          <h4>Select text color</h4>
-                          <ColorSelector
-                            backgroundColor={textColor}
-                            setBackGroundColor={setTextColor}
+                  <div style={{ display: lowerVisible ? "block" : "none" }}>
+                    <div className="controls">
+                      <div className="more-cust">
+                        <h4>Select background shape</h4>
+                        <div className="shapes">
+                          <BackgroundShape
+                            currentBkgShape={currentBkgShape}
+                            setCurrentBkgShape={setCurrentBkgShape}
                           />
                         </div>
                       </div>
-                      <div className="more-btn">
-                        <button>
-                          <Link to="/more-customization">
-                            More-customization
-                          </Link>
-                        </button>
+                      <div className="more-cust">
+                        <h4>Select font style</h4>
+                        <FontsComponents
+                          currentFont={currentFont}
+                          setCurrentFont={setCurrentFont}
+                        />
+                      </div>
+                      <div className="more-cust-1">
+                        <h4>Select background color</h4>
+                        <ColorSelector
+                          backgroundColor={backgroundColor}
+                          setBackGroundColor={setBackGroundColor}
+                        />
+                      </div>
+                      <div className="more-cust-2">
+                        <h4>Select text color</h4>
+                        <ColorSelector
+                          backgroundColor={textColor}
+                          setBackGroundColor={setTextColor}
+                        />
                       </div>
                     </div>
-                  )}
+                    <div className="more-btn">
+                      <button>
+                        <Link to="/more-customization">More-customization</Link>
+                      </button>
+                    </div>
+                  </div>
                 </div>
               </div>
               <div className="personaliseinnerimages">
@@ -218,8 +231,6 @@ const HomeScreen = ({ curimage }: any) => {
                     >
                       <label htmlFor="">Select an option</label>
                       <select
-                        name=""
-                        id=""
                         onChange={(e: any) =>
                           setInnerCustomised(e.target.value)
                         }
@@ -236,7 +247,6 @@ const HomeScreen = ({ curimage }: any) => {
                             innercustomised === "Logo" ? "block" : "none",
                         }}
                       >
-                        <h4>Upload a logo</h4>
                         <div className="file">
                           <label
                             htmlFor="logoUpload"
@@ -245,7 +255,12 @@ const HomeScreen = ({ curimage }: any) => {
                             Select a file
                           </label>
 
-                          <input type="file" style={{ display: "none" }} />
+                          <input
+                            type="file"
+                            onChange={handleInnerLogoUpload}
+                            id="logoUpload"
+                            style={{ display: "none" }}
+                          />
                         </div>
                       </div>
 
@@ -286,14 +301,7 @@ const HomeScreen = ({ curimage }: any) => {
               </div>
             </>
           )}
-          <div className="diaryimage flex">
-            <div className="coverimage">
-              {/* <img src={canvasCoverDataUrl} alt="" /> */}
-            </div>
-            <div className="coverimage1">
-              {/* <img src={canvasInnerDataUrl} alt="" /> */}
-            </div>
-          </div>
+
           <div className="customisecart flex">
             <div className="qty-box">
               <input type="text" />
