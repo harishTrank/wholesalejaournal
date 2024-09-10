@@ -33,6 +33,7 @@ const CoverOption = ({
       setCurrentBkgShape("rect");
       setUploadLogo("");
     } else if (coverCurrentOption === "Upload a logo") {
+      setCanvasText("");
       setLowerVisible(false);
       setCurrentBkgShape("");
     }
