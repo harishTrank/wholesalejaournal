@@ -1,5 +1,5 @@
 import React from "react";
-import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import HomeScreen from "./Pages/HomeScreen/HomeLayout";
 import MoreCustomScreen from "./Pages/MoreCustomScreen";
 import Dashboard from "./Pages/Dashboard/Index";

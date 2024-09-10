@@ -3,10 +3,12 @@ import { useFormik } from "formik";
 import * as Yup from "yup";
 import "./style.css";
 import LoginImage from "../../images/Login.jpg";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { loginApiCall } from "../../store/Services/Auth";
+import { toast } from "react-toastify";
 
 const LoginScreen = () => {
+  const navigation: any = useNavigate();
   const formik = useFormik({
     initialValues: {
       email: "",
@@ -23,15 +25,18 @@ const LoginScreen = () => {
     onSubmit: (values) => {
       loginApiCall({
         body: {
-          user_name: values.email,
+          email: values.email,
           password: values.password,
           user_type: "Client",
         },
       })
         .then((res: any) => {
-          console.log("res", res);
+          localStorage.setItem("accessToken", res.token.access);
+          localStorage.setItem("userId", res.userid);
+          toast.success("Login successfully.");
+          navigation("/");
         })
-        .catch((err: any) => console.log("err", err));
+        .catch((err: any) => toast.error("Unauthorized"));
     },
   });
 
