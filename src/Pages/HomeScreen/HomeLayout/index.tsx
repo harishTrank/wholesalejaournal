@@ -24,6 +24,7 @@ const HomeScreen = ({ curimage }: any) => {
   const coverRef = useRef<any>(null);
   const innerRef = useRef<any>(null);
   const [isContentVisible, setIsContentVisible]: any = useState(false);
+  const [isModalOpen, setIsModalOpen]: any = useState(false);
   const [previewImage, setPreviewImage]: any = useState({
     cover: null,
     inner: null,
@@ -63,6 +64,7 @@ const HomeScreen = ({ curimage }: any) => {
   };
 
   const preViewButtonHandler = () => {
+    setSelectedId(null);
     setTimeout(() => {
       if (innerRef?.current) {
         const stage = innerRef.current.getStage();
@@ -72,13 +74,13 @@ const HomeScreen = ({ curimage }: any) => {
         });
       }
       if (coverRef?.current) {
-        setSelectedId(null);
         const stage = coverRef.current.getStage();
         const dataUrl = stage.toDataURL();
         setPreviewImage((oldVal: any) => {
           return { ...oldVal, cover: dataUrl };
         });
       }
+      setIsModalOpen(true);
     }, 500);
   };
 
@@ -95,6 +97,10 @@ const HomeScreen = ({ curimage }: any) => {
     if (file) {
       setUploadInnerLogo(file);
     }
+  };
+
+  const closeModalHandler = () => {
+    setIsModalOpen(false);
   };
 
   return (
@@ -312,6 +318,33 @@ const HomeScreen = ({ curimage }: any) => {
             <div className="addbtn">
               <button>Add to cart</button>
             </div>
+            {isModalOpen && (
+              <div className="modal">
+                <div className="modal-content">
+                  <span className="close-button" onClick={closeModalHandler}>
+                    &times;
+                  </span>
+                  <div className="images-container">
+                    <div className="cover-modal">
+                      <img
+                        src={previewImage?.cover}
+                        alt=""
+                        className="modal-image"
+                      />
+                      <p>Cover Image</p>
+                    </div>
+                    <div className="inner-modal">
+                      <img
+                        src={previewImage?.inner}
+                        alt=""
+                        className="modal-image"
+                      />
+                      <p>Inner Image</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            )}
           </div>
         </div>
       </div>

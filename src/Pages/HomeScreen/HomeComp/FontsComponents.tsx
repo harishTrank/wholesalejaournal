@@ -24,7 +24,13 @@ const FontsComponents = ({ currentFont, setCurrentFont }: any) => {
                   : "1px solid black",
             }}
           >
-            <img src={item.image} loading="lazy" width="40" height="40" />
+            <img
+              src={item.image}
+              loading="lazy"
+              width="40"
+              height="40"
+              alt=""
+            />
           </label>
         </div>
       ))}
