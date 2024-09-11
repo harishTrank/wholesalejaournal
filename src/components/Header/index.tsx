@@ -18,7 +18,7 @@ const index = () => {
                         </div>
                         <div className='cart-header'>
                             <Link to='/account'><FaRegUserCircle /></Link>
-                            <Link to='/'><IoCart/></Link>
+                            <Link to='/cart'><IoCart/></Link>
                         </div>
                         <div className="toggle">
                             <i className="fa-solid fa-bars"></i>

@@ -8,6 +8,7 @@ import { loginApiCall } from "../../store/Services/Auth";
 import { toast } from "react-toastify";
 
 const LoginScreen = ({ setIsLoginShow }: any) => {
+  const navigate=useNavigate()
   const navigation: any = useNavigate();
   const formik = useFormik({
     initialValues: {
@@ -78,11 +79,16 @@ const LoginScreen = ({ setIsLoginShow }: any) => {
               <div className="error-message">{formik.errors.password}</div>
             ) : null}
           </div>
+       
           <button type="submit">Login</button>
+          
+         
+          
           <p>
             Don't have an account?{" "}
             <u onClick={() => setIsLoginShow(false)}>Signup</u>
           </p>
+          <p onClick={()=>navigate('/forgot')} ><u>Forgot Password?</u></p>
         </form>
       </div>
     </div>
