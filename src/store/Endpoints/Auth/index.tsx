@@ -36,4 +36,11 @@ export const authEndpoints = {
       uri: "/user-update/",
     },
   },
+  sendOtpEmail: {
+    v1: {
+      ...defaults.methods.POST,
+      ...defaults.versions.v1,
+      uri: "/send-otp/",
+    },
+  },
 };

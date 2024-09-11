@@ -40,8 +40,10 @@ const MyAccount = () => {
       body: {
         first_name: values.firstName,
         last_name: values.lastName,
-        current_password: values.currentPassword,
-        new_password: values.newPassword,
+        current_password:
+          values.currentPassword === "" ? undefined : values.currentPassword,
+        new_password:
+          values.newPassword === "" ? undefined : values.newPassword,
       },
     })
       .then(() => {
@@ -49,10 +51,12 @@ const MyAccount = () => {
         resetForm();
       })
       .catch((err) => {
-        toast.error(err.data.responsemessage);
+        toast.error(err.data.message);
+        resetForm();
       })
       .finally(() => {
         setIsLoading(false);
+        resetForm();
       });
   };
 
@@ -183,7 +187,11 @@ const MyAccount = () => {
               )}
             </Formik>
           ) : isForgetScreen ? (
-            <ForgotPassword />
+            <ForgotPassword
+              setIsLoading={setIsLoading}
+              setIsLoginShow={setIsLoginShow}
+              setIsForgetScreen={setIsForgetScreen}
+            />
           ) : isLoginShow ? (
             <LoginScreen
               setIsLoginShow={setIsLoginShow}

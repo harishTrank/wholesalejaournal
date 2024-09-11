@@ -3,7 +3,14 @@ import { useFormik } from "formik";
 import * as Yup from "yup";
 import forgot from "../../images/forgot.jpg";
 import "./style.css";
-const ForgotPassword = () => {
+import { sendOtpEmail } from "../../store/Services/Auth";
+import toast from "react-hot-toast";
+
+const ForgotPassword = ({
+  setIsLoading,
+  setIsLoginShow,
+  setIsForgetScreen,
+}: any) => {
   const [enterOtp, setEnterOtp] = useState(false);
 
   const formik = useFormik({
@@ -17,9 +24,11 @@ const ForgotPassword = () => {
       email: Yup.string()
         .email("Invalid email address")
         .required("Please enter email"),
-
+      otp: Yup.string()
+        .matches(/^\d{4}$/, "OTP must be exactly 4 digits")
+        .required("OTP is required"),
       newPassword: Yup.string()
-        .min(6, "Password must be at least 6 characters")
+        .min(8, "Password must be at least 8 characters")
         .required("Enter new password"),
       confirmPassword: Yup.string()
         .oneOf([Yup.ref("newPassword"), ""], "Passwords must match")
@@ -33,7 +42,21 @@ const ForgotPassword = () => {
 
   const handleSendOtp = () => {
     if (formik.values.email && formik.errors.email === undefined) {
-      setEnterOtp(true);
+      setIsLoading(true);
+      sendOtpEmail({
+        body: {
+          email: formik.values.email,
+        },
+      })
+        .then(() => {
+          setEnterOtp(true); // Show OTP input field
+          setIsLoading(false);
+          toast.success("OTP Sent Successfully.");
+        })
+        .catch((err) => {
+          toast.error(err.data?.message);
+          setIsLoading(false);
+        });
     } else {
       formik.setTouched({
         email: true,
@@ -122,6 +145,15 @@ const ForgotPassword = () => {
               <button type="submit">Change Password</button>
             </>
           )}
+          <p
+            onClick={() => {
+              setIsForgetScreen(false);
+              setIsLoginShow(true);
+            }}
+            style={{ textAlign: "center" }}
+          >
+            <u>Login</u>
+          </p>
         </form>
       </div>
     </div>
