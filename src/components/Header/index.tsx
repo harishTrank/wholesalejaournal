@@ -38,10 +38,10 @@ const index = () => {
                 <Link to="/journal">Journal Books</Link>
               </li>
               <li>
-                <a href="/writing">Writing Journal</a>
+                <Link to="/writing">Writing Journal</Link>
               </li>
               <li>
-                <a href="/shop">Shop</a>
+                <Link to="/shop">Shop</Link>
               </li>
             </ul>
           </div>

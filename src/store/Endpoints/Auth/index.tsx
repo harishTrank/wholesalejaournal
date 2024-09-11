@@ -15,6 +15,13 @@ export const authEndpoints = {
       uri: "/signup/",
     },
   },
+  getUserDetails: {
+    v1: {
+      ...defaults.methods.GET,
+      ...defaults.versions.v1,
+      uri: "/user-profile/",
+    },
+  },
   // changePassword: {
   //   v1: {
   //     ...defaults.methods.POST,

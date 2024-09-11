@@ -12,3 +12,8 @@ export const registerUser = ({ body }: any) =>
     uriEndPoint: authEndpoints.registerUser.v1,
     body,
   });
+
+export const getUserDetails = () =>
+  callApi({
+    uriEndPoint: authEndpoints.getUserDetails.v1,
+  });

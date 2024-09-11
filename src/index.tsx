@@ -5,14 +5,19 @@ import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+
+export const queryClient = new QueryClient();
 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
 );
 root.render(
   <>
-    <App />
-    <ToastContainer autoClose={2000} />
+    <QueryClientProvider client={queryClient}>
+      <App />
+      <ToastContainer autoClose={2000} />
+    </QueryClientProvider>
   </>
 );
 
