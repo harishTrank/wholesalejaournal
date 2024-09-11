@@ -68,7 +68,7 @@ const MyAccount = () => {
   return (
     <div>
       <Header />
-      {userDetailsLoading || (isLoading && <FullScreenLoader />)}
+      {(userDetailsLoading || isLoading) && <FullScreenLoader />}
       <div className="container">
         <section className="gap">
           <div className="my-profile">
