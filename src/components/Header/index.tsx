@@ -1,9 +1,15 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useEffect } from "react";
+import { Link, useLocation } from "react-router-dom";
 import { FaRegUserCircle } from "react-icons/fa";
 import { IoCart } from "react-icons/io5";
 
-const index = () => {
+const Header = () => {
+  const { pathname } = useLocation();
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [pathname]);
+
   return (
     <div>
       <header>
@@ -51,4 +57,4 @@ const index = () => {
   );
 };
 
-export default index;
+export default Header;

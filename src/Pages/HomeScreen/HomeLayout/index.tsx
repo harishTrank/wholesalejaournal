@@ -199,11 +199,11 @@ const HomeScreen = ({ curimage }: any) => {
                         />
                       </div>
                     </div>
-                    <div className="more-btn">
+                    {/* <div className="more-btn">
                       <button>
                         <Link to="/more-customization">More-customization</Link>
                       </button>
-                    </div>
+                    </div> */}
                   </div>
                 </div>
               </div>

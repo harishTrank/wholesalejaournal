@@ -12,6 +12,7 @@ import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Header from "../../components/Header";
+import { Link } from "react-router-dom";
 
 const Dashboard = () => {
   const settings = {
@@ -46,7 +47,7 @@ const Dashboard = () => {
                 lists- the possibilities are endless when your personalizing
                 your journal covers.
               </p>
-              <a href="#">Buy Now</a>
+              <Link to="/customise">Buy Now</Link>
             </div>
           </div>
         </div>
@@ -128,7 +129,7 @@ const Dashboard = () => {
                 "Discover our curated collection of inspiring journal
                 prototypes!"
               </p>
-              <a href="#">Explore More</a>
+              <Link to="/journal">Explore More</Link>
             </div>
             <div className="col-60">
               <div className="slider">
@@ -165,7 +166,7 @@ const Dashboard = () => {
               inspire your creativity and enhance your writing experience. Don't
               miss out on our new arrivals—your perfect journal awaits!
             </p>
-            <a href="#">View More</a>
+            <Link to="/writing">View More</Link>
           </div>
           <div className="col-33">
             <img src={new2} alt="" />

@@ -49,7 +49,7 @@ const ForgotPassword = ({
         },
       })
         .then(() => {
-          setEnterOtp(true); // Show OTP input field
+          setEnterOtp(true);
           setIsLoading(false);
           toast.success("OTP Sent Successfully.");
         })
