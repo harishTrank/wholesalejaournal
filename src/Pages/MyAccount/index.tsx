@@ -6,12 +6,15 @@ import Footer from "../../components/Footer";
 import "./style.css";
 import LoginScreen from "../Login";
 import Signup from "../Signup";
+import FullScreenLoader from "../../components/FullScreenLoader";
 
 const MyAccount = () => {
   const [isLoginShow, setIsLoginShow]: any = useState(true);
+  const [isLoading, setIsLoading]: any = useState(false);
   return (
     <div>
       <Header />
+      {isLoading && <FullScreenLoader />}
       <div className="container">
         <section className="gap">
           <div className="my-profile">
@@ -81,9 +84,15 @@ const MyAccount = () => {
               </div>
             </div>
           ) : isLoginShow ? (
-            <LoginScreen setIsLoginShow={setIsLoginShow} />
+            <LoginScreen
+              setIsLoginShow={setIsLoginShow}
+              setIsLoading={setIsLoading}
+            />
           ) : (
-            <Signup setIsLoginShow={setIsLoginShow} />
+            <Signup
+              setIsLoginShow={setIsLoginShow}
+              setIsLoading={setIsLoading}
+            />
           )}
         </section>
       </div>

@@ -7,7 +7,7 @@ import { useNavigate } from "react-router-dom";
 import { loginApiCall } from "../../store/Services/Auth";
 import { toast } from "react-toastify";
 
-const LoginScreen = ({ setIsLoginShow }: any) => {
+const LoginScreen = ({ setIsLoginShow, setIsLoading }: any) => {
   const navigation: any = useNavigate();
   const formik = useFormik({
     initialValues: {
@@ -23,6 +23,7 @@ const LoginScreen = ({ setIsLoginShow }: any) => {
         .required("Password is required"),
     }),
     onSubmit: (values) => {
+      setIsLoading(true);
       loginApiCall({
         body: {
           email: values.email,
@@ -35,8 +36,12 @@ const LoginScreen = ({ setIsLoginShow }: any) => {
           localStorage.setItem("userId", res.userid);
           toast.success("Login successfully.");
           navigation("/");
+          setIsLoading(false);
         })
-        .catch((err: any) => toast.error("Unauthorized"));
+        .catch((err: any) => {
+          toast.error("Unauthorized");
+          setIsLoading(false);
+        });
     },
   });
 
