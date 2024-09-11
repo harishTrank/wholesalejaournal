@@ -13,6 +13,7 @@ import { GetUserDetailsApi } from "../../hooks/Auth/query";
 import { useNavigate } from "react-router-dom";
 import { logoutUser, updateUserDetail } from "../../store/Services/Auth";
 import toast from "react-hot-toast";
+import ForgotPassword from "../ForgotPassword";
 
 // Define the validation schema using Yup
 const ProfileSchema = Yup.object().shape({
@@ -30,10 +31,11 @@ const MyAccount = () => {
   const navigation: any = useNavigate();
   const [isLoginShow, setIsLoginShow] = useState(true);
   const [isLoading, setIsLoading] = useState(false);
-  const { data, isLoading: userDetailsLoading }: any = GetUserDetailsApi();
+  const { data }: any = GetUserDetailsApi();
+  const [isForgetScreen, setIsForgetScreen]: any = useState(false);
 
   const onSubmitHandler = (values: any, { resetForm }: any) => {
-    setIsLoading(true); // Show the loader
+    setIsLoading(true);
     updateUserDetail({
       body: {
         first_name: values.firstName,
@@ -64,11 +66,10 @@ const MyAccount = () => {
       })
       .catch((err: any) => toast.error("Something went wrong."));
   };
-
   return (
     <div>
       <Header />
-      {(userDetailsLoading || isLoading) && <FullScreenLoader />}
+      {isLoading && <FullScreenLoader />}
       <div className="container">
         <section className="gap">
           <div className="my-profile">
@@ -181,10 +182,13 @@ const MyAccount = () => {
                 </Form>
               )}
             </Formik>
+          ) : isForgetScreen ? (
+            <ForgotPassword />
           ) : isLoginShow ? (
             <LoginScreen
               setIsLoginShow={setIsLoginShow}
               setIsLoading={setIsLoading}
+              setIsForgetScreen={setIsForgetScreen}
             />
           ) : (
             <Signup

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import "./style.css";
@@ -7,7 +7,11 @@ import { useNavigate } from "react-router-dom";
 import { loginApiCall } from "../../store/Services/Auth";
 import toast from "react-hot-toast";
 
-const LoginScreen = ({ setIsLoginShow, setIsLoading }: any) => {
+const LoginScreen = ({
+  setIsLoginShow,
+  setIsLoading,
+  setIsForgetScreen,
+}: any) => {
   const navigation: any = useNavigate();
   const formik = useFormik({
     initialValues: {
@@ -83,10 +87,15 @@ const LoginScreen = ({ setIsLoginShow, setIsLoading }: any) => {
               <div className="error-message">{formik.errors.password}</div>
             ) : null}
           </div>
+
           <button type="submit">Login</button>
+
           <p>
             Don't have an account?{" "}
             <u onClick={() => setIsLoginShow(false)}>Signup</u>
+          </p>
+          <p onClick={() => setIsForgetScreen(true)}>
+            <u>Forgot Password?</u>
           </p>
         </form>
       </div>

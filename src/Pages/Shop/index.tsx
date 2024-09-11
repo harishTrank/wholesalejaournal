@@ -6,7 +6,9 @@ import Footer from "../../components/Footer";
 import "./style.css";
 import { Link } from "react-router-dom";
 
+
 const index = () => {
+  
   return (
     <div className="journal">
       <Header />

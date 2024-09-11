@@ -75,3 +75,6 @@
   .login-card p{
     margin-top: 15px;
   }
+.login-card-right p{
+  cursor: pointer;
+}
