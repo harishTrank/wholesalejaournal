@@ -42,7 +42,7 @@ const MyAccount = () => {
         new_password: values.newPassword,
       },
     })
-      .then((res) => {
+      .then(() => {
         toast.success("Update user successfully.");
         resetForm();
       })
@@ -53,11 +53,6 @@ const MyAccount = () => {
         setIsLoading(false);
       });
   };
-
-  // Loading screen while fetching user details
-  if (userDetailsLoading || isLoading) {
-    return <FullScreenLoader />;
-  }
 
   const logoutButtonHandler = () => {
     logoutUser()
@@ -73,6 +68,7 @@ const MyAccount = () => {
   return (
     <div>
       <Header />
+      {userDetailsLoading || (isLoading && <FullScreenLoader />)}
       <div className="container">
         <section className="gap">
           <div className="my-profile">
