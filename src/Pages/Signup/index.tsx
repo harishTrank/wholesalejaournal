@@ -5,7 +5,7 @@ import SignupImage from "../../images/Signup.jpg";
 import "./style.css";
 import { registerUser } from "../../store/Services/Auth";
 import { useNavigate } from "react-router-dom";
-import { toast } from "react-toastify";
+import toast from "react-hot-toast";
 
 // Define the validation schema using Yup
 const SignupSchema = Yup.object().shape({

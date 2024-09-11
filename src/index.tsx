@@ -3,9 +3,8 @@ import ReactDOM from "react-dom/client";
 import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
-import { ToastContainer } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { Toaster } from "react-hot-toast";
 
 export const queryClient = new QueryClient();
 
@@ -16,7 +15,7 @@ root.render(
   <>
     <QueryClientProvider client={queryClient}>
       <App />
-      <ToastContainer autoClose={2000} />
+      <Toaster />
     </QueryClientProvider>
   </>
 );

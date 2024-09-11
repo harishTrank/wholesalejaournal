@@ -10,6 +10,9 @@ import LoginScreen from "../Login";
 import Signup from "../Signup";
 import FullScreenLoader from "../../components/FullScreenLoader";
 import { GetUserDetailsApi } from "../../hooks/Auth/query";
+import { useNavigate } from "react-router-dom";
+import { logoutUser, updateUserDetail } from "../../store/Services/Auth";
+import toast from "react-hot-toast";
 
 // Define the validation schema using Yup
 const ProfileSchema = Yup.object().shape({
@@ -24,18 +27,48 @@ const ProfileSchema = Yup.object().shape({
 });
 
 const MyAccount = () => {
+  const navigation: any = useNavigate();
   const [isLoginShow, setIsLoginShow] = useState(true);
   const [isLoading, setIsLoading] = useState(false);
   const { data, isLoading: userDetailsLoading }: any = GetUserDetailsApi();
 
-  const onSubmitHandler = (values: any) => {
-    console.log("Form Submitted", values);
+  const onSubmitHandler = (values: any, { resetForm }: any) => {
+    setIsLoading(true); // Show the loader
+    updateUserDetail({
+      body: {
+        first_name: values.firstName,
+        last_name: values.lastName,
+        current_password: values.currentPassword,
+        new_password: values.newPassword,
+      },
+    })
+      .then((res) => {
+        toast.success("Update user successfully.");
+        resetForm();
+      })
+      .catch((err) => {
+        toast.error(err.data.responsemessage);
+      })
+      .finally(() => {
+        setIsLoading(false);
+      });
   };
 
   // Loading screen while fetching user details
   if (userDetailsLoading || isLoading) {
     return <FullScreenLoader />;
   }
+
+  const logoutButtonHandler = () => {
+    logoutUser()
+      .then((res: any) => {
+        localStorage.removeItem("accessToken");
+        localStorage.removeItem("userId");
+        navigation("/");
+        toast.success("Logout user successfully.");
+      })
+      .catch((err: any) => toast.error("Something went wrong."));
+  };
 
   return (
     <div>
@@ -140,7 +173,9 @@ const MyAccount = () => {
                         <button type="submit" disabled={isSubmitting}>
                           Update
                         </button>
-                        <button type="button">Logout</button>
+                        <button onClick={logoutButtonHandler} type="button">
+                          Logout
+                        </button>
                       </div>
                     </div>
                   </div>

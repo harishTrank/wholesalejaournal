@@ -5,7 +5,7 @@ import "./style.css";
 import LoginImage from "../../images/Login.jpg";
 import { useNavigate } from "react-router-dom";
 import { loginApiCall } from "../../store/Services/Auth";
-import { toast } from "react-toastify";
+import toast from "react-hot-toast";
 
 const LoginScreen = ({ setIsLoginShow, setIsLoading }: any) => {
   const navigation: any = useNavigate();
