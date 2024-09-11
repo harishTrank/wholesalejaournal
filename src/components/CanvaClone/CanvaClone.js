@@ -37,9 +37,8 @@ function CanvaClone({
     };
 
     // path to the local image to load into CE.SDK
-    const customImagePath = `${
-      window.location.protocol + "//" + window.location.host
-    }/resources/programming.png`;
+    const customImagePath = `${window.location.protocol + "//" + window.location.host
+      }/resources/programming.png`;
 
     let cesdk;
     let config = {
