@@ -29,4 +29,11 @@ export const authEndpoints = {
   //     uri: "/login-history/",
   //   },
   // },
+  shopProducts:{
+    v1:{
+      ...defaults.methods.GET,
+      ...defaults.versions.v1,
+      uri:"/products/"
+    }
+  }
 };

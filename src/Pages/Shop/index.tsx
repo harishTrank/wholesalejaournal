@@ -6,7 +6,9 @@ import Footer from '../../components/Footer'
 import './style.css'
 import { Link } from 'react-router-dom'
 
+
 const index = () => {
+  
   return (
     <div className='journal'>
       <Header/>
@@ -32,9 +34,11 @@ const index = () => {
                 </select>
             </div>
             <div className="journal-cards">
-              <Link to='/customise'>
-                <Card/>
-                </Link>
+              <Link to='customise'>
+              
+              <Card/>
+              </Link> 
+                
             </div>
         </div>
       </div>

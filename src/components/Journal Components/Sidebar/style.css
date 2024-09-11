@@ -37,6 +37,7 @@
 .search-products input{
     border: 1px solid #d3ced2;
     border-radius: 3px 0 0 3px;
+    width: 65%;
 }
 .search-products button{
     cursor: pointer;
@@ -46,6 +47,7 @@
     padding: 10px 25px;
     border-radius: 0 3px 3px 0;
     border: none;
+    width: 35%;
 }
 .Uncategorised p{
     font-weight: bold;

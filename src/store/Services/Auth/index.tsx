@@ -6,3 +6,8 @@ export const loginApiCall = ({ body }: any) =>
     uriEndPoint: authEndpoints.mobileLogin.v1,
     body,
   });
+
+export const productApiCall=({body}:any)=>
+  callApi({
+    uriEndPoint:authEndpoints.shopProducts.v1
+  })  
