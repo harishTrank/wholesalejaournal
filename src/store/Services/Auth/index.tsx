@@ -7,7 +7,8 @@ export const loginApiCall = ({ body }: any) =>
     body,
   });
 
-export const productApiCall=({body}:any)=>
+export const registerUser = ({ body }: any) =>
   callApi({
-    uriEndPoint:authEndpoints.shopProducts.v1
-  })  
+    uriEndPoint: authEndpoints.registerUser.v1,
+    body,
+  });

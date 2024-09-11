@@ -88,7 +88,7 @@ const HomeScreen = ({ curimage }: any) => {
     if (innercustomised === "Logo") {
       setInnerPageText("");
     } else {
-      setUploadInnerLogo(null);
+      setUploadInnerLogo("");
     }
   }, [innercustomised]);
 
