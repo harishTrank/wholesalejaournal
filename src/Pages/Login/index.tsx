@@ -3,11 +3,11 @@ import { useFormik } from "formik";
 import * as Yup from "yup";
 import "./style.css";
 import LoginImage from "../../images/Login.jpg";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { loginApiCall } from "../../store/Services/Auth";
 import { toast } from "react-toastify";
 
-const LoginScreen = () => {
+const LoginScreen = ({ setIsLoginShow }: any) => {
   const navigation: any = useNavigate();
   const formik = useFormik({
     initialValues: {
@@ -81,9 +81,7 @@ const LoginScreen = () => {
           <button type="submit">Login</button>
           <p>
             Don't have an account?{" "}
-            <Link to="/signup">
-              <u>Signup</u>
-            </Link>
+            <u onClick={() => setIsLoginShow(false)}>Signup</u>
           </p>
         </form>
       </div>

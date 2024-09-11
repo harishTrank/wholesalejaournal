@@ -1,16 +1,12 @@
-import React from 'react'
-import SignupImage from '../../images/Signup.jpg'
-import './style.css'
-import { Link } from 'react-router-dom'
-const index = () => {
+import React from "react";
+import SignupImage from "../../images/Signup.jpg";
+import "./style.css";
+
+const Signup = ({ setIsLoginShow }: any) => {
   return (
-    <div className='login-section'>
     <div className="login-card">
       <div className="login-card-left">
-        <img 
-          src={SignupImage}
-          alt="Login Illustration" 
-        />
+        <img src={SignupImage} alt="Login Illustration" />
       </div>
       <div className="login-card-right">
         <h1>Signup</h1>
@@ -23,7 +19,7 @@ const index = () => {
             <label>Last Name</label>
             <input type="text" placeholder="Enter your last name" required />
           </div>
-          
+
           <div className="input-group">
             <label>Email</label>
             <input type="email" placeholder="Enter your email" required />
@@ -34,15 +30,21 @@ const index = () => {
           </div>
           <div className="input-group">
             <label>Confirm Password</label>
-            <input type="password" placeholder="Enter your password again" required />
+            <input
+              type="password"
+              placeholder="Enter your password again"
+              required
+            />
           </div>
           <button type="submit">Signup</button>
-          <p>Already have an account? <Link to='/login'><u>Login</u></Link> </p>
+          <p>
+            Already have an account?{" "}
+            <u onClick={() => setIsLoginShow(true)}>Login</u>
+          </p>
         </form>
       </div>
     </div>
-    </div>
-  )
-}
+  );
+};
 
-export default index
+export default Signup;

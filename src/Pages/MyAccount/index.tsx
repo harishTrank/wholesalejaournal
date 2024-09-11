@@ -1,12 +1,14 @@
-import React from "react";
+import React, { useState } from "react";
 import Header from "../../components/Header";
 import { CgProfile } from "react-icons/cg";
 import Accountimage from "../../images/10973590.jpg";
 import Footer from "../../components/Footer";
 import "./style.css";
 import LoginScreen from "../Login";
+import Signup from "../Signup";
 
 const MyAccount = () => {
+  const [isLoginShow, setIsLoginShow]: any = useState(true);
   return (
     <div>
       <Header />
@@ -78,8 +80,10 @@ const MyAccount = () => {
                 <img src={Accountimage} alt="" />
               </div>
             </div>
+          ) : isLoginShow ? (
+            <LoginScreen setIsLoginShow={setIsLoginShow} />
           ) : (
-            <LoginScreen />
+            <Signup setIsLoginShow={setIsLoginShow} />
           )}
         </section>
       </div>
