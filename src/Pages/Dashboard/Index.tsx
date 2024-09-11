@@ -16,6 +16,7 @@ import { Link } from "react-router-dom";
 import Cate1 from "../../assests/cate1.png";
 import Cate2 from "../../assests/cate2.png";
 import Cate3 from "../../assests/cate3.png";
+import Footer from "../../components/Footer";
 
 const Dashboard = () => {
   const settings = {
@@ -177,73 +178,7 @@ const Dashboard = () => {
         </div>
       </section>
 
-      <footer className="gap">
-        <div className="container">
-          <div className="flex space-bw">
-            <div className="col-25">
-              <h3>USA Custom Pad</h3>
-              <ul>
-                <li>
-                  <a href="#">
-                    Sidney Industrial Park <br />
-                    16 Winkler Road – Sidney, New York 13838
-                  </a>
-                </li>
-                <li>
-                  <a href="#">Ph: (800) 310-2723</a>
-                </li>
-                <li>
-                  <a href="#">E-Mail: sales@usapad.com</a>
-                </li>
-                <li>
-                  <a href="#">Fax: (607) 563-9553</a>
-                </li>
-              </ul>
-            </div>
-            <div className="col-25 lpad">
-              <h3>Links</h3>
-              <ul>
-                <li>
-                  <a href="#">Home</a>
-                </li>
-                <li>
-                  <a href="#">Shop</a>
-                </li>
-                <li>
-                  <a href="#">About</a>
-                </li>
-                <li>
-                  <a href="#">Contact</a>
-                </li>
-              </ul>
-            </div>
-            <div className="col-25">
-              <h3>Help</h3>
-              <ul>
-                <li>
-                  <a href="#">Payment Options</a>
-                </li>
-                <li>
-                  <a href="#">Returns</a>
-                </li>
-                <li>
-                  <a href="#">Privacy Policy</a>
-                </li>
-              </ul>
-            </div>
-            <div className="col-25">
-              <h3>Newsletter</h3>
-              <form action="">
-                <input type="text" />
-                <input type="button" value="Subscribe" />
-              </form>
-            </div>
-          </div>
-          <div className="copyright">
-            <p>Wholesalejournals.com copyright ©2024. All rights reserved.</p>
-          </div>
-        </div>
-      </footer>
+      <Footer />
     </div>
   );
 };
