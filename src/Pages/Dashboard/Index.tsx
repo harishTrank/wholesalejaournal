@@ -13,6 +13,9 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Header from "../../components/Header";
 import { Link } from "react-router-dom";
+import Cate1 from "../../assests/cate1.png";
+import Cate2 from "../../assests/cate2.png";
+import Cate3 from "../../assests/cate3.png";
 
 const Dashboard = () => {
   const settings = {
@@ -57,21 +60,21 @@ const Dashboard = () => {
         <div className="container">
           <div className="flex space-bw product-detail">
             <div className="col-33_2">
-              {/* <img src={cate1} alt="" /> */}
+              <img src={Cate1} alt="" />
               <div className="product-text">
-                <h3>Cork Diaries</h3>
+                <h4>Cork Diaries</h4>
               </div>
             </div>
             <div className="col-33_2">
-              {/* <img src={cate2} alt="" /> */}
+              <img src={Cate2} alt="" />
               <div className="product-text">
-                <h3>Custom Hardbound Diaries with Smooth Covers</h3>
+                <h4>Custom Hardbound Diaries with Smooth Covers</h4>
               </div>
             </div>
             <div className="col-33_2">
-              {/* <img src={cate3} alt="" /> */}
+              <img src={Cate3} alt="" />
               <div className="product-text">
-                <h3>Bound Bulk Journals with Soft-Textured Covers</h3>
+                <h4>Bound Bulk Journals with Soft-Textured Covers</h4>
               </div>
             </div>
           </div>
