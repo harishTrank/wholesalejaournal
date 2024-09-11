@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-// import { loginHistory } from "../../store/Services/Auth";
+import { getUserDetails } from "../../store/Services/Auth";
 
-// export const useLoginHistory = (payload: any) =>
-//   useQuery(["loginHistory", payload], () => loginHistory(payload));
+export const GetUserDetailsApi = () =>
+  useQuery(["getUserDetails"], getUserDetails);

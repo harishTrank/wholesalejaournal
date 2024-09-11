@@ -5,7 +5,7 @@ import SignupImage from "../../images/Signup.jpg";
 import "./style.css";
 import { registerUser } from "../../store/Services/Auth";
 import { useNavigate } from "react-router-dom";
-import { toast } from "react-toastify";
+import toast from "react-hot-toast";
 
 // Define the validation schema using Yup
 const SignupSchema = Yup.object().shape({
@@ -20,12 +20,13 @@ const SignupSchema = Yup.object().shape({
     .required("Confirm password is required"),
 });
 
-const Signup = ({ setIsLoginShow }: any) => {
+const Signup = ({ setIsLoginShow, setIsLoading }: any) => {
   const navigation: any = useNavigate();
   const onSubmitHandler = async (
     values: any,
     { setSubmitting, resetForm }: any
   ) => {
+    setIsLoading(true);
     try {
       const res: any = await registerUser({
         body: {
@@ -41,10 +42,13 @@ const Signup = ({ setIsLoginShow }: any) => {
       toast.success("User created successfully.");
       resetForm();
       navigation("/");
+      setIsLoading(false);
     } catch (err: any) {
       toast.error(err.data.responsemessage);
+      setIsLoading(false);
     } finally {
       setSubmitting(false);
+      setIsLoading(false);
     }
   };
   return (

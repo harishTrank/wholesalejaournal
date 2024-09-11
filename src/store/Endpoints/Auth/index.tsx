@@ -15,32 +15,25 @@ export const authEndpoints = {
       uri: "/signup/",
     },
   },
-  // changePassword: {
-  //   v1: {
-  //     ...defaults.methods.POST,
-  //     ...defaults.versions.v1,
-  //     uri: "/update-password/",
-  //   },
-  // },
-  // mobileLogout: {
-  //   v1: {
-  //     ...defaults.methods.POST,
-  //     ...defaults.versions.v1,
-  //     uri: "/logout/",
-  //   },
-  // },
-  // loginHistory: {
-  //   v1: {
-  //     ...defaults.methods.GET,
-  //     ...defaults.versions.v1,
-  //     uri: "/login-history/",
-  //   },
-  // },
-  shopProducts:{
-    v1:{
+  getUserDetails: {
+    v1: {
       ...defaults.methods.GET,
       ...defaults.versions.v1,
-      uri:"/products/"
-    }
-  }
+      uri: "/user-profile/",
+    },
+  },
+  logoutUser: {
+    v1: {
+      ...defaults.methods.POST,
+      ...defaults.versions.v1,
+      uri: "/logout/",
+    },
+  },
+  updateUserDetail: {
+    v1: {
+      ...defaults.methods.PUT,
+      ...defaults.versions.v1,
+      uri: "/user-update/",
+    },
+  },
 };
