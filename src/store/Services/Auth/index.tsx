@@ -34,3 +34,9 @@ export const sendOtpEmail = ({ body }: any) =>
     uriEndPoint: authEndpoints.sendOtpEmail.v1,
     body,
   });
+
+export const forgotPasswordAPI = ({ body }: any) =>
+  callApi({
+    uriEndPoint: authEndpoints.forgotPasswordAPI.v1,
+    body,
+  });

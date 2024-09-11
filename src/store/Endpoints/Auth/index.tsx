@@ -43,4 +43,11 @@ export const authEndpoints = {
       uri: "/send-otp/",
     },
   },
+  forgotPasswordAPI: {
+    v1: {
+      ...defaults.methods.POST,
+      ...defaults.versions.v1,
+      uri: "/forget-password/",
+    },
+  },
 };

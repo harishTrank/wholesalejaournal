@@ -3,7 +3,7 @@ import { useFormik } from "formik";
 import * as Yup from "yup";
 import forgot from "../../images/forgot.jpg";
 import "./style.css";
-import { sendOtpEmail } from "../../store/Services/Auth";
+import { forgotPasswordAPI, sendOtpEmail } from "../../store/Services/Auth";
 import toast from "react-hot-toast";
 
 const ForgotPassword = ({
@@ -35,8 +35,24 @@ const ForgotPassword = ({
         .required("Enter confirm password"),
     }),
     onSubmit: (values) => {
-      // Handle form submission
-      console.log(values);
+      setIsLoading(true);
+      forgotPasswordAPI({
+        body: {
+          email: values.email,
+          otp: values.otp,
+          new_password: values.newPassword,
+        },
+      })
+        .then((res: any) => {
+          toast.success(res.message);
+          setIsForgetScreen(false);
+          setIsLoginShow(true);
+          setIsLoading(false);
+        })
+        .catch((err: any) => {
+          toast.error(err.data?.message);
+          setIsLoading(false);
+        });
     },
   });
 
