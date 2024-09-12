@@ -406,7 +406,7 @@ const HomeScreen = ({ curimage }: any) => {
 
           <div className="customisecart flex">
            
-            <div className="addbtn">
+            <div className="addbtn previewbtn">
               <button onClick={preViewButtonHandler}>Preview</button>
             </div>
             <div className="addbtn">
