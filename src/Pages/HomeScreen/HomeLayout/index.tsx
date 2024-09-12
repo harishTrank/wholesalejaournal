@@ -477,7 +477,7 @@ const HomeScreen = ({ curimage }: any) => {
             )}
 
             <div className="customisecart flex">
-              {selectedOption && (
+              {selectedOption === "Yes" && (
                 <>
                   <div className="addbtn">
                     <button onClick={preViewButtonHandler}>Preview</button>

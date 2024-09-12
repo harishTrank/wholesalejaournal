@@ -110,7 +110,7 @@ export const canvasType = {
   ],
   leatheretteColor: [
     {
-      name: "Red",
+      name: "Rose",
       threeByFive: require("../assests/LeatheretteColor/red/red3x5.png"),
       fourByFour: require("../assests/LeatheretteColor/red/red4x4.png"),
       fourBySix: require("../assests/LeatheretteColor/red/red4x6.png"),
