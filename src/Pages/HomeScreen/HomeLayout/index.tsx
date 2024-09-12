@@ -7,6 +7,9 @@ import ColorSelector from "../HomeComp/ColorSelector";
 import { Link } from "react-router-dom";
 import Header from "../../../components/Header";
 import FontsComponents from "../HomeComp/FontsComponents";
+import Footer from '../../../components/Footer'
+import Diary from '../../../images/Diary-removebg-preview.png'
+import Card from '../../../components/Journal Components/Card'
 
 const HomeScreen = ({ curimage }: any) => {
   const [image, setImage]: any = useState(null);
@@ -102,10 +105,27 @@ const HomeScreen = ({ curimage }: any) => {
   const closeModalHandler = () => {
     setIsModalOpen(false);
   };
+  const [activeTab, setActiveTab]:any = useState('one');
+
+  const handleTabClick = (tabId:any) => {
+      setActiveTab(tabId);
+  };
+  const [selectedStar, setSelectedStar]:any = useState(0);
+
+    const handleStarClick = (index:any) => {
+      if (selectedStar === index) {
+        setSelectedStar(0);
+    } else {
+        setSelectedStar(index);
+    }
+    };
 
   return (
-    <div className="container">
+    <div className="customisation-page">
       <Header />
+    
+    <div className="container">
+      
       <div className="mainContainer">
         <div className="customcanvas">
           <CustomCanvas
@@ -309,9 +329,7 @@ const HomeScreen = ({ curimage }: any) => {
           )}
 
           <div className="customisecart flex">
-            <div className="qty-box">
-              <input type="text" />
-            </div>
+           
             <div className="addbtn">
               <button onClick={preViewButtonHandler}>Preview</button>
             </div>
@@ -347,7 +365,104 @@ const HomeScreen = ({ curimage }: any) => {
             )}
           </div>
         </div>
+        
       </div>
+      <div className="customise-tabs">
+        <div className="tab-head">
+                <li
+                    className={activeTab === 'one' ? 'active' : ''}
+                    onClick={() => handleTabClick('one')}>
+                    Description
+                </li>
+                <li
+                    className={activeTab === 'two' ? 'active' : ''}
+                    onClick={() => handleTabClick('two')}>
+                    Additional information
+                </li>
+                <li
+                    className={activeTab === 'three' ? 'active' : ''}
+                    onClick={() => handleTabClick('three')}>
+                    Reviews
+                </li>
+            </div>
+            <div className="tab-wrapper">
+                <div
+                    className="tab-content"
+                    style={{ display: activeTab === 'one' ? 'block' : 'none' }}
+                >
+                    <h3>Description</h3>
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Animi facilis repudiandae cum id iusto, ratione voluptatibus tenetur enim, ipsam ab dolores. Quibusdam obcaecati quis unde, consequuntur beatae error sed recusandae.</p>
+                </div>
+                <div
+                    className="tab-content"
+                    style={{ display: activeTab === 'two' ? 'block' : 'none' }}
+                >
+                    <h3>Additional Information</h3>
+                    <p>This is dummy content Two</p>
+                </div>
+                <div
+                    className="tab-content"
+                    style={{ display: activeTab === 'three' ? 'block' : 'none' }}
+                >
+                    <h3>Reviews</h3>
+                    <p>There are no reviews yet</p>
+                    <p>Be the first to review Product</p>
+                    <p>Your email address will not be published.</p>
+                    <div className="rating-section">
+                    <p>Your rating</p>
+                     <div className="rating-container">
+                     
+                     {[1, 2, 3, 4, 5].map((star, index) => (
+                <span
+                    key={index}
+                    className={selectedStar >= star ? 'star selected' : 'star'}
+                    onClick={() => handleStarClick(star)}
+                >
+                    ★
+                </span>
+            ))}
+                     </div>
+                     <div className="review-form">
+                      <label htmlFor="">Your Review</label>
+                      <textarea id="comment" name="comment" rows={4}></textarea>
+                     </div>
+                     <div className="rating-email flex space-bw">
+                      <div className="rating-name">
+                        <label htmlFor="">Name</label>
+                        <input type="text" />
+                      </div>
+                      <div className="rating-remaining">
+                        <label htmlFor="">Email</label>
+                        <input type="text" />
+                      </div>
+                     </div>
+                     <div className="rating-save flex align-center">
+                      <input type="checkbox" className="rating-check"/>&nbsp;
+                      <p>Save my name,email, and website in this browser for the next time I comment</p>
+                     </div>
+                     <div className="submitbtn">
+                      <button>Submit</button>
+                     </div>
+                     </div>
+                </div>
+            </div>
+            <div className="related-products">
+              <div className="related-content">
+                <h2>Related Products</h2>
+                <div className="related-cards">
+                  <div className="related-card flex space-bw">
+                    <Card/>
+                    <Card/>
+                    <Card/>
+
+                  </div>
+                </div>
+              </div>
+            </div>
+        </div>
+      
+    </div>
+    <Footer/>
     </div>
   );
 };
