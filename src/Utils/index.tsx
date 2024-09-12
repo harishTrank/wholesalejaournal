@@ -76,3 +76,58 @@ export const fonts = [
       "https://cdn.customily.com/shopify/assetFiles/swatches/may-designs-main.myshopify.com/af1a5c75-f3c9-474f-bc9d-590d16cae0d0/2/51bba9cb-2e8b-45f9-ab39-b2f87e3e0a3c.png",
   },
 ];
+
+export const canvasType = {
+  boardColor: {
+    candy_apple: {
+      threeByFive: require("../assests/BoardColor/candy_apple/candy_apple3x5.png"),
+      fourByFour: require("../assests/BoardColor/candy_apple/candy_apple4x4.png"),
+      fourBySix: require("../assests/BoardColor/candy_apple/candy_apple4x6.png"),
+      fiveBySeven: require("../assests/BoardColor/candy_apple/candy_apple5x7.png"),
+    },
+    jade: {
+      threeByFive: require("../assests/BoardColor/jade/jade3x5.png"),
+      fourByFour: require("../assests/BoardColor/jade/jade4x4.png"),
+      fourBySix: require("../assests/BoardColor/jade/jade4x6.png"),
+      fiveBySeven: require("../assests/BoardColor/jade/jade5x7.png"),
+    },
+    rich_green: {
+      threeByFive: require("../assests/BoardColor/rich_green/rich_green3x5.png"),
+      fourByFour: require("../assests/BoardColor/rich_green/rich_green4x4.png"),
+      fourBySix: require("../assests/BoardColor/rich_green/rich_green4x6.png"),
+      fiveBySeven: require("../assests/BoardColor/rich_green/rich_green5x7.png"),
+    },
+    Sapphire_Blue: {
+      threeByFive: require("../assests/BoardColor/Sapphire_Blue/Sapphire_Blue3x5.png"),
+      fourByFour: require("../assests/BoardColor/Sapphire_Blue/Sapphire_Blue4x4.png"),
+      fourBySix: require("../assests/BoardColor/Sapphire_Blue/Sapphire_Blue4x6.png"),
+      fiveBySeven: require("../assests/BoardColor/Sapphire_Blue/Sapphire_Blue5x7.png"),
+    },
+  },
+  leatheretteColor: {
+    red: {
+      threeByFive: require("../assests/LeatheretteColor/red/red3x5.png"),
+      fourByFour: require("../assests/LeatheretteColor/red/red4x4.png"),
+      fourBySix: require("../assests/LeatheretteColor/red/red4x6.png"),
+      fiveBySeven: require("../assests/LeatheretteColor/red/red5x7.png"),
+    },
+    SoftGreen: {
+      threeByFive: require("../assests/LeatheretteColor/SoftGreen/SoftGreen3x5.png"),
+      fourByFour: require("../assests/LeatheretteColor/SoftGreen/SoftGreen4x4.png"),
+      fourBySix: require("../assests/LeatheretteColor/SoftGreen/SoftGreen4x6.png"),
+      fiveBySeven: require("../assests/LeatheretteColor/SoftGreen/SoftGreen5x7.png"),
+    },
+    wine: {
+      threeByFive: require("../assests/LeatheretteColor/wine/wine3x5.png"),
+      fourByFour: require("../assests/LeatheretteColor/wine/wine4x4.png"),
+      fourBySix: require("../assests/LeatheretteColor/wine/wine4x6.png"),
+      fiveBySeven: require("../assests/LeatheretteColor/wine/wine5x7.png"),
+    },
+    winkle: {
+      threeByFive: require("../assests/LeatheretteColor/winkle/winkle3x5.png"),
+      fourByFour: require("../assests/LeatheretteColor/winkle/winkle4x4.png"),
+      fourBySix: require("../assests/LeatheretteColor/winkle/winkle4x6.png"),
+      fiveBySeven: require("../assests/LeatheretteColor/winkle/winkle5x7.png"),
+    },
+  },
+};

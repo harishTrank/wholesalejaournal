@@ -89,18 +89,8 @@ const CustomCanvas = ({
       const img = new window.Image();
       img.src = image.src;
       img.onload = () => {
-        const aspectRatio = img.width / img.height;
-
-        let width, height;
-
-        if (canvasWidth / aspectRatio <= canvasHeight) {
-          width = canvasWidth;
-          height = canvasWidth / aspectRatio;
-        } else {
-          height = canvasHeight;
-          width = canvasHeight * aspectRatio;
-        }
-
+        let width = img.width;
+        let height = img.height;
         setImgProps({ width, height });
       };
     }
@@ -175,8 +165,8 @@ const CustomCanvas = ({
     <div>
       <div style={{ display: innerPageOption === "Cover" ? "block" : "none" }}>
         <Stage
-          width={canvasWidth}
-          height={canvasHeight}
+          width={imgProps?.width}
+          height={imgProps?.height}
           onMouseDown={handleDeselect}
           onTouchStart={handleDeselect}
           ref={coverRef}
@@ -185,8 +175,6 @@ const CustomCanvas = ({
             {image && (
               <KonvaImage
                 image={image}
-                x={10}
-                y={10}
                 width={imgProps.width}
                 height={imgProps.height}
               />
