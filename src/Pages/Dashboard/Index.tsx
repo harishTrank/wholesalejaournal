@@ -12,6 +12,11 @@ import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Header from "../../components/Header";
+import { Link } from "react-router-dom";
+import Cate1 from "../../assests/cate1.png";
+import Cate2 from "../../assests/cate2.png";
+import Cate3 from "../../assests/cate3.png";
+import Footer from "../../components/Footer";
 
 const Dashboard = () => {
   const settings = {
@@ -46,7 +51,7 @@ const Dashboard = () => {
                 lists- the possibilities are endless when your personalizing
                 your journal covers.
               </p>
-              <a href="#">Buy Now</a>
+              <Link to="/customise">Buy Now</Link>
             </div>
           </div>
         </div>
@@ -56,21 +61,21 @@ const Dashboard = () => {
         <div className="container">
           <div className="flex space-bw product-detail">
             <div className="col-33_2">
-              {/* <img src={cate1} alt="" /> */}
+              <img src={Cate1} alt="" />
               <div className="product-text">
-                <h3>Cork Diaries</h3>
+                <h4>Cork Diaries</h4>
               </div>
             </div>
             <div className="col-33_2">
-              {/* <img src={cate2} alt="" /> */}
+              <img src={Cate2} alt="" />
               <div className="product-text">
-                <h3>Custom Hardbound Diaries with Smooth Covers</h3>
+                <h4>Custom Hardbound Diaries with Smooth Covers</h4>
               </div>
             </div>
             <div className="col-33_2">
-              {/* <img src={cate3} alt="" /> */}
+              <img src={Cate3} alt="" />
               <div className="product-text">
-                <h3>Bound Bulk Journals with Soft-Textured Covers</h3>
+                <h4>Bound Bulk Journals with Soft-Textured Covers</h4>
               </div>
             </div>
           </div>
@@ -128,7 +133,7 @@ const Dashboard = () => {
                 "Discover our curated collection of inspiring journal
                 prototypes!"
               </p>
-              <a href="#">Explore More</a>
+              <Link to="/journal">Explore More</Link>
             </div>
             <div className="col-60">
               <div className="slider">
@@ -165,7 +170,7 @@ const Dashboard = () => {
               inspire your creativity and enhance your writing experience. Don't
               miss out on our new arrivals—your perfect journal awaits!
             </p>
-            <a href="#">View More</a>
+            <Link to="/writing">View More</Link>
           </div>
           <div className="col-33">
             <img src={new2} alt="" />
@@ -173,73 +178,7 @@ const Dashboard = () => {
         </div>
       </section>
 
-      <footer className="gap">
-        <div className="container">
-          <div className="flex space-bw">
-            <div className="col-25">
-              <h3>USA Custom Pad</h3>
-              <ul>
-                <li>
-                  <a href="#">
-                    Sidney Industrial Park <br />
-                    16 Winkler Road – Sidney, New York 13838
-                  </a>
-                </li>
-                <li>
-                  <a href="#">Ph: (800) 310-2723</a>
-                </li>
-                <li>
-                  <a href="#">E-Mail: sales@usapad.com</a>
-                </li>
-                <li>
-                  <a href="#">Fax: (607) 563-9553</a>
-                </li>
-              </ul>
-            </div>
-            <div className="col-25 lpad">
-              <h3>Links</h3>
-              <ul>
-                <li>
-                  <a href="#">Home</a>
-                </li>
-                <li>
-                  <a href="#">Shop</a>
-                </li>
-                <li>
-                  <a href="#">About</a>
-                </li>
-                <li>
-                  <a href="#">Contact</a>
-                </li>
-              </ul>
-            </div>
-            <div className="col-25">
-              <h3>Help</h3>
-              <ul>
-                <li>
-                  <a href="#">Payment Options</a>
-                </li>
-                <li>
-                  <a href="#">Returns</a>
-                </li>
-                <li>
-                  <a href="#">Privacy Policy</a>
-                </li>
-              </ul>
-            </div>
-            <div className="col-25">
-              <h3>Newsletter</h3>
-              <form action="">
-                <input type="text" />
-                <input type="button" value="Subscribe" />
-              </form>
-            </div>
-          </div>
-          <div className="copyright">
-            <p>Wholesalejournals.com copyright ©2024. All rights reserved.</p>
-          </div>
-        </div>
-      </footer>
+      <Footer />
     </div>
   );
 };

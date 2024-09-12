@@ -9,7 +9,7 @@ import Writing from "./Pages/Writing Journal";
 import Shop from "./Pages/Shop";
 import MyAccount from "./Pages/MyAccount";
 import Cart from "./Pages/Cart";
-import ForgotPassword from "./Pages/ForgotPassword"
+
 function App() {
   return (
     <BrowserRouter>
@@ -27,7 +27,6 @@ function App() {
         <Route path="/shop" element={<Shop />} />
         <Route path="/account" element={<MyAccount />} />
         <Route path="/cart" element={<Cart />} />
-        <Route path="/forgot" element={<ForgotPassword/>}/>
         <Route path="/journal" element={<Journal />} />
       </Routes>
     </BrowserRouter>

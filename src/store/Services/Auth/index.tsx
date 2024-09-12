@@ -28,3 +28,15 @@ export const updateUserDetail = ({ body }: any) =>
     uriEndPoint: authEndpoints.updateUserDetail.v1,
     body,
   });
+
+export const sendOtpEmail = ({ body }: any) =>
+  callApi({
+    uriEndPoint: authEndpoints.sendOtpEmail.v1,
+    body,
+  });
+
+export const forgotPasswordAPI = ({ body }: any) =>
+  callApi({
+    uriEndPoint: authEndpoints.forgotPasswordAPI.v1,
+    body,
+  });

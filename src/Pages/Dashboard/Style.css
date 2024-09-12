@@ -247,8 +247,8 @@ footer ul li {
 }
 
 footer ul li a {
-    font-size: 16px;
-    color: #9f9f9f;
+    font-size: 14px;
+    color: #000;
 }
 
 footer form {
@@ -390,4 +390,8 @@ footer .copyright p {
     footer .col-25 {
         margin-bottom: 10px;
     }
+}
+
+h4{
+    font-weight: 600;
 }
