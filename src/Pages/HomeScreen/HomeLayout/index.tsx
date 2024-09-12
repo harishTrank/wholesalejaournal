@@ -153,6 +153,8 @@ const HomeScreen = ({ curimage }: any) => {
     setLeatherOpen(!leatherOpen);
   };
 
+  
+
   return (
     <div className="customisation-page">
       <Header />
