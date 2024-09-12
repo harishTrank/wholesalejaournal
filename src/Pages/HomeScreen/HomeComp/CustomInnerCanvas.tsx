@@ -156,8 +156,8 @@ const CustomInnerCanvas = ({
   return (
     <div>
       <Stage
-        width={canvasWidth}
-        height={canvasHeight}
+        width={imgProps?.width}
+        height={imgProps?.height}
         onMouseDown={handleDeselect}
         onTouchStart={handleDeselect}
         ref={innerRef}
@@ -166,8 +166,6 @@ const CustomInnerCanvas = ({
           {currentBackImg && (
             <KonvaImage
               image={currentBackImg}
-              x={10}
-              y={10}
               width={imgProps.width}
               height={imgProps.height}
             />
