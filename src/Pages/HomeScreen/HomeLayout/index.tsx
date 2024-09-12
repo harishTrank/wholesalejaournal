@@ -42,7 +42,7 @@ const HomeScreen = ({ curimage }: any) => {
   const [isOpen, setIsOpen]: any = useState(false);
   const [leatherOpen, setLeatherOpen]: any = useState(false);
   const [boardSelectedOption, setBoardSelectedOption]: any = useState("");
-  const [currentSize, setCurrentSize]: any = useState("threeByFive");
+  const [currentSize, setCurrentSize]: any = useState("fiveBySeven");
   const [currentTheme, setCurrentTheme]: any = useState({});
 
   const changeBackGroundHandler = () => {
@@ -477,12 +477,16 @@ const HomeScreen = ({ curimage }: any) => {
             )}
 
             <div className="customisecart flex">
-              <div className="addbtn">
-                <button onClick={preViewButtonHandler}>Preview</button>
-              </div>
-              <div className="addbtn">
-                <button>Add to cart</button>
-              </div>
+              {selectedOption && (
+                <>
+                  <div className="addbtn">
+                    <button onClick={preViewButtonHandler}>Preview</button>
+                  </div>
+                  <div className="addbtn">
+                    <button>Add to cart</button>
+                  </div>
+                </>
+              )}
               {isModalOpen && (
                 <div className="modal">
                   <div className="modal-content">

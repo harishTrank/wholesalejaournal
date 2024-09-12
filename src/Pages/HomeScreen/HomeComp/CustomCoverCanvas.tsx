@@ -39,7 +39,7 @@ const CustomCanvas = ({
     shadowBlur: 1,
     stroke: "white",
     id: "shape",
-    x: (window.innerWidth * 0.35) / 2 - 130, // Initial position
+    x: (window.innerWidth * 0.35) / 2 - 150, // Initial position
     y: 100,
     draggable: true,
   });

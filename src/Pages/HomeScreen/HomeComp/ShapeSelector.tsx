@@ -23,8 +23,6 @@ const ShapeSelector = ({
     <>
       {currentBkgShape === "rect" ? (
         <Rect
-          x={110}
-          y={75}
           {...shapeProps}
           ref={shapeRef}
           onClick={onSelect}
@@ -35,8 +33,6 @@ const ShapeSelector = ({
       ) : currentBkgShape === "circle" ? (
         <Circle
           {...shapeProps}
-          x={215}
-          y={160}
           ref={shapeRef}
           radius={100}
           onClick={onSelect}
@@ -47,8 +43,6 @@ const ShapeSelector = ({
       ) : currentBkgShape === "squr" ? (
         <Rect
           {...shapeProps}
-          x={130}
-          y={75}
           width={160}
           height={160}
           ref={shapeRef}
@@ -63,8 +57,6 @@ const ShapeSelector = ({
             {...shapeProps}
             width={160}
             height={160}
-            x={215}
-            y={75}
             ref={shapeRef}
             rotation={45}
             onClick={onSelect}
