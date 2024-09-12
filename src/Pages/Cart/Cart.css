@@ -1,12 +1,11 @@
 .quantity-box {
-    display: flex;
-    align-items: center;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    width: 125px;
-    height: 48px;
-
-  }
+  display: flex;
+  align-items: center;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  width: 143px;
+  height: 48px;
+}
   
   .quantity-box button {
     background:none;
@@ -96,11 +95,16 @@
 .entercode input{
   width: 70%;
   margin-bottom: 15px;
+  padding: 10px;
 
 }
 .entercode button{
   width: 29%;
   margin-bottom: 15px;
+  background: #B88E2F;
+  border: none;
+  border-radius: 5px;
+  color: #fff;
   
 }
 .entercode{
