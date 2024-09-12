@@ -10,6 +10,9 @@ import FontsComponents from "../HomeComp/FontsComponents";
 import Footer from '../../../components/Footer'
 import Diary from '../../../images/Diary-removebg-preview.png'
 import Card from '../../../components/Journal Components/Card'
+import { FaChevronDown } from "react-icons/fa";
+import { FaChevronUp } from "react-icons/fa";
+import colorimage from '../../../images/4x4.png'
 
 const HomeScreen = ({ curimage }: any) => {
   const [image, setImage]: any = useState(null);
@@ -38,6 +41,13 @@ const HomeScreen = ({ curimage }: any) => {
   const [innerTextColor, setInnerTextColor]: any = useState("#333333");
   const [currentFont, setCurrentFont]: any = useState("Roboto");
   const [currentInnerFont, setCurrentInnerFont]: any = useState("Roboto");
+  const [isOpen, setIsOpen]:any = useState(false);
+  const [leatherOpen,setLeatherOpen]:any=useState(false)
+  const [boardSelectedOption,setBoardSelectedOption]:any=useState('')
+
+  const handleBoardSelectChange = (e:any) => {
+    setBoardSelectedOption(e.target.value);
+  };
 
   useEffect(() => {
     const loadImage: any = new window.Image();
@@ -119,6 +129,12 @@ const HomeScreen = ({ curimage }: any) => {
         setSelectedStar(index);
     }
     };
+    const toggleDropdown = () => {
+      setIsOpen(!isOpen);
+    };
+    const toggleLeather=()=>{
+      setLeatherOpen(!leatherOpen)
+    }
 
   return (
     <div className="customisation-page">
@@ -163,6 +179,9 @@ const HomeScreen = ({ curimage }: any) => {
           </div>
           {selectedOption === "Yes" && (
             <>
+            
+          
+           
               <div className="personalisecover">
                 <div
                   className="accordion-header"
@@ -171,7 +190,63 @@ const HomeScreen = ({ curimage }: any) => {
                 >
                   <h3>Personalise Cover</h3>
                 </div>
-                <div style={{ display: isCanvasVisible ? "block" : "none" }}>
+                <div className="covertype" style={{ display: isCanvasVisible ? "block" : "none", background:"#f9f9f9",padding:"10px" }}>
+                <label htmlFor="" >Select Cover Type</label>
+            <select name="" id="" onChange={handleBoardSelectChange}>
+              <option value="">Select an option</option>
+              <option value="boardColor">Board Color</option>
+              <option value="leatheretteColor">Leatherette Color</option>
+            </select>
+                <div className="boardcolorsection" style={{ display: boardSelectedOption === 'boardColor' ? 'block' : 'none' }}>
+            <div className=" toggleclass flex space-bw" onClick={toggleDropdown}>
+              <h3>Select Board Color </h3>
+              <p>{isOpen ? <FaChevronUp size={10}/> : <FaChevronDown size={10}/>}</p>
+            </div>
+            {isOpen && (
+        <div className="dropdown">
+          <ul>
+            <li className="flex"><img src={colorimage} alt="" />Red</li>
+            <li>Green</li>
+            <li>Blue</li>
+            <li>Yellow</li>
+            <li>Black</li>
+            <li>hello</li>
+            <li>hello</li>
+          </ul>
+        </div>
+      )}
+                  </div>
+                  <div className="leatherettesection" style={{ display: boardSelectedOption === 'leatheretteColor' ? 'block' : 'none' }}>
+                    <div className="toggleclass flex space-bw" onClick={toggleLeather}>
+                      <h3>Select Leatherette Color</h3>
+                      <p>{leatherOpen ? <FaChevronUp size={10}/> : <FaChevronDown size={10}/>}</p>
+                    </div>
+                    {leatherOpen && (
+        <div className="dropdown">
+          <ul>
+            <li className="flex"><img src={colorimage} alt="" />Red</li>
+            <li>Green</li>
+            <li>Blue</li>
+            <li>Yellow</li>
+            <li>Black</li>
+            <li>hello</li>
+            <li>hello</li>
+          </ul>
+        </div>
+      )}
+
+
+                  </div>
+                  <label htmlFor="">Select Size</label>
+                  <select name="" id="">
+                    <option value="">Select Option</option>
+                    <option value="">4x4</option>
+                    <option value="">3x5</option>
+                    <option value="">4x6</option>
+                    <option value="">5x7</option>
+                  
+
+                  </select>
                   <div className="cover-option">
                     <CoverOption
                       coverCurrentOption={coverCurrentOption}
@@ -187,6 +262,7 @@ const HomeScreen = ({ curimage }: any) => {
                     />
                   </div>
                   <div style={{ display: lowerVisible ? "block" : "none" }}>
+                  
                     <div className="controls">
                       <div className="more-cust">
                         <h4>Select background shape</h4>
