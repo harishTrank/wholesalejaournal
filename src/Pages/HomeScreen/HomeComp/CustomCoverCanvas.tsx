@@ -67,7 +67,7 @@ const CustomCanvas = ({
   const logoRef = useRef<any>(null);
 
   const canvasWidth = window.innerWidth * 0.3;
-  const canvasHeight = window.innerHeight;
+  const canvasHeight = window.innerHeight * 0.8;
 
   const handleSelect = (e: any) => {
     setSelectedId(e.target.id());
@@ -83,15 +83,27 @@ const CustomCanvas = ({
     // Optional: Handle transformations such as rotation, scale, etc.
   };
 
-  // Set image background
+  // Set image background with proper scaling to fit the canvas
   useEffect(() => {
     if (image) {
       const img = new window.Image();
       img.src = image.src;
       img.onload = () => {
-        let width = img.width;
-        let height = img.height;
-        setImgProps({ width, height });
+        const imageAspectRatio = img.width / img.height;
+
+        let newWidth = canvasWidth;
+        let newHeight = canvasHeight;
+
+        // Check if the width or height exceeds the canvas and scale accordingly
+        if (canvasWidth / imageAspectRatio <= canvasHeight) {
+          newWidth = canvasWidth;
+          newHeight = canvasWidth / imageAspectRatio;
+        } else {
+          newHeight = canvasHeight;
+          newWidth = canvasHeight * imageAspectRatio;
+        }
+
+        setImgProps({ width: newWidth, height: newHeight });
       };
     }
   }, [image, canvasHeight, canvasWidth, setImgProps]);
@@ -165,8 +177,8 @@ const CustomCanvas = ({
     <div>
       <div style={{ display: innerPageOption === "Cover" ? "block" : "none" }}>
         <Stage
-          width={imgProps?.width}
-          height={imgProps?.height}
+          width={imgProps.width}
+          height={imgProps.height}
           onMouseDown={handleDeselect}
           onTouchStart={handleDeselect}
           ref={coverRef}
@@ -177,6 +189,8 @@ const CustomCanvas = ({
                 image={image}
                 width={imgProps.width}
                 height={imgProps.height}
+                x={(canvasWidth - imgProps.width) / 2}
+                y={(canvasHeight - imgProps.height) / 2}
               />
             )}
           </Layer>
