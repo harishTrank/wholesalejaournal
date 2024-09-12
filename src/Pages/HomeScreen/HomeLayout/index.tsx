@@ -157,7 +157,7 @@ const HomeScreen = ({ curimage }: any) => {
     <div className="customisation-page">
       <Header />
 
-      <div className="container">
+      <div className="container parent-content">
         <div className="mainContainer">
           <div className="customcanvas">
             <CustomCanvas
