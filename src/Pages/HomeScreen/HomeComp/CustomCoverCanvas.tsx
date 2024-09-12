@@ -67,7 +67,7 @@ const CustomCanvas = ({
   const logoRef = useRef<any>(null);
 
   const canvasWidth = window.innerWidth * 0.3;
-  const canvasHeight = window.innerHeight;
+  const canvasHeight = window.innerHeight * 0.8;
 
   const handleSelect = (e: any) => {
     setSelectedId(e.target.id());
@@ -83,7 +83,6 @@ const CustomCanvas = ({
     // Optional: Handle transformations such as rotation, scale, etc.
   };
 
-  // Set image background
   useEffect(() => {
     if (image) {
       const img = new window.Image();
@@ -91,12 +90,22 @@ const CustomCanvas = ({
       img.onload = () => {
         let width = img.width;
         let height = img.height;
+        const imgAspectRatio = width / height;
+
+        if (width > canvasWidth || height > canvasHeight) {
+          if (canvasWidth / imgAspectRatio <= canvasHeight) {
+            width = canvasWidth;
+            height = canvasWidth / imgAspectRatio;
+          } else {
+            height = canvasHeight;
+            width = canvasHeight * imgAspectRatio;
+          }
+        }
         setImgProps({ width, height });
       };
     }
-  }, [image, canvasHeight, canvasWidth, setImgProps]);
+  }, [image, canvasHeight, canvasWidth]);
 
-  // Handle uploadLogo update to display and center the logo on canvas
   useEffect(() => {
     if (uploadLogo && uploadLogo !== "") {
       const logo = new window.Image();
@@ -165,8 +174,8 @@ const CustomCanvas = ({
     <div>
       <div style={{ display: innerPageOption === "Cover" ? "block" : "none" }}>
         <Stage
-          width={imgProps?.width}
-          height={imgProps?.height}
+          width={imgProps.width}
+          height={imgProps.height}
           onMouseDown={handleDeselect}
           onTouchStart={handleDeselect}
           ref={coverRef}

@@ -78,56 +78,64 @@ export const fonts = [
 ];
 
 export const canvasType = {
-  boardColor: {
-    candy_apple: {
-      threeByFive: require("../assests/BoardColor/candy_apple/candy_apple3x5.png"),
-      fourByFour: require("../assests/BoardColor/candy_apple/candy_apple4x4.png"),
-      fourBySix: require("../assests/BoardColor/candy_apple/candy_apple4x6.png"),
-      fiveBySeven: require("../assests/BoardColor/candy_apple/candy_apple5x7.png"),
-    },
-    jade: {
+  boardColor: [
+    {
+      name: "Jade",
       threeByFive: require("../assests/BoardColor/jade/jade3x5.png"),
       fourByFour: require("../assests/BoardColor/jade/jade4x4.png"),
       fourBySix: require("../assests/BoardColor/jade/jade4x6.png"),
       fiveBySeven: require("../assests/BoardColor/jade/jade5x7.png"),
     },
-    rich_green: {
+    {
+      name: "Candy Apple",
+      threeByFive: require("../assests/BoardColor/candy_apple/candy_apple3x5.png"),
+      fourByFour: require("../assests/BoardColor/candy_apple/candy_apple4x4.png"),
+      fourBySix: require("../assests/BoardColor/candy_apple/candy_apple4x6.png"),
+      fiveBySeven: require("../assests/BoardColor/candy_apple/candy_apple5x7.png"),
+    },
+    {
+      name: "Rich Green",
       threeByFive: require("../assests/BoardColor/rich_green/rich_green3x5.png"),
       fourByFour: require("../assests/BoardColor/rich_green/rich_green4x4.png"),
       fourBySix: require("../assests/BoardColor/rich_green/rich_green4x6.png"),
       fiveBySeven: require("../assests/BoardColor/rich_green/rich_green5x7.png"),
     },
-    Sapphire_Blue: {
+    {
+      name: "Sapphire Blue",
       threeByFive: require("../assests/BoardColor/Sapphire_Blue/Sapphire_Blue3x5.png"),
       fourByFour: require("../assests/BoardColor/Sapphire_Blue/Sapphire_Blue4x4.png"),
       fourBySix: require("../assests/BoardColor/Sapphire_Blue/Sapphire_Blue4x6.png"),
       fiveBySeven: require("../assests/BoardColor/Sapphire_Blue/Sapphire_Blue5x7.png"),
     },
-  },
-  leatheretteColor: {
-    red: {
+  ],
+  leatheretteColor: [
+    {
+      name: "Red",
       threeByFive: require("../assests/LeatheretteColor/red/red3x5.png"),
       fourByFour: require("../assests/LeatheretteColor/red/red4x4.png"),
       fourBySix: require("../assests/LeatheretteColor/red/red4x6.png"),
       fiveBySeven: require("../assests/LeatheretteColor/red/red5x7.png"),
     },
-    SoftGreen: {
+    {
+      name: "Soft Green",
       threeByFive: require("../assests/LeatheretteColor/SoftGreen/SoftGreen3x5.png"),
       fourByFour: require("../assests/LeatheretteColor/SoftGreen/SoftGreen4x4.png"),
       fourBySix: require("../assests/LeatheretteColor/SoftGreen/SoftGreen4x6.png"),
       fiveBySeven: require("../assests/LeatheretteColor/SoftGreen/SoftGreen5x7.png"),
     },
-    wine: {
+    {
+      name: "Wine",
       threeByFive: require("../assests/LeatheretteColor/wine/wine3x5.png"),
       fourByFour: require("../assests/LeatheretteColor/wine/wine4x4.png"),
       fourBySix: require("../assests/LeatheretteColor/wine/wine4x6.png"),
       fiveBySeven: require("../assests/LeatheretteColor/wine/wine5x7.png"),
     },
-    winkle: {
+    {
+      name: "Winkle",
       threeByFive: require("../assests/LeatheretteColor/winkle/winkle3x5.png"),
       fourByFour: require("../assests/LeatheretteColor/winkle/winkle4x4.png"),
       fourBySix: require("../assests/LeatheretteColor/winkle/winkle4x6.png"),
       fiveBySeven: require("../assests/LeatheretteColor/winkle/winkle5x7.png"),
     },
-  },
+  ],
 };
