@@ -80,18 +80,18 @@ export const fonts = [
 export const canvasType = {
   boardColor: [
     {
-      name: "Candy Apple",
-      threeByFive: require("../assests/BoardColor/candy_apple/candy_apple3x5.png"),
-      fourByFour: require("../assests/BoardColor/candy_apple/candy_apple4x4.png"),
-      fourBySix: require("../assests/BoardColor/candy_apple/candy_apple4x6.png"),
-      fiveBySeven: require("../assests/BoardColor/candy_apple/candy_apple5x7.png"),
-    },
-    {
       name: "Jade",
       threeByFive: require("../assests/BoardColor/jade/jade3x5.png"),
       fourByFour: require("../assests/BoardColor/jade/jade4x4.png"),
       fourBySix: require("../assests/BoardColor/jade/jade4x6.png"),
       fiveBySeven: require("../assests/BoardColor/jade/jade5x7.png"),
+    },
+    {
+      name: "Candy Apple",
+      threeByFive: require("../assests/BoardColor/candy_apple/candy_apple3x5.png"),
+      fourByFour: require("../assests/BoardColor/candy_apple/candy_apple4x4.png"),
+      fourBySix: require("../assests/BoardColor/candy_apple/candy_apple4x6.png"),
+      fiveBySeven: require("../assests/BoardColor/candy_apple/candy_apple5x7.png"),
     },
     {
       name: "Rich Green",

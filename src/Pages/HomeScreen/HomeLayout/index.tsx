@@ -45,11 +45,10 @@ const HomeScreen = ({ curimage }: any) => {
   const [currentSize, setCurrentSize]: any = useState("threeByFive");
   const [currentTheme, setCurrentTheme]: any = useState({});
 
-  const changeBackGroundHandler = (item: any = currentTheme) => {
-    if (item) {
-      setCurrentTheme(item);
+  const changeBackGroundHandler = () => {
+    if (currentTheme) {
       const loadImage: any = new window.Image();
-      loadImage.src = item[currentSize];
+      loadImage.src = currentTheme[currentSize];
       loadImage.onload = () => {
         setImage(loadImage);
       };
@@ -60,7 +59,7 @@ const HomeScreen = ({ curimage }: any) => {
 
   useEffect(() => {
     changeBackGroundHandler();
-  }, [currentSize]);
+  }, [currentSize, currentTheme]);
 
   const handleBoardSelectChange = (e: any) => {
     setBoardSelectedOption(e.target.value);
@@ -78,6 +77,7 @@ const HomeScreen = ({ curimage }: any) => {
     setSelectedOption(event.target.value);
     if (event.target.value === "Yes") {
       setCurrentBkgShape("rect");
+      setCurrentTheme(canvasType.boardColor[0]);
       // ;v(true);
     } else {
       setCurrentBkgShape("");
@@ -252,7 +252,7 @@ const HomeScreen = ({ curimage }: any) => {
                                 <li
                                   className="flex"
                                   key={index}
-                                  onClick={() => changeBackGroundHandler(item)}
+                                  onClick={() => setCurrentTheme(item)}
                                 >
                                   <img src={item.fourByFour} alt="" />
                                   {item.name}
@@ -293,7 +293,7 @@ const HomeScreen = ({ curimage }: any) => {
                                 <li
                                   className="flex"
                                   key={index}
-                                  onClick={() => changeBackGroundHandler(item)}
+                                  onClick={() => setCurrentTheme(item)}
                                 >
                                   <img src={item.fourByFour} alt="" />
                                   {item.name}

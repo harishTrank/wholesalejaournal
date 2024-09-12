@@ -83,32 +83,29 @@ const CustomCanvas = ({
     // Optional: Handle transformations such as rotation, scale, etc.
   };
 
-  // Set image background with proper scaling to fit the canvas
   useEffect(() => {
     if (image) {
       const img = new window.Image();
       img.src = image.src;
       img.onload = () => {
-        const imageAspectRatio = img.width / img.height;
+        let width = img.width;
+        let height = img.height;
+        const imgAspectRatio = width / height;
 
-        let newWidth = canvasWidth;
-        let newHeight = canvasHeight;
-
-        // Check if the width or height exceeds the canvas and scale accordingly
-        if (canvasWidth / imageAspectRatio <= canvasHeight) {
-          newWidth = canvasWidth;
-          newHeight = canvasWidth / imageAspectRatio;
-        } else {
-          newHeight = canvasHeight;
-          newWidth = canvasHeight * imageAspectRatio;
+        if (width > canvasWidth || height > canvasHeight) {
+          if (canvasWidth / imgAspectRatio <= canvasHeight) {
+            width = canvasWidth;
+            height = canvasWidth / imgAspectRatio;
+          } else {
+            height = canvasHeight;
+            width = canvasHeight * imgAspectRatio;
+          }
         }
-
-        setImgProps({ width: newWidth, height: newHeight });
+        setImgProps({ width, height });
       };
     }
-  }, [image, canvasHeight, canvasWidth, setImgProps]);
+  }, [image, canvasHeight, canvasWidth]);
 
-  // Handle uploadLogo update to display and center the logo on canvas
   useEffect(() => {
     if (uploadLogo && uploadLogo !== "") {
       const logo = new window.Image();
@@ -189,8 +186,6 @@ const CustomCanvas = ({
                 image={image}
                 width={imgProps.width}
                 height={imgProps.height}
-                x={(canvasWidth - imgProps.width) / 2}
-                y={(canvasHeight - imgProps.height) / 2}
               />
             )}
           </Layer>
