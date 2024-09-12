@@ -285,6 +285,7 @@ p.site-description {
   border-top-left-radius: 5px;
   border-top-right-radius: 5px;
   background: #efefef;
+  margin-right: 10px;
 }
 
 .tab-head li.active {
@@ -400,4 +401,7 @@ p.site-description {
   width: 25px;
   height: 25px;
   margin-right: 15px;
+}
+.customise-tabs{
+  margin-top: 6rem;
 }

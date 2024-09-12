@@ -156,8 +156,8 @@ const CustomInnerCanvas = ({
   return (
     <div>
       <Stage
-        width={imgProps?.width}
-        height={imgProps?.height}
+        width={imgProps?.width || canvasWidth}
+        height={imgProps?.height || canvasHeight}
         onMouseDown={handleDeselect}
         onTouchStart={handleDeselect}
         ref={innerRef}
