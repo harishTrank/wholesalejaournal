@@ -6,6 +6,7 @@ import LoginImage from "../../images/Login.jpg";
 import { useNavigate } from "react-router-dom";
 import { loginApiCall } from "../../store/Services/Auth";
 import toast from "react-hot-toast";
+import { addToCartDefault } from "../../store/Services/Product";
 
 const LoginScreen = ({
   setIsLoginShow,
@@ -38,9 +39,37 @@ const LoginScreen = ({
         .then((res: any) => {
           localStorage.setItem("accessToken", res.token.access);
           localStorage.setItem("userId", res.userid);
-          toast.success("Login successfully.");
-          navigation("/");
+          if (localStorage.getItem("cartData")) {
+            let currentData: any = localStorage.getItem("cartData");
+            currentData =
+              !currentData || currentData === "undefined"
+                ? []
+                : JSON.parse(currentData);
+            currentData.reverse().map((item: any) => {
+              addToCartDefault({
+                body: {
+                  quantity: 1,
+                  price: 35,
+                  currentSize: item?.currentSize,
+                  boardSelectedOption: item?.boardSelectedOption,
+                  name: item?.name,
+                  heading: item?.heading,
+                  cover: item?.cover,
+                  inner: item?.inner,
+                  description: item?.description,
+                },
+              })
+                .then(() => {
+                  navigation("/cart");
+                  localStorage.removeItem("cartData");
+                })
+                .catch(() => localStorage.removeItem("cartData"));
+            });
+          } else {
+            navigation("/");
+          }
           setIsLoading(false);
+          toast.success("Login successfully.");
         })
         .catch((err: any) => {
           toast.error("Unauthorized");

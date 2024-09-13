@@ -6,6 +6,7 @@ import "./style.css";
 import { registerUser } from "../../store/Services/Auth";
 import { useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
+import { addToCartDefault } from "../../store/Services/Product";
 
 // Define the validation schema using Yup
 const SignupSchema = Yup.object().shape({
@@ -41,7 +42,35 @@ const Signup = ({ setIsLoginShow, setIsLoading }: any) => {
       localStorage.setItem("userId", res.userid);
       toast.success("User created successfully.");
       resetForm();
-      navigation("/");
+      if (localStorage.getItem("cartData")) {
+        let currentData: any = localStorage.getItem("cartData");
+        currentData =
+          !currentData || currentData === "undefined"
+            ? []
+            : JSON.parse(currentData);
+        currentData.reverse().map((item: any) => {
+          addToCartDefault({
+            body: {
+              quantity: 1,
+              price: 35,
+              currentSize: item?.currentSize,
+              boardSelectedOption: item?.boardSelectedOption,
+              name: item?.name,
+              heading: item?.heading,
+              cover: item?.cover,
+              inner: item?.inner,
+              description: item?.description,
+            },
+          })
+            .then(() => {
+              navigation("/cart");
+              localStorage.removeItem("cartData");
+            })
+            .catch(() => localStorage.removeItem("cartData"));
+        });
+      } else {
+        navigation("/");
+      }
       setIsLoading(false);
     } catch (err: any) {
       toast.error(err.data.responsemessage);
