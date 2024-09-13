@@ -13,6 +13,7 @@ import { FaChevronUp } from "react-icons/fa";
 import { canvasType } from "../../../Utils";
 import FullScreenLoader from "../../../components/FullScreenLoader";
 import toast from "react-hot-toast";
+import { addToCartDefault } from "../../../store/Services/Product";
 
 const HomeScreen = ({ curimage }: any) => {
   const [image, setImage]: any = useState(null);
@@ -199,7 +200,28 @@ const HomeScreen = ({ curimage }: any) => {
           setIsLoading(false);
           toast.success("Item add to your cart successfully.");
         } else {
-          setIsLoading(false);
+          addToCartDefault({
+            body: {
+              quantity: 1,
+              price: 35,
+              currentSize,
+              boardSelectedOption,
+              name: currentTheme?.name,
+              heading: currentTheme?.heading,
+              cover: dataUrlCover,
+              inner: dataUrlInner,
+              description:
+                "Our Wholsale recycled journals are eco-friendly,stylish, and sustainable. Made from high quality recycled matrials",
+            },
+          })
+            .then((res: any) => {
+              toast.success("Item add to your cart successfully.");
+              setIsLoading(false);
+            })
+            .catch(() => {
+              toast.error("Something went wrong from server side.");
+              setIsLoading(false);
+            });
         }
       }, 500);
     }, 500);
