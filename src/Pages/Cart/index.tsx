@@ -115,7 +115,10 @@ const CartScreen = () => {
                         <p>Total</p>
                         <p>${cartTotal}</p>
                       </div>
+                      <div className="checkout-btn">
                       <button onClick={checkOutButtonHandler}>Checkout</button>
+                      </div>
+                      
                     </div>
                   </div>
                 </div>
