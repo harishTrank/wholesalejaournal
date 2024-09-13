@@ -222,24 +222,24 @@ footer{
 }
 /* Target the scrollbar */
 ::-webkit-scrollbar {
-  width: 6px;  /* Adjust this value for the width */
-  height: 6px; /* Adjust this value for the height if it's a horizontal scrollbar */
+  width: 6px;  
+  height: 6px; 
 }
 
 /* Background of the scrollbar */
 ::-webkit-scrollbar-track {
-  background: #f1f1f1; /* Color of the scrollbar track */
+  background: #f1f1f1; 
 }
 
-/* Thumb (the draggable part of the scrollbar) */
+
 ::-webkit-scrollbar-thumb {
-  background: #888; /* Color of the scrollbar thumb */
-  border-radius: 10px; /* Round the thumb for a sleeker look */
+  background: #888; 
+  border-radius: 10px; 
 }
 
-/* Hover effect on the scrollbar thumb */
+
 ::-webkit-scrollbar-thumb:hover {
-  background: #555; /* Color when hovered */
+  background: #555; 
 }
 
 @media(max-width:1023px) {
