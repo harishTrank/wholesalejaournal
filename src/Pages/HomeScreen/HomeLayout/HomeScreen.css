@@ -407,3 +407,10 @@ p.site-description {
 .customise-tabs{
   margin-top: 6rem;
 }
+.input-text input{
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #bcbcbc;
+  font-size: 14px;
+  outline: none;
+}
