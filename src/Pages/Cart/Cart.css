@@ -46,10 +46,17 @@
     margin-bottom: 10px;
   }
   .product-image{
-    width: 10%;
+    width: 20%;
+    display: flex;
   }
   .product-image img{
-    width: 100%;
+    width: 50%;
+    height: 50%;
+    margin-right: 5px;
+  }
+
+  .product-description {
+    width: 70%;
   }
 .product-description p u{
   font-size: 20px;
@@ -124,4 +131,28 @@
 }
 .free-shipping p{
   margin-bottom: 10px;
+}
+
+.remove-item{
+  cursor: pointer;
+}
+.empty-cart{
+  text-align: center;
+}
+.empty-cart i{
+  font-size: 44px;
+  margin-bottom: 20px;
+  color: #000;
+}
+.empty-cart p{
+  margin-bottom: 20px;
+}
+.empty-cart .button{
+  background: #B88E2F;
+  padding: 10px 15px;
+  color: #fff;
+  font-size: 16px;
+  border: none;
+  outline: none;
+  border-radius: 5px;
 }

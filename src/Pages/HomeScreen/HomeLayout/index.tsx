@@ -11,6 +11,8 @@ import Card from "../../../components/Journal Components/Card";
 import { FaChevronDown } from "react-icons/fa";
 import { FaChevronUp } from "react-icons/fa";
 import { canvasType } from "../../../Utils";
+import FullScreenLoader from "../../../components/FullScreenLoader";
+import toast from "react-hot-toast";
 
 const HomeScreen = ({ curimage }: any) => {
   const [image, setImage]: any = useState(null);
@@ -41,9 +43,11 @@ const HomeScreen = ({ curimage }: any) => {
   const [currentInnerFont, setCurrentInnerFont]: any = useState("Roboto");
   const [isOpen, setIsOpen]: any = useState(false);
   const [leatherOpen, setLeatherOpen]: any = useState(false);
-  const [boardSelectedOption, setBoardSelectedOption]: any = useState("");
+  const [boardSelectedOption, setBoardSelectedOption]: any =
+    useState("boardColor");
   const [currentSize, setCurrentSize]: any = useState("fiveBySeven");
   const [currentTheme, setCurrentTheme]: any = useState({});
+  const [isLoading, setIsLoading] = useState(false);
 
   const changeBackGroundHandler = () => {
     if (currentTheme) {
@@ -153,12 +157,56 @@ const HomeScreen = ({ curimage }: any) => {
     setLeatherOpen(!leatherOpen);
   };
 
-  
+  const addToCartHandler = () => {
+    setSelectedId(null);
+    setIsLoading(true);
+    let dataUrlCover: any, dataUrlInner: any;
+
+    setTimeout(() => {
+      if (innerRef?.current) {
+        const stage = innerRef.current.getStage();
+        dataUrlInner = stage.toDataURL();
+      }
+      if (coverRef?.current) {
+        const stage = coverRef.current.getStage();
+        dataUrlCover = stage.toDataURL();
+      }
+      setTimeout(() => {
+        if (!localStorage.getItem("accessToken")) {
+          let currentData: any = localStorage.getItem("cartData");
+          currentData =
+            currentData && currentData !== "undefined"
+              ? JSON.parse(currentData)
+              : [];
+
+          const newData: any = [
+            {
+              quantity: 1,
+              price: 35,
+              currentSize,
+              boardSelectedOption,
+              name: currentTheme?.name,
+              heading: currentTheme?.heading,
+              cover: dataUrlCover,
+              inner: dataUrlInner,
+              description:
+                "Our Wholsale recycled journals are eco-friendly,stylish, and sustainable. Made from high quality recycled matrials",
+            },
+            ...currentData,
+          ];
+
+          localStorage.setItem("cartData", JSON.stringify(newData));
+          setIsLoading(false);
+          toast.success("Item add to your cart successfully.");
+        }
+      }, 500);
+    }, 500);
+  };
 
   return (
     <div className="customisation-page">
       <Header />
-
+      {isLoading && <FullScreenLoader />}
       <div className="container parent-content">
         <div className="mainContainer">
           <div className="customcanvas">
@@ -485,7 +533,7 @@ const HomeScreen = ({ curimage }: any) => {
                     <button onClick={preViewButtonHandler}>Preview</button>
                   </div>
                   <div className="addbtn">
-                    <button>Add to cart</button>
+                    <button onClick={addToCartHandler}>Add to cart</button>
                   </div>
                 </>
               )}

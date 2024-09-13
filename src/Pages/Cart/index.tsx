@@ -1,101 +1,105 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Header from "../../components/Header";
 import Footer from "../../components/Footer";
-import Diary from "../../images/Diary-removebg-preview.png";
 import "./Cart.css";
-const Index = () => {
-  const [quantity, setQuantity]: any = useState(1); // Default value is 1
+import CartObject from "./Components/CartObject";
+import { Link } from "react-router-dom";
+import FullScreenLoader from "../../components/FullScreenLoader";
 
-  const handleIncrement = () => {
-    setQuantity(quantity + 1);
-  };
+const CartScreen = () => {
+  const [cartDetails, setCartDetails]: any = useState([]);
+  const [isLoading, setIsLoading]: any = useState(false);
+  const [cartTotal, setCartTotal]: any = useState(0);
 
-  const handleDecrement = () => {
-    if (quantity > 1) {
-      setQuantity(quantity - 1);
+  useEffect(() => {
+    if (!localStorage.getItem("accessToken")) {
+      const currentData: any = localStorage.getItem("cartData");
+      if (currentData && currentData !== "undefined") {
+        setCartDetails(JSON.parse(currentData));
+      }
     }
-  };
+  }, [localStorage.getItem("cartData")]);
+
+  useEffect(() => {
+    setCartTotal(
+      Math.floor(
+        cartDetails.reduce((sum: any, item: any) => {
+          return sum + item.price * item.quantity;
+        }, 0)
+      ).toFixed(2) || "0.00"
+    );
+  }, [cartDetails]);
+
   return (
     <div className="cart-section">
       <Header />
+      {isLoading && <FullScreenLoader />}
       <div className="container">
         <section className="gap">
           <div className="cart-section">
-            <p>Home/Cart</p>
-            <h2>Cart</h2>
-            <div className="details-section flex space-bw">
-              <div className="product">
-                <div className="product-content">
-                  <div className="product-upper flex space-bw">
-                    <p>Product</p>
-                    <p>TOTAL</p>
-                  </div>
-                  <div className="product-down flex space-bw">
-                    <div className="product-image">
-                      <img src={Diary} alt="" />
-                    </div>
-                    <div className="product-description">
-                      <p>
-                        <u>Eco Saddle Stiched Notebooks</u>
-                      </p>
-                      <p>$10.00</p>
-                      <p>
-                        Our Wholsale recycled journals are eco-friendly,stylish,
-                        and sustainable. Made from high
-                        <br />
-                        quality recycled matrials
-                      </p>
-                      <div className="quantity-box">
-                        <button onClick={handleDecrement} className="minus-btn">
-                          -
-                        </button>
-                        <input type="text" value={quantity} readOnly />
-                        <button onClick={handleIncrement} className="plus-btn">
-                          +
-                        </button>
-                       
+            {!cartDetails ||
+            cartDetails === null ||
+            cartDetails.length === 0 ? (
+              <div className="empty-cart">
+                <i className="fa-solid fa-face-sad-tear"></i>
+                <p>Your Cart is empty</p>
+                <Link className="button" to="/">
+                  Add Items
+                </Link>
+              </div>
+            ) : (
+              <>
+                <h2>Cart</h2>
+                <div className="details-section flex space-bw">
+                  <div className="product">
+                    <div className="product-content">
+                      <div className="product-upper flex space-bw">
+                        <p>Product</p>
+                        <p>TOTAL</p>
                       </div>
-                      <p>
-                        <span>Remove Item</span>
-                      </p>
-                     
+                      {cartDetails.map((currentItem: any, index: any) => (
+                        <CartObject
+                          key={index}
+                          currentIndex={index}
+                          currentItem={currentItem}
+                          setIsLoading={setIsLoading}
+                          setCartDetails={setCartDetails}
+                        />
+                      ))}
                     </div>
-                    <div className="product-price">
-                        <p>$10.00</p>
+                  </div>
+                  <div className="cart-total">
+                    <div className="cart-heading">
+                      <h3>Cart Totals</h3>
+                    </div>
+
+                    <div className="addcoupon">
+                      <div className="addcoupon-heading">
+                        <p>Add a coupon</p>
+                      </div>
+
+                      <div className="entercode flex space-bw">
+                        <input type="text" placeholder="Enter Code" />
+                        <button>Apply</button>
+                      </div>
+                      <div className="subtotal flex space-bw">
+                        <p>Subtotal</p>
+                        <p>${cartTotal}</p>
+                      </div>
+                      <div className="free-shipping flex space-bw">
+                        <p>Shipping</p>
+                        <p>FREE</p>
+                      </div>
+
+                      <div className="total flex space-bw">
+                        <p>Total</p>
+                        <p>${cartTotal}</p>
+                      </div>
                     </div>
                   </div>
                 </div>
-              </div>
-              <div className="cart-total">
-                <div className="cart-heading">
-                <h3>Cart Totals</h3>
-                </div>
-               
-                <div className="addcoupon">
-                  <div className="addcoupon-heading">
-                  <p>Add a coupon</p>
-                  </div>
-                  
-                  <div className="entercode flex space-bw">
-                    <input type="text" placeholder="Enter Code" />
-                    <button>Apply</button>
-                  </div>
-                  <div className="subtotal flex space-bw">
-                    <p>Subtotal</p>
-                    <p>$10.00</p>
-                  </div>
-                  <div className="free-shipping flex space-bw">
-                    <p>Shipping</p>
-                    <p>FREE</p>
-                  </div>
-                  
-                  <div className="total flex space-bw">
-                    <p>Total</p>
-                    <p>$10.00</p>
-                  </div>
-                </div>
-              </div>
-            </div>
+              </>
+            )}
           </div>
         </section>
       </div>
@@ -104,4 +108,4 @@ const Index = () => {
   );
 };
 
-export default Index;
+export default CartScreen;

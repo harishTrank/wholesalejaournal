@@ -65,10 +65,9 @@ const CustomInnerCanvas = ({
   // Load the correct image based on innerPageOption
   useEffect(() => {
     const img = new window.Image();
+    img.src = NonLinedImageSrc;
     if (innerPageOption === "Lined") {
       img.src = LinedImageSrc;
-    } else if (innerPageOption === "Non Lined") {
-      img.src = NonLinedImageSrc;
     }
 
     // Wait for the image to load before using it
