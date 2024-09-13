@@ -1,10 +1,16 @@
 import React, { useState } from "react";
+import {
+  incrementDecrementCartItemAPI,
+  removeCartItem,
+} from "../../../store/Services/Product";
+import toast from "react-hot-toast";
 
 const CartObject = ({
   currentItem,
   currentIndex,
   setIsLoading,
   setCartDetails,
+  setHitAgainAPI,
 }: any) => {
   const [quantity, setQuantity]: any = useState(currentItem?.quantity);
 
@@ -26,6 +32,9 @@ const CartObject = ({
       localStorage.setItem("cartData", JSON.stringify(finalData));
       setIsLoading(false);
       setCartDetails(finalData);
+    } else {
+      setIsLoading(true);
+      cartObjectQuantityHandler(quantity + 1, currentItem.id);
     }
   };
 
@@ -48,8 +57,27 @@ const CartObject = ({
         localStorage.setItem("cartData", JSON.stringify(finalData));
         setIsLoading(false);
         setCartDetails(finalData);
+      } else {
+        setIsLoading(true);
+        cartObjectQuantityHandler(quantity - 1, currentItem.id);
       }
     }
+  };
+
+  const cartObjectQuantityHandler = (quantity: any, id: any) => {
+    incrementDecrementCartItemAPI({
+      body: {
+        quantity,
+        id,
+      },
+    })
+      .then(() => {
+        setIsLoading(false);
+      })
+      .catch(() => {
+        setIsLoading(false);
+        toast.error("Something went wrong from server side.");
+      });
   };
 
   const removeItemHandler = () => {
@@ -62,6 +90,21 @@ const CartObject = ({
       localStorage.setItem("cartData", JSON.stringify(finalData));
       setIsLoading(false);
       setCartDetails(finalData);
+    } else {
+      removeCartItem({
+        body: {
+          item_id: currentItem?.id,
+        },
+      })
+        .then(() => {
+          toast.success("Remove item successfully");
+          setHitAgainAPI((oldValue: any) => oldValue + 1);
+          setIsLoading(false);
+        })
+        .catch(() => {
+          toast.error("Something went wrong from server side.");
+          setIsLoading(false);
+        });
     }
   };
 

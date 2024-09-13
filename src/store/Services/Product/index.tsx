@@ -10,3 +10,15 @@ export const currentCartListAPI = () =>
   callApi({
     uriEndPoint: productEndpoints.currentCartListAPI.v1,
   });
+
+export const removeCartItem = ({ body }: any) =>
+  callApi({
+    uriEndPoint: productEndpoints.removeCartItem.v1,
+    body,
+  });
+
+export const incrementDecrementCartItemAPI = ({ body }: any) =>
+  callApi({
+    uriEndPoint: productEndpoints.incrementDecrementCartItemAPI.v1,
+    body,
+  });

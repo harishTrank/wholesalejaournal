@@ -13,8 +13,10 @@ const CartScreen = () => {
   const [isLoading, setIsLoading]: any = useState(false);
   const [cartTotal, setCartTotal]: any = useState(0);
   const navigation: any = useNavigate();
+  const [hitAgainAPI, setHitAgainAPI]: any = useState(0);
 
   useEffect(() => {
+    setIsLoading(true);
     if (!localStorage.getItem("accessToken")) {
       const currentData: any = localStorage.getItem("cartData");
       if (currentData && currentData !== "undefined") {
@@ -31,7 +33,7 @@ const CartScreen = () => {
           toast.error("Something went wrong from server side.");
         });
     }
-  }, [localStorage.getItem("cartData")]);
+  }, [hitAgainAPI]);
 
   useEffect(() => {
     setCartTotal(
@@ -84,6 +86,7 @@ const CartScreen = () => {
                           currentItem={currentItem}
                           setIsLoading={setIsLoading}
                           setCartDetails={setCartDetails}
+                          setHitAgainAPI={setHitAgainAPI}
                         />
                       ))}
                     </div>

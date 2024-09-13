@@ -15,4 +15,18 @@ export const productEndpoints = {
       uri: "/get-user-cart/",
     },
   },
+  removeCartItem: {
+    v1: {
+      ...defaults.methods.PUT,
+      ...defaults.versions.v1,
+      uri: "/cart-remove/",
+    },
+  },
+  incrementDecrementCartItemAPI: {
+    v1: {
+      ...defaults.methods.PUT,
+      ...defaults.versions.v1,
+      uri: "/cart-item-in-de/",
+    },
+  },
 };
