@@ -25,12 +25,10 @@ const CoverOption = ({
     if (coverCurrentOption === "Phrase") {
       setCanvasText(["", "", ""]);
       setLowerVisible(true);
-      setCurrentBkgShape("rect");
       setUploadLogo("");
     } else if (coverCurrentOption === "Name or initial") {
       setCanvasText("");
       setLowerVisible(true);
-      setCurrentBkgShape("rect");
       setUploadLogo("");
     } else if (coverCurrentOption === "Upload a logo") {
       setCanvasText("");

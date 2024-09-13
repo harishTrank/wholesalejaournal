@@ -81,7 +81,7 @@ const HomeScreen = ({ curimage }: any) => {
   const handleOptionChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     setSelectedOption(event.target.value);
     if (event.target.value === "Yes") {
-      setCurrentBkgShape("rect");
+      // setCurrentBkgShape("rect");
       setCurrentTheme(canvasType.boardColor[0]);
       // ;v(true);
     } else {

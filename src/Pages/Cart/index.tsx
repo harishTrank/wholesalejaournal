@@ -22,6 +22,7 @@ const CartScreen = () => {
       if (currentData && currentData !== "undefined") {
         setCartDetails(JSON.parse(currentData));
       }
+      setIsLoading(false);
     } else {
       currentCartListAPI()
         .then((res: any) => {
@@ -119,9 +120,10 @@ const CartScreen = () => {
                         <p>${cartTotal}</p>
                       </div>
                       <div className="checkout-btn">
-                      <button onClick={checkOutButtonHandler}>Checkout</button>
+                        <button onClick={checkOutButtonHandler}>
+                          Checkout
+                        </button>
                       </div>
-                      
                     </div>
                   </div>
                 </div>
