@@ -24,6 +24,7 @@ const CartScreen = () => {
       currentCartListAPI()
         .then((res: any) => {
           setCartDetails(res.data);
+          setIsLoading(false);
         })
         .catch(() => {
           setIsLoading(false);
