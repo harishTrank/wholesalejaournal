@@ -24,15 +24,17 @@ const CartScreen = () => {
       }
       setIsLoading(false);
     } else {
-      currentCartListAPI()
-        .then((res: any) => {
-          setCartDetails(res.data);
-          setIsLoading(false);
-        })
-        .catch(() => {
-          setIsLoading(false);
-          toast.error("Something went wrong from server side.");
-        });
+      setTimeout(() => {
+        currentCartListAPI()
+          .then((res: any) => {
+            setCartDetails(res.data);
+            setIsLoading(false);
+          })
+          .catch(() => {
+            setIsLoading(false);
+            toast.error("Something went wrong from server side.");
+          });
+      }, 2000);
     }
   }, [hitAgainAPI]);
 
