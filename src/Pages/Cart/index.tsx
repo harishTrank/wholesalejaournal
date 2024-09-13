@@ -34,7 +34,7 @@ const CartScreen = () => {
             setIsLoading(false);
             toast.error("Something went wrong from server side.");
           });
-      }, 2000);
+      }, 1000);
     }
   }, [hitAgainAPI]);
 
