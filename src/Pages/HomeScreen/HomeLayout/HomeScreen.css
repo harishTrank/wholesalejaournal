@@ -33,9 +33,11 @@ p.site-description {
 }
 
 .accordion-content {
- width: 40%;
+  width: 40%;
   margin-left: 5rem;
   margin-top: 20px;
+  height: 584px;
+  overflow-y: auto;
 }
 
 .swatch label {
@@ -407,3 +409,13 @@ p.site-description {
   margin-top: 6rem;
 }
 
+.input-text input{
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #bcbcbc;
+  font-size: 14px;
+  outline: none;
+}
+.inner-content{
+  background: rgb(249, 249, 249);
+}
