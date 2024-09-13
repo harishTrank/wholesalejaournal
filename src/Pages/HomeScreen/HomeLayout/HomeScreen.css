@@ -414,3 +414,6 @@ p.site-description {
   font-size: 14px;
   outline: none;
 }
+.inner-content{
+  background: rgb(249, 249, 249);
+}
