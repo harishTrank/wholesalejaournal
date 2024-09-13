@@ -198,6 +198,8 @@ const HomeScreen = ({ curimage }: any) => {
           localStorage.setItem("cartData", JSON.stringify(newData));
           setIsLoading(false);
           toast.success("Item add to your cart successfully.");
+        } else {
+          setIsLoading(false);
         }
       }, 500);
     }, 500);
