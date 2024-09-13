@@ -3,13 +3,16 @@ import Header from "../../components/Header";
 import Footer from "../../components/Footer";
 import "./Cart.css";
 import CartObject from "./Components/CartObject";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import FullScreenLoader from "../../components/FullScreenLoader";
+import toast from "react-hot-toast";
+import { currentCartListAPI } from "../../store/Services/Product";
 
 const CartScreen = () => {
   const [cartDetails, setCartDetails]: any = useState([]);
   const [isLoading, setIsLoading]: any = useState(false);
   const [cartTotal, setCartTotal]: any = useState(0);
+  const navigation: any = useNavigate();
 
   useEffect(() => {
     if (!localStorage.getItem("accessToken")) {
@@ -17,6 +20,15 @@ const CartScreen = () => {
       if (currentData && currentData !== "undefined") {
         setCartDetails(JSON.parse(currentData));
       }
+    } else {
+      currentCartListAPI()
+        .then((res: any) => {
+          setCartDetails(res.data);
+        })
+        .catch(() => {
+          setIsLoading(false);
+          toast.error("Something went wrong from server side.");
+        });
     }
   }, [localStorage.getItem("cartData")]);
 
@@ -29,6 +41,13 @@ const CartScreen = () => {
       ).toFixed(2) || "0.00"
     );
   }, [cartDetails]);
+
+  const checkOutButtonHandler = () => {
+    if (!localStorage.getItem("accessToken")) {
+      navigation("/account");
+      toast.error("Please login before proceeding.");
+    }
+  };
 
   return (
     <div className="cart-section">
@@ -95,6 +114,7 @@ const CartScreen = () => {
                         <p>Total</p>
                         <p>${cartTotal}</p>
                       </div>
+                      <button onClick={checkOutButtonHandler}>Checkout</button>
                     </div>
                   </div>
                 </div>

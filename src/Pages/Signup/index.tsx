@@ -51,7 +51,7 @@ const Signup = ({ setIsLoginShow, setIsLoading }: any) => {
         currentData.reverse().map((item: any) => {
           addToCartDefault({
             body: {
-              quantity: 1,
+              quantity: item?.quantity,
               price: 35,
               currentSize: item?.currentSize,
               boardSelectedOption: item?.boardSelectedOption,
@@ -61,13 +61,14 @@ const Signup = ({ setIsLoginShow, setIsLoading }: any) => {
               inner: item?.inner,
               description: item?.description,
             },
-          })
-            .then(() => {
-              navigation("/cart");
-              localStorage.removeItem("cartData");
-            })
-            .catch(() => localStorage.removeItem("cartData"));
+          });
         });
+        if (currentData.length === 0) {
+          navigation("/");
+        } else {
+          navigation("/cart");
+        }
+        localStorage.removeItem("cartData");
       } else {
         navigation("/");
       }

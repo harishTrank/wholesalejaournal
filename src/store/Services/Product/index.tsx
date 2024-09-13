@@ -6,3 +6,7 @@ export const addToCartDefault = ({ body }: any) =>
     uriEndPoint: productEndpoints.addToCartDefault.v1,
     body,
   });
+export const currentCartListAPI = () =>
+  callApi({
+    uriEndPoint: productEndpoints.currentCartListAPI.v1,
+  });

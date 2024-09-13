@@ -8,4 +8,11 @@ export const productEndpoints = {
       uri: "/add-to-cart/",
     },
   },
+  currentCartListAPI: {
+    v1: {
+      ...defaults.methods.GET,
+      ...defaults.versions.v1,
+      uri: "/get-user-cart/",
+    },
+  },
 };
