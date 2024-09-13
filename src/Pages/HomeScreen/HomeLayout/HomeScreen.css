@@ -33,9 +33,11 @@ p.site-description {
 }
 
 .accordion-content {
- width: 40%;
+  width: 40%;
   margin-left: 5rem;
   margin-top: 20px;
+  height: 584px;
+  overflow-y: auto;
 }
 
 .swatch label {
