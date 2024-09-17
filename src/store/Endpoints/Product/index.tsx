@@ -29,4 +29,18 @@ export const productEndpoints = {
       uri: "/cart-item-in-de/",
     },
   },
+  homeProducts:{
+    v1:{
+      ...defaults.methods.GET,
+      ...defaults.versions.v1,
+      uri:"/our-products/"
+    }
+  },
+  journalBooks:{
+    v1:{
+      ...defaults.methods.GET,
+      ...defaults.versions.v1,
+      uri:"/products/"
+    }
+  }
 };

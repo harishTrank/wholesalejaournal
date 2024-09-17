@@ -1,18 +1,18 @@
 import React from 'react'
 import Diary from '../../../images/Diary Final.png'
 import './style.css'
-const index = () => {
+const Card = ({product, index}:any) => {
   return (
-    <div className='card-container'>
+    <div className='card-container' key={index}>
         <div className="card-content ">
             <div className="card-image">
-                <img src={Diary} alt="" />
+                <img src={product.product_image} alt="" />
             </div>
             <div className="card-name">
-                <p>Eco friendly Rectangular Journal</p>
+                <p>{product.title}</p>
             </div>
             <div className="card-price">
-                <p>$10.00</p>
+                <p>${product.price}</p>
             </div>
             <div className="card-btn">
                 <button>Add to cart</button>
@@ -23,4 +23,4 @@ const index = () => {
   )
 }
 
-export default index
+export default Card

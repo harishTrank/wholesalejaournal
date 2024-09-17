@@ -1,6 +1,11 @@
 import React from 'react'
 import './style.css'
-const index = () => {
+const index = ({categoryCount,onColorChange}:any) => {
+    const handleColorClick = (e:any) => {
+        console.log(e.target.value)
+        // onColorChange(color); 
+      };
+    
   return (
     <div className='sidebar'>
         <div className="sidebar-content">
@@ -9,18 +14,18 @@ const index = () => {
                 <button>Search</button>
             </div>
             <div className='Uncategorised mb'>
-                <p className='mb'>Uncategorised</p>
-                <p className='mb'>Journal Books</p>
-                <p className='mb'>Writing Journals</p>
+                <p className='mb'>Uncategorised({categoryCount.Others})</p>
+                <p className='mb'>Journal Books ({categoryCount.JournalBooks})</p>
+                <p className='mb'>Writing Journals({categoryCount.WritingJournal})</p>
             </div>
             <div className="filtercolor mb">
                 <h2 className='mb'>Filter By color</h2>
                <label htmlFor='blue'>
-                <input type="checkbox" />
+                <input type="checkbox" key={'Blue'} onChange={(e: any) => handleColorClick(e)} />
                 <span>Blue</span>
                </label>
                <label htmlFor='Grey'>
-                <input type="checkbox" />
+                <input type="checkbox" key={'Red'} onChange={()=>handleColorClick('Red')} />
                 <span>Grey</span>
                </label>
                <label htmlFor='Green'>

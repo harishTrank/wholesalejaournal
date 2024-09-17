@@ -22,3 +22,15 @@ export const incrementDecrementCartItemAPI = ({ body }: any) =>
     uriEndPoint: productEndpoints.incrementDecrementCartItemAPI.v1,
     body,
   });
+
+ export const homeProducts=()=>
+  callApi({
+    uriEndPoint:productEndpoints.homeProducts.v1,
+   
+  })
+  
+export const journalBooksProducts=({query}:any)=>
+  callApi({
+    uriEndPoint:productEndpoints.journalBooks.v1,
+    query
+  })

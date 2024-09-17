@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "./Style.css";
 import product1 from "../../assests/product1.png";
 import product2 from "../../assests/product2.png";
@@ -17,7 +17,7 @@ import Cate1 from "../../assests/cate1.png";
 import Cate2 from "../../assests/cate2.png";
 import Cate3 from "../../assests/cate3.png";
 import Footer from "../../components/Footer";
-
+import { homeProducts } from "../../store/Services/Product";
 const Dashboard = () => {
   const settings = {
     dots: true,
@@ -29,6 +29,14 @@ const Dashboard = () => {
     autoplaySpeed: 3000,
     arrows: true,
   };
+
+  const [dasboardProducts,setDasboardProducts]:any=useState([])
+
+  useEffect(()=>{
+    homeProducts().then((res:any)=>{
+      setDasboardProducts(res.data)
+    })
+  },[])
 
   return (
     <div>
@@ -87,39 +95,23 @@ const Dashboard = () => {
           <div className="common-text text-center">
             <h2>Our Products</h2>
           </div>
+        
           <div className="flex space-bw product-detail">
-            <div className="col-25">
-              <img src={product1} alt="" />
-              <div className="product-text">
-                <h3>Wholesale Recycled Paper Notebooks</h3>
-                <p>Product # WHJS1209-9</p>
-                <a href="#">Buy Now</a>
-              </div>
+          {dasboardProducts?.map((product:any,index:any)=>(
+            <div className="col-25 product-box" key={index}>
+            <img src={product.product_image} alt="" />
+            <div className="product-text">
+              <h3>{product.title}</h3>
+              <p>${product.price}</p>
+              <p>{product.disc}</p>
+              <a href="#">Add to Cart</a>
             </div>
-            <div className="col-25">
-              <img src={product2} alt="" />
-              <div className="product-text">
-                <h3>Eco Saddle Stitched Notebooks</h3>
-                <p>Product # WHJS1209-9</p>
-                <a href="#">Buy Now</a>
-              </div>
-            </div>
-            <div className="col-25">
-              <img src={product3} alt="" />
-              <div className="product-text">
-                <h3>Wholesale Recycled Paper Notebooks</h3>
-                <p>Product # WHJS1209-9</p>
-                <a href="#">Buy Now</a>
-              </div>
-            </div>
-            <div className="col-25">
-              <img src={product4} alt="" />
-              <div className="product-text">
-                <h3>Bulk Recycled Spiral Journals</h3>
-                <p>Product # WHJS1209-9</p>
-                <a href="#">Buy Now</a>
-              </div>
-            </div>
+          </div>
+        ))}
+            
+            
+            
+            
           </div>
         </div>
       </section>
