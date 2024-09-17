@@ -1,11 +1,41 @@
 import React from 'react'
 import './style.css'
-const index = ({categoryCount,onColorChange}:any) => {
-    const handleColorClick = (e:any) => {
-        console.log(e.target.value)
-        // onColorChange(color); 
+const index = ({categoryCount,selectedColors,setSelectedColors,linedProducts,setLinedProducts,coverType,setCoverType}:any) => {
+    const handleColorChange = (e: any) => {
+        const { value, checked } = e.target;
+        
+        if (checked) {
+          setSelectedColors((prev: string[]) => [...prev, value]);
+        
+        } else {
+          setSelectedColors((prev: string[]) => prev.filter((color: string) => color !== value));
+        
+        }
       };
-    
+      const handlelinedProducts = (e: any) => {
+        const { value, checked } = e.target;
+        
+        if (checked) {
+          setLinedProducts((prev: string[]) => [...prev, value]);
+        
+        } else {
+          setLinedProducts((prev: string[]) => prev.filter((color: string) => color !== value));
+        
+        }
+      };
+      const handleCoverProducts = (e: any) => {
+        const { value, checked } = e.target;
+        
+        if (checked) {
+          setCoverType((prev: string[]) => [...prev, value]);
+        
+        } else {
+          setCoverType((prev: string[]) => prev.filter((color: string) => color !== value));
+        
+        }
+      };
+
+   
   return (
     <div className='sidebar'>
         <div className="sidebar-content">
@@ -14,30 +44,54 @@ const index = ({categoryCount,onColorChange}:any) => {
                 <button>Search</button>
             </div>
             <div className='Uncategorised mb'>
-                <p className='mb'>Uncategorised({categoryCount.Others})</p>
-                <p className='mb'>Journal Books ({categoryCount.JournalBooks})</p>
-                <p className='mb'>Writing Journals({categoryCount.WritingJournal})</p>
+                <p className='mb'>Uncategorised({categoryCount?.Others})</p>
+                <p className='mb'>Journal Books ({categoryCount?.JournalBooks})</p>
+                <p className='mb'>Writing Journals({categoryCount?.WritingJournal})</p>
             </div>
             <div className="filtercolor mb">
                 <h2 className='mb'>Filter By color</h2>
                <label htmlFor='blue'>
-                <input type="checkbox" key={'Blue'} onChange={(e: any) => handleColorClick(e)} />
+               <input
+            type="checkbox"
+            value="Blue"
+            checked={selectedColors.includes('Blue')}
+            onChange={handleColorChange}
+          />
                 <span>Blue</span>
                </label>
                <label htmlFor='Grey'>
-                <input type="checkbox" key={'Red'} onChange={()=>handleColorClick('Red')} />
+               <input
+            type="checkbox"
+            value="Grey"
+            checked={selectedColors.includes('Grey')}
+            onChange={handleColorChange}
+          />
                 <span>Grey</span>
                </label>
                <label htmlFor='Green'>
-                <input type="checkbox" />
-                <span>Green</span>
+               <input
+            type="checkbox"
+            value="Green"
+            checked={selectedColors.includes('Green')}
+            onChange={handleColorChange}
+          />                <span>Green</span>
                </label>
                <label htmlFor='Red'>
-                <input type="checkbox" />
+               <input
+            type="checkbox"
+            value="Green"
+            checked={selectedColors.includes('Green')}
+            onChange={handleColorChange}
+          />
                 <span>Red</span>
                </label>
                <label htmlFor='Yellow'>
-                <input type="checkbox" />
+               <input
+            type="checkbox"
+            value="Yellow"
+            checked={selectedColors.includes('Yellow')}
+            onChange={handleColorChange}
+          />
                 <span>Yellow</span>
                </label>
                
@@ -46,11 +100,11 @@ const index = ({categoryCount,onColorChange}:any) => {
             <div className="filtercategory mb">
                 <h2 className='mb'>Filter by category</h2>
                 <label htmlFor="">
-                    <input type="checkbox" />
-                    <span>Lined Template</span>
+                     <input type="checkbox" value="Lined" checked={linedProducts.includes('Lined')} onChange={handlelinedProducts} />
+                    <span>Lined Template</span> 
                 </label>
-                <label htmlFor="">
-                    <input type="checkbox" />
+                 <label htmlFor="">
+                <input type="checkbox" value="NonLined" checked={linedProducts.includes('NonLined')} onChange={handlelinedProducts}  />
                     <span>Non Lined Template</span>
                 </label>
 
@@ -58,15 +112,15 @@ const index = ({categoryCount,onColorChange}:any) => {
             <div className="covertype mb">
                 <h2 className='mb'>Filter by cover type</h2>
             <label htmlFor="">
-                    <input type="checkbox" />
+                    <input type="checkbox" value='HardCover' checked={coverType.includes('HardCover')} onChange={handleCoverProducts} />
                     <span>Hard Cover</span>
                 </label>
                 <label htmlFor="">
-                    <input type="checkbox" />
+                <input type="checkbox" value='Leather' checked={coverType.includes('Leather')} onChange={handleCoverProducts} />
                     <span>Leather</span>
                 </label>
                 <label htmlFor="">
-                    <input type="checkbox" />
+                <input type="checkbox" value='SoftCover' checked={coverType.includes('SoftCover')} onChange={handleCoverProducts} />
                     <span>Soft Cover</span>
                 </label>
             </div>

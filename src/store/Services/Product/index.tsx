@@ -29,8 +29,9 @@ export const incrementDecrementCartItemAPI = ({ body }: any) =>
    
   })
   
-export const journalBooksProducts=({query}:any)=>
+export const journalBooksProducts=({body, query}:any)=>
   callApi({
     uriEndPoint:productEndpoints.journalBooks.v1,
+    body,
     query
   })

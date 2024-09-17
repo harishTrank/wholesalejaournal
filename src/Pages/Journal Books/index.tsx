@@ -6,22 +6,37 @@ import Footer from "../../components/Footer";
 import "./style.css";
 import { Link } from "react-router-dom";
 import { journalBooksProducts } from "../../store/Services/Product";
+import { Pagination } from "antd";
 
 const Index = () => {
    const [journalProducts,setJournalProducts]:any=useState([])
    const [journalCount,setJournalCount]:any=useState([])
    const [categoryCount,setCategoryCounts]:any=useState([])
    const [sortOption,setSortOption]:any=useState('')
-   const [selectedColors,setSelectedColors]:any=useState([])
+   const [selectedColors, setSelectedColors]:any = useState('');
    const [currentPage, setCurrentPage]:any = useState(1);
-   const [totalPage,setTotalPage]:any=useState(1);
+   const [totalPage,setTotalPage]:any=useState(3);
+   const [linedProducts,setLinedProducts]:any=useState('')
+   const [coverType,setCoverType]:any=useState('')
+   // Update with your actual total number of pages
+
+  // Handler for page changes using Ant Design Pagination
+  const onPageChange = (page: number) => {
+    setCurrentPage(page);
+  };
   
    
   useEffect(()=>{
+    console.log("123", currentPage)
     journalBooksProducts({
-      query:{
+      body:{
         sort_by: sortOption,
         color: selectedColors||'',
+        lined_non_lined:linedProducts||'',
+        cover_type:coverType||''
+       
+      },
+      query: {
         page:currentPage
       }
     }).then((res:any)=>{
@@ -32,7 +47,7 @@ const Index = () => {
       
 
     })
-  },[sortOption,selectedColors,currentPage])
+  },[sortOption,selectedColors,currentPage,linedProducts,coverType])
   
   const handleSortChange = (e:any) => {
     const selectedOption = e.target.value;
@@ -41,19 +56,11 @@ const Index = () => {
   };
   // const handleColorChange = (colors:any) => {
   //   setSelectedColors(colors); 
-  // };
+  // }
+ 
   
-  const goToNextPage = () => {
-    if (totalPage > currentPage) {
-      setCurrentPage((oldval:any)=>oldval+1);
-    }
-  };
   
-  const goToPreviousPage = () => {
-    if (totalPage >= currentPage) {
-      setCurrentPage((oldval:any)=>oldval-1);
-    }
-  };
+  
   return (
     <div className="journal">
       <Header />
@@ -61,7 +68,9 @@ const Index = () => {
         <section className="gap">
           <div className="flex space-bw">
             <div className="sidebar-section">
-              <Sidebar  categoryCount={categoryCount} />
+              <Sidebar  categoryCount={categoryCount} selectedColors={selectedColors}   setSelectedColors={setSelectedColors}
+              linedProducts={linedProducts} setLinedProducts={setLinedProducts}
+              coverType={coverType} setCoverType={setCoverType}/>
             </div>
             <div className="journal-section">
               <div className="journal-content">
@@ -86,9 +95,14 @@ const Index = () => {
                   
                 </div>
                 <div className="pagination-controls">
-        <button onClick={goToPreviousPage} disabled={currentPage===1}>Previous</button>
-        <button onClick={goToNextPage} disabled={currentPage===totalPage}>Next</button>
-      </div>
+                <Pagination
+                current={currentPage}
+                total={totalPage * 10} 
+                onChange={onPageChange}
+                showSizeChanger={false} 
+                showQuickJumper  />
+                
+                 </div>
               </div>
             </div>
 
