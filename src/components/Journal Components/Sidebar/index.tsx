@@ -79,8 +79,8 @@ const index = ({categoryCount,selectedColors,setSelectedColors,linedProducts,set
                <label htmlFor='Red'>
                <input
             type="checkbox"
-            value="Green"
-            checked={selectedColors.includes('Green')}
+            value="Red"
+            checked={selectedColors.includes('Red')}
             onChange={handleColorChange}
           />
                 <span>Red</span>
