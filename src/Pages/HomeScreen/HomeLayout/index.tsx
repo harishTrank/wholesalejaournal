@@ -298,9 +298,16 @@ const HomeScreen = ({ curimage }: any) => {
             />
 
             <div className="flex space-bw">
+              <div className="customiseimg-1">
               <img src={currentTheme?.category_type__image} alt="" />
+              </div>
+              <div className="customiseimg-2">
               <img src={currentTheme?.category_type__image} alt="" />
+              </div>
+              <div className="customiseimg-3">
               <img src={currentTheme?.category_type__image} alt="" />
+              </div>
+             
             </div>
           </div>
 
