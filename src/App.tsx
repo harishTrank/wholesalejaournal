@@ -16,6 +16,7 @@ function App() {
           path="/customise"
           element={<HomeScreen curimage={require("./assests/default.png")} />}
         />
+        <Route path="/customise/:id" element={<HomeScreen />} />
         <Route path="morecustomization" element={<MoreCustomScreen />} />
         <Route path="/" element={<Dashboard />} />
 

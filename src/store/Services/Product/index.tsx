@@ -23,15 +23,20 @@ export const incrementDecrementCartItemAPI = ({ body }: any) =>
     body,
   });
 
- export const homeProducts=()=>
+export const homeProducts = () =>
   callApi({
-    uriEndPoint:productEndpoints.homeProducts.v1,
-   
-  })
-  
-export const journalBooksProducts=({body, query}:any)=>
+    uriEndPoint: productEndpoints.homeProducts.v1,
+  });
+
+export const journalBooksProducts = ({ body, query }: any) =>
   callApi({
-    uriEndPoint:productEndpoints.journalBooks.v1,
+    uriEndPoint: productEndpoints.journalBooks.v1,
     body,
-    query
-  })
+    query,
+  });
+
+export const productCategoriesWise = ({ query }: any) =>
+  callApi({
+    uriEndPoint: productEndpoints.productCategoriesWise.v1,
+    query,
+  });
