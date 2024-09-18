@@ -30,13 +30,13 @@ const Dashboard = () => {
     arrows: true,
   };
 
-  const [dasboardProducts,setDasboardProducts]:any=useState([])
+  const [dasboardProducts, setDasboardProducts]: any = useState([]);
 
-  useEffect(()=>{
-    homeProducts().then((res:any)=>{
-      setDasboardProducts(res.data)
-    })
-  },[])
+  useEffect(() => {
+    homeProducts().then((res: any) => {
+      setDasboardProducts(res.data);
+    });
+  }, []);
 
   return (
     <div>
@@ -95,23 +95,23 @@ const Dashboard = () => {
           <div className="common-text text-center">
             <h2>Our Products</h2>
           </div>
-        
+
           <div className="flex space-bw product-detail">
-          {dasboardProducts?.map((product:any,index:any)=>(
-            <div className="col-25 product-box" key={index}>
-            <img src={product.product_image} alt="" />
-            <div className="product-text">
-              <h3>{product.title}</h3>
-              <p>${product.price}</p>
-              <p>{product.disc}</p>
-              <a href="#">Add to Cart</a>
-            </div>
-          </div>
-        ))}
-            
-            
-            
-            
+            {dasboardProducts?.map((product: any, index: any) => (
+              <div className="col-25 product-box" key={index}>
+                <img
+                  style={{ objectFit: "contain" }}
+                  src={product?.product_image}
+                  alt=""
+                />
+                <div className="product-text">
+                  <h3>{product.title}</h3>
+                  <p>${product.price}</p>
+                  <p>{product.disc}</p>
+                  <a href="#">Add to Cart</a>
+                </div>
+              </div>
+            ))}
           </div>
         </div>
       </section>

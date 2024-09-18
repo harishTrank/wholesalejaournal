@@ -91,8 +91,7 @@ const CustomCanvas = ({
         let width = img.width;
         let height = img.height;
         const imgAspectRatio = width / height;
-
-        if (width > canvasWidth || height > canvasHeight) {
+        if (width < canvasWidth || height < canvasHeight) {
           if (canvasWidth / imgAspectRatio <= canvasHeight) {
             width = canvasWidth;
             height = canvasWidth / imgAspectRatio;

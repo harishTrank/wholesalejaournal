@@ -13,9 +13,14 @@ import { FaChevronUp } from "react-icons/fa";
 import { canvasType } from "../../../Utils";
 import FullScreenLoader from "../../../components/FullScreenLoader";
 import toast from "react-hot-toast";
-import { addToCartDefault } from "../../../store/Services/Product";
+import {
+  addToCartDefault,
+  productCategoriesWise,
+} from "../../../store/Services/Product";
+import { useNavigate, useParams } from "react-router-dom";
 
 const HomeScreen = ({ curimage }: any) => {
+  const navigation: any = useNavigate();
   const [image, setImage]: any = useState(null);
   const [coverCurrentOption, setCoverCurrentOption] = useState("Phrase");
   const [currentBkgShape, setCurrentBkgShape]: any = useState("");
@@ -49,9 +54,12 @@ const HomeScreen = ({ curimage }: any) => {
   const [currentSize, setCurrentSize]: any = useState("fiveBySeven");
   const [currentTheme, setCurrentTheme]: any = useState({});
   const [isLoading, setIsLoading] = useState(false);
+  const [apiCategoryList, setApiCategoryList]: any = useState([]);
+
+  const parameters: any = useParams();
 
   const changeBackGroundHandler = () => {
-    if (currentTheme) {
+    if (currentTheme && !parameters?.id) {
       const loadImage: any = new window.Image();
       loadImage.src = currentTheme[currentSize];
       loadImage.onload = () => {
@@ -71,11 +79,13 @@ const HomeScreen = ({ curimage }: any) => {
   };
 
   useEffect(() => {
-    const loadImage: any = new window.Image();
-    loadImage.src = curimage;
-    loadImage.onload = () => {
-      setImage(loadImage);
-    };
+    if (!parameters?.id) {
+      const loadImage: any = new window.Image();
+      loadImage.src = curimage;
+      loadImage.onload = () => {
+        setImage(loadImage);
+      };
+    }
   }, [curimage]);
 
   const handleOptionChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
@@ -227,6 +237,40 @@ const HomeScreen = ({ curimage }: any) => {
     }, 500);
   };
 
+  useEffect(() => {
+    if (parameters?.id) {
+      setIsLoading(true);
+      productCategoriesWise({
+        query: {
+          product_id: parameters?.id,
+        },
+      }).then((res: any) => {
+        setIsLoading(false);
+        setApiCategoryList(res?.related_products);
+        const currentObj: any = res.related_products.find(
+          (item: any) => item.id == parameters.id
+        );
+        setCurrentTheme(currentObj);
+        const loadImage: any = new window.Image();
+        loadImage.src = currentObj?.product_image;
+        loadImage.onload = () => {
+          setImage(loadImage);
+        };
+      });
+    }
+  }, [parameters]);
+
+  const selectBackGroundHandler = (obj: any) => {
+    const loadImage: any = new window.Image();
+    loadImage.src = obj?.product_image;
+    loadImage.onload = () => {
+      setImage(loadImage);
+    };
+    setCurrentTheme(obj);
+    setLeatherOpen(false);
+    setIsOpen(false);
+  };
+
   return (
     <div className="customisation-page">
       <Header />
@@ -252,6 +296,12 @@ const HomeScreen = ({ curimage }: any) => {
               currentFont={currentFont}
               uploadInnerLogo={uploadInnerLogo}
             />
+
+            <div className="flex space-bw">
+              <img src={currentTheme?.category_type__image} alt="" />
+              <img src={currentTheme?.category_type__image} alt="" />
+              <img src={currentTheme?.category_type__image} alt="" />
+            </div>
           </div>
 
           <div className="accordion-content">
@@ -277,6 +327,7 @@ const HomeScreen = ({ curimage }: any) => {
                   >
                     <h3>Personalise Cover</h3>
                   </div>
+
                   <div
                     className="covertype"
                     style={{
@@ -285,113 +336,156 @@ const HomeScreen = ({ curimage }: any) => {
                       padding: "10px",
                     }}
                   >
-                    <label htmlFor="">Select Cover Type</label>
-                    <select
-                      value={boardSelectedOption}
-                      onChange={handleBoardSelectChange}
-                    >
-                      <option value="">Select an option</option>
-                      <option value="boardColor">Board Color</option>
-                      <option value="leatheretteColor">
-                        Leatherette Color
-                      </option>
-                    </select>
-                    <div
-                      className="boardcolorsection"
-                      style={{
-                        display:
-                          boardSelectedOption === "boardColor"
-                            ? "block"
-                            : "none",
-                      }}
-                    >
-                      <div
-                        className=" toggleclass flex space-bw"
-                        onClick={toggleDropdown}
-                      >
-                        <h3>Select Board Color </h3>
-                        <p>
-                          {isOpen ? (
-                            <FaChevronUp size={10} />
-                          ) : (
-                            <FaChevronDown size={10} />
-                          )}
-                        </p>
-                      </div>
-                      {isOpen && (
-                        <div className="dropdown">
-                          <ul>
-                            {canvasType.boardColor?.map(
-                              (item: any, index: any) => (
-                                <li
-                                  className="flex"
-                                  key={index}
-                                  onClick={() => setCurrentTheme(item)}
-                                >
-                                  <img src={item.fourByFour} alt="" />
-                                  {item.name}
-                                </li>
-                              )
-                            )}
-                          </ul>
-                        </div>
-                      )}
-                    </div>
-                    <div
-                      className="leatherettesection"
-                      style={{
-                        display:
-                          boardSelectedOption === "leatheretteColor"
-                            ? "block"
-                            : "none",
-                      }}
-                    >
-                      <div
-                        className="toggleclass flex space-bw"
-                        onClick={toggleLeather}
-                      >
-                        <h3>Select Leatherette Color</h3>
-                        <p>
-                          {leatherOpen ? (
-                            <FaChevronUp size={10} />
-                          ) : (
-                            <FaChevronDown size={10} />
-                          )}
-                        </p>
-                      </div>
-                      {leatherOpen && (
-                        <div className="dropdown">
-                          <ul>
-                            {canvasType.leatheretteColor?.map(
-                              (item: any, index: any) => (
-                                <li
-                                  className="flex"
-                                  key={index}
-                                  onClick={() => setCurrentTheme(item)}
-                                >
-                                  <img src={item.fourByFour} alt="" />
-                                  {item.name}
-                                </li>
-                              )
-                            )}
-                          </ul>
-                        </div>
-                      )}
-                    </div>
-                    {boardSelectedOption !== "" && (
+                    {parameters?.id ? (
                       <>
-                        <label htmlFor="">Select Size</label>
-                        <select
-                          value={currentSize}
-                          onChange={(e: any) => setCurrentSize(e.target.value)}
+                        <div
+                          className=" toggleclass flex space-bw"
+                          onClick={toggleDropdown}
                         >
-                          <option value="threeByFive">3x5</option>
-                          <option value="fourByFour">4x4</option>
-                          <option value="fourBySix">4x6</option>
-                          <option value="fiveBySeven">5x7</option>
+                          <h3>Select Board Color </h3>
+                          <p>
+                            {isOpen ? (
+                              <FaChevronUp size={10} />
+                            ) : (
+                              <FaChevronDown size={10} />
+                            )}
+                          </p>
+                        </div>
+                        {isOpen && (
+                          <div className="dropdown">
+                            <ul>
+                              {apiCategoryList?.map((item: any, index: any) => (
+                                <li
+                                  className="flex"
+                                  key={index}
+                                  onClick={() => selectBackGroundHandler(item)}
+                                >
+                                  <img
+                                    style={{ objectFit: "contain" }}
+                                    src={item?.product_image}
+                                    alt=""
+                                  />
+                                  {item?.title}
+                                </li>
+                              ))}
+                            </ul>
+                          </div>
+                        )}
+                      </>
+                    ) : (
+                      <>
+                        <label htmlFor="">Select Cover Type</label>
+                        <select
+                          value={boardSelectedOption}
+                          onChange={handleBoardSelectChange}
+                        >
+                          <option value="">Select an option</option>
+                          <option value="boardColor">Board Color</option>
+                          <option value="leatheretteColor">
+                            Leatherette Color
+                          </option>
                         </select>
+                        <div
+                          className="boardcolorsection"
+                          style={{
+                            display:
+                              boardSelectedOption === "boardColor"
+                                ? "block"
+                                : "none",
+                          }}
+                        >
+                          <div
+                            className=" toggleclass flex space-bw"
+                            onClick={toggleDropdown}
+                          >
+                            <h3>Select Board Color </h3>
+                            <p>
+                              {isOpen ? (
+                                <FaChevronUp size={10} />
+                              ) : (
+                                <FaChevronDown size={10} />
+                              )}
+                            </p>
+                          </div>
+                          {isOpen && (
+                            <div className="dropdown">
+                              <ul>
+                                {canvasType.boardColor?.map(
+                                  (item: any, index: any) => (
+                                    <li
+                                      className="flex"
+                                      key={index}
+                                      onClick={() => setCurrentTheme(item)}
+                                    >
+                                      <img src={item.fourByFour} alt="" />
+                                      {item.name}
+                                    </li>
+                                  )
+                                )}
+                              </ul>
+                            </div>
+                          )}
+                        </div>
+                        <div
+                          className="leatherettesection"
+                          style={{
+                            display:
+                              boardSelectedOption === "leatheretteColor"
+                                ? "block"
+                                : "none",
+                          }}
+                        >
+                          <div
+                            className="toggleclass flex space-bw"
+                            onClick={toggleLeather}
+                          >
+                            <h3>Select Leatherette Color</h3>
+                            <p>
+                              {leatherOpen ? (
+                                <FaChevronUp size={10} />
+                              ) : (
+                                <FaChevronDown size={10} />
+                              )}
+                            </p>
+                          </div>
+                          {leatherOpen && (
+                            <div className="dropdown">
+                              <ul>
+                                {canvasType.leatheretteColor?.map(
+                                  (item: any, index: any) => (
+                                    <li
+                                      className="flex"
+                                      key={index}
+                                      onClick={() => setCurrentTheme(item)}
+                                    >
+                                      <img src={item.fourByFour} alt="" />
+                                      {item.name}
+                                    </li>
+                                  )
+                                )}
+                              </ul>
+                            </div>
+                          )}
+                        </div>
+                        {boardSelectedOption !== "" && (
+                          <>
+                            <label htmlFor="">Select Size</label>
+                            <select
+                              value={currentSize}
+                              onChange={(e: any) =>
+                                setCurrentSize(e.target.value)
+                              }
+                            >
+                              <option value="threeByFive">3x5</option>
+                              <option value="fourByFour">4x4</option>
+                              <option value="fourBySix">4x6</option>
+                              <option value="fiveBySeven">5x7</option>
+                            </select>
+                          </>
+                        )}
                       </>
                     )}
+
                     <div className="cover-option">
                       <CoverOption
                         coverCurrentOption={coverCurrentOption}
@@ -688,9 +782,11 @@ const HomeScreen = ({ curimage }: any) => {
               <h2>Related Products</h2>
               <div className="related-cards">
                 <div className="related-card flex space-bw">
-                  <Card />
-                  <Card />
-                  <Card />
+                  {apiCategoryList
+                    .filter((item: any) => item.id != parameters?.id)
+                    .map((object: any, index: any) => (
+                      <Card product={object} index={index} key={index} />
+                    ))}
                 </div>
               </div>
             </div>

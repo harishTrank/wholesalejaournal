@@ -29,18 +29,25 @@ export const productEndpoints = {
       uri: "/cart-item-in-de/",
     },
   },
-  homeProducts:{
-    v1:{
+  homeProducts: {
+    v1: {
       ...defaults.methods.GET,
       ...defaults.versions.v1,
-      uri:"/our-products/"
-    }
+      uri: "/our-products/",
+    },
   },
-  journalBooks:{
-    v1:{
+  journalBooks: {
+    v1: {
       ...defaults.methods.POST,
       ...defaults.versions.v1,
-      uri:"/products/"
-    }
-  }
+      uri: "/products/",
+    },
+  },
+  productCategoriesWise: {
+    v1: {
+      ...defaults.methods.GET,
+      ...defaults.versions.v1,
+      uri: "/category-wise-product/",
+    },
+  },
 };

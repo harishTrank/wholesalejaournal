@@ -56,19 +56,19 @@ const index = ({
             className="mb classcursor"
             onClick={() => setBookTypeFilter("Others")}
           >
-            Uncategorised({categoryCount?.Others})
+            Uncategorised({categoryCount?.Others || 0})
           </p>
           <p
             className="mb classcursor"
             onClick={() => setBookTypeFilter("JournalBooks")}
           >
-            Journal Books ({categoryCount?.JournalBooks})
+            Journal Books ({categoryCount?.JournalBooks || 0})
           </p>
           <p
             className="mb classcursor"
             onClick={() => setBookTypeFilter("WritingJournal")}
           >
-            Writing Journals({categoryCount?.WritingJournal})
+            Writing Journals({categoryCount?.WritingJournal || 0})
           </p>
         </div>
         <div className="filtercolor mb">
