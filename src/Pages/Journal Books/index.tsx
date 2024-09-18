@@ -7,6 +7,7 @@ import "./style.css";
 import { Link } from "react-router-dom";
 import { journalBooksProducts } from "../../store/Services/Product";
 import { Pagination } from "antd";
+import FullScreenLoader from "../../components/FullScreenLoader";
 
 const JournalBook = ({ bookType }: any) => {
   const [journalProducts, setJournalProducts]: any = useState([]);
@@ -19,6 +20,7 @@ const JournalBook = ({ bookType }: any) => {
   const [linedProducts, setLinedProducts]: any = useState("");
   const [coverType, setCoverType]: any = useState("");
   const [bookTypeFilter, setBookTypeFilter]: any = useState(bookType);
+  const [isLoading, setIsLoading]: any = useState(false);
 
   const onPageChange = (page: number) => {
     setCurrentPage(page);
@@ -33,7 +35,7 @@ const JournalBook = ({ bookType }: any) => {
   }, [bookType]);
 
   useEffect(() => {
-    console.log("bookType", bookType);
+    setIsLoading(true);
     journalBooksProducts({
       body: {
         sort_by: sortOption,
@@ -50,6 +52,7 @@ const JournalBook = ({ bookType }: any) => {
       setJournalCount(res.count);
       setCategoryCounts(res.category_counts);
       setTotalPage(res.total_pages);
+      setIsLoading(false);
     });
   }, [
     sortOption,
@@ -69,6 +72,7 @@ const JournalBook = ({ bookType }: any) => {
   return (
     <div className="journal">
       <Header />
+      {isLoading && <FullScreenLoader />}
       <div className="container">
         <section className="gap">
           <div className="flex space-bw">
@@ -88,9 +92,9 @@ const JournalBook = ({ bookType }: any) => {
               <div className="journal-content">
                 <p>Home/Journal Books</p>
                 <h1>
-                  {bookType === "JournalBooks"
+                  {bookTypeFilter === "JournalBooks"
                     ? "Journal Books"
-                    : bookType === "WritingJournal"
+                    : bookTypeFilter === "WritingJournal"
                     ? "Writing Journal"
                     : "Shop"}
                 </h1>
