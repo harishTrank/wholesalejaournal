@@ -8,6 +8,8 @@ const CoverOption = ({
   setLowerVisible,
   setUploadLogo,
   setCurrentBkgShape,
+  currentTheme,
+  paramsid,
 }: any) => {
   const optionSelectHandler = (e: any) => {
     setCoverCurrentOption(e.target.value);
@@ -51,9 +53,18 @@ const CoverOption = ({
         value={coverCurrentOption}
         onChange={optionSelectHandler}
       >
-        <option value="Phrase">Phrase</option>
-        <option value="Name or initial">Name or initial</option>
-        <option value="Upload a logo">Upload a logo</option>
+        <option value="">Select Option</option>
+
+        {currentTheme?.category_type__phrase_flag && (
+          <option value="Phrase">Phrase</option>
+        )}
+
+        {currentTheme?.category_type__initial_flag && (
+          <option value="Name or initial">Name or initial</option>
+        )}
+        {currentTheme?.category_type__cover_logo_flag && (
+          <option value="Upload a logo">Upload a logo</option>
+        )}
       </select>
       {coverCurrentOption === "Phrase" ? (
         <div className="Lines flex">
@@ -108,30 +119,30 @@ const CoverOption = ({
             onChange={(e: any) => setCanvasText(e.target.value)}
           ></textarea>
         </span>
-      ) : coverCurrentOption === "Upload a logo" ? (
-        <>
-          <div className="file" id="uploadImage">
-            <label htmlFor="logoUpload" style={{ cursor: "pointer" }}>
-              Select a file
-            </label>
-
-            <input
-              type="file"
-              onChange={handleLogoUpload}
-              id="logoUpload"
-              style={{ display: "none" }}
-            />
-          </div>
-          <img
-            hidden
-            id="logoPreview"
-            src=""
-            alt="Logo Preview"
-            style={{ maxWidth: 200, marginTop: 10 }}
-          />
-        </>
       ) : (
-        <div>hello</div>
+        coverCurrentOption === "Upload a logo" && (
+          <>
+            <div className="file" id="uploadImage">
+              <label htmlFor="logoUpload" style={{ cursor: "pointer" }}>
+                Select a file
+              </label>
+
+              <input
+                type="file"
+                onChange={handleLogoUpload}
+                id="logoUpload"
+                style={{ display: "none" }}
+              />
+            </div>
+            <img
+              hidden
+              id="logoPreview"
+              src=""
+              alt="Logo Preview"
+              style={{ maxWidth: 200, marginTop: 10 }}
+            />
+          </>
+        )
       )}
     </>
   );

@@ -17,12 +17,11 @@ import {
   addToCartDefault,
   productCategoriesWise,
 } from "../../../store/Services/Product";
-import { useNavigate, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 
 const HomeScreen = ({ curimage }: any) => {
-  const navigation: any = useNavigate();
   const [image, setImage]: any = useState(null);
-  const [coverCurrentOption, setCoverCurrentOption] = useState("Phrase");
+  const [coverCurrentOption, setCoverCurrentOption] = useState("");
   const [currentBkgShape, setCurrentBkgShape]: any = useState("");
   const [backgroundColor, setBackGroundColor]: any = useState("#F5E6D9");
   const [textColor, setTextColor]: any = useState("#333333");
@@ -42,7 +41,7 @@ const HomeScreen = ({ curimage }: any) => {
     inner: null,
   });
   const [selectedId, setSelectedId] = useState<string | null>(null);
-  const [innercustomised, setInnerCustomised]: any = useState("Text");
+  const [innercustomised, setInnerCustomised]: any = useState("");
   const [innerPageText, setInnerPageText]: any = useState("");
   const [innerTextColor, setInnerTextColor]: any = useState("#333333");
   const [currentFont, setCurrentFont]: any = useState("Roboto");
@@ -92,7 +91,9 @@ const HomeScreen = ({ curimage }: any) => {
     setSelectedOption(event.target.value);
     if (event.target.value === "Yes") {
       // setCurrentBkgShape("rect");
-      setCurrentTheme(canvasType.boardColor[0]);
+      if (!parameters?.id) {
+        setCurrentTheme(canvasType.boardColor[0]);
+      }
       // ;v(true);
     } else {
       setCurrentBkgShape("");
@@ -298,9 +299,15 @@ const HomeScreen = ({ curimage }: any) => {
             />
 
             <div className="flex space-bw">
-              <img src={currentTheme?.category_type__image} alt="" />
-              <img src={currentTheme?.category_type__image} alt="" />
-              <img src={currentTheme?.category_type__image} alt="" />
+              <div className="customise-img1">
+                <img src={currentTheme?.cover_img} alt="" />
+              </div>
+              <div className="customise-img1">
+                <img src={currentTheme?.inner_img} alt="" />
+              </div>
+              <div className="customise-img1">
+                <img src={currentTheme?.category_type__image} alt="" />
+              </div>
             </div>
           </div>
 
@@ -498,6 +505,8 @@ const HomeScreen = ({ curimage }: any) => {
                         uploadLogo={uploadLogo}
                         innerPageOption={innerPageOption}
                         setInnerPageOption={setInnerPageOption}
+                        currentTheme={currentTheme}
+                        paramsid={parameters?.id}
                       />
                     </div>
                     <div style={{ display: lowerVisible ? "block" : "none" }}>
@@ -511,13 +520,16 @@ const HomeScreen = ({ curimage }: any) => {
                             />
                           </div>
                         </div>
-                        <div className="more-cust">
-                          <h4>Select font style</h4>
-                          <FontsComponents
-                            currentFont={currentFont}
-                            setCurrentFont={setCurrentFont}
-                          />
-                        </div>
+                        {currentTheme?.category_type__phrase_flag ||
+                          (currentTheme?.category_type__initial_flag && (
+                            <div className="more-cust">
+                              <h4>Select font style</h4>
+                              <FontsComponents
+                                currentFont={currentFont}
+                                setCurrentFont={setCurrentFont}
+                              />
+                            </div>
+                          ))}
                         <div className="more-cust-1">
                           <h4>Select background color</h4>
                           <ColorSelector
@@ -525,13 +537,16 @@ const HomeScreen = ({ curimage }: any) => {
                             setBackGroundColor={setBackGroundColor}
                           />
                         </div>
-                        <div className="more-cust-2">
-                          <h4>Select text color</h4>
-                          <ColorSelector
-                            backgroundColor={textColor}
-                            setBackGroundColor={setTextColor}
-                          />
-                        </div>
+                        {currentTheme?.category_type__phrase_flag ||
+                          (currentTheme?.category_type__initial_flag && (
+                            <div className="more-cust-2">
+                              <h4>Select text color</h4>
+                              <ColorSelector
+                                backgroundColor={textColor}
+                                setBackGroundColor={setTextColor}
+                              />
+                            </div>
+                          ))}
                       </div>
                       {/* <div className="more-btn">
                       <button>
@@ -578,8 +593,13 @@ const HomeScreen = ({ curimage }: any) => {
                           }
                           value={innercustomised}
                         >
-                          <option value="Logo">Upload a logo</option>
-                          <option value="Text">Write some text</option>
+                          <option value="">Select Option</option>
+                          {currentTheme?.category_type__inner_logo_flag && (
+                            <option value="Logo">Upload a logo</option>
+                          )}
+                          {currentTheme?.category_type__inner_text_flag && (
+                            <option value="Text">Write some text</option>
+                          )}
                         </select>
 
                         <div
@@ -622,20 +642,24 @@ const HomeScreen = ({ curimage }: any) => {
                               }
                             />
                           </div>
-                          <div className="more-cust">
-                            <h4>Select font style</h4>
-                            <FontsComponents
-                              currentFont={currentInnerFont}
-                              setCurrentFont={setCurrentInnerFont}
-                            />
-                          </div>
-                          <div className="more-cust-1">
-                            <h4>Select text color</h4>
-                            <ColorSelector
-                              backgroundColor={innerTextColor}
-                              setBackGroundColor={setInnerTextColor}
-                            />
-                          </div>
+                          {currentTheme?.category_type__inner_text_flag && (
+                            <>
+                              <div className="more-cust">
+                                <h4>Select font style</h4>
+                                <FontsComponents
+                                  currentFont={currentInnerFont}
+                                  setCurrentFont={setCurrentInnerFont}
+                                />
+                              </div>
+                              <div className="more-cust-1">
+                                <h4>Select text color</h4>
+                                <ColorSelector
+                                  backgroundColor={innerTextColor}
+                                  setBackGroundColor={setInnerTextColor}
+                                />
+                              </div>
+                            </>
+                          )}
                         </div>
                       </div>
                     </div>
@@ -645,7 +669,7 @@ const HomeScreen = ({ curimage }: any) => {
             )}
 
             <div className="customisecart flex">
-              {selectedOption === "Yes" && (
+              {(selectedOption === "Yes" || parameters?.id) && (
                 <>
                   <div className="addbtn">
                     <button onClick={preViewButtonHandler}>Preview</button>
@@ -783,7 +807,7 @@ const HomeScreen = ({ curimage }: any) => {
               <div className="related-cards">
                 <div className="related-card flex space-bw">
                   {apiCategoryList
-                    .filter((item: any) => item.id != parameters?.id)
+                    .filter((item: any) => item.id != currentTheme?.id)
                     .map((object: any, index: any) => (
                       <Card product={object} index={index} key={index} />
                     ))}
