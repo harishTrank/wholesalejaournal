@@ -211,19 +211,25 @@ const HomeScreen = ({ curimage }: any) => {
           setIsLoading(false);
           toast.success("Item add to your cart successfully.");
         } else {
+          let body: any = {
+            quantity: 1,
+            currentSize,
+            boardSelectedOption,
+            name: currentTheme?.name,
+            heading: currentTheme?.heading,
+            cover: dataUrlCover,
+            inner: dataUrlInner,
+            description:
+              "Our Wholsale recycled journals are eco-friendly,stylish, and sustainable. Made from high quality recycled matrials",
+          };
+          if (parameters?.id) {
+            body.product_id = parameters?.id;
+            body.cart_type = "Edit";
+          } else {
+            body.price = 35;
+          }
           addToCartDefault({
-            body: {
-              quantity: 1,
-              price: 35,
-              currentSize,
-              boardSelectedOption,
-              name: currentTheme?.name,
-              heading: currentTheme?.heading,
-              cover: dataUrlCover,
-              inner: dataUrlInner,
-              description:
-                "Our Wholsale recycled journals are eco-friendly,stylish, and sustainable. Made from high quality recycled matrials",
-            },
+            body,
           })
             .then((res: any) => {
               toast.success("Item add to your cart successfully.");
@@ -254,6 +260,7 @@ const HomeScreen = ({ curimage }: any) => {
         setCurrentTheme(currentObj);
         const loadImage: any = new window.Image();
         loadImage.src = currentObj?.product_image;
+        loadImage.crossOrigin = "Anonymous";
         loadImage.onload = () => {
           setImage(loadImage);
         };
@@ -520,16 +527,16 @@ const HomeScreen = ({ curimage }: any) => {
                             />
                           </div>
                         </div>
-                        {currentTheme?.category_type__phrase_flag ||
-                          (currentTheme?.category_type__initial_flag && (
-                            <div className="more-cust">
-                              <h4>Select font style</h4>
-                              <FontsComponents
-                                currentFont={currentFont}
-                                setCurrentFont={setCurrentFont}
-                              />
-                            </div>
-                          ))}
+                        {(currentTheme?.category_type__phrase_flag ||
+                          currentTheme?.category_type__initial_flag) && (
+                          <div className="more-cust">
+                            <h4>Select font style</h4>
+                            <FontsComponents
+                              currentFont={currentFont}
+                              setCurrentFont={setCurrentFont}
+                            />
+                          </div>
+                        )}
                         <div className="more-cust-1">
                           <h4>Select background color</h4>
                           <ColorSelector

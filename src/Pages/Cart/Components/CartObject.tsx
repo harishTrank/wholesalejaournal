@@ -111,8 +111,8 @@ const CartObject = ({
   return (
     <div className="product-down flex space-bw">
       <div className="product-image">
-        <img src={currentItem?.cover} alt="" />
-        <img src={currentItem?.inner} alt="" />
+        <img style={{ objectFit: "contain" }} src={currentItem?.cover} alt="" />
+        <img style={{ objectFit: "contain" }} src={currentItem?.inner} alt="" />
       </div>
       <div className="product-description">
         <p>
