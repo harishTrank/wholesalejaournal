@@ -52,3 +52,7 @@
 .Uncategorised p{
     font-weight: bold;
 }
+
+.classcursor {
+    cursor: pointer;
+}
