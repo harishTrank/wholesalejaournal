@@ -131,7 +131,10 @@ const JournalBook = ({ bookType }: any) => {
                     </div>
                   </>
                 ) : (
-                  <p>No data found!</p>
+                  <div className="no-data text-center">
+                     <p>Oops! No data found!</p>
+                  </div>
+                 
                 )}
               </div>
             </div>
