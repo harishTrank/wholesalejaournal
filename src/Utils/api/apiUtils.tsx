@@ -3,7 +3,7 @@ import queryString from "querystring";
 
 export const hostname = () => {
   // let hostUrl = "http://192.168.0.18:8000/api";
-  let hostUrl = "http://43.205.195.1:8000/api";
+  let hostUrl = "http://43.205.195.1:5000/api";
 
   return hostUrl;
 };
