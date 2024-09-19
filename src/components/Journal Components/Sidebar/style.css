@@ -49,10 +49,10 @@
     border: none;
     width: 35%;
 }
-.Uncategorised p{
-    font-weight: bold;
-}
 
 .classcursor {
     cursor: pointer;
+}
+.Uncategorised p{
+    font-weight: 600;
 }
