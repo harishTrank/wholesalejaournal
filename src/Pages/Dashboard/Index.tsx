@@ -8,7 +8,7 @@ import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Header from "../../components/Header";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Cate1 from "../../assests/cate1.png";
 import Cate2 from "../../assests/cate2.png";
 import Cate3 from "../../assests/cate3.png";
@@ -33,6 +33,12 @@ const Dashboard = () => {
       setDasboardProducts(res.data);
     });
   }, []);
+
+  const navigation: any = useNavigate();
+  const addtocardHandler = (product: any) => {
+    console.log("product", product);
+    navigation(`/customise/${product?.id}`);
+  };
 
   return (
     <div>
@@ -104,7 +110,12 @@ const Dashboard = () => {
                   <h3>{product.title}</h3>
                   <p>${product.price}</p>
                   <p>{product.disc}</p>
-                  <a href="#">Add to Cart</a>
+                  <a
+                    style={{ cursor: "pointer" }}
+                    onClick={() => addtocardHandler(product)}
+                  >
+                    View Product
+                  </a>
                 </div>
               </div>
             ))}
