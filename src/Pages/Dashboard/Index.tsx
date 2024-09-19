@@ -1,9 +1,5 @@
 import React, { useEffect, useState } from "react";
 import "./Style.css";
-import product1 from "../../assests/product1.png";
-import product2 from "../../assests/product2.png";
-import product3 from "../../assests/product3.png";
-import product4 from "../../assests/product4.png";
 import slide1 from "../../assests/slide1.png";
 import slide2 from "../../assests/slide2.png";
 import new1 from "../../assests/new1.png";
@@ -59,7 +55,7 @@ const Dashboard = () => {
                 lists- the possibilities are endless when your personalizing
                 your journal covers.
               </p>
-              <Link to="/customise">Buy Now</Link>
+              <Link to="/journal">Buy Now</Link>
             </div>
           </div>
         </div>

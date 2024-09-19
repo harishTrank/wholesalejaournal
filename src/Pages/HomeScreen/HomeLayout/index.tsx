@@ -194,15 +194,18 @@ const HomeScreen = ({ curimage }: any) => {
           const newData: any = [
             {
               quantity: 1,
-              price: 35,
+              price:
+                selectedOption === "Yes"
+                  ? currentTheme?.price + currentTheme?.category_type__price
+                  : currentTheme?.price,
+              customise_price: selectedOption,
               currentSize,
               boardSelectedOption,
-              name: currentTheme?.name,
-              heading: currentTheme?.heading,
+              name: currentTheme?.title,
               cover: dataUrlCover,
               inner: dataUrlInner,
-              description:
-                "Our Wholsale recycled journals are eco-friendly,stylish, and sustainable. Made from high quality recycled matrials",
+              description: currentTheme?.disc,
+              product_id: parameters?.id,
             },
             ...currentData,
           ];
@@ -214,19 +217,16 @@ const HomeScreen = ({ curimage }: any) => {
           let body: any = {
             quantity: 1,
             currentSize,
+            customise_price: selectedOption,
             boardSelectedOption,
-            name: currentTheme?.name,
+            name: currentTheme?.title,
             heading: currentTheme?.heading,
             cover: dataUrlCover,
             inner: dataUrlInner,
-            description:
-              "Our Wholsale recycled journals are eco-friendly,stylish, and sustainable. Made from high quality recycled matrials",
+            description: currentTheme?.disc,
           };
           if (parameters?.id) {
             body.product_id = parameters?.id;
-            body.cart_type = "Edit";
-          } else {
-            body.price = 35;
           }
           addToCartDefault({
             body,
@@ -327,7 +327,9 @@ const HomeScreen = ({ curimage }: any) => {
                 onChange={handleOptionChange}
               >
                 <option value="">Select an option</option>
-                <option value="Yes">Yes</option>
+                <option value="Yes">
+                  Yes ${currentTheme?.category_type__price}
+                </option>
                 <option value="No">No</option>
               </select>
             </div>
@@ -544,16 +546,16 @@ const HomeScreen = ({ curimage }: any) => {
                             setBackGroundColor={setBackGroundColor}
                           />
                         </div>
-                        {currentTheme?.category_type__phrase_flag ||
-                          (currentTheme?.category_type__initial_flag && (
-                            <div className="more-cust-2">
-                              <h4>Select text color</h4>
-                              <ColorSelector
-                                backgroundColor={textColor}
-                                setBackGroundColor={setTextColor}
-                              />
-                            </div>
-                          ))}
+                        {(currentTheme?.category_type__phrase_flag ||
+                          currentTheme?.category_type__initial_flag) && (
+                          <div className="more-cust-2">
+                            <h4>Select text color</h4>
+                            <ColorSelector
+                              backgroundColor={textColor}
+                              setBackGroundColor={setTextColor}
+                            />
+                          </div>
+                        )}
                       </div>
                       {/* <div className="more-btn">
                       <button>

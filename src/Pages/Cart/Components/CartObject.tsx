@@ -14,6 +14,23 @@ const CartObject = ({
 }: any) => {
   const [quantity, setQuantity]: any = useState(currentItem?.quantity);
 
+  const cartObjectQuantityHandler = (quantity: any, id: any) => {
+    incrementDecrementCartItemAPI({
+      body: {
+        quantity,
+        id,
+      },
+    })
+      .then(() => {
+        setIsLoading(false);
+        setHitAgainAPI((oldValue: any) => oldValue + 1);
+      })
+      .catch(() => {
+        setIsLoading(false);
+        toast.error("Something went wrong from server side.");
+      });
+  };
+
   const handleIncrement = () => {
     setQuantity(quantity + 1);
     if (!localStorage.getItem("accessToken")) {
@@ -64,22 +81,6 @@ const CartObject = ({
     }
   };
 
-  const cartObjectQuantityHandler = (quantity: any, id: any) => {
-    incrementDecrementCartItemAPI({
-      body: {
-        quantity,
-        id,
-      },
-    })
-      .then(() => {
-        setIsLoading(false);
-      })
-      .catch(() => {
-        setIsLoading(false);
-        toast.error("Something went wrong from server side.");
-      });
-  };
-
   const removeItemHandler = () => {
     setIsLoading(true);
     if (!localStorage.getItem("accessToken")) {
@@ -116,7 +117,7 @@ const CartObject = ({
       </div>
       <div className="product-description">
         <p>
-          <u>{currentItem?.heading}</u>
+          <u>{currentItem?.heading || currentItem?.name}</u>
         </p>
         <p>{currentItem?.description}</p>
         <div className="quantity-box">

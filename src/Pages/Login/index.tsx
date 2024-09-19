@@ -46,18 +46,20 @@ const LoginScreen = ({
                 ? []
                 : JSON.parse(currentData);
             currentData.reverse().map((item: any) => {
+              const body: any = {
+                quantity: item?.quantity,
+                currentSize: item?.currentSize,
+                boardSelectedOption: item?.boardSelectedOption,
+                name: item?.name,
+                heading: item?.heading,
+                cover: item?.cover,
+                inner: item?.inner,
+                description: item?.description,
+                customise_price: item?.customise_price,
+                product_id: item?.product_id,
+              };
               addToCartDefault({
-                body: {
-                  quantity: item?.quantity,
-                  price: 35,
-                  currentSize: item?.currentSize,
-                  boardSelectedOption: item?.boardSelectedOption,
-                  name: item?.name,
-                  heading: item?.heading,
-                  cover: item?.cover,
-                  inner: item?.inner,
-                  description: item?.description,
-                },
+                body,
               });
             });
             if (currentData.length === 0) {
