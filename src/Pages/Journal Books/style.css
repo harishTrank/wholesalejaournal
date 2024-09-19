@@ -15,3 +15,10 @@
     width: 45%;
     margin: 2rem auto;
 }
+
+.no-data{
+    margin-top: 3rem;
+}
+.no-data p{
+    font-size: 25px;
+}

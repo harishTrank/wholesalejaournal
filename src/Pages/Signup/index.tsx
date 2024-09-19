@@ -1,12 +1,13 @@
 import React from "react";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
-import SignupImage from "../../images/Signup.jpg";
+
 import "./style.css";
 import { registerUser } from "../../store/Services/Auth";
 import { useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
 import { addToCartDefault } from "../../store/Services/Product";
+import LoginImage from '../../images/Login.jpg'
 
 // Define the validation schema using Yup
 const SignupSchema = Yup.object().shape({
@@ -86,7 +87,7 @@ const Signup = ({ setIsLoginShow, setIsLoading }: any) => {
   return (
     <div className="login-card">
       <div className="login-card-left">
-        <img src={SignupImage} alt="Login Illustration" />
+        <img src={LoginImage} alt="Login Illustration" />
       </div>
       <div className="login-card-right">
         <h1>Signup</h1>

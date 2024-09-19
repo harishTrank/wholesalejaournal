@@ -2,11 +2,12 @@ import React from "react";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import "./style.css";
-import LoginImage from "../../images/Login.jpg";
+
 import { useNavigate } from "react-router-dom";
 import { loginApiCall } from "../../store/Services/Auth";
 import toast from "react-hot-toast";
 import { addToCartDefault } from "../../store/Services/Product";
+import SignupImage from '../../images/Signup.jpg'
 
 const LoginScreen = ({
   setIsLoginShow,
@@ -84,7 +85,7 @@ const LoginScreen = ({
   return (
     <div className="login-card">
       <div className="login-card-left">
-        <img src={LoginImage} alt="Login Illustration" />
+        <img src={SignupImage} alt="Login Illustration" />
       </div>
       <div className="login-card-right">
         <h1>Login</h1>
