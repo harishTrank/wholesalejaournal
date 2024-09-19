@@ -112,20 +112,27 @@ const JournalBook = ({ bookType }: any) => {
                     </option>
                   </select>
                 </div>
-                <div className="journal-cards flex ">
-                  {journalProducts.map((product: any, index: any) => (
-                    <Card product={product} index={index} key={index} />
-                  ))}
-                </div>
-                <div className="pagination-controls">
-                  <Pagination
-                    current={currentPage}
-                    total={totalPage * 10}
-                    onChange={onPageChange}
-                    showSizeChanger={false}
-                    showQuickJumper
-                  />
-                </div>
+
+                {journalCount && journalCount != 0 ? (
+                  <>
+                    <div className="journal-cards flex ">
+                      {journalProducts.map((product: any, index: any) => (
+                        <Card product={product} index={index} key={index} />
+                      ))}
+                    </div>
+                    <div className="pagination-controls">
+                      <Pagination
+                        current={currentPage}
+                        total={totalPage * 10}
+                        onChange={onPageChange}
+                        showSizeChanger={false}
+                        showQuickJumper
+                      />
+                    </div>
+                  </>
+                ) : (
+                  <p>No data found!</p>
+                )}
               </div>
             </div>
           </div>

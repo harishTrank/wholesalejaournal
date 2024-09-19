@@ -194,15 +194,18 @@ const HomeScreen = ({ curimage }: any) => {
           const newData: any = [
             {
               quantity: 1,
-              price: 35,
+              price:
+                selectedOption === "Yes"
+                  ? currentTheme?.price + currentTheme?.category_type__price
+                  : currentTheme?.price,
+              customise_price: selectedOption,
               currentSize,
               boardSelectedOption,
-              name: currentTheme?.name,
-              heading: currentTheme?.heading,
+              name: currentTheme?.title,
               cover: dataUrlCover,
               inner: dataUrlInner,
-              description:
-                "Our Wholsale recycled journals are eco-friendly,stylish, and sustainable. Made from high quality recycled matrials",
+              description: currentTheme?.disc,
+              product_id: parameters?.id,
             },
             ...currentData,
           ];
@@ -211,19 +214,22 @@ const HomeScreen = ({ curimage }: any) => {
           setIsLoading(false);
           toast.success("Item add to your cart successfully.");
         } else {
+          let body: any = {
+            quantity: 1,
+            currentSize,
+            customise_price: selectedOption,
+            boardSelectedOption,
+            name: currentTheme?.title,
+            heading: currentTheme?.heading,
+            cover: dataUrlCover,
+            inner: dataUrlInner,
+            description: currentTheme?.disc,
+          };
+          if (parameters?.id) {
+            body.product_id = parameters?.id;
+          }
           addToCartDefault({
-            body: {
-              quantity: 1,
-              price: 35,
-              currentSize,
-              boardSelectedOption,
-              name: currentTheme?.name,
-              heading: currentTheme?.heading,
-              cover: dataUrlCover,
-              inner: dataUrlInner,
-              description:
-                "Our Wholsale recycled journals are eco-friendly,stylish, and sustainable. Made from high quality recycled matrials",
-            },
+            body,
           })
             .then((res: any) => {
               toast.success("Item add to your cart successfully.");
@@ -254,6 +260,7 @@ const HomeScreen = ({ curimage }: any) => {
         setCurrentTheme(currentObj);
         const loadImage: any = new window.Image();
         loadImage.src = currentObj?.product_image;
+        loadImage.crossOrigin = "Anonymous";
         loadImage.onload = () => {
           setImage(loadImage);
         };
@@ -320,7 +327,9 @@ const HomeScreen = ({ curimage }: any) => {
                 onChange={handleOptionChange}
               >
                 <option value="">Select an option</option>
-                <option value="Yes">Yes</option>
+                <option value="Yes">
+                  Yes ${currentTheme?.category_type__price}
+                </option>
                 <option value="No">No</option>
               </select>
             </div>
@@ -520,16 +529,16 @@ const HomeScreen = ({ curimage }: any) => {
                             />
                           </div>
                         </div>
-                        {currentTheme?.category_type__phrase_flag ||
-                          (currentTheme?.category_type__initial_flag && (
-                            <div className="more-cust">
-                              <h4>Select font style</h4>
-                              <FontsComponents
-                                currentFont={currentFont}
-                                setCurrentFont={setCurrentFont}
-                              />
-                            </div>
-                          ))}
+                        {(currentTheme?.category_type__phrase_flag ||
+                          currentTheme?.category_type__initial_flag) && (
+                          <div className="more-cust">
+                            <h4>Select font style</h4>
+                            <FontsComponents
+                              currentFont={currentFont}
+                              setCurrentFont={setCurrentFont}
+                            />
+                          </div>
+                        )}
                         <div className="more-cust-1">
                           <h4>Select background color</h4>
                           <ColorSelector
@@ -537,16 +546,16 @@ const HomeScreen = ({ curimage }: any) => {
                             setBackGroundColor={setBackGroundColor}
                           />
                         </div>
-                        {currentTheme?.category_type__phrase_flag ||
-                          (currentTheme?.category_type__initial_flag && (
-                            <div className="more-cust-2">
-                              <h4>Select text color</h4>
-                              <ColorSelector
-                                backgroundColor={textColor}
-                                setBackGroundColor={setTextColor}
-                              />
-                            </div>
-                          ))}
+                        {(currentTheme?.category_type__phrase_flag ||
+                          currentTheme?.category_type__initial_flag) && (
+                          <div className="more-cust-2">
+                            <h4>Select text color</h4>
+                            <ColorSelector
+                              backgroundColor={textColor}
+                              setBackGroundColor={setTextColor}
+                            />
+                          </div>
+                        )}
                       </div>
                       {/* <div className="more-btn">
                       <button>
