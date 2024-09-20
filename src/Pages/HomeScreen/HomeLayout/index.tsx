@@ -51,7 +51,7 @@ const HomeScreen = ({ curimage }: any) => {
   const [leatherOpen, setLeatherOpen]: any = useState(false);
   const [boardSelectedOption, setBoardSelectedOption]: any =
     useState("boardColor");
-  const [currentSize, setCurrentSize]: any = useState({});
+  const [currentSize, setCurrentSize]: any = useState(null);
   const [currentTheme, setCurrentTheme]: any = useState({});
   const [isLoading, setIsLoading] = useState(false);
   const [apiCategoryList, setApiCategoryList]: any = useState([]);
@@ -208,7 +208,7 @@ const HomeScreen = ({ curimage }: any) => {
                   ? currentTheme?.price + currentTheme?.category_type__price
                   : currentTheme?.price,
               customise_price: selectedOption,
-              currentSize,
+              currentSize: currentSize?.id ? currentSize?.id : "default",
               boardSelectedOption,
               name: currentTheme?.title,
               cover: dataUrlCover,
@@ -225,7 +225,7 @@ const HomeScreen = ({ curimage }: any) => {
         } else {
           let body: any = {
             quantity: 1,
-            currentSize,
+            currentSize: currentSize?.id ? currentSize?.id : "default",
             customise_price: selectedOption,
             boardSelectedOption,
             name: currentTheme?.title,
@@ -240,7 +240,7 @@ const HomeScreen = ({ curimage }: any) => {
           addToCartDefault({
             body,
           })
-            .then((res: any) => {
+            .then(() => {
               toast.success("Item add to your cart successfully.");
               setIsLoading(false);
             })
