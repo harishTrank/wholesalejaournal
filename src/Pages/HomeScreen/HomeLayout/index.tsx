@@ -75,6 +75,13 @@ const HomeScreen = ({ curimage }: any) => {
       loadImage.onload = () => {
         setImage(loadImage);
       };
+    } else if (currentSize === "") {
+      const loadImage: any = new window.Image();
+      loadImage.src = currentTheme?.product_image;
+      loadImage.crossOrigin = "Anonymous";
+      loadImage.onload = () => {
+        setImage(loadImage);
+      };
     }
   };
 
@@ -508,7 +515,11 @@ const HomeScreen = ({ curimage }: any) => {
                         <label htmlFor="">Select Size</label>
                         <select
                           onChange={(e: any) =>
-                            setCurrentSize(JSON.parse(e.target.value))
+                            setCurrentSize(
+                              e.target.value === ""
+                                ? ""
+                                : JSON.parse(e.target.value)
+                            )
                           }
                         >
                           <>
