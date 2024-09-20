@@ -16,6 +16,7 @@ import toast from "react-hot-toast";
 import {
   addToCartDefault,
   productCategoriesWise,
+  productSizeApi,
 } from "../../../store/Services/Product";
 import { useParams } from "react-router-dom";
 
@@ -50,10 +51,11 @@ const HomeScreen = ({ curimage }: any) => {
   const [leatherOpen, setLeatherOpen]: any = useState(false);
   const [boardSelectedOption, setBoardSelectedOption]: any =
     useState("boardColor");
-  const [currentSize, setCurrentSize]: any = useState("fiveBySeven");
+  const [currentSize, setCurrentSize]: any = useState({});
   const [currentTheme, setCurrentTheme]: any = useState({});
   const [isLoading, setIsLoading] = useState(false);
   const [apiCategoryList, setApiCategoryList]: any = useState([]);
+  const [sizeApiResponse, setSizeApiResponse]: any = useState([]);
 
   const parameters: any = useParams();
 
@@ -66,6 +68,13 @@ const HomeScreen = ({ curimage }: any) => {
       };
       setLeatherOpen(false);
       setIsOpen(false);
+    } else if (currentSize?.image) {
+      const loadImage: any = new window.Image();
+      loadImage.src = currentSize?.image;
+      loadImage.crossOrigin = "Anonymous";
+      loadImage.onload = () => {
+        setImage(loadImage);
+      };
     }
   };
 
@@ -252,7 +261,6 @@ const HomeScreen = ({ curimage }: any) => {
           product_id: parameters?.id,
         },
       }).then((res: any) => {
-        setIsLoading(false);
         setApiCategoryList(res?.related_products);
         const currentObj: any = res.related_products.find(
           (item: any) => item.id == parameters.id
@@ -264,6 +272,15 @@ const HomeScreen = ({ curimage }: any) => {
         loadImage.onload = () => {
           setImage(loadImage);
         };
+
+        productSizeApi({
+          query: {
+            product_id: parameters?.id,
+          },
+        }).then((res: any) => {
+          setSizeApiResponse(res.data);
+          setIsLoading(false);
+        });
       });
     }
   }, [parameters]);
@@ -483,22 +500,26 @@ const HomeScreen = ({ curimage }: any) => {
                             </div>
                           )}
                         </div>
-                        {boardSelectedOption !== "" && (
+                      </>
+                    )}
+
+                    {sizeApiResponse && sizeApiResponse.length > 0 && (
+                      <>
+                        <label htmlFor="">Select Size</label>
+                        <select
+                          onChange={(e: any) =>
+                            setCurrentSize(JSON.parse(e.target.value))
+                          }
+                        >
                           <>
-                            <label htmlFor="">Select Size</label>
-                            <select
-                              value={currentSize}
-                              onChange={(e: any) =>
-                                setCurrentSize(e.target.value)
-                              }
-                            >
-                              <option value="threeByFive">3x5</option>
-                              <option value="fourByFour">4x4</option>
-                              <option value="fourBySix">4x6</option>
-                              <option value="fiveBySeven">5x7</option>
-                            </select>
+                            <option value="">Change Size</option>
+                            {sizeApiResponse?.map((item: any, index: any) => (
+                              <option key={index} value={JSON.stringify(item)}>
+                                {item?.product_size}
+                              </option>
+                            ))}
                           </>
-                        )}
+                        </select>
                       </>
                     )}
 

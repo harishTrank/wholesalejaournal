@@ -50,4 +50,11 @@ export const productEndpoints = {
       uri: "/category-wise-product/",
     },
   },
+  productSizeApi: {
+    v1: {
+      ...defaults.methods.GET,
+      ...defaults.versions.v1,
+      uri: "/product-size/",
+    },
+  },
 };

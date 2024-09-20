@@ -40,3 +40,9 @@ export const productCategoriesWise = ({ query }: any) =>
     uriEndPoint: productEndpoints.productCategoriesWise.v1,
     query,
   });
+
+export const productSizeApi = ({ query }: any) =>
+  callApi({
+    uriEndPoint: productEndpoints.productSizeApi.v1,
+    query,
+  });

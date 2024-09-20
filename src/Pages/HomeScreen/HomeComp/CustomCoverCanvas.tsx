@@ -91,13 +91,22 @@ const CustomCanvas = ({
         let width = img.width;
         let height = img.height;
         const imgAspectRatio = width / height;
-        if (width < canvasWidth || height < canvasHeight) {
-          if (canvasWidth / imgAspectRatio <= canvasHeight) {
-            width = canvasWidth;
-            height = canvasWidth / imgAspectRatio;
-          } else {
+        const canvasAspectRatio = canvasWidth / canvasHeight;
+        if (width > canvasWidth || height > canvasHeight) {
+          if (canvasAspectRatio > imgAspectRatio) {
             height = canvasHeight;
             width = canvasHeight * imgAspectRatio;
+          } else {
+            width = canvasWidth;
+            height = canvasWidth / imgAspectRatio;
+          }
+        } else {
+          if (canvasAspectRatio > imgAspectRatio) {
+            height = Math.min(canvasHeight, height * (canvasWidth / width));
+            width = height * imgAspectRatio;
+          } else {
+            width = Math.min(canvasWidth, width * (canvasHeight / height));
+            height = width / imgAspectRatio;
           }
         }
         setImgProps({ width, height });
