@@ -21,6 +21,7 @@ const JournalBook = ({ bookType }: any) => {
   const [coverType, setCoverType]: any = useState("");
   const [bookTypeFilter, setBookTypeFilter]: any = useState(bookType);
   const [isLoading, setIsLoading]: any = useState(false);
+  const [search,setSearch]:any=useState("")
 
   const onPageChange = (page: number) => {
     setCurrentPage(page);
@@ -43,6 +44,8 @@ const JournalBook = ({ bookType }: any) => {
         lined_non_lined: linedProducts || "",
         cover_type: coverType || "",
         category: bookTypeFilter,
+        title:search,
+        
       },
       query: {
         page: currentPage,
@@ -61,6 +64,7 @@ const JournalBook = ({ bookType }: any) => {
     linedProducts,
     coverType,
     bookTypeFilter,
+    search
   ]);
 
   const handleSortChange = (e: any) => {
@@ -86,6 +90,7 @@ const JournalBook = ({ bookType }: any) => {
                 coverType={coverType}
                 setCoverType={setCoverType}
                 setBookTypeFilter={setBookTypeFilter}
+                setSearch={setSearch}
               />
             </div>
             <div className="journal-section">

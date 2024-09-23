@@ -1,6 +1,6 @@
-import React from "react";
+import React, { useState } from "react";
 import "./style.css";
-const index = ({
+const Sidebar = ({
   categoryCount,
   selectedColors,
   setSelectedColors,
@@ -9,7 +9,9 @@ const index = ({
   coverType,
   setCoverType,
   setBookTypeFilter,
+  setSearch
 }: any) => {
+  const [searchInput, setSearchInput]:any = useState(''); 
   const handleColorChange = (e: any) => {
     const { value, checked } = e.target;
 
@@ -43,13 +45,20 @@ const index = ({
       );
     }
   };
+  const handleSearchChange = (e: any) => {
+    setSearchInput(e.target.value);
+  };
+
+  const handleSearch = () => {
+    setSearch(searchInput); // Send the search input to the parent component
+  };
 
   return (
     <div className="sidebar">
       <div className="sidebar-content">
         <div className="search-products flex mb">
-          <input type="text" placeholder="Search Products.." />
-          <button>Search</button>
+          <input type="text" placeholder="Search Products.."  value={searchInput} onChange={handleSearchChange}/>
+          <button onClick={handleSearch}>Search</button>
         </div>
         <div className="Uncategorised mb">
           <p
@@ -175,4 +184,4 @@ const index = ({
   );
 };
 
-export default index;
+export default Sidebar;
