@@ -50,7 +50,7 @@ const Sidebar = ({
   };
 
   const handleSearch = () => {
-    setSearch(searchInput); // Send the search input to the parent component
+    setSearch(searchInput); 
   };
 
   return (
