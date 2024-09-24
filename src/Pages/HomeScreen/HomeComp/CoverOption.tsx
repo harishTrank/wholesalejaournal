@@ -55,14 +55,12 @@ const CoverOption = ({
       >
         <option value="">Select Option</option>
 
-        {currentTheme?.category_type__phrase_flag && (
-          <option value="Phrase">Phrase</option>
-        )}
+        {currentTheme?.phrase_flag && <option value="Phrase">Phrase</option>}
 
-        {currentTheme?.category_type__initial_flag && (
+        {currentTheme?.initial_flag && (
           <option value="Name or initial">Name or initial</option>
         )}
-        {currentTheme?.category_type__cover_logo_flag && (
+        {currentTheme?.cover_logo_flag && (
           <option value="Upload a logo">Upload a logo</option>
         )}
       </select>

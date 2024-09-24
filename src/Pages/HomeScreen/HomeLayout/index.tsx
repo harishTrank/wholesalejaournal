@@ -212,7 +212,7 @@ const HomeScreen = ({ curimage }: any) => {
               quantity: 1,
               price:
                 selectedOption === "Yes"
-                  ? currentTheme?.price + currentTheme?.category_type__price
+                  ? currentTheme?.price + currentTheme?.additional_price
                   : currentTheme?.price,
               customise_price: selectedOption,
               currentSize: currentSize?.id ? currentSize?.id : "default",
@@ -352,7 +352,7 @@ const HomeScreen = ({ curimage }: any) => {
               >
                 <option value="">Select an option</option>
                 <option value="Yes">
-                  Yes ${currentTheme?.category_type__price}
+                  Yes ${currentTheme?.additional_price}
                 </option>
                 <option value="No">No</option>
               </select>
@@ -561,8 +561,8 @@ const HomeScreen = ({ curimage }: any) => {
                             />
                           </div>
                         </div>
-                        {(currentTheme?.category_type__phrase_flag ||
-                          currentTheme?.category_type__initial_flag) && (
+                        {(currentTheme?.phrase_flag ||
+                          currentTheme?.initial_flag) && (
                           <div className="more-cust">
                             <h4>Select font style</h4>
                             <FontsComponents
@@ -578,8 +578,8 @@ const HomeScreen = ({ curimage }: any) => {
                             setBackGroundColor={setBackGroundColor}
                           />
                         </div>
-                        {(currentTheme?.category_type__phrase_flag ||
-                          currentTheme?.category_type__initial_flag) && (
+                        {(currentTheme?.phrase_flag ||
+                          currentTheme?.initial_flag) && (
                           <div className="more-cust-2">
                             <h4>Select text color</h4>
                             <ColorSelector
@@ -635,10 +635,10 @@ const HomeScreen = ({ curimage }: any) => {
                           value={innercustomised}
                         >
                           <option value="">Select Option</option>
-                          {currentTheme?.category_type__inner_logo_flag && (
+                          {currentTheme?.inner_logo_flag && (
                             <option value="Logo">Upload a logo</option>
                           )}
-                          {currentTheme?.category_type__inner_text_flag && (
+                          {currentTheme?.inner_text_flag && (
                             <option value="Text">Write some text</option>
                           )}
                         </select>
@@ -683,7 +683,7 @@ const HomeScreen = ({ curimage }: any) => {
                               }
                             />
                           </div>
-                          {currentTheme?.category_type__inner_text_flag && (
+                          {currentTheme?.inner_text_flag && (
                             <>
                               <div className="more-cust">
                                 <h4>Select font style</h4>
