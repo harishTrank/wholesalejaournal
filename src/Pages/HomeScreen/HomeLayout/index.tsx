@@ -354,7 +354,7 @@ const HomeScreen = ({ curimage }: any) => {
           <div className="popup-content" onClick={(e) => e.stopPropagation()}>
             <img src={selectedImage} alt="Selected Image" />
             <button className="popup-close-btn" onClick={hideImagePopup}>
-              Close
+              X
             </button>
           </div>
         </div>

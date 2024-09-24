@@ -443,17 +443,37 @@ p.site-description {
 }
 
 /* Popup content */
+.popup-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.85); /* Darker background */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+/* Popup content centered in the screen */
 .popup-content {
-  background: white;
+  background: transparent;
   padding: 20px;
   border-radius: 8px;
   text-align: center;
   position: relative;
+  width: 90%;
+  height: 90%;
+  /* display: flex; */
+  justify-content: center;
+  align-items: center;
 }
 
 .popup-content img {
-  max-width: 100%;
-  max-height: 80vh;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
 }
 
 .popup-close-btn {
@@ -466,4 +486,6 @@ p.site-description {
   padding: 5px 10px;
   cursor: pointer;
   border-radius: 5px;
+  z-index: 1001; 
 }
+
