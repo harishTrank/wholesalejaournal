@@ -2,8 +2,8 @@ import Axios from "axios";
 import queryString from "querystring";
 
 export const hostname = () => {
-   let hostUrl = "http://192.168.0.18:8000/api";
-  // let hostUrl = "https://journals.tranktechnologies.com/api";
+  //  let hostUrl = "http://192.168.0.18:8000/api";
+   let hostUrl = "https://journals.tranktechnologies.com/api";
 
   return hostUrl;
 };

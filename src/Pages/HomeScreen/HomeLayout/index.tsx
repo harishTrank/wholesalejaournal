@@ -58,6 +58,15 @@ const HomeScreen = ({ curimage }: any) => {
   const [sizeApiResponse, setSizeApiResponse]: any = useState([]);
 
   const parameters: any = useParams();
+  const [selectedImage, setSelectedImage] = useState(null);
+
+  const showImagePopup = (image:any) => {
+    setSelectedImage(image);
+  };
+
+  const hideImagePopup = () => {
+    setSelectedImage(null);
+  };
 
   const changeBackGroundHandler = () => {
     if (currentTheme && !parameters?.id) {
@@ -330,16 +339,27 @@ const HomeScreen = ({ curimage }: any) => {
             />
 
             <div className="flex space-bw">
-              <div className="customise-img1">
-                <img src={currentTheme?.cover_img} alt="" />
-              </div>
-              <div className="customise-img1">
-                <img src={currentTheme?.inner_img} alt="" />
-              </div>
-              <div className="customise-img1">
-                <img src={currentTheme?.category_type__image} alt="" />
-              </div>
+               <div className="customise-img1" onClick={() => showImagePopup(currentTheme?.cover_img)}>
+        <img src={currentTheme?.cover_img} alt="Cover Image" />
+      </div>
+      <div className="customise-img1" onClick={() => showImagePopup(currentTheme?.inner_img)}>
+        <img src={currentTheme?.inner_img} alt="Inner Image" />
+      </div>
+      <div className="customise-img1" onClick={() => showImagePopup(currentTheme?.category_type__image)}>
+        <img src={currentTheme?.category_type__image} alt="Category Image" />
+      </div>
             </div>
+            {selectedImage && (
+        <div className="popup-overlay" onClick={hideImagePopup}>
+          <div className="popup-content" onClick={(e) => e.stopPropagation()}>
+            <img src={selectedImage} alt="Selected Image" />
+            <button className="popup-close-btn" onClick={hideImagePopup}>
+              Close
+            </button>
+          </div>
+        </div>
+      )}
+            
           </div>
 
           <div className="accordion-content">
