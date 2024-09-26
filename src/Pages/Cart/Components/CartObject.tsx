@@ -43,6 +43,7 @@ const CartObject = ({
           ? {
               ...item,
               quantity: quantity + 1,
+              total_price: item.price * (quantity + 1),
             }
           : item;
       });
@@ -68,6 +69,7 @@ const CartObject = ({
             ? {
                 ...item,
                 quantity: quantity - 1,
+                total_price: item.price * (quantity + 1),
               }
             : item;
         });
