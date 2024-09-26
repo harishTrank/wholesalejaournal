@@ -56,12 +56,12 @@ const HomeScreen = ({ curimage }: any) => {
   const [isLoading, setIsLoading] = useState(false);
   const [apiCategoryList, setApiCategoryList]: any = useState([]);
   const [sizeApiResponse, setSizeApiResponse]: any = useState([]);
-  const [productQty,setProductQty]:any=useState(1)
+  const [productQty, setProductQty]: any = useState(1);
 
   const parameters: any = useParams();
   const [selectedImage, setSelectedImage] = useState(null);
 
-  const showImagePopup = (image:any) => {
+  const showImagePopup = (image: any) => {
     setSelectedImage(image);
   };
 
@@ -232,6 +232,10 @@ const HomeScreen = ({ curimage }: any) => {
               inner: dataUrlInner,
               description: currentTheme?.disc,
               product_id: parameters?.id,
+              total_price:
+                (selectedOption === "Yes"
+                  ? currentTheme?.price + currentTheme?.additional_price
+                  : currentTheme?.price) * productQty,
             },
             ...currentData,
           ];
@@ -241,7 +245,7 @@ const HomeScreen = ({ curimage }: any) => {
           toast.success("Item add to your cart successfully.");
         } else {
           let body: any = {
-            quantity: 1,
+            quantity: productQty,
             currentSize: currentSize?.id ? currentSize?.id : "default",
             customise_price: selectedOption,
             boardSelectedOption,
@@ -340,27 +344,43 @@ const HomeScreen = ({ curimage }: any) => {
             />
 
             <div className="flex space-bw">
-               <div className="customise-img1" onClick={() => showImagePopup(currentTheme?.cover_img)}>
-        <img src={currentTheme?.cover_img} alt="Cover Image" />
-      </div>
-      <div className="customise-img1" onClick={() => showImagePopup(currentTheme?.inner_img)}>
-        <img src={currentTheme?.inner_img} alt="Inner Image" />
-      </div>
-      <div className="customise-img1" onClick={() => showImagePopup(currentTheme?.category_type__image)}>
-        <img src={currentTheme?.category_type__image} alt="Category Image" />
-      </div>
+              <div
+                className="customise-img1"
+                onClick={() => showImagePopup(currentTheme?.cover_img)}
+              >
+                <img src={currentTheme?.cover_img} alt="Cover Image" />
+              </div>
+              <div
+                className="customise-img1"
+                onClick={() => showImagePopup(currentTheme?.inner_img)}
+              >
+                <img src={currentTheme?.inner_img} alt="Inner Image" />
+              </div>
+              <div
+                className="customise-img1"
+                onClick={() =>
+                  showImagePopup(currentTheme?.category_type__image)
+                }
+              >
+                <img
+                  src={currentTheme?.category_type__image}
+                  alt="Category Image"
+                />
+              </div>
             </div>
             {selectedImage && (
-        <div className="popup-overlay" onClick={hideImagePopup}>
-          <div className="popup-content" onClick={(e) => e.stopPropagation()}>
-            <img src={selectedImage} alt="Selected Image" />
-            <button className="popup-close-btn" onClick={hideImagePopup}>
-              X
-            </button>
-          </div>
-        </div>
-      )}
-            
+              <div className="popup-overlay" onClick={hideImagePopup}>
+                <div
+                  className="popup-content"
+                  onClick={(e) => e.stopPropagation()}
+                >
+                  <img src={selectedImage} alt="Selected Image" />
+                  <button className="popup-close-btn" onClick={hideImagePopup}>
+                    X
+                  </button>
+                </div>
+              </div>
+            )}
           </div>
 
           <div className="accordion-content">
@@ -733,8 +753,12 @@ const HomeScreen = ({ curimage }: any) => {
             <div className="customisecart flex">
               {(selectedOption === "Yes" || parameters?.id) && (
                 <>
-                <div className="qty-box">
-                    <input type="text" value={productQty} onChange={(e:any)=>setProductQty(e.target.value)} />
+                  <div className="qty-box">
+                    <input
+                      type="text"
+                      value={productQty}
+                      onChange={(e: any) => setProductQty(e.target.value)}
+                    />
                   </div>
                   <div className="addbtn">
                     <button onClick={preViewButtonHandler}>Preview</button>
@@ -742,9 +766,6 @@ const HomeScreen = ({ curimage }: any) => {
                   <div className="addbtn">
                     <button onClick={addToCartHandler}>Add to cart</button>
                   </div>
-                  
-
-
                 </>
               )}
               {isModalOpen && (
