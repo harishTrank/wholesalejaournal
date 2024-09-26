@@ -42,7 +42,7 @@ const CartScreen = () => {
     setCartTotal(
       Math.floor(
         cartDetails.reduce((sum: any, item: any) => {
-          return sum + item.price * item.quantity;
+          return sum + item?.total_price;
         }, 0)
       ).toFixed(2) || "0.00"
     );
