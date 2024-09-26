@@ -139,7 +139,7 @@ const CartObject = ({
         </p>
       </div>
       <div className="product-price">
-        <p>${Math.round(currentItem?.price * quantity).toFixed(2)}</p>
+        <p>${Math.round(currentItem?.total_price).toFixed(2)}</p>
       </div>
     </div>
   );
