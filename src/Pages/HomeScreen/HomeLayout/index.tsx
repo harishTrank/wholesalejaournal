@@ -56,6 +56,7 @@ const HomeScreen = ({ curimage }: any) => {
   const [isLoading, setIsLoading] = useState(false);
   const [apiCategoryList, setApiCategoryList]: any = useState([]);
   const [sizeApiResponse, setSizeApiResponse]: any = useState([]);
+  const [productQty,setProductQty]:any=useState(1)
 
   const parameters: any = useParams();
   const [selectedImage, setSelectedImage] = useState(null);
@@ -218,7 +219,7 @@ const HomeScreen = ({ curimage }: any) => {
 
           const newData: any = [
             {
-              quantity: 1,
+              quantity: productQty,
               price:
                 selectedOption === "Yes"
                   ? currentTheme?.price + currentTheme?.additional_price
@@ -732,12 +733,18 @@ const HomeScreen = ({ curimage }: any) => {
             <div className="customisecart flex">
               {(selectedOption === "Yes" || parameters?.id) && (
                 <>
+                <div className="qty-box">
+                    <input type="text" value={productQty} onChange={(e:any)=>setProductQty(e.target.value)} />
+                  </div>
                   <div className="addbtn">
                     <button onClick={preViewButtonHandler}>Preview</button>
                   </div>
                   <div className="addbtn">
                     <button onClick={addToCartHandler}>Add to cart</button>
                   </div>
+                  
+
+
                 </>
               )}
               {isModalOpen && (

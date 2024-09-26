@@ -489,3 +489,9 @@ p.site-description {
   z-index: 1001; 
 }
 
+.qty-box{
+  width: 13%;
+}
+.qty-box input{
+  width: 100%;
+}
