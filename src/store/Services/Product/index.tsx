@@ -46,3 +46,8 @@ export const productSizeApi = ({ query }: any) =>
     uriEndPoint: productEndpoints.productSizeApi.v1,
     query,
   });
+
+export const cartTotal=()=>
+  callApi({
+    uriEndPoint:productEndpoints.cartTotal.v1
+  })

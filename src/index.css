@@ -155,7 +155,7 @@ header {
 .cart-header{
   display: flex;
   flex-wrap: wrap;
-  gap: 1rem;
+
 }
 nav {
   background: #FCF8F3;
