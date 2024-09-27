@@ -29,6 +29,7 @@ const CartScreen = () => {
           .then((res: any) => {
             setCartDetails(res.data);
             setIsLoading(false);
+            setCartTotal(res.total_price_sum);
           })
           .catch(() => {
             setIsLoading(false);
@@ -37,16 +38,6 @@ const CartScreen = () => {
       }, 1000);
     }
   }, [hitAgainAPI]);
-
-  useEffect(() => {
-    setCartTotal(
-      Math.floor(
-        cartDetails.reduce((sum: any, item: any) => {
-          return sum + item?.total_price;
-        }, 0)
-      ).toFixed(2) || "0.00"
-    );
-  }, [cartDetails]);
 
   const checkOutButtonHandler = () => {
     if (!localStorage.getItem("accessToken")) {
