@@ -7,7 +7,6 @@ import { Link, useNavigate } from "react-router-dom";
 import FullScreenLoader from "../../components/FullScreenLoader";
 import toast from "react-hot-toast";
 import { currentCartListAPI } from "../../store/Services/Product";
-import { NumberFormatter } from "../../Utils";
 
 const CartScreen = () => {
   const [cartDetails, setCartDetails]: any = useState([]);
@@ -102,7 +101,7 @@ const CartScreen = () => {
                       </div>
                       <div className="subtotal flex space-bw">
                         <p>Subtotal</p>
-                        <p>${NumberFormatter(cartTotal)}</p>
+                        <p>${cartTotal}</p>
                       </div>
                       <div className="free-shipping flex space-bw">
                         <p>Shipping</p>
