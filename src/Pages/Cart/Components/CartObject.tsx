@@ -4,6 +4,7 @@ import {
   removeCartItem,
 } from "../../../store/Services/Product";
 import toast from "react-hot-toast";
+import { NumberFormatter } from "../../../Utils";
 
 const CartObject = ({
   currentItem,
@@ -141,7 +142,7 @@ const CartObject = ({
         </p>
       </div>
       <div className="product-price">
-        <p>${Math.round(currentItem?.total_price).toFixed(2)}</p>
+        <p>${NumberFormatter(Math.round(currentItem?.total_price))}</p>
       </div>
     </div>
   );
