@@ -19,6 +19,8 @@ import {
   productSizeApi,
 } from "../../../store/Services/Product";
 import { useParams } from "react-router-dom";
+import { useAtom } from "jotai";
+import { cartLengthApiHit } from "../../../JotaiStore";
 
 const HomeScreen = ({ curimage }: any) => {
   const [image, setImage]: any = useState(null);
@@ -60,6 +62,7 @@ const HomeScreen = ({ curimage }: any) => {
 
   const parameters: any = useParams();
   const [selectedImage, setSelectedImage] = useState(null);
+  const [,setapiHitCartLength] : any = useAtom(cartLengthApiHit);
 
   const showImagePopup = (image: any) => {
     setSelectedImage(image);
@@ -239,7 +242,7 @@ const HomeScreen = ({ curimage }: any) => {
             },
             ...currentData,
           ];
-
+          setapiHitCartLength((oldval: any) => oldval + 1);
           localStorage.setItem("cartData", JSON.stringify(newData));
           setIsLoading(false);
           toast.success("Item add to your cart successfully.");
@@ -262,6 +265,7 @@ const HomeScreen = ({ curimage }: any) => {
             body,
           })
             .then(() => {
+              setapiHitCartLength((oldval: any) => oldval + 1);
               toast.success("Item add to your cart successfully.");
               setIsLoading(false);
             })
@@ -753,13 +757,13 @@ const HomeScreen = ({ curimage }: any) => {
             <div className="customisecart flex">
               {(selectedOption === "Yes" || parameters?.id) && (
                 <>
-                  <div className="qty-box">
-                    <input
-                      type="text"
-                      value={productQty}
-                      onChange={(e: any) => setProductQty(e.target.value)}
-                    />
-                  </div>
+                 <div className="qty-box">
+                  <input type="number" value={productQty} onChange={(e: any) => {
+                      const value = e.target.value;
+     
+                   if (value >= 0) {
+                  setProductQty(value);}}}/>
+                   </div>
                   <div className="addbtn">
                     <button onClick={preViewButtonHandler}>Preview</button>
                   </div>

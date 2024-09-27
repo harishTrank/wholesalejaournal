@@ -5,6 +5,8 @@ import {
 } from "../../../store/Services/Product";
 import toast from "react-hot-toast";
 import { NumberFormatter } from "../../../Utils";
+import { cartLengthApiHit } from "../../../JotaiStore";
+import { useAtom } from "jotai";
 
 const CartObject = ({
   currentItem,
@@ -14,6 +16,7 @@ const CartObject = ({
   setHitAgainAPI,
 }: any) => {
   const [quantity, setQuantity]: any = useState(currentItem?.quantity);
+  const [, setapiHitCartLength]: any = useAtom(cartLengthApiHit);
 
   const cartObjectQuantityHandler = (quantity: any, id: any) => {
     incrementDecrementCartItemAPI({
@@ -93,6 +96,7 @@ const CartObject = ({
       );
       localStorage.setItem("cartData", JSON.stringify(finalData));
       setIsLoading(false);
+      setapiHitCartLength((oldval: any) => oldval + 1);
       setCartDetails(finalData);
     } else {
       removeCartItem({
@@ -101,6 +105,7 @@ const CartObject = ({
         },
       })
         .then(() => {
+          setapiHitCartLength((oldval: any) => oldval + 1);
           toast.success("Remove item successfully");
           setHitAgainAPI((oldValue: any) => oldValue + 1);
           setIsLoading(false);

@@ -18,6 +18,7 @@
     "axios": "^1.7.7",
     "chroma-js": "^2.4.2",
     "formik": "^2.4.6",
+    "jotai": "^2.10.0",
     "konva": "^9.3.14",
     "photoeditorsdk": "^5.19.0",
     "querystring": "^0.2.1",

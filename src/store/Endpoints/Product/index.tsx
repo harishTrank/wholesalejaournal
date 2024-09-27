@@ -57,4 +57,12 @@ export const productEndpoints = {
       uri: "/product-size/",
     },
   },
+  cartTotal: {
+    v1: {
+      ...defaults.methods.GET,
+      ...defaults.versions.v1,
+      uri: "/cart-count/",
+    },
+  },
+  
 };
