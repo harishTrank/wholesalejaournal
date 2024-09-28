@@ -62,7 +62,7 @@ const HomeScreen = ({ curimage }: any) => {
 
   const parameters: any = useParams();
   const [selectedImage, setSelectedImage] = useState(null);
-  const [,setapiHitCartLength] : any = useAtom(cartLengthApiHit);
+  const [, setapiHitCartLength]: any = useAtom(cartLengthApiHit);
 
   const showImagePopup = (image: any) => {
     setSelectedImage(image);
@@ -389,6 +389,10 @@ const HomeScreen = ({ curimage }: any) => {
 
           <div className="accordion-content">
             <div className="personalisethisproductheading">
+              <h1>{currentTheme?.title}</h1>
+              <h3>${currentTheme?.price}</h3>
+              <p>{currentTheme?.disc}</p>
+              <br />
               <h2>Personalise this product</h2>
               <select
                 name="optionSelect"
@@ -757,13 +761,19 @@ const HomeScreen = ({ curimage }: any) => {
             <div className="customisecart flex">
               {(selectedOption === "Yes" || parameters?.id) && (
                 <>
-                 <div className="qty-box">
-                  <input type="number" value={productQty} onChange={(e: any) => {
-                      const value = e.target.value;
-     
-                   if (value >= 0) {
-                  setProductQty(value);}}}/>
-                   </div>
+                  <div className="qty-box">
+                    <input
+                      type="number"
+                      value={productQty}
+                      onChange={(e: any) => {
+                        const value = e.target.value;
+
+                        if (value >= 0) {
+                          setProductQty(value);
+                        }
+                      }}
+                    />
+                  </div>
                   <div className="addbtn">
                     <button onClick={preViewButtonHandler}>Preview</button>
                   </div>

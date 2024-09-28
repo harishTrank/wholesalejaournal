@@ -14,9 +14,11 @@ const Header = () => {
   const [apiHitAgain]: any = useAtom(cartLengthApiHit);
 
   useEffect(() => {
-    cartTotal().then((res: any) => {
-      setCartQty(res.count);
-    });
+    cartTotal()
+      .then((res: any) => {
+        setCartQty(res.count);
+      })
+      .catch((err: any) => console.log("err", err));
   }, [apiHitAgain]);
 
   useEffect(() => {
