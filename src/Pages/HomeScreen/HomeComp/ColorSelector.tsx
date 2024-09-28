@@ -3,7 +3,7 @@ import { colors } from "../../../Utils";
 
 const BackGroundColor = ({ backgroundColor, setBackGroundColor }: any) => {
   return (
-    <div className="swatch customily-swatch" style={{ width: "55%" }}>
+    <div className="swatch customily-swatch" style={{ width: "65%" }}>
       {colors.map((item: any, index: any) => (
         <div className="tooltip" key={index}>
           <label
