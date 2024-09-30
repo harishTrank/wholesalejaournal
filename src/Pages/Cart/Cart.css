@@ -56,7 +56,7 @@
   }
 
   .product-description {
-    width: 70%;
+    width: 60%;
   }
 .product-description p u{
   font-size: 20px;
@@ -165,4 +165,61 @@
   padding: 10px;
   border-radius: 5px;
   cursor: pointer;
+}
+
+/* popup */
+.popup-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.7);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.popup {
+  background: white;
+  padding: 20px;
+  border-radius: 8px;
+  text-align: center;
+  width: 50%;
+  height: 600px;
+  overflow-y: auto;
+}
+
+.popup button {
+  background-color: #4caf50;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.popup button:hover {
+  background-color: #45a049;
+}
+.couponlistfinal{
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  margin-top: 20px;
+}
+.finalcouponcontent{
+  padding: 10px;
+}
+.check-coupon button{
+  width: 100%;
+  background: #B88E2F;
+  border: none;
+  border-radius: 5px;
+  color: #fff;
+  align-items: center;
+  display: flex;
+  text-align: center;
+  justify-content: center;
+  padding: 10px;
+
 }

@@ -51,3 +51,19 @@ export const cartTotal=()=>
   callApi({
     uriEndPoint:productEndpoints.cartTotal.v1
   })
+
+export const DiscountList=()=>
+  callApi({
+    uriEndPoint:productEndpoints.DiscountList.v1
+  })  
+
+export const CouponList=()=>
+  callApi({
+    uriEndPoint:productEndpoints.CouponList.v1
+  }) 
+
+export const ApplyCoupon=({ body }:any)=>
+  callApi({
+    uriEndPoint:productEndpoints.ApplyCoupon.v1,
+    body
+  })
