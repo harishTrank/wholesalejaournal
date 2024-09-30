@@ -64,5 +64,29 @@ export const productEndpoints = {
       uri: "/cart-count/",
     },
   },
+  DiscountList: {
+    v1: {
+      ...defaults.methods.GET,
+      ...defaults.versions.v1,
+      uri: "/discount/",
+    },
+  },
+  CouponList: {
+    v1: {
+      ...defaults.methods.GET,
+      ...defaults.versions.v1,
+      uri: "/user-coupons/",
+    },
+  },
+  ApplyCoupon: {
+    v1: {
+      ...defaults.methods.POST,
+      ...defaults.versions.v1,
+      uri: "/coupon/",
+    },
+  },
+  
+ 
+  
   
 };

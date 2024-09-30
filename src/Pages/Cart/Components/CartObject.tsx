@@ -142,7 +142,7 @@ const CartObject = ({
         </p>
       </div>
       <div className="product-price">
-        <p>${NumberFormatter(Math.round(currentItem?.total_price))}</p>
+        <p>${currentItem?.total_price}</p>
       </div>
     </div>
   );
