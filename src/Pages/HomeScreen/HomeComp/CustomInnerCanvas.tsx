@@ -20,7 +20,7 @@ const CustomInnerCanvas = ({
   selectedId,
   setSelectedId,
 }: any) => {
-  const [logoImage, setLogoImage] = useState<HTMLImageElement | null>(null);
+  const [logoInnerImage, setLogoInnerImage] = useState<HTMLImageElement | null>(null);
 
   const [imgProps, setImgProps] = useState({ width: 0, height: 0 });
   const [currentBackImg, setCurrentBackImg] = useState<HTMLImageElement | null>(
@@ -43,7 +43,7 @@ const CustomInnerCanvas = ({
   });
   const textRef = useRef<any>(null);
   const trRef = useRef<any>(null);
-  const logoRef = useRef<any>(null);
+  const logoInnerRef = useRef<any>(null);
 
   const canvasWidth = window.innerWidth * 0.3;
   const canvasHeight = window.innerHeight;
@@ -134,7 +134,7 @@ const CustomInnerCanvas = ({
         const logoX = (canvasWidth - logoWidth) / 2;
         const logoY = (canvasHeight - logoHeight) / 2;
 
-        setLogoImage(logo);
+        setLogoInnerImage(logo);
         setLogoProps({
           width: logoWidth,
           height: logoHeight,
@@ -148,7 +148,7 @@ const CustomInnerCanvas = ({
     }
 
     if (uploadInnerLogo === "") {
-      setLogoImage(null);
+      setLogoInnerImage(null);
     }
   }, [uploadInnerLogo, canvasHeight, canvasWidth]);
 
@@ -204,15 +204,15 @@ const CustomInnerCanvas = ({
           )}
         </Layer>
         <Layer>
-          {logoImage && (
+          {logoInnerImage && (
             <KonvaImage
-              image={logoImage}
+              image={logoInnerImage}
               x={logoProps.x}
               y={logoProps.y}
               width={logoProps.width}
               height={logoProps.height}
               draggable
-              ref={logoRef}
+              ref={logoInnerRef}
               onClick={handleSelect}
               onTap={handleSelect}
               onDragEnd={(e) =>
@@ -226,8 +226,8 @@ const CustomInnerCanvas = ({
               id="logo"
             />
           )}
-          {selectedId === "logo" && logoRef.current && (
-            <Transformer ref={trRef} nodes={[logoRef.current]} />
+          {selectedId === "logo" && logoInnerRef.current && (
+            <Transformer ref={trRef} nodes={[logoInnerRef.current]} />
           )}
         </Layer>
       </Stage>

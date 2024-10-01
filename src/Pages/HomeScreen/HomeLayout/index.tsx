@@ -706,7 +706,7 @@ const HomeScreen = ({ curimage }: any) => {
                         >
                           <div className="file">
                             <label
-                              htmlFor="logoUpload"
+                              htmlFor="logoUpload1"
                               style={{ cursor: "pointer", marginTop: "10px" }}
                             >
                               Select a file
@@ -715,7 +715,7 @@ const HomeScreen = ({ curimage }: any) => {
                             <input
                               type="file"
                               onChange={handleInnerLogoUpload}
-                              id="logoUpload"
+                              id="logoUpload1"
                               style={{ display: "none" }}
                             />
                           </div>
