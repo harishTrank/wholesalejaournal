@@ -9,14 +9,12 @@ const CoverOption = ({
   setUploadLogo,
   setCurrentBkgShape,
   currentTheme,
-  paramsid,
 }: any) => {
   const optionSelectHandler = (e: any) => {
     setCoverCurrentOption(e.target.value);
   };
 
   const handleLogoUpload = (e: any) => {
-    // setUploadLogo(e.target.value);
     const file = e.target.files[0];
     if (file) {
       setUploadLogo(file);
@@ -62,6 +60,9 @@ const CoverOption = ({
         )}
         {currentTheme?.cover_logo_flag && (
           <option value="Upload a logo">Upload a logo</option>
+        )}
+        {currentTheme?.own_design_flag && (
+          <option value="Upload a logo">Upload own design</option>
         )}
       </select>
       {coverCurrentOption === "Phrase" ? (
