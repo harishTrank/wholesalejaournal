@@ -63,6 +63,9 @@ const HomeScreen = ({ curimage }: any) => {
   const parameters: any = useParams();
   const [selectedImage, setSelectedImage] = useState(null);
   const [, setapiHitCartLength]: any = useAtom(cartLengthApiHit);
+  const [personaliseOwn,setPersonaliseOwn]:any=useState(false)
+  const [uploadOwnDesign,setUploadOwnDesign]:any=useState(null)
+  const [hidedivs,setHideDivs]:any=useState(false)
 
   const showImagePopup = (image: any) => {
     setSelectedImage(image);
@@ -137,6 +140,10 @@ const HomeScreen = ({ curimage }: any) => {
   const toggleContentVisibility = () => {
     setIsContentVisible(!isContentVisible); // Toggle the content visibility
   };
+  const toggleMyOwnContent=()=>{
+    setPersonaliseOwn(!personaliseOwn)
+    setHideDivs(!hidedivs)
+  }
 
   const preViewButtonHandler = () => {
     setSelectedId(null);
@@ -174,6 +181,12 @@ const HomeScreen = ({ curimage }: any) => {
     }
   };
 
+  const handleOwnDesign=(e:any)=>{
+    const file=e.target.files[0]
+    if(file){
+      setPersonaliseOwn(file)
+    }
+  }
   const closeModalHandler = () => {
     setIsModalOpen(false);
   };
@@ -345,6 +358,7 @@ const HomeScreen = ({ curimage }: any) => {
               currentInnerFont={currentInnerFont}
               currentFont={currentFont}
               uploadInnerLogo={uploadInnerLogo}
+              personaliseOwn={personaliseOwn}
             />
 
             <div className="flex space-bw">
@@ -408,7 +422,7 @@ const HomeScreen = ({ curimage }: any) => {
             </div>
             {selectedOption === "Yes" && (
               <>
-                <div className="personalisecover">
+                <div className="personalisecover" style={{display: hidedivs ? 'none' : 'block'}}>
                   <div
                     className="accordion-header"
                     onClick={toggleCanvasVisibility}
@@ -646,7 +660,7 @@ const HomeScreen = ({ curimage }: any) => {
                     </div>
                   </div>
                 </div>
-                <div className="personaliseinnerimages">
+                <div className="personaliseinnerimages" style={{display: hidedivs ? 'none' : 'block'}}>
                   <div
                     className="accordion-header"
                     onClick={toggleContentVisibility}
@@ -754,6 +768,23 @@ const HomeScreen = ({ curimage }: any) => {
                       </div>
                     </div>
                   )}
+                </div>
+                <div className="personaliseowndesign">
+                  <div className="accordion-header" >
+                    <h3  onClick={toggleMyOwnContent}>Personalise My Own Design</h3>
+                    {
+                      personaliseOwn && (
+                        <div className="uploadLogo">
+                          <div className="file">
+                            <label htmlFor="ownimage">Select Image</label>
+                            <input type="file" style={{display:'none'}} onChange={handleOwnDesign} id="ownimage"/>
+                          </div>
+
+                        </div>
+                      )
+                    }
+                  </div>
+
                 </div>
               </>
             )}

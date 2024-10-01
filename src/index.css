@@ -242,11 +242,11 @@ footer{
   background: #555; 
 }
 
-@media(max-width:1023px) {
+/* @media(max-width:1023px) {
   .container {
     max-width: 95%;
   }
-}
+} */
 
 @media(max-width: 767px) {
 
@@ -373,4 +373,30 @@ footer ul li a {
 footer .col-25 {
     margin-bottom: 10px;
 }
+}
+
+@media (max-width:967px){
+  .col-25 {
+    width: 50%;
+  }
+  .mrg-top{
+    margin-top: 20px;
+  }
+  h1 {
+    font-size: 30px;
+}
+}
+
+@media (max-width:767px){
+  .col-25 {
+    width: 100%;
+  }
+
+}
+
+@media (max-width:480px){
+  .col-33_2 {
+      width: 100%;
+      margin-bottom: 20px;
+  }
 }

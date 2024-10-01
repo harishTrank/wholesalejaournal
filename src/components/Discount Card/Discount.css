@@ -62,3 +62,15 @@
 .circle2{
     right: -25px;
 }
+
+@media (max-width:968px){
+    .coupon-card {
+        width: 50%;
+    }
+}
+
+@media (max-width:767px){
+    .coupon-card {
+        width: 100%;
+    }
+}

@@ -31,3 +31,30 @@
     background: #B88E2F;
     border: none;
 }
+
+@media (max-width:1024px){
+    .card-container {
+        width: 50%;
+    }
+}
+
+@media (max-width:968px){
+    
+    .card-container {
+        width: 50%;
+    }
+}
+
+@media (max-width:768px){
+    
+    .card-container {
+        width: 100%;
+    }
+    .default-sorting select {
+        width: 90%;
+        margin-top: 15px;
+    }
+}
+
+
+

@@ -259,7 +259,7 @@ footer form {
 
 footer form input[type="text"],
 footer form input[type="button"] {
-    width: 73%;
+    width: 70%;
     outline: none;
     border: none;
     padding: 5px;
@@ -406,3 +406,19 @@ footer .copyright p {
 h4{
     font-weight: 600;
 }
+
+@media (max-width:968px){
+    .top-area a {
+        font-size: 16px;
+    }
+    p {
+        font-size: 13px;
+    }
+    .new-text a {
+        width: 100%;
+    }
+}
+
+
+
+

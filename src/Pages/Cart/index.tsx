@@ -148,8 +148,8 @@ const CartScreen = () => {
                         />
                         <button onClick={applyCouponHandler}>Apply</button>
                       </div>
-                      <div className="check-coupon">
-                        <button onClick={handleApplyClick}>
+                      <div className="check-coupon ">
+                        <button onClick={handleApplyClick} className="flex al-center justify-center">
                           Check Available Coupons&nbsp; <RiCoupon5Line />
                         </button>
                       </div>
@@ -157,30 +157,42 @@ const CartScreen = () => {
                         <div className="popup-overlay">
                           <div className="popup">
                             <h2>Coupons</h2>
+                            <span onClick={closePopup} className="close-button">x</span>
 
                             {couponDetails.map((coupon: any, index: any) => (
-                              <div key={index} className="couponlistfinal">
-                                <div className="finalcouponcontent">
-                                  <h1>{coupon.coupon_code}</h1>
-                                  <p>
-                                    Flat {coupon.discount_amount}% discount on
-                                    this order
-                                  </p>
-                                  <p>
-                                    Minimum Order value should be{" "}
-                                    {coupon.min_amount}
+                             
+                              <div className="cartcoupon flex space-bw al-center">
+                                <div className="coupon-left">
+                                <p> Flat {coupon.discount_amount}% OFF</p>
+                                </div>
+                                <div className="coupon-right">
+                                <h3>{coupon.coupon_code}</h3>
+                                <div className="cartcoupon-row">
+                                 
+                                   <p>{coupon.disc}</p> 
+                                   
+                                </div>
+                                <div className="cartcoupon-row">
+                                <p>
+                                     Minimum Order value should be
+                                     {coupon.min_amount}
                                   </p>
                                   <button
                                     onClick={() =>
-                                      applyCoupon(coupon.coupon_code)
-                                    }
-                                  >
-                                    Apply Now
-                                  </button>
+                                       applyCoupon(coupon.coupon_code)
+                                     }
+                                   >
+                                     Apply
+                                   </button>
+                                  
                                 </div>
+                                </div>
+                               
+                                <div className="cartcircle-1"></div>
+                                <div className="cartcircle-2"></div>
                               </div>
                             ))}
-                            <button onClick={closePopup}>Close</button>
+                            
                           </div>
                         </div>
                       )}
@@ -197,7 +209,7 @@ const CartScreen = () => {
                       </div>
                       <div className="free-shipping flex space-bw">
                         <p>Discount Amount</p>
-                        <p>${system ? finalAmount.discount_amount : 0}</p>
+                        <p style={{color:'red'}}>-${system ? finalAmount.discount_amount : 0}</p>
                       </div>
 
                       <div className="total flex space-bw">

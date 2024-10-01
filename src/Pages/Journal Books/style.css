@@ -1,7 +1,7 @@
 .journal-section {
     width: calc(100% - 350px);
 }
-.default-sorting select{
+.default-sorting select {
     background: #fff;
     color: #000;
     padding: 10px;
@@ -21,4 +21,26 @@
 }
 .no-data p{
     font-size: 25px;
+}
+
+@media (max-width:767px){
+    .sidebar-section{
+        width: 100%;
+        margin-bottom: 30px;
+    }
+    .journal-section {
+        width: 100%;
+
+    }
+    h1 {
+        font-size: 25px;
+        margin: 15px 0;
+    }
+}
+
+@media (max-width:768px){
+    .sidebar{
+        width: 100%;
+        margin-bottom: 20px;
+    }
 }

@@ -7,7 +7,7 @@ const Footer = () => {
       <footer className="gap">
         <div className="container">
           <div className="flex space-bw">
-            <div className="col-25">
+            <div className="col-25 mrg-top">
               <h3>USA Custom Pad</h3>
               <ul>
                 <li>
@@ -27,7 +27,7 @@ const Footer = () => {
                 </li>
               </ul>
             </div>
-            <div className="col-25 lpad">
+            <div className="col-25 lpad mrg-top">
               <h3>Links</h3>
               <ul>
                 <li>
@@ -44,7 +44,7 @@ const Footer = () => {
                 </li>
               </ul>
             </div>
-            <div className="col-25">
+            <div className="col-25 mrg-top">
               <h3>Help</h3>
               <ul>
                 <li>
@@ -58,7 +58,7 @@ const Footer = () => {
                 </li>
               </ul>
             </div>
-            <div className="col-25">
+            <div className="col-25 mrg-top">
               <h3>Newsletter</h3>
               <form action="">
                 <input type="text" />
