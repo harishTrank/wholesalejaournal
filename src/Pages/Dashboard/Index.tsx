@@ -14,7 +14,7 @@ import Cate2 from "../../assests/cate2.png";
 import Cate3 from "../../assests/cate3.png";
 import Footer from "../../components/Footer";
 import { homeProducts } from "../../store/Services/Product";
-import Discount from '../../components/Discount Card'
+import Discount from "../../components/Discount Card";
 import { DiscountList } from "../../store/Services/Product";
 const Dashboard = () => {
   const settings = {
@@ -29,21 +29,19 @@ const Dashboard = () => {
   };
 
   const [dasboardProducts, setDasboardProducts]: any = useState([]);
-  const [discountcoupons,setDiscountCoupons]:any=useState([])
+  const [discountcoupons, setDiscountCoupons]: any = useState([]);
 
   useEffect(() => {
     homeProducts().then((res: any) => {
       setDasboardProducts(res.data);
-     
     });
 
-    DiscountList().then((res:any)=>{
-      setDiscountCoupons(res.Data)
-      
-
-    })
+    DiscountList()
+      .then((res: any) => {
+        setDiscountCoupons(res.Data);
+      })
+      .catch((err) => console.log("err", err));
   }, []);
-
 
   const navigation: any = useNavigate();
   const addtocardHandler = (product: any) => {
@@ -107,9 +105,8 @@ const Dashboard = () => {
           <div className="common-text text-center">
             <h2>Our Discount</h2>
           </div>
-          <div >
-            <Discount discountCoupons={discountcoupons}/>
-            
+          <div>
+            <Discount discountCoupons={discountcoupons} />
           </div>
         </div>
       </section>
