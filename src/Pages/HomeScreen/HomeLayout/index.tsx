@@ -241,7 +241,7 @@ const HomeScreen = ({ curimage }: any) => {
                 (selectedOption === "Yes"
                   ? currentTheme?.price + currentTheme?.additional_price
                   : currentTheme?.price) * productQty,
-              page_count: currentTheme?.page_count,
+              page_count: totalInnerPages,
             },
             ...currentData,
           ];
@@ -260,10 +260,10 @@ const HomeScreen = ({ curimage }: any) => {
             cover: dataUrlCover,
             inner: dataUrlInner,
             description: currentTheme?.disc,
-            page_count: currentTheme?.page_count,
           };
           if (parameters?.id) {
             body.product_id = parameters?.id;
+            body.page_count = totalInnerPages;
           }
           addToCartDefault({
             body,

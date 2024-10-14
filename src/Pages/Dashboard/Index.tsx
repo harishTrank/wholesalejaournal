@@ -32,9 +32,11 @@ const Dashboard = () => {
   const [discountcoupons, setDiscountCoupons]: any = useState([]);
 
   useEffect(() => {
-    homeProducts().then((res: any) => {
-      setDasboardProducts(res.data);
-    });
+    homeProducts()
+      .then((res: any) => {
+        setDasboardProducts(res.data);
+      })
+      .catch((err) => console.log("err", err));
 
     DiscountList()
       .then((res: any) => {

@@ -21,7 +21,7 @@ const JournalBook = ({ bookType }: any) => {
   const [coverType, setCoverType]: any = useState("");
   const [bookTypeFilter, setBookTypeFilter]: any = useState(bookType);
   const [isLoading, setIsLoading]: any = useState(false);
-  const [search,setSearch]:any=useState("")
+  const [search, setSearch]: any = useState("");
 
   const onPageChange = (page: number) => {
     setCurrentPage(page);
@@ -44,8 +44,7 @@ const JournalBook = ({ bookType }: any) => {
         lined_non_lined: linedProducts || "",
         cover_type: coverType || "",
         category: bookTypeFilter,
-        title:search,
-        
+        title: search,
       },
       query: {
         page: currentPage,
@@ -64,7 +63,7 @@ const JournalBook = ({ bookType }: any) => {
     linedProducts,
     coverType,
     bookTypeFilter,
-    search
+    search,
   ]);
 
   const handleSortChange = (e: any) => {
@@ -101,10 +100,11 @@ const JournalBook = ({ bookType }: any) => {
                     ? "Journal Books"
                     : bookTypeFilter === "WritingJournal"
                     ? "Writing Journal"
-                    : "Shop"}
+                    : "Uncategorised"}
                 </h1>
                 <div className="default-sorting flex space-bw al-center">
-                  <p>Showing all {journalCount} results</p>
+                  <p></p>
+                  {/* <p>Showing all {journalCount} results</p> */}
                   <select value={sortOption} onChange={handleSortChange}>
                     <option value="default">Default sorting</option>
                     <option value="popularity">Sort by popularity</option>
@@ -125,21 +125,22 @@ const JournalBook = ({ bookType }: any) => {
                         <Card product={product} index={index} key={index} />
                       ))}
                     </div>
-                    <div className="pagination-controls">
-                      <Pagination
-                        current={currentPage}
-                        total={totalPage * 10}
-                        onChange={onPageChange}
-                        showSizeChanger={false}
-                        showQuickJumper
-                      />
-                    </div>
+                    {journalProducts?.[0]?.first_product_id && (
+                      <div className="pagination-controls">
+                        <Pagination
+                          current={currentPage}
+                          total={totalPage * 10}
+                          onChange={onPageChange}
+                          showSizeChanger={false}
+                          showQuickJumper
+                        />
+                      </div>
+                    )}
                   </>
                 ) : (
                   <div className="no-data text-center">
-                     <p>Oops! No data found!</p>
+                    <p>Oops! No data found!</p>
                   </div>
-                 
                 )}
               </div>
             </div>
