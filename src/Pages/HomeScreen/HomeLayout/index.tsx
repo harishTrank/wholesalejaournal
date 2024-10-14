@@ -64,6 +64,7 @@ const HomeScreen = ({ curimage }: any) => {
   const [selectedImage, setSelectedImage] = useState(null);
   const [, setapiHitCartLength]: any = useAtom(cartLengthApiHit);
   const [personaliseOwn, setPersonaliseOwn]: any = useState(false);
+  const [totalInnerPages, setTotalInnerPages]: any = useState(0);
 
   const showImagePopup = (image: any) => {
     setSelectedImage(image);
@@ -240,6 +241,7 @@ const HomeScreen = ({ curimage }: any) => {
                 (selectedOption === "Yes"
                   ? currentTheme?.price + currentTheme?.additional_price
                   : currentTheme?.price) * productQty,
+              page_count: currentTheme?.page_count,
             },
             ...currentData,
           ];
@@ -258,6 +260,7 @@ const HomeScreen = ({ curimage }: any) => {
             cover: dataUrlCover,
             inner: dataUrlInner,
             description: currentTheme?.disc,
+            page_count: currentTheme?.page_count,
           };
           if (parameters?.id) {
             body.product_id = parameters?.id;
@@ -292,6 +295,7 @@ const HomeScreen = ({ curimage }: any) => {
           (item: any) => item.id == parameters.id
         );
         setCurrentTheme(currentObj);
+        setTotalInnerPages(currentObj?.page_count);
         const loadImage: any = new window.Image();
         loadImage.src = currentObj?.product_image;
         loadImage.crossOrigin = "Anonymous";
@@ -678,6 +682,17 @@ const HomeScreen = ({ curimage }: any) => {
                               : "none",
                         }}
                       >
+                        <div className="number-pages">
+                          <label htmlFor="">Select Total Number of Pages</label>
+                          <input
+                            value={totalInnerPages}
+                            onChange={(e: any) =>
+                              setTotalInnerPages(e.target.value)
+                            }
+                            type="number"
+                          />
+                        </div>
+
                         <label htmlFor="">Select an option</label>
                         <select
                           onChange={(e: any) =>
