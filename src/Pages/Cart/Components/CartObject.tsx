@@ -52,6 +52,7 @@ const CartObject = ({
           : item;
       });
       localStorage.setItem("cartData", JSON.stringify(finalData));
+      setHitAgainAPI((oldValue: any) => oldValue + 1);
       setIsLoading(false);
       setCartDetails(finalData);
     } else {
@@ -73,11 +74,12 @@ const CartObject = ({
             ? {
                 ...item,
                 quantity: quantity - 1,
-                total_price: item.price * (quantity + 1),
+                total_price: item.price * (quantity - 1),
               }
             : item;
         });
         localStorage.setItem("cartData", JSON.stringify(finalData));
+        setHitAgainAPI((oldValue: any) => oldValue + 1);
         setIsLoading(false);
         setCartDetails(finalData);
       } else {

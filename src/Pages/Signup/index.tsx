@@ -7,7 +7,7 @@ import { registerUser } from "../../store/Services/Auth";
 import { useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
 import { addToCartDefault } from "../../store/Services/Product";
-import LoginImage from '../../images/Login.jpg'
+import LoginImage from "../../images/Login.jpg";
 
 // Define the validation schema using Yup
 const SignupSchema = Yup.object().shape({
@@ -43,39 +43,41 @@ const Signup = ({ setIsLoginShow, setIsLoading }: any) => {
       localStorage.setItem("userId", res.userid);
       toast.success("User created successfully.");
       resetForm();
-      if (localStorage.getItem("cartData")) {
-        let currentData: any = localStorage.getItem("cartData");
-        currentData =
-          !currentData || currentData === "undefined"
-            ? []
-            : JSON.parse(currentData);
-        currentData.reverse().map((item: any) => {
-          const body: any = {
-            quantity: item?.quantity,
-            currentSize: item?.currentSize,
-            boardSelectedOption: item?.boardSelectedOption,
-            name: item?.name,
-            heading: item?.heading,
-            cover: item?.cover,
-            inner: item?.inner,
-            description: item?.description,
-            customise_price: item?.customise_price,
-            product_id: item?.product_id,
-          };
-          addToCartDefault({
-            body,
+      setTimeout(() => {
+        if (localStorage.getItem("cartData")) {
+          let currentData: any = localStorage.getItem("cartData");
+          currentData =
+            !currentData || currentData === "undefined"
+              ? []
+              : JSON.parse(currentData);
+          currentData.reverse().map((item: any) => {
+            const body: any = {
+              quantity: item?.quantity,
+              currentSize: item?.currentSize,
+              boardSelectedOption: item?.boardSelectedOption,
+              name: item?.name,
+              heading: item?.heading,
+              cover: item?.cover,
+              inner: item?.inner,
+              description: item?.description,
+              customise_price: item?.customise_price,
+              product_id: item?.product_id,
+            };
+            addToCartDefault({
+              body,
+            });
           });
-        });
-        if (currentData.length === 0) {
-          navigation("/");
+          if (currentData.length === 0) {
+            navigation("/");
+          } else {
+            navigation("/cart");
+          }
+          localStorage.removeItem("cartData");
         } else {
-          navigation("/cart");
+          navigation("/");
         }
-        localStorage.removeItem("cartData");
-      } else {
-        navigation("/");
-      }
-      setIsLoading(false);
+        setIsLoading(false);
+      }, 1000);
     } catch (err: any) {
       toast.error(err.data.responsemessage);
       setIsLoading(false);

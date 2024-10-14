@@ -11,7 +11,6 @@ import {
   CouponList,
   currentCartListAPI,
 } from "../../store/Services/Product";
-import { NumberFormatter } from "../../Utils";
 import { RiCoupon5Line } from "react-icons/ri";
 
 const CartScreen = () => {
@@ -23,7 +22,11 @@ const CartScreen = () => {
   const [couponPopup, setCouponPopup]: any = useState(false);
   const [couponDetails, setCouponDetails]: any = useState("");
   const [selectedCouponCode, setSelectedCouponCode]: any = useState("");
-  const [finalAmount, setFinalAmount]: any = useState("");
+  const [finalAmount, setFinalAmount]: any = useState({
+    original_price: 0,
+    discount_amount: 0,
+    discount_price: 0,
+  });
   const [system, setSystem]: any = useState(false);
   const handleApplyClick = () => {
     setCouponPopup(true);
@@ -38,7 +41,12 @@ const CartScreen = () => {
     if (!localStorage.getItem("accessToken")) {
       const currentData: any = localStorage.getItem("cartData");
       if (currentData && currentData !== "undefined") {
-        setCartDetails(JSON.parse(currentData));
+        const jsondata: any = JSON.parse(currentData);
+        setCartDetails(jsondata);
+        setCartTotal(
+          jsondata.reduce((a: any, b: any) => a.total_price + b.total_price) ||
+            0
+        );
       }
       setIsLoading(false);
     } else {
@@ -65,10 +73,11 @@ const CartScreen = () => {
   };
 
   useEffect(() => {
-    CouponList().then((res: any) => {
-      setCouponDetails(res.data);
-      console.log(couponDetails);
-    });
+    CouponList()
+      .then((res: any) => {
+        setCouponDetails(res.data);
+      })
+      .catch((err) => console.log("err", err));
   }, []);
 
   const applyCouponHandler = () => {
@@ -78,14 +87,18 @@ const CartScreen = () => {
       },
     })
       .then((res: any) => {
-        setFinalAmount(res);
+        setFinalAmount({
+          original_price: res.original_price,
+          discount_amount: res.discount_amount,
+          discount_price: res.discount_price,
+        });
         setSystem(true);
-        console.log("kkk", finalAmount);
       })
       .catch((err: any) => {
         console.error("Error applying coupon:", err);
       });
   };
+
   const applyCoupon = (couponCode: any) => {
     setSelectedCouponCode(couponCode);
     setCouponPopup(false);
@@ -145,6 +158,9 @@ const CartScreen = () => {
                           type="text"
                           placeholder="Enter Code"
                           value={selectedCouponCode}
+                          onChange={(e) =>
+                            setSelectedCouponCode(e.target.value)
+                          }
                         />
                         <button onClick={applyCouponHandler}>Apply</button>
                       </div>
@@ -165,7 +181,10 @@ const CartScreen = () => {
                             </span>
 
                             {couponDetails.map((coupon: any, index: any) => (
-                              <div className="cartcoupon flex space-bw al-center">
+                              <div
+                                key={index}
+                                className="cartcoupon flex space-bw al-center"
+                              >
                                 <div className="coupon-left">
                                   <p> Flat {coupon.discount_amount}% OFF</p>
                                 </div>
@@ -176,7 +195,7 @@ const CartScreen = () => {
                                   </div>
                                   <div className="cartcoupon-row">
                                     <p>
-                                      Minimum Order value should be
+                                      Minimum Order value should be{" "}
                                       {coupon.min_amount}
                                     </p>
                                     <button
@@ -200,7 +219,10 @@ const CartScreen = () => {
                       <div className="subtotal flex space-bw">
                         <p>Subtotal</p>
                         <p>
-                          ${system ? finalAmount.original_price : cartTotal}
+                          $
+                          {system && finalAmount.original_price
+                            ? finalAmount.original_price
+                            : cartTotal}
                         </p>
                       </div>
                       <div className="free-shipping flex space-bw">
@@ -210,16 +232,19 @@ const CartScreen = () => {
                       <div className="free-shipping flex space-bw">
                         <p>Discount Amount</p>
                         <p style={{ color: "red" }}>
-                          {system
+                          {system && finalAmount.discount_amount
                             ? `-$${finalAmount.discount_amount}`
-                            : `$${0}`}
+                            : `$0`}
                         </p>
                       </div>
 
                       <div className="total flex space-bw">
                         <p>Total</p>
                         <p>
-                          ${system ? finalAmount.discount_price : cartTotal}
+                          $
+                          {system && finalAmount.discount_price
+                            ? finalAmount.discount_price
+                            : cartTotal}
                         </p>
                       </div>
                       <div className="checkout-btn">

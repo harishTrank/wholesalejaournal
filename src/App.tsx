@@ -26,7 +26,7 @@ function App() {
           path="/writing"
           element={<Journal bookType="WritingJournal" />}
         />
-        <Route path="/shop" element={<Journal bookType="Others" />} />
+        {/* <Route path="/shop" element={<Journal bookType="Others" />} /> */}
         <Route path="/account" element={<MyAccount />} />
         <Route path="/cart" element={<Cart />} />
       </Routes>

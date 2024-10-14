@@ -14,11 +14,17 @@ const Header = () => {
   const [apiHitAgain]: any = useAtom(cartLengthApiHit);
 
   useEffect(() => {
-    cartTotal()
-      .then((res: any) => {
-        setCartQty(res.count);
-      })
-      .catch((err: any) => console.log("err", err));
+    if (!localStorage.getItem("accessToken")) {
+      const currentData: any = localStorage.getItem("cartData");
+      const count = JSON.parse(currentData);
+      setCartQty(count?.length || 0);
+    } else {
+      cartTotal()
+        .then((res: any) => {
+          setCartQty(res.count);
+        })
+        .catch((err: any) => console.log("err", err));
+    }
   }, [apiHitAgain]);
 
   useEffect(() => {
@@ -70,7 +76,7 @@ const Header = () => {
                 <Link to="/writing">Writing Journal</Link>
               </li>
               <li>
-                <Link to="/shop">Shop</Link>
+                <Link to="/cart">Shop</Link>
               </li>
             </ul>
           </div>
