@@ -270,3 +270,14 @@
   color: #fff; 
   border-radius: 10px;
 }
+
+@media (max-width:768px){
+  .product {
+    width: 100%;
+}
+.cart-total{
+  width: 100%;
+  margin-top: 20px;
+}
+
+}

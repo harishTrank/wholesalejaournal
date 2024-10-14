@@ -493,3 +493,20 @@ p.site-description {
 .qty-box input{
   width: 100%;
 }
+.number-pages input{
+  width: 80%;
+  padding: 5px;
+  margin-top: 10px;
+}
+.number-pages{
+  margin-bottom: 10px;
+}
+@media (max-width:768px){
+  .customcanvas{
+      width: 100%;
+  }
+  .accordion-content{
+      width: 100%;
+      
+  }
+  }

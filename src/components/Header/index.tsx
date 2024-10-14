@@ -69,8 +69,8 @@ const Header = () => {
               <li>
                 <Link to="/writing">Writing Journal</Link>
               </li>
-              <li>
-                <Link to="/shop">Shop</Link>
+              <li onClick={()=>navigate('/cart')} >
+               Shop
               </li>
             </ul>
           </div>

@@ -64,6 +64,7 @@ const HomeScreen = ({ curimage }: any) => {
   const [selectedImage, setSelectedImage] = useState(null);
   const [, setapiHitCartLength]: any = useAtom(cartLengthApiHit);
   const [personaliseOwn, setPersonaliseOwn]: any = useState(false);
+  const [pageCount,setPageCount]:any=useState()
 
   const showImagePopup = (image: any) => {
     setSelectedImage(image);
@@ -264,8 +265,11 @@ const HomeScreen = ({ curimage }: any) => {
           }
           addToCartDefault({
             body,
+          
           })
             .then(() => {
+              setPageCount(body.page_count)
+              console.log('kkk',pageCount)
               setapiHitCartLength((oldval: any) => oldval + 1);
               toast.success("Item add to your cart successfully.");
               setIsLoading(false);
@@ -678,6 +682,11 @@ const HomeScreen = ({ curimage }: any) => {
                               : "none",
                         }}
                       >
+                        <div className="number-pages">
+                        <label htmlFor="">Select Total Number of Pages</label>
+                        <input type="number" />
+                        </div>
+                       
                         <label htmlFor="">Select an option</label>
                         <select
                           onChange={(e: any) =>
