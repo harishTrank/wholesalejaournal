@@ -54,6 +54,7 @@ const JournalBook = ({ bookType }: any) => {
       setJournalCount(res.count);
       setCategoryCounts(res.category_counts);
       setTotalPage(res.total_pages);
+      console.log('kkk',currentPage)
       setIsLoading(false);
     });
   }, [
@@ -127,13 +128,14 @@ const JournalBook = ({ bookType }: any) => {
                     </div>
                     {journalProducts?.[0]?.first_product_id && (
                       <div className="pagination-controls">
-                        <Pagination
-                          current={currentPage}
-                          total={totalPage * 10}
-                          onChange={onPageChange}
-                          showSizeChanger={false}
-                          showQuickJumper
-                        />
+                       <Pagination
+  current={currentPage || 1}  // Default to page 1 if undefined
+  total={totalPage ? totalPage * 10 : 0}  // Default to 0 if totalPage is undefined
+  onChange={onPageChange}
+  showSizeChanger={false}
+  showQuickJumper
+/>
+
                       </div>
                     )}
                   </>

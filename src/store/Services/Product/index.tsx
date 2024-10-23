@@ -67,3 +67,8 @@ export const ApplyCoupon=({ body }:any)=>
     uriEndPoint:productEndpoints.ApplyCoupon.v1,
     body
   })
+
+export const SidebarColors=()=>
+  callApi({
+    uriEndPoint:productEndpoints.SidebarColors.v1
+  })
