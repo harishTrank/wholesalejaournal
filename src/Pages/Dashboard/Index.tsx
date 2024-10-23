@@ -130,7 +130,8 @@ const Dashboard = () => {
                 <div className="product-text">
                   <h3>{product.title}</h3>
                   <p>${product.price}</p>
-                  <p>{product.disc}</p>
+                  <p>{product.disc.length > 100 ? `${product.disc.substring(0, 100)}...` : product.disc}</p>
+
                   <a
                     style={{ cursor: "pointer" }}
                     onClick={() => addtocardHandler(product)}
