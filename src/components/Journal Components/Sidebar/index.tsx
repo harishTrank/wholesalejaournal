@@ -1,5 +1,6 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./style.css";
+import { SidebarColors } from "../../../store/Services/Product";
 const Sidebar = ({
   categoryCount,
   selectedColors,
@@ -12,6 +13,7 @@ const Sidebar = ({
   setSearch,
 }: any) => {
   const [searchInput, setSearchInput]: any = useState("");
+  const [filterColors, setFilterColors]: any = useState([]);
   const handleColorChange = (e: any) => {
     const { value, checked } = e.target;
 
@@ -52,6 +54,13 @@ const Sidebar = ({
   const handleSearch = () => {
     setSearch(searchInput);
   };
+  useEffect(() => {
+    SidebarColors()
+      .then((res: any) => {
+        setFilterColors(res.data);
+      })
+      .catch((err) => console.log("err", err));
+  }, []);
 
   return (
     <div className="sidebar">
@@ -87,53 +96,18 @@ const Sidebar = ({
         </div>
         <div className="filtercolor mb">
           <h2 className="mb">Filter By color</h2>
-
-          <label htmlFor="blue">
-            <input
-              type="checkbox"
-              value="Blue"
-              checked={selectedColors.includes("Blue")}
-              onChange={handleColorChange}
-            />
-            <span>Blue</span>
-          </label>
-
-          <label htmlFor="Grey">
-            <input
-              type="checkbox"
-              value="Grey"
-              checked={selectedColors.includes("Grey")}
-              onChange={handleColorChange}
-            />
-            <span>Grey</span>
-          </label>
-          <label htmlFor="Green">
-            <input
-              type="checkbox"
-              value="Green"
-              checked={selectedColors.includes("Green")}
-              onChange={handleColorChange}
-            />{" "}
-            <span>Green</span>
-          </label>
-          <label htmlFor="Red">
-            <input
-              type="checkbox"
-              value="Red"
-              checked={selectedColors.includes("Red")}
-              onChange={handleColorChange}
-            />
-            <span>Red</span>
-          </label>
-          <label htmlFor="Yellow">
-            <input
-              type="checkbox"
-              value="Yellow"
-              checked={selectedColors.includes("Yellow")}
-              onChange={handleColorChange}
-            />
-            <span>Yellow</span>
-          </label>
+          {Array.isArray(filterColors) &&
+            filterColors.map((color: any, index: any) => (
+              <label htmlFor={color} key={index}>
+                <input
+                  type="checkbox"
+                  value={color}
+                  checked={selectedColors.includes(color)}
+                  onChange={handleColorChange}
+                />
+                <span>{color}</span>
+              </label>
+            ))}
         </div>
         <div className="filtercategory mb">
           <h2 className="mb">Filter by category</h2>

@@ -85,6 +85,13 @@ export const productEndpoints = {
       uri: "/coupon/",
     },
   },
+  SidebarColors:{
+    v1: {
+      ...defaults.methods.GET,
+      ...defaults.versions.v1,
+      uri: "/colors/",
+    },
+  }
   
  
   
