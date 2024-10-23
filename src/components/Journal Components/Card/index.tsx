@@ -1,10 +1,8 @@
 import React from "react";
 import "./style.css";
-import { productCategoriesWise } from "../../../store/Services/Product";
 import { useNavigate } from "react-router-dom";
 
 const Card = ({ product, index }: any) => {
-  console.log("product", product);
   const navigation: any = useNavigate();
   const productClickHandler = () => {
     navigation(`/customise/${product?.id || product?.first_product_id}`);
