@@ -353,30 +353,36 @@ const HomeScreen = ({ curimage }: any) => {
               personaliseOwn={personaliseOwn}
             />
 
-            <div className="flex space-bw">
-              <div
-                className="customise-img1"
-                onClick={() => showImagePopup(currentTheme?.cover_img)}
-              >
-                <img src={currentTheme?.cover_img} alt="Cover Image" />
-              </div>
-              <div
-                className="customise-img1"
-                onClick={() => showImagePopup(currentTheme?.inner_img)}
-              >
-                <img src={currentTheme?.inner_img} alt="Inner Image" />
-              </div>
-              <div
-                className="customise-img1"
-                onClick={() =>
-                  showImagePopup(currentTheme?.category_type__image)
-                }
-              >
-                <img
-                  src={currentTheme?.category_type__image}
-                  alt="Category Image"
-                />
-              </div>
+            <div className="flex">
+              {currentTheme?.category_type__image && (
+                <div
+                  className="customise-img1"
+                  onClick={() =>
+                    showImagePopup(currentTheme?.category_type__image)
+                  }
+                >
+                  <img
+                    src={currentTheme?.category_type__image}
+                    alt="Category Image"
+                  />
+                </div>
+              )}
+              {currentTheme?.cover_img && (
+                <div
+                  className="customise-img1"
+                  onClick={() => showImagePopup(currentTheme?.cover_img)}
+                >
+                  <img src={currentTheme?.cover_img} alt="Cover Image" />
+                </div>
+              )}
+              {currentTheme?.inner_img && (
+                <div
+                  className="customise-img1"
+                  onClick={() => showImagePopup(currentTheme?.inner_img)}
+                >
+                  <img src={currentTheme?.inner_img} alt="Inner Image" />
+                </div>
+              )}
             </div>
             {selectedImage && (
               <div className="popup-overlay" onClick={hideImagePopup}>

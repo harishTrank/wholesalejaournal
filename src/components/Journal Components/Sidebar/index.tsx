@@ -9,9 +9,9 @@ const Sidebar = ({
   coverType,
   setCoverType,
   setBookTypeFilter,
-  setSearch
+  setSearch,
 }: any) => {
-  const [searchInput, setSearchInput]:any = useState(''); 
+  const [searchInput, setSearchInput]: any = useState("");
   const handleColorChange = (e: any) => {
     const { value, checked } = e.target;
 
@@ -50,14 +50,19 @@ const Sidebar = ({
   };
 
   const handleSearch = () => {
-    setSearch(searchInput); 
+    setSearch(searchInput);
   };
 
   return (
     <div className="sidebar">
       <div className="sidebar-content">
         <div className="search-products flex mb">
-          <input type="text" placeholder="Search Products.."  value={searchInput} onChange={handleSearchChange}/>
+          <input
+            type="text"
+            placeholder="Search Products.."
+            value={searchInput}
+            onChange={handleSearchChange}
+          />
           <button onClick={handleSearch}>Search</button>
         </div>
         <div className="Uncategorised mb">
@@ -82,6 +87,7 @@ const Sidebar = ({
         </div>
         <div className="filtercolor mb">
           <h2 className="mb">Filter By color</h2>
+
           <label htmlFor="blue">
             <input
               type="checkbox"
@@ -91,6 +97,7 @@ const Sidebar = ({
             />
             <span>Blue</span>
           </label>
+
           <label htmlFor="Grey">
             <input
               type="checkbox"
