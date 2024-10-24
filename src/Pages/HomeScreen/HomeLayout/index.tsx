@@ -861,12 +861,12 @@ const HomeScreen = ({ curimage }: any) => {
             >
               Description
             </li>
-            <li
+            {/* <li
               className={activeTab === "two" ? "active" : ""}
               onClick={() => handleTabClick("two")}
             >
               Additional information
-            </li>
+            </li> */}
             <li
               className={activeTab === "three" ? "active" : ""}
               onClick={() => handleTabClick("three")}
@@ -882,13 +882,13 @@ const HomeScreen = ({ curimage }: any) => {
              
               <p>{currentTheme?.disc}</p>
             </div>
-            <div
+            {/* <div
               className="tab-content"
               style={{ display: activeTab === "two" ? "block" : "none" }}
             >
               <h3>Additional Information</h3>
               <p>This is dummy content Two</p>
-            </div>
+            </div> */}
             <div
               className="tab-content"
               style={{ display: activeTab === "three" ? "block" : "none" }}
