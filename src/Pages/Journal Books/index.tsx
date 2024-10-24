@@ -129,12 +129,11 @@ const JournalBook = ({ bookType }: any) => {
                     {journalProducts?.[0]?.first_product_id && (
                       <div className="pagination-controls">
                        <Pagination
-  current={currentPage || 1}  // Default to page 1 if undefined
-  total={totalPage ? totalPage * 10 : 0}  // Default to 0 if totalPage is undefined
-  onChange={onPageChange}
-  showSizeChanger={false}
-  showQuickJumper
-/>
+                       current={currentPage || 1}  
+                       total={totalPage ? totalPage * 10 : 0} 
+                       onChange={onPageChange}
+                       showSizeChanger={false}
+                       showQuickJumper/>
 
                       </div>
                     )}

@@ -65,6 +65,8 @@ const HomeScreen = ({ curimage }: any) => {
   const [, setapiHitCartLength]: any = useAtom(cartLengthApiHit);
   const [personaliseOwn, setPersonaliseOwn]: any = useState(false);
   const [totalInnerPages, setTotalInnerPages]: any = useState(0);
+  const [productLined,setProductLines]:any=useState()
+  const [productblank,setProductBlank]:any=useState()
 
   const showImagePopup = (image: any) => {
     setSelectedImage(image);
@@ -135,9 +137,17 @@ const HomeScreen = ({ curimage }: any) => {
 
   const toggleCanvasVisibility = () => {
     setIsCanvasVisible(!isCanvasVisible);
+    if (!isCanvasVisible) {
+      setIsContentVisible(false); // Close inner-content if coverType is opened
+    }
   };
+
+  // Toggle inner-content visibility and ensure coverType is closed
   const toggleContentVisibility = () => {
     setIsContentVisible(!isContentVisible);
+    if (!isContentVisible) {
+      setIsCanvasVisible(false); // Close coverType if inner-content is opened
+    }
   };
 
   const preViewButtonHandler = () => {
@@ -180,6 +190,7 @@ const HomeScreen = ({ curimage }: any) => {
     setIsModalOpen(false);
   };
   const [activeTab, setActiveTab]: any = useState("one");
+  const [openAccordion, setOpenAccordion] = useState(null);
 
   const handleTabClick = (tabId: any) => {
     setActiveTab(tabId);
@@ -291,6 +302,9 @@ const HomeScreen = ({ curimage }: any) => {
         },
       }).then((res: any) => {
         setApiCategoryList(res?.related_products);
+        setProductLines(res?.related_products[0].lined_flag)
+       
+        setProductBlank(res?.related_products[0].blank_flag)
         const currentObj: any = res.related_products.find(
           (item: any) => item.id == parameters.id
         );
@@ -325,6 +339,8 @@ const HomeScreen = ({ curimage }: any) => {
     setLeatherOpen(false);
     setIsOpen(false);
   };
+  
+  
 
   return (
     <div className="customisation-page">
@@ -397,7 +413,7 @@ const HomeScreen = ({ curimage }: any) => {
             <div className="personalisethisproductheading">
               <h1>{currentTheme?.title}</h1>
               <h3>${currentTheme?.price}</h3>
-              <p>{currentTheme?.disc}</p>
+             
               <br />
               <h2>Personalise this product</h2>
               <select
@@ -668,8 +684,13 @@ const HomeScreen = ({ curimage }: any) => {
                         value={innerPageOption}
                       >
                         <option value="Cover">Cover</option>
-                        <option value="Lined">Lined</option>
-                        <option value="Non Lined">Non Lined</option>
+                        {productLined && (
+                          <option value="Lined">Lined</option>
+                        )}
+                        {productblank && <option value="Non Lined">Non Lined</option>}
+                        
+                        
+                       
                       </select>
 
                       <div
@@ -858,13 +879,8 @@ const HomeScreen = ({ curimage }: any) => {
               className="tab-content"
               style={{ display: activeTab === "one" ? "block" : "none" }}
             >
-              <h3>Description</h3>
-              <p>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Animi
-                facilis repudiandae cum id iusto, ratione voluptatibus tenetur
-                enim, ipsam ab dolores. Quibusdam obcaecati quis unde,
-                consequuntur beatae error sed recusandae.
-              </p>
+             
+              <p>{currentTheme?.disc}</p>
             </div>
             <div
               className="tab-content"
