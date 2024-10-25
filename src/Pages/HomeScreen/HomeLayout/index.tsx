@@ -65,8 +65,8 @@ const HomeScreen = ({ curimage }: any) => {
   const [, setapiHitCartLength]: any = useAtom(cartLengthApiHit);
   const [personaliseOwn, setPersonaliseOwn]: any = useState(false);
   const [totalInnerPages, setTotalInnerPages]: any = useState(0);
-  const [productLined,setProductLines]:any=useState()
-  const [productblank,setProductBlank]:any=useState()
+  const [productLined, setProductLines]: any = useState();
+  const [productblank, setProductBlank]: any = useState();
 
   const showImagePopup = (image: any) => {
     setSelectedImage(image);
@@ -302,9 +302,9 @@ const HomeScreen = ({ curimage }: any) => {
         },
       }).then((res: any) => {
         setApiCategoryList(res?.related_products);
-        setProductLines(res?.related_products[0].lined_flag)
-       
-        setProductBlank(res?.related_products[0].blank_flag)
+        setProductLines(res?.related_products[0].lined_flag);
+
+        setProductBlank(res?.related_products[0].blank_flag);
         const currentObj: any = res.related_products.find(
           (item: any) => item.id == parameters.id
         );
@@ -339,8 +339,6 @@ const HomeScreen = ({ curimage }: any) => {
     setLeatherOpen(false);
     setIsOpen(false);
   };
-  
-  
 
   return (
     <div className="customisation-page">
@@ -419,7 +417,7 @@ const HomeScreen = ({ curimage }: any) => {
             <div className="personalisethisproductheading">
               <h1>{currentTheme?.title}</h1>
               <h3>${currentTheme?.price}</h3>
-             
+
               <br />
               <h2>Personalise this product</h2>
               <select
@@ -684,19 +682,20 @@ const HomeScreen = ({ curimage }: any) => {
                   {isContentVisible && (
                     <div className="inner-content">
                       <select
-                        onChange={(e: any) =>
-                          setInnerPageOption(e.target.value)
-                        }
+                        onChange={(e: any) => {
+                          setInnerPageOption(e.target.value);
+                          if (e.target.value === "Cover") {
+                            setIsContentVisible(false);
+                            setIsCanvasVisible(true);
+                          }
+                        }}
                         value={innerPageOption}
                       >
                         <option value="Cover">Cover</option>
-                        {productLined && (
-                          <option value="Lined">Lined</option>
+                        {productLined && <option value="Lined">Lined</option>}
+                        {productblank && (
+                          <option value="Non Lined">Non Lined</option>
                         )}
-                        {productblank && <option value="Non Lined">Non Lined</option>}
-                        
-                        
-                       
                       </select>
 
                       <div
@@ -885,7 +884,6 @@ const HomeScreen = ({ curimage }: any) => {
               className="tab-content"
               style={{ display: activeTab === "one" ? "block" : "none" }}
             >
-             
               <p>{currentTheme?.disc}</p>
             </div>
             {/* <div
