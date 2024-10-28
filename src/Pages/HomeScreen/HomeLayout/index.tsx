@@ -598,7 +598,6 @@ const HomeScreen = ({ curimage }: any) => {
                           }
                         >
                           <>
-                            <option value="">Change Size</option>
                             {sizeApiResponse?.map((item: any, index: any) => (
                               <option key={index} value={JSON.stringify(item)}>
                                 {item?.product_size}
