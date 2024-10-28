@@ -65,8 +65,6 @@ const HomeScreen = ({ curimage }: any) => {
   const [, setapiHitCartLength]: any = useAtom(cartLengthApiHit);
   const [personaliseOwn, setPersonaliseOwn]: any = useState(false);
   const [totalInnerPages, setTotalInnerPages]: any = useState(0);
-  const [productLined, setProductLines]: any = useState();
-  const [productblank, setProductBlank]: any = useState();
 
   const showImagePopup = (image: any) => {
     setSelectedImage(image);
@@ -302,9 +300,6 @@ const HomeScreen = ({ curimage }: any) => {
         },
       }).then((res: any) => {
         setApiCategoryList(res?.related_products);
-        setProductLines(res?.related_products[0].lined_flag);
-
-        setProductBlank(res?.related_products[0].blank_flag);
         const currentObj: any = res.related_products.find(
           (item: any) => item.id == parameters.id
         );
@@ -691,8 +686,10 @@ const HomeScreen = ({ curimage }: any) => {
                         value={innerPageOption}
                       >
                         <option value="Cover">Cover</option>
-                        {productLined && <option value="Lined">Lined</option>}
-                        {productblank && (
+                        {currentTheme?.lined_flag && (
+                          <option value="Lined">Lined</option>
+                        )}
+                        {currentTheme?.blank_flag && (
                           <option value="Non Lined">Non Lined</option>
                         )}
                       </select>
