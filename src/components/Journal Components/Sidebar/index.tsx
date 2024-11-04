@@ -15,6 +15,7 @@ const Sidebar = ({
   const [searchInput, setSearchInput]: any = useState("");
   const [filterColors, setFilterColors]: any = useState([]);
   const handleColorChange = (e: any) => {
+    setSearch("");
     const { value, checked } = e.target;
 
     if (checked) {
@@ -29,6 +30,7 @@ const Sidebar = ({
     
   };
   const handlelinedProducts = (e: any) => {
+    setSearch("");
     const { value, checked } = e.target;
 
     if (checked) {
@@ -41,7 +43,6 @@ const Sidebar = ({
     }
   };
   const handleCoverProducts = (e: any) => {
-    setSearch("")
     const { value, checked } = e.target;
 
     if (checked) {

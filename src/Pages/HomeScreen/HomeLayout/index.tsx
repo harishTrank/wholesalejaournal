@@ -170,7 +170,7 @@ const HomeScreen = ({ curimage }: any) => {
   };
 
   useEffect(() => {
-    if (innercustomised === "Logo") {
+    if (innercustomised === "Logo" || innercustomised === "design") {
       setInnerPageText("");
     } else {
       setUploadInnerLogo("");
@@ -730,7 +730,7 @@ const HomeScreen = ({ curimage }: any) => {
                             <option value="Text">Write some text</option>
                           )}
                           {currentTheme?.inner_own_flag && (
-                            <option value="Logo">Upload a own design</option>
+                            <option value="design">Upload a own design</option>
                           )}
                         </select>
 
@@ -738,7 +738,10 @@ const HomeScreen = ({ curimage }: any) => {
                           className="uploadlogo"
                           style={{
                             display:
-                              innercustomised === "Logo" ? "block" : "none",
+                              innercustomised === "Logo" ||
+                              innercustomised === "design"
+                                ? "block"
+                                : "none",
                           }}
                         >
                           <div className="file">
