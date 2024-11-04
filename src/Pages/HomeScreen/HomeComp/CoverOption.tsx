@@ -30,7 +30,10 @@ const CoverOption = ({
       setCanvasText("");
       setLowerVisible(true);
       setUploadLogo("");
-    } else if (coverCurrentOption === "Upload a logo") {
+    } else if (
+      coverCurrentOption === "Upload a logo" ||
+      coverCurrentOption === "Upload own design"
+    ) {
       setCanvasText("");
       setLowerVisible(false);
       setCurrentBkgShape("");
@@ -62,7 +65,7 @@ const CoverOption = ({
           <option value="Upload a logo">Upload a logo</option>
         )}
         {currentTheme?.own_design_flag && (
-          <option value="Upload a logo">Upload own design</option>
+          <option value="Upload own design">Upload own design</option>
         )}
       </select>
       {coverCurrentOption === "Phrase" ? (
@@ -119,7 +122,8 @@ const CoverOption = ({
           ></textarea>
         </span>
       ) : (
-        coverCurrentOption === "Upload a logo" && (
+        (coverCurrentOption === "Upload own design" ||
+          coverCurrentOption === "Upload a logo") && (
           <>
             <div className="file" id="uploadImage">
               <label htmlFor="logoUpload" style={{ cursor: "pointer" }}>
