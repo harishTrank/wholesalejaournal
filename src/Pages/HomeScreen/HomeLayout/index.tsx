@@ -807,11 +807,19 @@ const HomeScreen = ({ curimage }: any) => {
                     <input
                       type="number"
                       value={productQty}
+                      min={1}
                       onChange={(e: any) => {
                         const value = e.target.value;
 
                         if (value >= 0) {
                           setProductQty(value);
+                        }
+                       
+                      }}
+                      onBlur={() => {
+                        // Reset to 1 if left empty or set below 1 on blur
+                        if (!productQty || productQty < 1) {
+                          setProductQty(1);
                         }
                       }}
                     />
