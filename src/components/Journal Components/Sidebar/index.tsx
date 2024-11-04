@@ -19,17 +19,21 @@ const Sidebar = ({
 
     if (checked) {
       setSelectedColors((prev: string[]) => [...prev, value]);
+     
+     
     } else {
       setSelectedColors((prev: string[]) =>
         prev.filter((color: string) => color !== value)
       );
     }
+    
   };
   const handlelinedProducts = (e: any) => {
     const { value, checked } = e.target;
 
     if (checked) {
       setLinedProducts((prev: string[]) => [...prev, value]);
+     
     } else {
       setLinedProducts((prev: string[]) =>
         prev.filter((color: string) => color !== value)
@@ -37,10 +41,13 @@ const Sidebar = ({
     }
   };
   const handleCoverProducts = (e: any) => {
+    setSearch("")
     const { value, checked } = e.target;
 
     if (checked) {
       setCoverType((prev: string[]) => [...prev, value]);
+      
+   
     } else {
       setCoverType((prev: string[]) =>
         prev.filter((color: string) => color !== value)
@@ -49,10 +56,12 @@ const Sidebar = ({
   };
   const handleSearchChange = (e: any) => {
     setSearchInput(e.target.value);
+  
   };
 
   const handleSearch = () => {
     setSearch(searchInput);
+    setSelectedColors([])
   };
   useEffect(() => {
     SidebarColors()
