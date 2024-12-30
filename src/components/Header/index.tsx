@@ -7,6 +7,9 @@ import "./Header.css";
 import { cartTotal } from "../../store/Services/Product";
 import { useAtom } from "jotai";
 import { cartLengthApiHit } from "../../JotaiStore";
+import Logo from '../../images/wholesale-logo.png'
+import { CiUser } from "react-icons/ci";
+
 
 const Header = () => {
   const { pathname } = useLocation();
@@ -37,15 +40,31 @@ const Header = () => {
       <header>
         <div className="container">
           <div className="top-area flex space-bw al-center">
-            <div>
-              <Link to="/">Wholesale Journal</Link>
+            <div className="flex al-center wholesale-heading">
+            <img src={Logo} alt="" />&nbsp;&nbsp;
+             <p onClick={()=>navigate('/')}>Wholesale Journal</p>
             </div>
-            <div className="tagline">
-              <p>Bulk Journals- journals and notebooks- custom diaries</p>
+            <div className="nav-pages">
+            <ul className="flex  space-bw al-center ">
+              <li onClick={()=>navigate('/')}>
+              
+                Home
+              </li>
+              <li  onClick={()=>navigate('/journal')}>
+               
+                Journal Books
+              </li>
+              <li  onClick={()=>navigate('/writing')}>
+               
+                Writing Journal
+              </li>
+            
+            </ul>
             </div>
+            
             <div className="cart-header flex space-bw  al-center">
-              <div className="icon-1" onClick={() => navigate("/account")}>
-                <FaRegUserCircle size={22} />
+              <div className="icon-access" onClick={() => navigate("/account")}>
+               <p className="flex al-center"> <CiUser size={22} />&nbsp; Account Access</p>
               </div>
 
               <div
@@ -53,7 +72,7 @@ const Header = () => {
                 onClick={() => navigate("/cart")}
               >
                 <p>
-                  <IoCart size={22} />
+                  <IoCart size={25} />
                 </p>
                 <p>{cartQty !== 0 ? `(${cartQty})` : ""}</p>
               </div>
@@ -63,24 +82,7 @@ const Header = () => {
             </div>
           </div>
         </div>
-        <nav>
-          <div className="container">
-            <ul className="flex justify-center">
-              <li>
-                <Link to="/">Home</Link>
-              </li>
-              <li>
-                <Link to="/journal">Journal Books</Link>
-              </li>
-              <li>
-                <Link to="/writing">Writing Journal</Link>
-              </li>
-              <li>
-                <Link to="/cart">Shop</Link>
-              </li>
-            </ul>
-          </div>
-        </nav>
+       
       </header>
     </div>
   );

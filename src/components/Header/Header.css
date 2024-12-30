@@ -1,5 +1,5 @@
 .icon-1,.icon-2{
-    margin: 10px 5px;
+    margin: 10px 10px;
 }
 .icon-2 p{
     margin-left: 8px;
@@ -9,6 +9,10 @@
 }
 .icon-2{
     cursor: pointer;
+}
+.wholesale-heading p{
+    font-size: 25px;
+
 }
 @media (max-width:480px){
     .icon-1, .icon-2 {

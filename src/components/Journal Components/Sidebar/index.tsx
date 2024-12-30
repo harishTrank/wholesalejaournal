@@ -70,6 +70,7 @@ const Sidebar = ({
         setFilterColors(res.data);
       })
       .catch((err) => console.log("err", err));
+      
   }, []);
 
   return (

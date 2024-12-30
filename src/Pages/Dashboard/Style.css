@@ -8,7 +8,8 @@ header {
 
 .top-area a {
     font-size: 22px;
-    font-weight: 700;
+    font-weight: 500;
+    
 }
 
 .top-area p {
@@ -39,35 +40,51 @@ nav ul li {
 }
 
 /* banner area */
-.banner-area {
-    width: 100%;
-    background: url(../../assests/banner-back.png);
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
-    padding: 100px 0;
-}
-
-.banner-area .banner-text {
-    background: #FFF3E3;
-    padding: 15px;
-    border-radius: 10px;
-}
-
-.banner-area .banner-text h1 {
-    color: #B88E2F;
-}
-
-.banner-area .banner-text p {
-    margin-bottom: 15px;
-}
-
-.banner-area .banner-text a {
-    display: inline-block;
-    background: #B88E2F;
-    color: #fff;
-    padding: 10px 25px;
-}
+.custom-image-container {
+    position: relative;
+   padding: 300px;
+    background-image: url('../../images/wholesale-big.png'); 
+    background-size: cover; 
+    background-position: center; 
+    background-repeat: no-repeat; 
+  }
+  
+  .custom-overlay-content {
+    position: absolute;
+    bottom: 91px; 
+    left: 83px; 
+    color: #fff; 
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  
+  .custom-text {
+    font-size: 57px; 
+   
+  }
+  .custom-text-lower {
+    font-size: 20px;
+    font-weight: 300
+  }
+  
+  .custom-button {
+    background-color: #636AE8;
+    color: #fff; 
+    border: none;
+    padding: 10px 15px;
+    font-size: 14px;
+    cursor: pointer;
+    border-radius: 4px;
+    width: 20%;
+    margin-top: 20px;
+    transition: background-color 0.3s ease;
+  }
+  
+  .custom-button:hover {
+    background-color: #4a55b4; 
+  }
+  
 
 /* product area */
 .product-detail img {
@@ -76,7 +93,7 @@ nav ul li {
 }
 
 .product-text {
-    background: #F4F5F7;
+    background: #f8f9fd;
     padding: 10px;
 }
 
@@ -93,10 +110,11 @@ nav ul li {
 
 .product-text a {
     display: inline-block;
-    background: #B88E2F;
+    background: none;
     padding: 8px 15px;
     font-size: 14px;
-    color: #fff;
+    color: #636AE8;
+    border: 1px solid #636AE8;
 }
 
 .slider img {
@@ -214,7 +232,7 @@ nav ul li {
 }
 
 .new-text {
-    background: #F1EBE8;
+    background: #f8f9fd;
     padding: 40px;
     display: flex;
     flex-direction: column;

@@ -16,6 +16,7 @@ import Footer from "../../components/Footer";
 import { homeProducts } from "../../store/Services/Product";
 import Discount from "../../components/Discount Card";
 import { DiscountList } from "../../store/Services/Product";
+import Bigg from '../../images/bestseller.png'
 const Dashboard = () => {
   const settings = {
     dots: true,
@@ -55,27 +56,16 @@ const Dashboard = () => {
     <div>
       <Header />
       <section className="banner-area">
-        <div className="container">
-          <div className="flex space-bw">
-            <div className="col-50 no-show"></div>
-            <div className="col-50 banner-text">
-              <h3>New Arrival</h3>
-              <h1>Find your dream journal now</h1>
-              <p>
-                Wholesale journals and notebooks can be purchases with blank,
-                personalized or custom covers, Leather, recycled and faux
-                leather journal and notebook covers can be imprinted with your
-                organizations name, logo, mascots or seals. Give custom
-                journals, notebooks and diaries as gifts to your employees and
-                clients at company events. Customized journals or notebooks can
-                be used as field journals, laboratory notebooks, office to do
-                lists- the possibilities are endless when your personalizing
-                your journal covers.
-              </p>
-              <Link to="/journal">Buy Now</Link>
-            </div>
-          </div>
-        </div>
+      
+        <div className="custom-image-container">
+  <div className="custom-overlay-content">
+    <p className="custom-text">Capture Your Thoughts</p>
+    <p className="custom-text-lower">20% off your first order - Unleash your creativity</p>
+    <button className="custom-button">Shop Now</button>
+  </div>
+</div>
+
+       
       </section>
 
       <section className="pad-top">
@@ -115,8 +105,8 @@ const Dashboard = () => {
 
       <section className="gap">
         <div className="container">
-          <div className="common-text text-center">
-            <h2>Our Products</h2>
+          <div className="common-text text-center popular-heading">
+            <h2>Popular Journals</h2>
           </div>
 
           <div className="flex space-bw product-detail">
@@ -145,7 +135,7 @@ const Dashboard = () => {
         </div>
       </section>
 
-      <section className="gap prod-slides">
+      {/* <section className="gap prod-slides">
         <div className="container">
           <div className="flex al-center">
             <div className="col-40">
@@ -176,6 +166,9 @@ const Dashboard = () => {
             </div>
           </div>
         </div>
+      </section> */}
+      <section className="bigger-image gap flex justify-center">
+        <img src={Bigg} alt="" />
       </section>
 
       <section className="pad-top">

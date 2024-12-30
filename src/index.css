@@ -133,6 +133,42 @@ p {
 header {
   background: #fff;
 }
+.nav-pages ul li{
+ color: #565E6C;
+  font-size: 18px;
+  margin-left: 20px;
+  position: relative;
+  transition: color 0.3s ease;
+  padding: 10px 15px;
+}
+.icon-access{
+  background: #636AE8;
+  border-radius: 5px;
+  
+}
+.icon-access p{
+  padding: 7px;
+  color: #fff !important;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+
+.nav-pages ul li::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background-color: #636AE8; 
+  transition: width 0.3s ease;
+}
+
+.nav-pages ul li:hover::after {
+  width: 100%;
+}
+
 
 .top-area {
   padding: 15px 0;
@@ -218,7 +254,7 @@ footer .copyright p {
 }
 
 footer{
-  background-color: #efefef;
+  background-color: #f8f9fd;
 }
 /* Target the scrollbar */
 ::-webkit-scrollbar {

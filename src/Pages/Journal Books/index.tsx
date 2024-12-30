@@ -119,7 +119,7 @@ const JournalBook = ({ bookType }: any) => {
 
                 {journalCount && journalCount != 0 ? (
                   <>
-                    <div className="journal-cards flex ">
+                    <div className="journal-cards flex space-bw">
                       {journalProducts.map((product: any, index: any) => (
                         <Card product={product} index={index} key={index} />
                       ))}

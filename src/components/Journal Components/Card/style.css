@@ -1,9 +1,11 @@
 .card-container{
     width: 30.75%;
     border-radius: 0px;
-    background: #F4F5F7;
-   
-    margin: 20px 24px 20px 0px;
+    background: #f8f7fd;
+    margin-bottom: 30px;
+}
+.journal-cards{
+    margin-top: 20px;
 }
 .card-image img {
     margin: 0;
@@ -28,7 +30,7 @@
     padding: 12px 15px;
     margin: 3px;
     font-size: 15px;
-    background: #B88E2F;
+    background: #636AE8;
     border: none;
 }
 
