@@ -13,6 +13,8 @@ import { FaChevronUp } from "react-icons/fa";
 import { canvasType } from "../../../Utils";
 import FullScreenLoader from "../../../components/FullScreenLoader";
 import toast from "react-hot-toast";
+import { IoIosArrowDown } from "react-icons/io";
+
 import {
   addToCartDefault,
   productCategoriesWise,
@@ -65,6 +67,10 @@ const HomeScreen = ({ curimage }: any) => {
   const [, setapiHitCartLength]: any = useAtom(cartLengthApiHit);
   const [personaliseOwn, setPersonaliseOwn]: any = useState(false);
   const [totalInnerPages, setTotalInnerPages]: any = useState(0);
+  const [openShape, setOpenShape]:any = useState(false);
+  const [openFont, setOpenFont]:any = useState(false);
+  const [openBackCol, setOpenBackCol]:any = useState(false);
+  const [openTextCol, setOpenTextCol]:any = useState(false);
 
   const showImagePopup = (image: any) => {
     setSelectedImage(image);
@@ -73,6 +79,19 @@ const HomeScreen = ({ curimage }: any) => {
   const hideImagePopup = () => {
     setSelectedImage(null);
   };
+
+  const handleShape = () => {
+    setOpenShape(!openShape);
+  }
+  const handleFont = () => {
+    setOpenFont(!openFont);
+  }
+  const handleBackCol = () => {
+    setOpenBackCol(!openBackCol);
+  }
+  const handleTextCol = () => {
+    setOpenTextCol(!openTextCol);
+  }
 
   const changeBackGroundHandler = () => {
     if (currentTheme && !parameters?.id) {
@@ -430,80 +449,25 @@ const HomeScreen = ({ curimage }: any) => {
             {selectedOption === "Yes" && (
               <>
                 <div className="personalisecover">
-                  <div
-                    className="accordion-header"
-                    onClick={toggleCanvasVisibility}
-                    style={{ cursor: "pointer" }}
-                  >
-                    <h3>Personalise Cover</h3>
-                  </div>
+                    <div
+                      className="accordion-header"
+                      onClick={toggleCanvasVisibility}
+                      style={{ cursor: "pointer" }}
+                    >
+                      <h3>Personalise Cover</h3>
+                    </div>
 
-                  <div
-                    className="covertype"
-                    style={{
-                      display: isCanvasVisible ? "block" : "none",
-                      background: "#f9f9f9",
-                      padding: "10px",
-                    }}
-                  >
-                    {parameters?.id ? (
-                      <>
-                        <div
-                          className=" toggleclass flex space-bw"
-                          onClick={toggleDropdown}
-                        >
-                          <h3>Select Board Color </h3>
-                          <p>
-                            {isOpen ? (
-                              <FaChevronUp size={10} />
-                            ) : (
-                              <FaChevronDown size={10} />
-                            )}
-                          </p>
-                        </div>
-                        {isOpen && (
-                          <div className="dropdown">
-                            <ul>
-                              {apiCategoryList?.map((item: any, index: any) => (
-                                <li
-                                  className="flex"
-                                  key={index}
-                                  onClick={() => selectBackGroundHandler(item)}
-                                >
-                                  <img
-                                    style={{ objectFit: "contain" }}
-                                    src={item?.product_image}
-                                    alt=""
-                                  />
-                                  {item?.title}
-                                </li>
-                              ))}
-                            </ul>
-                          </div>
-                        )}
-                      </>
-                    ) : (
-                      <>
-                        <label htmlFor="">Select Cover Type</label>
-                        <select
-                          value={boardSelectedOption}
-                          onChange={handleBoardSelectChange}
-                        >
-                          <option value="">Select an option</option>
-                          <option value="boardColor">Board Color</option>
-                          <option value="leatheretteColor">
-                            Leatherette Color
-                          </option>
-                        </select>
-                        <div
-                          className="boardcolorsection"
-                          style={{
-                            display:
-                              boardSelectedOption === "boardColor"
-                                ? "block"
-                                : "none",
-                          }}
-                        >
+                    <div
+                      className="covertype"
+                      style={{
+                        display: isCanvasVisible ? "block" : "none",
+                        background: "#f5f5f5",
+                        padding: "10px",
+                        marginBottom: "10px"
+                      }}
+                    >
+                      {parameters?.id ? (
+                        <>
                           <div
                             className=" toggleclass flex space-bw"
                             onClick={toggleDropdown}
@@ -520,286 +484,384 @@ const HomeScreen = ({ curimage }: any) => {
                           {isOpen && (
                             <div className="dropdown">
                               <ul>
-                                {canvasType.boardColor?.map(
-                                  (item: any, index: any) => (
-                                    <li
-                                      className="flex"
-                                      key={index}
-                                      onClick={() => setCurrentTheme(item)}
-                                    >
-                                      <img src={item.fourByFour} alt="" />
-                                      {item.name}
-                                    </li>
-                                  )
-                                )}
+                                {apiCategoryList?.map((item: any, index: any) => (
+                                  <li
+                                    className="flex"
+                                    key={index}
+                                    onClick={() => selectBackGroundHandler(item)}
+                                  >
+                                    <img
+                                      style={{ objectFit: "contain" }}
+                                      src={item?.product_image}
+                                      alt=""
+                                    />
+                                    {item?.title}
+                                  </li>
+                                ))}
                               </ul>
                             </div>
                           )}
-                        </div>
-                        <div
-                          className="leatherettesection"
-                          style={{
-                            display:
-                              boardSelectedOption === "leatheretteColor"
-                                ? "block"
-                                : "none",
-                          }}
-                        >
-                          <div
-                            className="toggleclass flex space-bw"
-                            onClick={toggleLeather}
+                        </>
+                      ) : (
+                        <>
+                          <label htmlFor="">Select Cover Type</label>
+                          <select
+                            value={boardSelectedOption}
+                            onChange={handleBoardSelectChange}
                           >
-                            <h3>Select Leatherette Color</h3>
-                            <p>
-                              {leatherOpen ? (
-                                <FaChevronUp size={10} />
-                              ) : (
-                                <FaChevronDown size={10} />
-                              )}
-                            </p>
-                          </div>
-                          {leatherOpen && (
-                            <div className="dropdown">
-                              <ul>
-                                {canvasType.leatheretteColor?.map(
-                                  (item: any, index: any) => (
-                                    <li
-                                      className="flex"
-                                      key={index}
-                                      onClick={() => setCurrentTheme(item)}
-                                    >
-                                      <img src={item.fourByFour} alt="" />
-                                      {item.name}
-                                    </li>
-                                  )
-                                )}
-                              </ul>
-                            </div>
-                          )}
-                        </div>
-                      </>
-                    )}
-
-                    {sizeApiResponse && sizeApiResponse.length > 0 && (
-                      <>
-                        <label htmlFor="">Select Size</label>
-                        <select
-                          onChange={(e: any) =>
-                            setCurrentSize(
-                              e.target.value === ""
-                                ? ""
-                                : JSON.parse(e.target.value)
-                            )
-                          }
-                        >
-                          <>
-                            {sizeApiResponse?.map((item: any, index: any) => (
-                              <option key={index} value={JSON.stringify(item)}>
-                                {item?.product_size}
-                              </option>
-                            ))}
-                          </>
-                        </select>
-                      </>
-                    )}
-
-                    <div className="cover-option">
-                      <CoverOption
-                        coverCurrentOption={coverCurrentOption}
-                        setCoverCurrentOption={setCoverCurrentOption}
-                        canvasText={canvasText}
-                        setCanvasText={setCanvasText}
-                        setLowerVisible={setLowerVisible}
-                        setCurrentBkgShape={setCurrentBkgShape}
-                        setUploadLogo={setUploadLogo}
-                        uploadLogo={uploadLogo}
-                        innerPageOption={innerPageOption}
-                        setInnerPageOption={setInnerPageOption}
-                        currentTheme={currentTheme}
-                        paramsid={parameters?.id}
-                      />
-                    </div>
-                    <div style={{ display: lowerVisible ? "block" : "none" }}>
-                      <div className="controls">
-                        <div className="more-cust">
-                          <h4>Select background shape</h4>
-                          <div className="shapes">
-                            <BackgroundShape
-                              currentBkgShape={currentBkgShape}
-                              setCurrentBkgShape={setCurrentBkgShape}
-                            />
-                          </div>
-                        </div>
-                        {(currentTheme?.phrase_flag ||
-                          currentTheme?.initial_flag) && (
-                          <div className="more-cust">
-                            <h4>Select font style</h4>
-                            <FontsComponents
-                              currentFont={currentFont}
-                              setCurrentFont={setCurrentFont}
-                            />
-                          </div>
-                        )}
-                        <div className="more-cust-1">
-                          <h4>Select background color</h4>
-                          <ColorSelector
-                            backgroundColor={backgroundColor}
-                            setBackGroundColor={setBackGroundColor}
-                          />
-                        </div>
-                        {(currentTheme?.phrase_flag ||
-                          currentTheme?.initial_flag) && (
-                          <div className="more-cust-2">
-                            <h4>Select text color</h4>
-                            <ColorSelector
-                              backgroundColor={textColor}
-                              setBackGroundColor={setTextColor}
-                            />
-                          </div>
-                        )}
-                      </div>
-                      {/* <div className="more-btn">
-                      <button>
-                        <Link to="/more-customization">More-customization</Link>
-                      </button>
-                    </div> */}
-                    </div>
-                  </div>
-                </div>
-                <div className="personaliseinnerimages">
-                  <div
-                    className="accordion-header"
-                    onClick={toggleContentVisibility}
-                  >
-                    <h3>Personalise inner pages</h3>
-                  </div>
-                  {isContentVisible && (
-                    <div className="inner-content">
-                      <select
-                        onChange={(e: any) => {
-                          setInnerPageOption(e.target.value);
-                          if (e.target.value === "Cover") {
-                            setIsContentVisible(false);
-                            setIsCanvasVisible(true);
-                          }
-                        }}
-                        value={innerPageOption}
-                      >
-                        <option value="Cover">Cover</option>
-                        {currentTheme?.lined_flag && (
-                          <option value="Lined">Lined</option>
-                        )}
-                        {currentTheme?.blank_flag && (
-                          <option value="Non Lined">Non Lined</option>
-                        )}
-                      </select>
-
-                      <div
-                        className="lined-content"
-                        style={{
-                          display:
-                            innerPageOption === "Lined" ||
-                            innerPageOption === "Non Lined"
-                              ? "block"
-                              : "none",
-                        }}
-                      >
-                        <div className="number-pages">
-                          <label htmlFor="">Select Total Number of Pages</label>
-                          <input
-                            value={totalInnerPages}
-                            onChange={(e: any) =>
-                              setTotalInnerPages(e.target.value)
-                            }
-                            type="number"
-                          />
-                        </div>
-
-                        <label htmlFor="">Select an option</label>
-                        <select
-                          onChange={(e: any) =>
-                            setInnerCustomised(e.target.value)
-                          }
-                          value={innercustomised}
-                        >
-                          <option value="">Select Option</option>
-                          {currentTheme?.inner_logo_flag && (
-                            <option value="Logo">Upload a logo</option>
-                          )}
-                          {currentTheme?.inner_text_flag && (
-                            <option value="Text">Write some text</option>
-                          )}
-                          {currentTheme?.inner_own_flag && (
-                            <option value="design">Upload a own design</option>
-                          )}
-                        </select>
-
-                        <div
-                          className="uploadlogo"
-                          style={{
-                            display:
-                              innercustomised === "Logo" ||
-                              innercustomised === "design"
-                                ? "block"
-                                : "none",
-                          }}
-                        >
-                          <div className="file">
-                            <label
-                              htmlFor="logoUpload1"
-                              style={{ cursor: "pointer", marginTop: "10px" }}
+                            <option value="">Select an option</option>
+                            <option value="boardColor">Board Color</option>
+                            <option value="leatheretteColor">
+                              Leatherette Color
+                            </option>
+                          </select>
+                          <div
+                            className="boardcolorsection"
+                            style={{
+                              display:
+                                boardSelectedOption === "boardColor"
+                                  ? "block"
+                                  : "none",
+                            }}
+                          >
+                            <div
+                              className=" toggleclass flex space-bw"
+                              onClick={toggleDropdown}
                             >
-                              Select a file
-                            </label>
-
-                            <input
-                              type="file"
-                              onChange={handleInnerLogoUpload}
-                              id="logoUpload1"
-                              style={{ display: "none" }}
-                            />
-                          </div>
-                        </div>
-
-                        <div
-                          style={{
-                            display:
-                              innercustomised === "Text" ? "block" : "none",
-                          }}
-                        >
-                          <div className="input-text">
-                            <input
-                              type="text"
-                              placeholder="Write some text here"
-                              value={innerPageText}
-                              onChange={(e: any) =>
-                                setInnerPageText(e.target.value)
-                              }
-                            />
-                          </div>
-                          {currentTheme?.inner_text_flag && (
-                            <>
-                              <div className="more-cust">
-                                <h4>Select font style</h4>
-                                <FontsComponents
-                                  currentFont={currentInnerFont}
-                                  setCurrentFont={setCurrentInnerFont}
-                                />
+                              <h3>Select Board Color </h3>
+                              <p>
+                                {isOpen ? (
+                                  <FaChevronUp size={10} />
+                                ) : (
+                                  <FaChevronDown size={10} />
+                                )}
+                              </p>
+                            </div>
+                            {isOpen && (
+                              <div className="dropdown">
+                                <ul>
+                                  {canvasType.boardColor?.map(
+                                    (item: any, index: any) => (
+                                      <li
+                                        className="flex"
+                                        key={index}
+                                        onClick={() => setCurrentTheme(item)}
+                                      >
+                                        <img src={item.fourByFour} alt="" />
+                                        {item.name}
+                                      </li>
+                                    )
+                                  )}
+                                </ul>
                               </div>
-                              <div className="more-cust-1">
-                                <h4>Select text color</h4>
-                                <ColorSelector
-                                  backgroundColor={innerTextColor}
-                                  setBackGroundColor={setInnerTextColor}
-                                />
+                            )}
+                          </div>
+                          <div
+                            className="leatherettesection"
+                            style={{
+                              display:
+                                boardSelectedOption === "leatheretteColor"
+                                  ? "block"
+                                  : "none",
+                            }}
+                          >
+                            <div
+                              className="toggleclass flex space-bw"
+                              onClick={toggleLeather}
+                            >
+                              <h3>Select Leatherette Color</h3>
+                              <p>
+                                {leatherOpen ? (
+                                  <FaChevronUp size={10} />
+                                ) : (
+                                  <FaChevronDown size={10} />
+                                )}
+                              </p>
+                            </div>
+                            {leatherOpen && (
+                              <div className="dropdown">
+                                <ul>
+                                  {canvasType.leatheretteColor?.map(
+                                    (item: any, index: any) => (
+                                      <li
+                                        className="flex"
+                                        key={index}
+                                        onClick={() => setCurrentTheme(item)}
+                                      >
+                                        <img src={item.fourByFour} alt="" />
+                                        {item.name}
+                                      </li>
+                                    )
+                                  )}
+                                </ul>
+                              </div>
+                            )}
+                          </div>
+                        </>
+                      )}
+
+                      <div className="flex space-bw">
+                        <div className="col-50">
+                          {sizeApiResponse && sizeApiResponse.length > 0 && (
+                            <>
+                              <div>
+                                <label htmlFor="">Select Size</label>
+                                <select
+                                  onChange={(e: any) =>
+                                    setCurrentSize(
+                                      e.target.value === ""
+                                        ? ""
+                                        : JSON.parse(e.target.value)
+                                    )
+                                  }
+                                >
+                                  <>
+                                    {sizeApiResponse?.map((item: any, index: any) => (
+                                      <option key={index} value={JSON.stringify(item)}>
+                                        {item?.product_size}
+                                      </option>
+                                    ))}
+                                  </>
+                                </select>
                               </div>
                             </>
                           )}
                         </div>
+                        <div className="cover-option col-50">
+                          <label htmlFor="">Select Option</label>
+                          <CoverOption
+                            coverCurrentOption={coverCurrentOption}
+                            setCoverCurrentOption={setCoverCurrentOption}
+                            canvasText={canvasText}
+                            setCanvasText={setCanvasText}
+                            setLowerVisible={setLowerVisible}
+                            setCurrentBkgShape={setCurrentBkgShape}
+                            setUploadLogo={setUploadLogo}
+                            uploadLogo={uploadLogo}
+                            innerPageOption={innerPageOption}
+                            setInnerPageOption={setInnerPageOption}
+                            currentTheme={currentTheme}
+                            paramsid={parameters?.id}
+                          />
+                        </div>
+                      </div>
+
+                      <div style={{ display: lowerVisible ? "block" : "none" }}>
+                        <div className="controls">
+                          <div className="flex space-bw">
+                            <div className="more-cust col-50">
+                              <h4>Select background shape</h4>
+                              <div className="shapesDrop" onClick={handleShape}>
+                                <h4>Choose any shape</h4>
+                                <IoIosArrowDown />
+                                <div className="shapes" style={{
+                                  display: openShape ? "block" : "none"
+                                }}
+                                >
+                                  <BackgroundShape
+                                    currentBkgShape={currentBkgShape}
+                                    setCurrentBkgShape={setCurrentBkgShape}
+                                  />
+                                </div>
+                              </div>
+                            </div>
+                            {(currentTheme?.phrase_flag ||
+                              currentTheme?.initial_flag) && (
+                              <div className="more-cust col-50">
+                                <h4>Select font style</h4>
+                                <div className="shapesDrop" onClick={handleFont}>
+                                  <h4>Choose any font</h4>
+                                  <IoIosArrowDown />
+                                  <div className="fonts" style={{
+                                    display: openFont ? "block" : "none"
+                                  }}>
+                                    <FontsComponents
+                                      currentFont={currentFont}
+                                      setCurrentFont={setCurrentFont}
+                                    />
+                                  </div>
+                                </div>
+                              </div>
+                            )}
+                          </div>
+                          <div className="flex space-bw">
+                            <div className="more-cust-1 col-50">
+                              <h4>Select background color</h4>
+                              <div className="shapesDrop" onClick={handleBackCol}>
+                                <h4>Choose background color</h4>
+                                <IoIosArrowDown />
+                                <div className="backcol" style={{
+                                    display: openBackCol ? "block" : "none"
+                                  }}>
+                                  <ColorSelector
+                                    backgroundColor={backgroundColor}
+                                    setBackGroundColor={setBackGroundColor}
+                                  />
+                                </div>
+                              </div>
+                            </div>
+                            {(currentTheme?.phrase_flag ||
+                              currentTheme?.initial_flag) && (
+                              <div className="more-cust-1 col-50">
+                                <h4>Select text color</h4>
+                                <div className="shapesDrop" onClick={handleTextCol}>
+                                  <h4>Choose text color</h4>
+                                  <IoIosArrowDown />
+                                  <div className="textcol" style={{
+                                    display: openTextCol ? "block" : "none"
+                                  }}>
+                                    <ColorSelector
+                                      backgroundColor={textColor}
+                                      setBackGroundColor={setTextColor}
+                                    />
+                                  </div>
+                                </div>
+                              </div>
+                            )}
+                          </div>
+                        </div>
+                        {/* <div className="more-btn">
+                        <button>
+                          <Link to="/more-customization">More-customization</Link>
+                        </button>
+                      </div> */}
                       </div>
                     </div>
-                  )}
-                </div>
+                  </div>
+                  <div className="personaliseinnerimages">
+                    <div
+                      className="accordion-header"
+                      onClick={toggleContentVisibility}
+                    >
+                      <h3>Personalise inner pages</h3>
+                    </div>
+                    {isContentVisible && (
+                      <div className="inner-content">
+                        <select
+                          onChange={(e: any) => {
+                            setInnerPageOption(e.target.value);
+                            if (e.target.value === "Cover") {
+                              setIsContentVisible(false);
+                              setIsCanvasVisible(true);
+                            }
+                          }}
+                          value={innerPageOption}
+                        >
+                          <option value="Cover">Cover</option>
+                          {currentTheme?.lined_flag && (
+                            <option value="Lined">Lined</option>
+                          )}
+                          {currentTheme?.blank_flag && (
+                            <option value="Non Lined">Non Lined</option>
+                          )}
+                        </select>
+
+                        <div
+                          className="lined-content"
+                          style={{
+                            display:
+                              innerPageOption === "Lined" ||
+                              innerPageOption === "Non Lined"
+                                ? "block"
+                                : "none",
+                          }}
+                        >
+                          <div className="number-pages">
+                            <label htmlFor="">Select Total Number of Pages</label>
+                            <input
+                              value={totalInnerPages}
+                              onChange={(e: any) =>
+                                setTotalInnerPages(e.target.value)
+                              }
+                              type="number"
+                            />
+                          </div>
+
+                          <label htmlFor="">Select an option</label>
+                          <select
+                            onChange={(e: any) =>
+                              setInnerCustomised(e.target.value)
+                            }
+                            value={innercustomised}
+                          >
+                            <option value="">Select Option</option>
+                            {currentTheme?.inner_logo_flag && (
+                              <option value="Logo">Upload a logo</option>
+                            )}
+                            {currentTheme?.inner_text_flag && (
+                              <option value="Text">Write some text</option>
+                            )}
+                            {currentTheme?.inner_own_flag && (
+                              <option value="design">Upload a own design</option>
+                            )}
+                          </select>
+
+                          <div
+                            className="uploadlogo"
+                            style={{
+                              display:
+                                innercustomised === "Logo" ||
+                                innercustomised === "design"
+                                  ? "block"
+                                  : "none",
+                            }}
+                          >
+                            <div className="file">
+                              <label
+                                htmlFor="logoUpload1"
+                                style={{ cursor: "pointer", marginTop: "10px" }}
+                              >
+                                Select a file
+                              </label>
+
+                              <input
+                                type="file"
+                                onChange={handleInnerLogoUpload}
+                                id="logoUpload1"
+                                style={{ display: "none" }}
+                              />
+                            </div>
+                          </div>
+
+                          <div
+                            style={{
+                              display:
+                                innercustomised === "Text" ? "block" : "none",
+                            }}
+                          >
+                            <div className="input-text">
+                              <input
+                                type="text"
+                                placeholder="Write some text here"
+                                value={innerPageText}
+                                onChange={(e: any) =>
+                                  setInnerPageText(e.target.value)
+                                }
+                              />
+                            </div>
+                            {currentTheme?.inner_text_flag && (
+                              <>
+                                <div className="more-cust">
+                                  <h4>Select font style</h4>
+                                  <FontsComponents
+                                    currentFont={currentInnerFont}
+                                    setCurrentFont={setCurrentInnerFont}
+                                  />
+                                </div>
+                                <div className="more-cust-1">
+                                  <h4>Select text color</h4>
+                                  <ColorSelector
+                                    backgroundColor={innerTextColor}
+                                    setBackGroundColor={setInnerTextColor}
+                                  />
+                                </div>
+                              </>
+                            )}
+                          </div>
+                        </div>
+                      </div>
+                    )}
+                  </div>
               </>
             )}
 

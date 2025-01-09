@@ -25,10 +25,9 @@ const BackgroundShape = ({ currentBkgShape, setCurrentBkgShape }: any) => {
       <div
         className="swatch"
         style={{
-          display: "flex",
-          flexDirection: "row",
-          width: window.innerWidth * 0.4,
-         
+          width: "100%",
+         display: "flex",
+         flexWrap: "wrap",
         }}
       >
         {details.map((item: any, index: any) => (
