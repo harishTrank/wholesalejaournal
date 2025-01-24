@@ -77,7 +77,7 @@ const JournalBook = ({ bookType }: any) => {
       {isLoading && <FullScreenLoader />}
       <div className="container">
         <section className="gap">
-          <div className="flex space-bw">
+          <div className="flex space-bw al-start">
             <div className="sidebar-section">
               <Sidebar
                 categoryCount={categoryCount}
@@ -93,7 +93,7 @@ const JournalBook = ({ bookType }: any) => {
             </div>
             <div className="journal-section">
               <div className="journal-content">
-                <p>Home/Journal Books</p>
+               
                 <h1>
                   {bookTypeFilter === "JournalBooks"
                     ? "Journal Books"

@@ -1,6 +1,13 @@
 .journal-section {
     width: calc(100% - 350px);
 }
+.journal-content h1{
+    text-align: center;
+}
+.sidebar-section{
+    position: sticky;
+    top: 0;
+}
 .default-sorting select {
     background: #fff;
     color: #000;

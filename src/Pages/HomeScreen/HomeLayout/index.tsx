@@ -866,7 +866,7 @@ const HomeScreen = ({ curimage }: any) => {
           </div>
         </div>
         <div className="customise-tabs">
-          <div className="tab-head">
+          <div className="tab-head flex ">
             <li
               className={activeTab === "one" ? "active" : ""}
               onClick={() => handleTabClick("one")}

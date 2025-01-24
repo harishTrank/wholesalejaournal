@@ -14,6 +14,7 @@ const CartObject = ({
   setIsLoading,
   setCartDetails,
   setHitAgainAPI,
+  
 }: any) => {
   const [quantity, setQuantity]: any = useState(currentItem?.quantity);
   const [, setapiHitCartLength]: any = useAtom(cartLengthApiHit);
@@ -36,58 +37,65 @@ const CartObject = ({
   };
 
   const handleIncrement = () => {
-    setQuantity(quantity + 1);
+    const newQuantity = quantity + 1;
+    setQuantity(newQuantity);
+  
     if (!localStorage.getItem("accessToken")) {
       setIsLoading(true);
       let currentData: any = localStorage.getItem("cartData");
       currentData = JSON.parse(currentData);
-
+  
       const finalData: any = currentData.map((item: any, index: any) => {
         return index === currentIndex
           ? {
               ...item,
-              quantity: quantity + 1,
-              total_price: item.price * (quantity + 1),
+              quantity: newQuantity,
+              total_price: item.price * newQuantity,
             }
           : item;
       });
       localStorage.setItem("cartData", JSON.stringify(finalData));
+  
+      setCartDetails(finalData);
       setHitAgainAPI((oldValue: any) => oldValue + 1);
       setIsLoading(false);
-      setCartDetails(finalData);
     } else {
       setIsLoading(true);
-      cartObjectQuantityHandler(quantity + 1, currentItem.id);
+      cartObjectQuantityHandler(newQuantity, currentItem.id);
     }
   };
-
+  
   const handleDecrement = () => {
     if (quantity > 1) {
-      setIsLoading(true);
-      setQuantity(quantity - 1);
+      const newQuantity = quantity - 1;
+      setQuantity(newQuantity);
+  
       if (!localStorage.getItem("accessToken")) {
+        setIsLoading(true);
         let currentData: any = localStorage.getItem("cartData");
         currentData = JSON.parse(currentData);
-
+  
         const finalData: any = currentData.map((item: any, index: any) => {
-          return currentIndex === index
+          return index === currentIndex
             ? {
                 ...item,
-                quantity: quantity - 1,
-                total_price: item.price * (quantity - 1),
+                quantity: newQuantity,
+                total_price: item.price * newQuantity,
               }
             : item;
         });
         localStorage.setItem("cartData", JSON.stringify(finalData));
+  
+        setCartDetails(finalData);
         setHitAgainAPI((oldValue: any) => oldValue + 1);
         setIsLoading(false);
-        setCartDetails(finalData);
       } else {
         setIsLoading(true);
-        cartObjectQuantityHandler(quantity - 1, currentItem.id);
+        cartObjectQuantityHandler(newQuantity, currentItem.id);
       }
     }
   };
+  
 
   const removeItemHandler = () => {
     setIsLoading(true);

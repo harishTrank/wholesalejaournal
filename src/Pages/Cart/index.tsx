@@ -30,11 +30,13 @@ const CartScreen = () => {
   const [system, setSystem]: any = useState(false);
   const handleApplyClick = () => {
     setCouponPopup(true);
+  
   };
 
   const closePopup = () => {
     setCouponPopup(false);
   };
+  const navigate=useNavigate()
 
   useEffect(() => {
     setIsLoading(true);
@@ -65,6 +67,8 @@ const CartScreen = () => {
     }
   }, [hitAgainAPI]);
 
+ 
+
   const checkOutButtonHandler = () => {
     if (!localStorage.getItem("accessToken")) {
       navigation("/account");
@@ -79,8 +83,18 @@ const CartScreen = () => {
       })
       .catch((err) => console.log("err", err));
   }, []);
+  
 
   const applyCouponHandler = () => {
+    const selectedCoupon = couponDetails.find(
+      (coupon: any) => coupon.coupon_code === selectedCouponCode
+    );
+  
+    if (selectedCoupon && cartTotal < selectedCoupon.min_amount) {
+      toast.error(`Minimum Order value should be $${selectedCoupon.min_amount} to apply this coupon.`);
+      return; 
+    }
+  
     ApplyCoupon({
       body: {
         coupon_code: selectedCouponCode,
@@ -92,17 +106,61 @@ const CartScreen = () => {
           discount_amount: res.discount_amount,
           discount_price: res.discount_price,
         });
-        setSystem(true);
+        setSystem(true); 
+        toast.success("Coupon Applied Successfully");
       })
       .catch((err: any) => {
         console.error("Error applying coupon:", err);
+        toast.error("Coupon cannot be applied");
       });
   };
+  
+  
 
   const applyCoupon = (couponCode: any) => {
     setSelectedCouponCode(couponCode);
     setCouponPopup(false);
   };
+  useEffect(() => {
+     let calculatedTotal = 0;
+  
+     if (cartDetails && cartDetails.length > 0) {
+       calculatedTotal = cartDetails.reduce(
+         (total: number, item: any) => total + item.total_price,
+         0
+       );
+     }
+  
+    
+    if (system && finalAmount.original_price) {
+    
+
+      if (calculatedTotal <couponDetails[0].min_amount) {
+        setSystem(false); 
+        setFinalAmount({
+          original_price: calculatedTotal,
+          discount_amount: 0, 
+        discount_price: calculatedTotal, 
+       });
+     toast.error("Coupon is no longer applicable due to the reduced total.");
+        
+       } else {
+       
+      setFinalAmount((prev: any) => ({
+          ...prev,
+         original_price: calculatedTotal,
+           discount_price: calculatedTotal - finalAmount.discount_amount,
+        }));
+       }
+    }
+  }, [cartDetails, system, finalAmount.discount_amount, couponDetails.min_amount]);
+  
+  
+  
+  
+  
+  
+  
 
   return (
     <div className="cart-section">
@@ -117,9 +175,9 @@ const CartScreen = () => {
               <div className="empty-cart">
                 <i className="fa-solid fa-face-sad-tear"></i>
                 <p>Your Cart is empty</p>
-                <Link className="button" to="/">
-                  Add Items
-                </Link>
+               <span onClick={()=>navigate('/')}>Add Items</span>
+                  
+                
               </div>
             ) : (
               <>
@@ -131,6 +189,7 @@ const CartScreen = () => {
                         <p>Product</p>
                         <p>TOTAL</p>
                       </div>
+
                       {cartDetails.map((currentItem: any, index: any) => (
                         <CartObject
                           key={index}
@@ -139,6 +198,7 @@ const CartScreen = () => {
                           setIsLoading={setIsLoading}
                           setCartDetails={setCartDetails}
                           setHitAgainAPI={setHitAgainAPI}
+                        
                         />
                       ))}
                     </div>
@@ -196,7 +256,7 @@ const CartScreen = () => {
                                   <div className="cartcoupon-row">
                                     <p>
                                       Minimum Order value should be{" "}
-                                      {coupon.min_amount}
+                                      {coupon.min_amount}$
                                     </p>
                                     <button
                                       onClick={() =>
